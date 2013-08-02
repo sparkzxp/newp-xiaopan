@@ -16,7 +16,7 @@
     <form id="form1" runat="server">
     <div class="top">
         <div class="t_left"></div>
-        <div class="t_content"><a href="main.jsp">首页</a>><a href="arctype.jsp">分类列表</a>>添加分类</div>
+        <div class="t_content"><a href="<%=basePath%>jsp/admin/main.jsp">首页</a></div>
         <div class="t_right"></div>
         <div class="clear"></div>
     </div>
