@@ -3,16 +3,7 @@
 <struts>
 	<package name="system" extends="root" namespace="/sys">
 		<action name="user_*" class="userAction" method="{1}">
-			<result>/jsp/admin/userList.jsp</result>
-			<result name="toEdit">/jsp/admin/userEdit.jsp</result>
-			<result name="toEditUserRole">/jsp/admin/editUserRole.jsp</result>
-			<result name="toDetail">/jsp/admin/userDetail.jsp</result>
-			<result name="showUsers">/jsp/admin/showUsers.jsp</result>
-			<result name="managePwd">/jsp/admin/managePwd.jsp</result>
-			<result name="toRegist">/jsp/index/regist.jsp</result>
-			<result name="toLogin">/jsp/index/main.jsp</result>
-			<result name="toRejected">/jsp/index/rejected.jsp</result>
-			<result name="managePwdtoList">/jsp/admin/managePwd_list.jsp</result>
+			<result name="toLogin">/jsp/admin/index.jsp</result>
 		</action>
 	</package>
 
