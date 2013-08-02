@@ -67,7 +67,7 @@
         <div class="left">
             <div class="top">栏目管理</div>
             <div class="item">
-                <p><a href="arctype.aspx" target="I1">栏目管理</a></p>
+                <p><a href="<%=basePath%>jsp/admin/arctype.jsp" target="I1">栏目管理</a></p>
                 <p><a href="archives.aspx" target="I1">内容列表</a></p>
                 <p><a href="add_archives.aspx" target="I1">添加内容</a></p>
             </div>
