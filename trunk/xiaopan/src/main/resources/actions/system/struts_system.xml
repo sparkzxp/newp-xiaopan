@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC     "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"     "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="system" extends="root" namespace="/sys">
+		<action name="user_*" class="userAction" method="{1}">
+			<result>/jsp/admin/userList.jsp</result>
+			<result name="toEdit">/jsp/admin/userEdit.jsp</result>
+			<result name="toEditUserRole">/jsp/admin/editUserRole.jsp</result>
+			<result name="toDetail">/jsp/admin/userDetail.jsp</result>
+			<result name="showUsers">/jsp/admin/showUsers.jsp</result>
+			<result name="managePwd">/jsp/admin/managePwd.jsp</result>
+			<result name="toRegist">/jsp/index/regist.jsp</result>
+			<result name="toLogin">/jsp/index/main.jsp</result>
+			<result name="toRejected">/jsp/index/rejected.jsp</result>
+			<result name="managePwdtoList">/jsp/admin/managePwd_list.jsp</result>
+		</action>
+	</package>
+
+	<package name="default" extends="struts-default">
+		<default-action-ref name="notFound" />
+		<action name="notFound">
+			<result>/jsp/error/404.jsp</result>
+		</action>
+		<action name="print_*" class="printAction">
+			<result>/jsp/common/print.jsp</result>
+		</action>
+	</package>
+	
+	<package name="regist" extends="root" namespace="/regist">
+		<action name="reg_*" class="registAction" method="{1}">
+			<result>/jsp/index/regist.jsp</result>
+			<result name="industryOrgEdit">/jsp/company/industryOrgEdit.jsp</result>
+		</action>
+	</package>
+</struts>
+

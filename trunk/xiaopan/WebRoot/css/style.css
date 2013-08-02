@@ -1,0 +1,104 @@
+﻿.main
+{
+	width:900px;
+	position:relative;
+	margin-top:20px;
+	height:470px;
+}
+.left,.middle,.right
+{
+	position:absolute;
+	top:0;
+}
+.left
+{
+	left:0;
+	width:140px;
+	text-align:center;
+}
+.left ul li
+{
+	margin-top:10px;
+}
+.left img
+{
+	width:100%;
+}
+.left img:hover
+{
+   filter:alpha(opacity=80); /*IE*/
+   -moz-opacity:0.8; /*MOZ , FF*/
+   opacity:0.8; /*CSS3, FF1.5*/
+}
+.middle
+{
+	left:185px;
+	width:500px;
+}
+.item
+{
+	float:left;
+	width:100px;
+	font-size:13px;
+	line-height:30px;
+}
+.item ul li strong
+{
+	font-size:14px;
+}
+.item a
+{
+	color:#15229f;
+}
+.m_ads ul li
+{
+	display:inline;
+	margin-top:15px;
+}
+.m_ads img
+{
+	width:120px;
+	height:80px;
+}
+.right
+{
+	width:200px;
+	right:0;
+	background:url(../images/title.jpg) left top repeat-x;
+}
+.r_item
+{
+	border:solid 1px #dfdfdf;
+	margin-bottom:13px;
+}
+.r_t
+{
+	height:30px;
+	line-height:30px;
+	overflow:hidden;
+}
+.r_t strong
+{
+	margin-left:15px;
+}
+.r_c ul li
+{
+	float:left;
+	width:180px;
+	margin-left:10px;
+	background:url(../images/dian.jpg) left center no-repeat;
+}
+.r_c ul li a
+{
+	float:left;
+	margin-left:10px;
+	width:170px;
+    overflow:hidden; 
+    text-overflow:ellipsis; 
+    white-space:nowrap;
+    -o-text-overflow:ellipsis; 
+}
+.right img
+{
+	margin-bottom:5px;
+}

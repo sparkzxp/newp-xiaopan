@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC     "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"     "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- 声明STRUTS常量配置 -->
+	<constant name="struts.devMode" value="false" />
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<constant name="struts.ui.theme" value="simple" />
+	<constant name="struts.objectFactory" value="spring"/>
+	<constant name="struts.ognl.allowStaticMethodAccess" value="true"/>
+	
+	<!-- 全局页面 -->
+	<package name="root" extends="struts-default">
+		<interceptors>
+			<interceptor-stack name="myStack">
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<interceptor-ref name="auth">
+					<param name="excludeMethods">login,initTree,getIndustryByOrg,toEdit</param>
+				</interceptor-ref>
+			</interceptor-stack>
+			<interceptor name="auth"
+				class="com.newp.xiaopan.action.interceptor.AuthorityInterceptor" />
+		</interceptors>
+		<default-interceptor-ref name="myStack" />
+		<global-results>
+			<result name="login">/jsp/index/login.jsp</result>
+		</global-results>
+	</package>
+	
+	<include file="actions/system/struts_system.xml" />
+</struts>
+

@@ -1,0 +1,50 @@
+body
+{
+	text-align:center;
+	background:#0976af;
+}
+.login
+{
+	width:568px;
+	margin:auto;
+	margin-top:100px;
+}
+.l_c
+{
+	height:320px;
+	width:568px;
+	background:url(../images/login_bg.jpg) left top no-repeat;
+}
+.error
+{
+	text-align:center;
+	height:70px;
+	line-height:110px;
+	color:#ff0000;
+	overflow:hidden;
+}
+.l_c table 
+{
+	margin-left:180px;
+	line-height:40px;
+}
+.code
+{
+	float:left;
+	margin-right:3px;
+}
+.btn
+{
+	width:90px;
+	height:30px;
+	border:none;
+	background:url(../images/layout.gif);
+	color:#ffffff;
+	font-weight:bold;
+	margin-top:15px;
+	margin-left:10px;
+}
+.l_bottom
+{
+	text-align:center;
+}
