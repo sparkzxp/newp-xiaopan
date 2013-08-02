@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="userNpc">
+	<!-- 返回值映射关系 -->
+	<resultMap id="userRstMap" type="user">
+		<result property="id" column="id" />
+		<result property="username" column="username" />
+		<result property="password" column="pwd" />
+		<result property="registerDate" column="registerDate" />
+		<result property="loginDate" column="loginDate" />
+	</resultMap>
+
+	<!-- 查询条件 -->
+	<sql id="queryUser_where">
+		<where>
+			<if test="user != null">
+				<if test="user.username !=null and user.username != ''">
+					<!-- and U.USER_NAME LIKE '%${user.username}%' -->
+					and U.USERNAME = #{user.username}
+				</if>
+			</if>
+		</where>
+	</sql>
+
+	<!-- 条件查询(分页) -->
+	<select id="query" resultMap="userRstMap" parameterType="map">
+		SELECT U.* FROM ADMIN U
+		<include refid="queryUser_where" />
+	</select>
+
+	<!-- 条件查询(分页) -->
+	<select id="queryByPager" resultMap="userRstMap" parameterType="map">
+		<![CDATA[
+		SELECT TOP ${pager.pageSize} * FROM(
+			SELECT ROW_NUMBER() OVER (ORDER BY USERNAME) AS ROWNUMBER,* FROM(
+				SELECT U.* FROM ADMIN U
+		]]>
+		<include refid="queryUser_where" />
+		<![CDATA[
+			) T1
+		) T
+ 		WHERE ROWNUMBER >= ${pager.startIndex}
+		]]>
+	</select>
+	<!-- 数据条数(分页) -->
+	<select id="queryCount" resultType="int" parameterType="map">
+		SELECT COUNT(*) FROM ADMIN U
+		<include refid="queryUser_where" />
+	</select>
+</mapper>
