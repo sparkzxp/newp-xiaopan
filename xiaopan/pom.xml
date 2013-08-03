@@ -21,10 +21,15 @@
 
 	<repositories>
 		<!-- 如有Nexus私服, 取消注释并指向正确的服务器地址. -->
-		<repository>
+		<!-- <repository>
 			<id>nexus</id>
 			<name>Team Nexus Repository</name>
 			<url>http://192.168.110.83:7777/nexus/content/repositories/iskyinfo-releases</url>
+		</repository> -->
+		<repository>
+			<id>nexus</id>
+			<name>Team Nexus Repository</name>
+			<url>http://127.0.0.1:7777/nexus/content/groups/public</url>
 		</repository>
 	</repositories>
 
@@ -114,11 +119,6 @@
 			<version>1.2.0</version>
 		</dependency>
 		<dependency>
-			<groupId>it.sauronsoftware</groupId>
-			<artifactId>ftp4j</artifactId>
-			<version>1.7.2</version>
-		</dependency>
-		<dependency>
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
 			<version>1.3</version>
@@ -142,6 +142,11 @@
 			<groupId>net.sf.json-lib</groupId>
 			<artifactId>json-lib</artifactId>
 			<version>2.4</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+			<version>3.2.1</version>
 		</dependency>
 	</dependencies>
 </project>
