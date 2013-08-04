@@ -30,7 +30,7 @@
 				}else if($('#loginForm_user_password').val()==''){
 					$('#loginForm_user_password').focus();
 				}else{
-					submitloginForm();
+					submitLoginForm();
 				}
 			};
 		};

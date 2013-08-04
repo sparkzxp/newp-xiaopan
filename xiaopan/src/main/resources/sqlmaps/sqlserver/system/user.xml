@@ -23,7 +23,7 @@
 		</where>
 	</sql>
 
-	<!-- 条件查询(分页) -->
+	<!-- 条件查询 -->
 	<select id="query" resultMap="userRstMap" parameterType="map">
 		SELECT U.* FROM ADMIN U
 		<include refid="queryUser_where" />
