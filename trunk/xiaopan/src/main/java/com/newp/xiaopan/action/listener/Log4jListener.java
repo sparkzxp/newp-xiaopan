@@ -12,8 +12,8 @@ public class Log4jListener implements ServletContextListener {
 
 	}
 
-	public void contextInitialized(ServletContextEvent servletcontextevent) {
-		String log4jdir = servletcontextevent.getServletContext().getRealPath("/");
+	public void contextInitialized(ServletContextEvent event) {
+		String log4jdir = event.getServletContext().getRealPath("/");
 		System.setProperty(log4jdirkey, log4jdir);
 	}
 }

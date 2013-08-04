@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="arctypeNpc">
+	<!-- 返回值映射关系 -->
+	<resultMap id="arctypeRstMap" type="arctype">
+		<result property="id" column="id" />
+		<result property="typename" column="typename" />
+		<result property="seotitle" column="seotitle" />
+		<result property="keyword" column="keyword" />
+		<result property="description" column="description" />
+		<result property="contents" column="contents" />
+		<result property="topid" column="topid" />
+		<!-- <association property="topid" column="topid" select="query"/> -->
+		<result property="sort" column="sort" />
+	</resultMap>
+
+	<!-- 查询条件 -->
+	<sql id="query_where">
+		<where>
+			<if test="arctype != null">
+				<if test="arctype.topid !=null and arctype.topid != ''">
+					and A.topid = #{arctype.topid}
+				</if>
+			</if>
+		</where>
+	</sql>
+
+	<select id="query" resultMap="arctypeRstMap" parameterType="map">
+		SELECT A.* FROM ARCTYPE A
+		<include refid="query_where" />
+	</select>
+</mapper>

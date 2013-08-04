@@ -14,7 +14,7 @@
 			<interceptor-stack name="myStack">
 				<interceptor-ref name="defaultStack"></interceptor-ref>
 				<interceptor-ref name="auth">
-					<param name="excludeMethods">login,initTree,getIndustryByOrg,toEdit</param>
+					<param name="excludeMethods">login</param>
 				</interceptor-ref>
 			</interceptor-stack>
 			<interceptor name="auth"
@@ -22,7 +22,7 @@
 		</interceptors>
 		<default-interceptor-ref name="myStack" />
 		<global-results>
-			<result name="login">/jsp/index/login.jsp</result>
+			<result name="login">/jsp/admin/login.jsp</result>
 		</global-results>
 	</package>
 	

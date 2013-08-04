@@ -5,23 +5,11 @@
 		<action name="user_*" class="userAction" method="{1}">
 			<result name="toLogin">/jsp/admin/index.jsp</result>
 		</action>
+		<action name="arctype_*" class="arctypeAction" method="{1}">
+			<result name="toList">/jsp/admin/arctype.jsp</result>
+			<result name="toEdit">/jsp/admin/arctype_edit.jsp</result>
+		</action>
 	</package>
 
-	<package name="default" extends="struts-default">
-		<default-action-ref name="notFound" />
-		<action name="notFound">
-			<result>/jsp/error/404.jsp</result>
-		</action>
-		<action name="print_*" class="printAction">
-			<result>/jsp/common/print.jsp</result>
-		</action>
-	</package>
-	
-	<package name="regist" extends="root" namespace="/regist">
-		<action name="reg_*" class="registAction" method="{1}">
-			<result>/jsp/index/regist.jsp</result>
-			<result name="industryOrgEdit">/jsp/company/industryOrgEdit.jsp</result>
-		</action>
-	</package>
 </struts>
 

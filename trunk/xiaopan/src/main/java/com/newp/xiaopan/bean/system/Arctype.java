@@ -3,13 +3,12 @@
  */
 package com.newp.xiaopan.bean.system;
 
-import com.newp.xiaopan.action.system.BaseAction;
 
 /**
  * @author 张霄鹏
  * 
  */
-public class Arctype extends BaseAction {
+public class Arctype extends BaseBean {
 
 	private static final long serialVersionUID = 1L;
 
@@ -18,7 +17,7 @@ public class Arctype extends BaseAction {
 	private String keyword;
 	private String description;
 	private String contents;
-	private Integer topd;
+	private Integer topid;
 	private Integer sort;
 
 	/**
@@ -97,18 +96,18 @@ public class Arctype extends BaseAction {
 	}
 
 	/**
-	 * @return the topd
+	 * @return the topid
 	 */
-	public Integer getTopd() {
-		return topd;
+	public Integer getTopid() {
+		return topid;
 	}
 
 	/**
-	 * @param topd
-	 *            the topd to set
+	 * @param topid
+	 *            the topid to set
 	 */
-	public void setTopd(Integer topd) {
-		this.topd = topd;
+	public void setTopid(Integer topid) {
+		this.topid = topid;
 	}
 
 	/**

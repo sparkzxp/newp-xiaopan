@@ -4,9 +4,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>校畔网 后台管理</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<base href="<%=basePath%>">
+	<title>校畔网 后台管理</title>
 	<link type="text/css" href="<%=basePath%>css/admin/common.css" rel="Stylesheet" />
     <link type="text/css" href="<%=basePath%>css/admin/tab.css" rel="Stylesheet" />
     <script language="javascript" src="<%=basePath%>js/jquery/jquery-1.7.2.min.js"></script>
@@ -104,41 +104,40 @@
 			<div class="c_l"></div>
 			<div class="c_c">
 				<div class="nav">
-					<a href="Add_arctype.aspx">添加顶级分类</a>
+					<a href="<%=basePath%>sys/arctype_toEdit?arctype.id=">添加分类</a>
 				</div>
-				<!-- <asp:Repeater ID="list" runat="server"
-					OnItemDataBound="list_ItemDataBound">
-					<ItemTemplate> -->
+				<s:iterator value="arctypes" var="parent">
+					<s:if test="#parent.topid == 0">
 					<div class="list id">
-						<div class="list_l list0" aid="id">typename&nbsp;&nbsp;
-							(ID:id)&nbsp;&nbsp; （排序:sort)</div>
+						<div class="list_l list0" aid='<s:property value="#parent.id" />'>
+							<s:property value="#parent.typename" />&nbsp;&nbsp;
+							(ID:<s:property value="#parent.id" />)&nbsp;&nbsp; （排序:<s:property value="#parent.sort" />)</div>
 						<div class="list_r">
-							<a href="Add_arctype.aspx?aid=id">添加下一级分类</a>| <a
-								href="archives.aspx?aid=id">内容</a>| <a
-								href="Edit_arctype.aspx?aid=id">修改</a>| <a href="#" aid="id"
+							<a href="archives.aspx?aid=id">内容</a>| <a
+								href="<%=basePath%>sys/arctype_toEdit?arctype.id=<s:property value="#parent.id" />">修改</a>| <a href="#" aid="id"
 								class="delete">删除</a>
 						</div>
 						<div class="clear"></div>
 						<div class="item">
-							<!-- <asp:Repeater ID="list_l" runat="server">
-								<ItemTemplate> -->
+							<s:iterator value="arctypes" var="child">
+								<s:if test="#child.topid == #parent.id">
 								<div class="l_item id">
-									<div class="list_l list1" aid="id">typename&nbsp;&nbsp;
-										(ID:id)&nbsp;&nbsp; （排序:sort)</div>
+									<div class="list_l list1" aid='<s:property value="#child.id" />'>
+										<s:property value="#child.typename" />&nbsp;&nbsp;
+										(ID:<s:property value="#child.id" />)&nbsp;&nbsp; （排序:<s:property value="#child.sort" />)</div>
 									<div class="list_r">
-										<a href="Add_arctype.aspx?aid=id">添加下一级分类</a>| <a
-											href="archives.aspx?aid=id">内容</a>| <a
+										<a href="archives.aspx?aid=id">内容</a>| <a
 											href="Edit_arctype.aspx?aid=id">修改</a>| <a href="#" aid="id"
 											class="delete">删除</a>
 									</div>
 									<div class="clear"></div>
 								</div>
-								<!-- </ItemTemplate>
-							</asp:Repeater> -->
+								</s:if>
+							</s:iterator>
 						</div>
 					</div>
-					<!-- </ItemTemplate>
-				</asp:Repeater> -->
+					</s:if>
+				</s:iterator>
 				<!--end list-->
 			</div>
 			<div class="c_r"></div>
