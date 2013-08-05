@@ -51,9 +51,11 @@
 	<typeAliases>
 		<typeAlias alias="user" type="com.newp.xiaopan.bean.system.User" />
 		<typeAlias alias="arctype" type="com.newp.xiaopan.bean.system.Arctype" />
+		<typeAlias alias="type" type="com.newp.xiaopan.bean.system.Type" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="sqlmaps/sqlserver/system/user.xml" />
 		<mapper resource="sqlmaps/sqlserver/system/arctype.xml" />
+		<mapper resource="sqlmaps/sqlserver/system/type.xml" />
 	</mappers>
 </configuration>  

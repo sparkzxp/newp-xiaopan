@@ -51,7 +51,7 @@
 	 	   				data = JSON.parse(data);
 		  	   			if(data.result=="success"){
 		  	   					alert("编辑成功!");
-		 						$('#editForm_atctype_id').val(data.id);
+		 						$('#editForm_arctype_id').val(data.id);
 		 					}else if(data.result=="error"){
 		 						alert("编辑失败!");
 		 					}else{
@@ -69,7 +69,7 @@
     <s:hidden name="arctype.id"/>
     <div class="top">
         <div class="t_left"></div>
-        <div class="t_content"><a href="<%=basePath%>jsp/admin/main.jsp">首页</a>><a href="<%=basePath%>sys/arctype_toList">分类列表</a>>添加分类</div>
+        <div class="t_content"><a href="<%=basePath%>jsp/admin/main.jsp">首页</a>><a href="<%=basePath%>sys/arctype_toList">栏目列表</a>>添加栏目</div>
         <div class="t_right"></div>
         <div class="clear"></div>
     </div>
@@ -87,16 +87,16 @@
                 </tr>
                 <tr>
                     <td width="120px" height="25px" align="right">关键词：</td>
-                    <td><s:textfield name="arctype.keyword" cssStyle="width:400px; height:60px;" cssClass="{required:true,maxlengthCN:200}"/></td>
+                    <td><s:textfield name="arctype.keyword" cssStyle="width:400px;" cssClass="{required:true,maxlengthCN:200}"/></td>
                 </tr>
                 <tr>
                     <td width="120px" height="25px" align="right">描述：</td>
                     <td><s:textarea name="arctype.description" cssStyle="width:400px; height:60px;" cssClass="{required:true}"/></td>
                 </tr>
                 <tr>
-                    <td align="right" height="25px">所属分类：</td>
+                    <td align="right" height="25px">所属栏目：</td>
                     <td>
-                    	<s:select name="arctype.topid" list="arctypes" listKey="id" listValue="typename" headerKey="0" headerValue="顶级分类" cssClass="{required:true}"></s:select>
+                    	<s:select name="arctype.topid" list="arctypes" listKey="id" listValue="typename" headerKey="0" headerValue="顶级栏目" cssClass="{required:true}"></s:select>
                     </td>
                 </tr>
                 <tr>

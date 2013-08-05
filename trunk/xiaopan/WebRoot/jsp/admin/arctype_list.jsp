@@ -23,7 +23,7 @@
 			});
 			$(".delete").each(function(i) {
 				$(this).bind("click", function() {
-					if(confirm("确定删除吗？")){
+					if(confirm("删除前请先确定有没有下级栏目，确定删除吗？")){
 						var aid = $(this).attr("aid");
 						$.post("<%=basePath%>sys/arctype_doDelete",{"arctype.id":aid},function(data){
 		   					if(data=="success"){
@@ -101,7 +101,7 @@
 		<div class="top">
 			<div class="t_left"></div>
 			<div class="t_content">
-				<a href="main.aspx">首页</a>>分类列表
+				<a href="<%=basePath%>jsp/admin/index.jsp">首页</a>>栏目列表
 			</div>
 			<div class="t_right"></div>
 			<div class="clear"></div>
@@ -110,30 +110,28 @@
 			<div class="c_l"></div>
 			<div class="c_c">
 				<div class="nav">
-					<a href="<%=basePath%>sys/arctype_toEdit?arctype.id=">添加分类</a>
+					<a href="<%=basePath%>sys/arctype_toEdit?arctype.id=">添加栏目</a>
 				</div>
 				<s:iterator value="arctypes" var="parent">
 					<s:if test="#parent.topid == 0">
-					<div class="list id">
+					<div class="list">
 						<div class="list_l list0" aid='<s:property value="#parent.id" />'>
 							<s:property value="#parent.typename" />&nbsp;&nbsp;
 							(ID:<s:property value="#parent.id" />)&nbsp;&nbsp; （排序:<s:property value="#parent.sort" />)</div>
 						<div class="list_r">
-							<a href="archives.aspx?aid=id">内容</a>| <a
-								href="<%=basePath%>sys/arctype_toEdit?arctype.id=<s:property value="#parent.id" />">修改</a>| <a href="javascript:void(0);" aid="<s:property value="#parent.id" />"
+							<a href="<%=basePath%>sys/arctype_toEdit?arctype.id=<s:property value="#parent.id" />">修改</a>| <a href="javascript:void(0);" aid="<s:property value="#parent.id" />"
 								class="delete">删除</a>
 						</div>
 						<div class="clear"></div>
 						<div class="item">
 							<s:iterator value="arctypes" var="child">
 								<s:if test="#child.topid == #parent.id">
-								<div class="l_item id">
+								<div class="l_item">
 									<div class="list_l list1" aid='<s:property value="#child.id" />'>
 										<s:property value="#child.typename" />&nbsp;&nbsp;
 										(ID:<s:property value="#child.id" />)&nbsp;&nbsp; （排序:<s:property value="#child.sort" />)</div>
 									<div class="list_r">
-										<a href="archives.aspx?aid=id">内容</a>| <a
-											href="<%=basePath%>sys/arctype_toEdit?arctype.id=<s:property value="#child.id" />">修改</a>| <a href="javascript:void(0);" aid="<s:property value="#child.id" />"
+										<a href="<%=basePath%>sys/arctype_toEdit?arctype.id=<s:property value="#child.id" />">修改</a>| <a href="javascript:void(0);" aid="<s:property value="#child.id" />"
 											class="delete">删除</a>
 									</div>
 									<div class="clear"></div>

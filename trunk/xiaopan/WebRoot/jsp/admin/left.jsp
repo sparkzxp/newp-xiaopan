@@ -67,14 +67,13 @@
         <div class="left">
             <div class="top">栏目管理</div>
             <div class="item">
-                <p><a href="<%=basePath%>sys/arctype_toList" target="I1">栏目管理</a></p>
-                <p><a href="archives.aspx" target="I1">内容列表</a></p>
-                <p><a href="add_archives.aspx" target="I1">添加内容</a></p>
+                <p><a href="<%=basePath%>sys/arctype_toList" target="I1">栏目列表</a></p>
+                <p><a href="<%=basePath%>sys/arctype_toEdit?arctype.id=" target="I1">添加栏目</a></p>
             </div>
             <div class="top">分类管理</div>
             <div class="item">
-                <p><a href="TypeList.aspx" target="I1">分类列表</a></p>
-                <p><a href="Add_Type.aspx" target="I1">添加分类</a></p>
+                <p><a href="<%=basePath%>sys/type_toList" target="I1">分类列表</a></p>
+                <p><a href="<%=basePath%>sys/type_toEdit?type.id=" target="I1">添加分类</a></p>
             </div>
             <div class="top">广告管理</div>
             <div class="item">
@@ -92,12 +91,12 @@
                 <p><a href="key.aspx" target="I1">热词列表</a></p>
                 <p><a href="Add_key.aspx" target="I1">添加热词</a></p>
             </div>
-            <div class="top">系统设置</div>
+            <%-- <div class="top">系统设置</div>
             <div class="item">
-                <p><a href="clear.aspx" target="I1">清除缓存</a></p>
-                <p><a href="config.aspx" target="I1">网站配制</a></p>
+                <p><a href="clear.jsp" target="I1">清除缓存</a></p>
+                <p><a href="config.jsp" target="I1">网站配制</a></p>
                 <p><a href="<%=basePath%>sys/user_toManagePwd" target="I1">修改密码</a></p>
-            </div>
+            </div> --%>
         </div>
     </form>
 </body>
