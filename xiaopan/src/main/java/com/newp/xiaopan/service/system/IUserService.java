@@ -21,4 +21,6 @@ public interface IUserService {
 	List<User> queryList(User user);
 
 	List<User> queryByPager(User user, Pager pager);
+
+	Integer updatePart(User user);
 }

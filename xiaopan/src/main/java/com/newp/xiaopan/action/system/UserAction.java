@@ -11,8 +11,6 @@ import org.springframework.stereotype.Controller;
 import com.newp.xiaopan.bean.system.User;
 import com.newp.xiaopan.common.Constants;
 import com.newp.xiaopan.common.MD5;
-import com.newp.xiaopan.common.bean.Pager;
-import com.newp.xiaopan.common.bean.Passworder;
 import com.newp.xiaopan.service.system.IUserService;
 import com.opensymphony.xwork2.Action;
 
@@ -29,8 +27,6 @@ public class UserAction extends BaseAction {
 
 	private List<User> users;// 用户集合
 	private User user;// 用户对象
-	private Pager pager;// 分页对象
-	private Passworder passworder;// 密码对象
 	private String failureReason;// login页面登录失败原因
 
 	public String login() {
@@ -59,9 +55,25 @@ public class UserAction extends BaseAction {
 	 * @author 张霄鹏
 	 * @return
 	 */
-	public void logout() {
-		this.ajax(Action.SUCCESS);
+	public String logout() {
 		ServletActionContext.getRequest().getSession().invalidate();
+		return Action.LOGIN;
+	}
+
+	public String toEdit() {
+		user = this.getLoginUser();
+		return Constants.ACTION_TO_EDIT;
+	}
+
+	public String toManagePwd() {
+		return "toManagePwd";
+	}
+
+	public void doManagePwd() {
+		user.setPassword(MD5.MD5_32(user.getPassword()));
+		user.setId(this.getLoginUser().getId());
+		this.userService.updatePart(user);
+		this.ajax(true);
 	}
 
 	public List<User> getUsers() {
@@ -78,22 +90,6 @@ public class UserAction extends BaseAction {
 
 	public void setUser(User user) {
 		this.user = user;
-	}
-
-	public Pager getPager() {
-		return pager;
-	}
-
-	public void setPager(Pager pager) {
-		this.pager = pager;
-	}
-
-	public Passworder getPassworder() {
-		return passworder;
-	}
-
-	public void setPassworder(Passworder passworder) {
-		this.passworder = passworder;
 	}
 
 	public String getFailureReason() {

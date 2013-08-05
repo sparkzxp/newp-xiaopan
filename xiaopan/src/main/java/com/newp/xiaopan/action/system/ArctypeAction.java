@@ -121,6 +121,11 @@ public class ArctypeAction extends BaseAction {
 		this.ajax(jsonObject.toJSONString());
 	}
 
+	public void doDelete() {
+		this.arctypeService.delete(arctype);
+		this.ajax(true);
+	}
+
 	/**
 	 * 获取图片储存路径 根目录 + upload/arctype/images
 	 */

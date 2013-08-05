@@ -4,6 +4,8 @@
 	<package name="system" extends="root" namespace="/sys">
 		<action name="user_*" class="userAction" method="{1}">
 			<result name="toLogin">/jsp/admin/index.jsp</result>
+			<result name="toEdit">/jsp/admin/admin_edit.jsp</result>
+			<result name="toManagePwd">/jsp/admin/admin_password.jsp</result>
 		</action>
 		<action name="arctype_*" class="arctypeAction" method="{1}">
 			<result name="toList">/jsp/admin/arctype.jsp</result>

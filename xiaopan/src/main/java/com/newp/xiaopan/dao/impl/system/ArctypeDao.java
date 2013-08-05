@@ -35,4 +35,8 @@ public class ArctypeDao implements IArctypeDao {
 	public Integer update(Arctype arctype) {
 		return this.sqlSession.update("arctypeNpc.update", arctype);
 	}
+
+	public Integer delete(Arctype arctype) {
+		return this.sqlSession.delete("arctypeNpc.delete", arctype);
+	}
 }
