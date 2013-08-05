@@ -56,15 +56,20 @@
                $(this).click(function(){
                    $(".item").css({display:"none"});
                    $(".item").eq(i).css({display:"block"});
-               })
-            })
-        })
+               });
+            });
+        });
     </script>
 </head>
 <body>
     <form id="form1" runat="server">
         <img src="<%=basePath%>css/images/main_21.gif" />
         <div class="left">
+            <div class="top">站点管理</div>
+            <div class="item">
+                <p><a href="<%=basePath%>sys/site_toList" target="I1">站点列表</a></p>
+                <p><a href="<%=basePath%>sys/site_toEdit?site.id=" target="I1">添加站点</a></p>
+            </div>
             <div class="top">栏目管理</div>
             <div class="item">
                 <p><a href="<%=basePath%>sys/arctype_toList" target="I1">栏目列表</a></p>
