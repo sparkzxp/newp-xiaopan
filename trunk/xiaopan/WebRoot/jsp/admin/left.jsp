@@ -62,7 +62,7 @@
     </script>
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form id="form1">
         <img src="<%=basePath%>css/images/main_21.gif" />
         <div class="left">
             <div class="top">站点管理</div>
@@ -80,21 +80,21 @@
                 <p><a href="<%=basePath%>sys/type_toList" target="I1">分类列表</a></p>
                 <p><a href="<%=basePath%>sys/type_toEdit?type.id=" target="I1">添加分类</a></p>
             </div>
+            <div class="top">店铺管理</div>
+            <div class="item">
+                <p><a href="<%=basePath%>sys/shop_toList" target="I1">店铺列表</a></p>
+                <p><a href="<%=basePath%>sys/shop_toEdit?shop.id=" target="I1">添加店铺</a></p>
+            </div>
             <div class="top">广告管理</div>
             <div class="item">
                 <p><a href="AdsType.aspx" target="I1">广告位置</a></p>
                 <p><a href="Add_Ads.aspx" target="I1">添加广告</a></p>
                 <p><a href="Ads_list.aspx" target="I1">广告列表</a></p>
             </div>
-            <div class="top">店铺管理</div>
-            <div class="item">
-                <p><a href="Shop.aspx" target="I1">店铺列表</a></p>
-                <p><a href="Add_Shop.aspx" target="I1">添加店铺</a></p>
-            </div>
             <div class="top">热词管理</div>
             <div class="item">
-                <p><a href="key.aspx" target="I1">热词列表</a></p>
-                <p><a href="Add_key.aspx" target="I1">添加热词</a></p>
+                <p><a href="<%=basePath%>sys/key_toList" target="I1">热词列表</a></p>
+                <p><a href="<%=basePath%>sys/key_toEdit?key.id=" target="I1">添加热词</a></p>
             </div>
             <%-- <div class="top">系统设置</div>
             <div class="item">

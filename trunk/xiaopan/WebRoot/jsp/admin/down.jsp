@@ -30,7 +30,7 @@
           <tr>
             <td width="369"><span class="STYLE1">版本 2013V1.0 </span></td>
             <td width="814" class="STYLE1">&nbsp;</td>
-            <td width="185" nowrap="nowrap" class="STYLE1"><div align="center"><img src="<%=basePath%>css/images/main_51.gif" width="12" height="12" /> 如有疑问请与技术人员联系。联系人：张霄鹏&nbsp;&nbsp;手机：1565867015</div></td>
+            <td width="185" nowrap="nowrap" class="STYLE1"><div align="center"><img src="<%=basePath%>css/images/main_51.gif" width="12" height="12" /> 如有疑问请与技术人员联系。联系人：张霄鹏&nbsp;&nbsp;手机：13861613227</div></td>
           </tr>
         </table></td>
         <td width="14"><img src="<%=basePath%>css/images/main_49.gif" width="14" height="24" /></td>

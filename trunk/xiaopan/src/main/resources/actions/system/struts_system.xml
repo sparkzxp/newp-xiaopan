@@ -18,6 +18,14 @@
 			<result name="toList">/jsp/admin/site_list.jsp</result>
 			<result name="toEdit">/jsp/admin/site_edit.jsp</result>
 		</action>
+		<action name="shop_*" class="shopAction" method="{1}">
+			<result name="toList">/jsp/admin/shop_list.jsp</result>
+			<result name="toEdit">/jsp/admin/shop_edit.jsp</result>
+		</action>
+		<action name="key_*" class="keyAction" method="{1}">
+			<result name="toList">/jsp/admin/key_list.jsp</result>
+			<result name="toEdit">/jsp/admin/key_edit.jsp</result>
+		</action>
 	</package>
 
 </struts>

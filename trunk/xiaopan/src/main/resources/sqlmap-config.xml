@@ -18,11 +18,15 @@
 		<typeAlias alias="arctype" type="com.newp.xiaopan.bean.system.Arctype" />
 		<typeAlias alias="type" type="com.newp.xiaopan.bean.system.Type" />
 		<typeAlias alias="site" type="com.newp.xiaopan.bean.system.Site" />
+		<typeAlias alias="shop" type="com.newp.xiaopan.bean.system.Shop" />
+		<typeAlias alias="key" type="com.newp.xiaopan.bean.system.Key" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="sqlmaps/sqlserver/system/user.xml" />
 		<mapper resource="sqlmaps/sqlserver/system/arctype.xml" />
 		<mapper resource="sqlmaps/sqlserver/system/type.xml" />
 		<mapper resource="sqlmaps/sqlserver/system/site.xml" />
+		<mapper resource="sqlmaps/sqlserver/system/shop.xml" />
+		<mapper resource="sqlmaps/sqlserver/system/key.xml" />
 	</mappers>
 </configuration>  

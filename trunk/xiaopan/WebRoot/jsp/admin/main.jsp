@@ -13,7 +13,7 @@
     <script language="javascript" src="<%=basePath%>js/admin/global.js"></script>
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form id="form1">
     <div class="top">
         <div class="t_left"></div>
         <div class="t_content"><a href="<%=basePath%>jsp/admin/main.jsp">首页</a></div>

@@ -97,7 +97,7 @@
 </style>
 </head>
 <body>
-	<form id="form1" runat="server">
+	<form id="form1">
 		<div class="top">
 			<div class="t_left"></div>
 			<div class="t_content">
