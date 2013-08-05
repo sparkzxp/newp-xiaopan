@@ -16,7 +16,6 @@
 		<where>
 			<if test="user != null">
 				<if test="user.username !=null and user.username != ''">
-					<!-- and U.USER_NAME LIKE '%${user.username}%' -->
 					and U.USERNAME = #{user.username}
 				</if>
 			</if>

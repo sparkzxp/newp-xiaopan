@@ -26,4 +26,13 @@ public class ArctypeDao implements IArctypeDao {
 	public List<Arctype> query(Map<String, Object> params) {
 		return this.sqlSession.selectList("arctypeNpc.query", params);
 	}
+
+	public String add(Arctype arctype) {
+		this.sqlSession.insert("arctypeNpc.add", arctype);
+		return String.valueOf(arctype.getId());
+	}
+
+	public Integer update(Arctype arctype) {
+		return this.sqlSession.update("arctypeNpc.update", arctype);
+	}
 }

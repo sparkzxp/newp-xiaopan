@@ -20,4 +20,8 @@ public interface IArctypeService {
 	Arctype query(Arctype arctype);
 
 	List<Arctype> queryList(Arctype arctype);
+
+	String add(Arctype arctype);
+
+	Integer update(Arctype arctype);
 }

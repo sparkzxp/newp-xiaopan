@@ -2,7 +2,6 @@ package com.newp.xiaopan.action.system;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,12 +13,12 @@ import java.util.Random;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONObject;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.newp.xiaopan.bean.system.Arctype;
@@ -31,6 +30,7 @@ import com.newp.xiaopan.service.system.IArctypeService;
  * 
  */
 @Controller
+@Scope(value = "prototype")
 public class ArctypeAction extends BaseAction {
 
 	private static final long serialVersionUID = 1L;
@@ -62,6 +62,7 @@ public class ArctypeAction extends BaseAction {
 		return Constants.ACTION_TO_EDIT;
 	}
 
+	@SuppressWarnings("unchecked")
 	public void uploadKindEditorImg() {
 		InputStream fis = null;
 		FileOutputStream fos = null;
@@ -77,7 +78,7 @@ public class ArctypeAction extends BaseAction {
 
 			fis = new FileInputStream(imgFile);
 			String filename = gainFileName();
-			fos = new FileOutputStream(path + filename);
+			fos = new FileOutputStream(path + "/" + filename);
 
 			byte[] data = new byte[1024];
 			while (fis.read(data) != -1) {
@@ -86,8 +87,7 @@ public class ArctypeAction extends BaseAction {
 			fos.flush();
 			msg.put("error", 0);
 			// 上传成功返回文件url地址 。
-			// TODO 获取根路径
-			msg.put("url", ServletActionContext.getRequest().getContextPath() + "/" + filename);
+			msg.put("url", ServletActionContext.getRequest().getContextPath() + "/upload/arctype/images/" + filename);
 			makeSuccessRespForKE(ServletActionContext.getResponse());
 		} catch (Exception e) {
 			log.error(e);
@@ -106,17 +106,31 @@ public class ArctypeAction extends BaseAction {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
+	public void doEdit() {
+		JSONObject jsonObject = new JSONObject();
+		if (StringUtils.isEmpty(arctype.getId())) {
+			String id = this.arctypeService.add(arctype);
+			jsonObject.put("result", "success");
+			jsonObject.put("id", id);
+		} else {
+			this.arctypeService.update(arctype);
+			jsonObject.put("result", "success");
+			jsonObject.put("id", arctype.getId());
+		}
+		this.ajax(jsonObject.toJSONString());
+	}
+
 	/**
 	 * 获取图片储存路径 根目录 + upload/arctype/images
 	 */
+	@SuppressWarnings("deprecation")
 	private String gainSavePath() {
 		return ServletActionContext.getRequest().getRealPath("/upload/arctype/images/"); // 服务器上面的真实路径
 	}
 
 	/**
 	 * 获取图片储存名称
-	 * 
-	 * @return
 	 */
 	private String gainFileName() {
 		String fileName = "";
@@ -140,6 +154,7 @@ public class ArctypeAction extends BaseAction {
 	 * @return
 	 */
 	// 这里封装好json数据error 1 表示错误，message 表示错误信息。
+	@SuppressWarnings("unchecked")
 	private void getError(String message) {
 		msg.put("error", 1);
 		msg.put("message", message);
@@ -147,10 +162,6 @@ public class ArctypeAction extends BaseAction {
 
 	/**
 	 * 成功的时候回写KindEditor。
-	 * 
-	 * @return
-	 * @throws FileNotFoundException
-	 * @throws IOException
 	 */
 	public boolean makeSuccessRespForKE(HttpServletResponse resp) {
 		// resp.setContentType("text/xml;charset=UTF-8");去除 否则会在谷歌火狐下上传失败
