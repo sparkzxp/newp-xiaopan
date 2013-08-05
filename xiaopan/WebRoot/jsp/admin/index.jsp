@@ -15,7 +15,7 @@
 </frameset>
 <noframes>
 <body>
-    <form id="form1" runat="server">
+    <form id="form1">
     </form>
 </body>
 </noframes>

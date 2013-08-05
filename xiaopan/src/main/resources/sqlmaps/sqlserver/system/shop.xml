@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="shopNpc">
+	<!-- 返回值映射关系 -->
+	<resultMap id="shopRstMap" type="shop">
+		<result property="id" column="id" />
+		<result property="title" column="title" />
+		<result property="keyword" column="keyword" />
+		<result property="description" column="description" />
+		<result property="contents" column="contents" />
+		<result property="address" column="address" />
+		<result property="tel" column="tel" />
+		<result property="contacter" column="contacter" />
+		<result property="imagePath" column="imagePath" />
+		<result property="siteId" column="siteId" />
+		<result property="typeIds" column="typeIds" />
+		<result property="score" column="score" />
+		<result property="click" column="click" />
+		<result property="pingnum" column="pingnum" />
+	</resultMap>
+
+	<!-- 查询条件 -->
+	<sql id="query_where">
+		<where>
+			<if test="shop != null">
+				<if test="shop.id != null and shop.id != ''">
+					and T.id = #{shop.id}
+				</if>
+			</if>
+		</where>
+	</sql>
+
+	<select id="query" resultMap="shopRstMap" parameterType="map">
+		SELECT T.* FROM SHOP T
+		<include refid="query_where" />
+		order by T.title asc
+	</select>
+	
+	<insert id="add" parameterType="shop">
+		<selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
+			SELECT @@IDENTITY
+		</selectKey>
+		INSERT INTO SHOP(
+			title, keyword, description,
+			contents, address, tel,
+			contacter, imagePath, siteId,
+			typeIds, score
+		) VALUES (
+			#{title}, #{keyword}, #{description},
+			#{contents}, #{address}, #{tel},
+			#{contacter}, #{imagePath}, #{siteId},
+			#{typeIds}, #{score}
+		)
+	</insert>
+	
+	<update id="update" parameterType="shop">
+		update SHOP set
+			title = #{title},
+			keyword = #{keyword},
+			description = #{description},
+			contents = #{contents},
+			address = #{address},
+			tel = #{tel},
+			contacter = #{contacter},
+			imagePath = #{imagePath},
+			siteId = #{siteId},
+			typeIds = #{typeIds},
+			score = #{score}
+			
+			WHERE id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="shop">
+		delete from SHOP where id = #{id}
+	</delete>
+</mapper>

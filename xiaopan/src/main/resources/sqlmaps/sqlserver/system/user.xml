@@ -26,6 +26,7 @@
 	<select id="query" resultMap="userRstMap" parameterType="map">
 		SELECT U.* FROM ADMIN U
 		<include refid="queryUser_where" />
+		order by U.username asc
 	</select>
 
 	<!-- 条件查询(分页) -->

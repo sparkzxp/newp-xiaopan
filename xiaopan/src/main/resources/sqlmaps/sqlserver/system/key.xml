@@ -1,53 +1,51 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="siteNpc">
+<mapper namespace="keyNpc">
 	<!-- 返回值映射关系 -->
-	<resultMap id="siteRstMap" type="site">
+	<resultMap id="keyRstMap" type="key">
 		<result property="id" column="id" />
 		<result property="name" column="name" />
-		<result property="description" column="description" />
 		<result property="sort" column="sort" />
 	</resultMap>
 
 	<!-- 查询条件 -->
 	<sql id="query_where">
 		<where>
-			<if test="site != null">
-				<if test="site.id != null and site.id != ''">
-					and T.id = #{site.id}
+			<if test="key != null">
+				<if test="key.id != null and key.id != ''">
+					and T.id = #{key.id}
 				</if>
 			</if>
 		</where>
 	</sql>
 
-	<select id="query" resultMap="siteRstMap" parameterType="map">
-		SELECT T.* FROM SITE T
+	<select id="query" resultMap="keyRstMap" parameterType="map">
+		SELECT T.* FROM [KEY] T
 		<include refid="query_where" />
 		order by T.sort asc, T.name asc
 	</select>
 	
-	<insert id="add" parameterType="site">
+	<insert id="add" parameterType="key">
 		<selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
 			SELECT @@IDENTITY
 		</selectKey>
-		INSERT INTO SITE(
-			name, description, sort
+		INSERT INTO [KEY](
+			name, sort
 		) VALUES (
-			#{name}, #{description}, #{sort}
+			#{name}, #{sort}
 		)
 	</insert>
 	
-	<update id="update" parameterType="site">
-		update SITE set
+	<update id="update" parameterType="key">
+		update [KEY] set
 			name = #{name},
-			description = #{description},
 			sort = #{sort}
 			
 			WHERE id = #{id}
 	</update>
 	
-	<delete id="delete" parameterType="site">
-		delete from SITE where id = #{id}
+	<delete id="delete" parameterType="key">
+		delete from [KEY] where id = #{id}
 	</delete>
 </mapper>
