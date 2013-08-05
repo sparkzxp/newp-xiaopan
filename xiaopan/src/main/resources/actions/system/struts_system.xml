@@ -14,6 +14,10 @@
 			<result name="toList">/jsp/admin/type_list.jsp</result>
 			<result name="toEdit">/jsp/admin/type_edit.jsp</result>
 		</action>
+		<action name="site_*" class="siteAction" method="{1}">
+			<result name="toList">/jsp/admin/site_list.jsp</result>
+			<result name="toEdit">/jsp/admin/site_edit.jsp</result>
+		</action>
 	</package>
 
 </struts>
