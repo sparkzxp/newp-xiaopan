@@ -48,4 +48,8 @@ public class UserService implements IUserService {
 		param.put("user", user);
 		return userDao.query(param);
 	}
+
+	public Integer updatePart(User user) {
+		return this.userDao.updatePart(user);
+	}
 }

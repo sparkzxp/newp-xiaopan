@@ -14,4 +14,6 @@ public interface IUserDao {
 	List<User> queryByPager(Map<String, Object> param);
 
 	Integer count(Map<String, Object> param);
+
+	Integer updatePart(User user);
 }

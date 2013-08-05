@@ -19,18 +19,24 @@
 			$(".list0").each(function(i) {
 				$(this).click(function() {
 					$(".item").eq(i).toggle();
-				})
-			})
+				});
+			});
 			$(".delete").each(function(i) {
-				$(this).click(function() {
-					var aid = $(this).attr("aid");
-					Delete("Handler/DeleteArcType.ashx", aid);
-				})
-			})
-		})
-		function del() {
-
-		}
+				$(this).bind("click", function() {
+					if(confirm("确定删除吗？")){
+						var aid = $(this).attr("aid");
+						$.post("<%=basePath%>sys/arctype_doDelete",{"arctype.id":aid},function(data){
+		   					if(data=="success"){
+		   						alert("操作成功！");
+		   						location.reload();
+		   					}else{
+		   						alert("操作失败！");
+		   					}
+		   				});
+					}
+				});
+			});
+		});
 	</script>
 	<style type="text/css">
 .nav {
@@ -114,7 +120,7 @@
 							(ID:<s:property value="#parent.id" />)&nbsp;&nbsp; （排序:<s:property value="#parent.sort" />)</div>
 						<div class="list_r">
 							<a href="archives.aspx?aid=id">内容</a>| <a
-								href="<%=basePath%>sys/arctype_toEdit?arctype.id=<s:property value="#parent.id" />">修改</a>| <a href="#" aid="id"
+								href="<%=basePath%>sys/arctype_toEdit?arctype.id=<s:property value="#parent.id" />">修改</a>| <a href="javascript:void(0);" aid="<s:property value="#parent.id" />"
 								class="delete">删除</a>
 						</div>
 						<div class="clear"></div>
@@ -127,7 +133,7 @@
 										(ID:<s:property value="#child.id" />)&nbsp;&nbsp; （排序:<s:property value="#child.sort" />)</div>
 									<div class="list_r">
 										<a href="archives.aspx?aid=id">内容</a>| <a
-											href="Edit_arctype.aspx?aid=id">修改</a>| <a href="#" aid="id"
+											href="<%=basePath%>sys/arctype_toEdit?arctype.id=<s:property value="#child.id" />">修改</a>| <a href="javascript:void(0);" aid="<s:property value="#child.id" />"
 											class="delete">删除</a>
 									</div>
 									<div class="clear"></div>

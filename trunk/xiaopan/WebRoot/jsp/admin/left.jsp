@@ -96,7 +96,7 @@
             <div class="item">
                 <p><a href="clear.aspx" target="I1">清除缓存</a></p>
                 <p><a href="config.aspx" target="I1">网站配制</a></p>
-                <p><a href="changepassword.aspx" target="I1">修改密码</a></p>
+                <p><a href="<%=basePath%>sys/user_toManagePwd" target="I1">修改密码</a></p>
             </div>
         </div>
     </form>

@@ -40,11 +40,9 @@
 	});
 
 		$(function(){
-			alert($('#editForm_arctype_contents').val());
 			if($('#editForm_arctype_id').val() != ''){
 				$('#editor_id').val($('#editForm_arctype_contents').val());
 			}
-			alert($('#editor_id').val());
    			$("#btn_submit").click(function(){
    				if($('#editForm').valid()){
    					$('#editForm_arctype_contents').val($('#editor_id').val());

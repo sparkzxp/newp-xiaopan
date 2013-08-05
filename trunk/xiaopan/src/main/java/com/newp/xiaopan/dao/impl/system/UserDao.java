@@ -30,4 +30,8 @@ public class UserDao implements IUserDao {
 	public List<User> queryByPager(Map<String, Object> param) {
 		return this.sqlSession.selectList("userNpc.queryByPager", param);
 	}
+
+	public Integer updatePart(User user) {
+		return this.sqlSession.update("userNpc.updatePart", user);
+	}
 }

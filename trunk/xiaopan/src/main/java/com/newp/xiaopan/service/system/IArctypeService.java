@@ -24,4 +24,6 @@ public interface IArctypeService {
 	String add(Arctype arctype);
 
 	Integer update(Arctype arctype);
+
+	Integer delete(Arctype arctype);
 }

@@ -61,4 +61,8 @@
 			
 			WHERE id = #{id}
 	</update>
+	
+	<delete id="delete" parameterType="arctype">
+		delete from ARCTYPE where id = #{id}
+	</delete>
 </mapper>
