@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="typeNpc">
+	<!-- 返回值映射关系 -->
+	<resultMap id="typeRstMap" type="type">
+		<result property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="color" column="color" />
+		<result property="seotitle" column="seotitle" />
+		<result property="keyword" column="keyword" />
+		<result property="description" column="description" />
+		<result property="topid" column="topid" />
+		<result property="sort" column="sort" />
+	</resultMap>
+
+	<!-- 查询条件 -->
+	<sql id="query_where">
+		<where>
+			<if test="type != null">
+				<if test="type.topid != null">
+					and T.topid = #{type.topid}
+				</if>
+				<if test="type.id != null and type.id != ''">
+					and T.id = #{type.id}
+				</if>
+			</if>
+		</where>
+	</sql>
+
+	<select id="query" resultMap="typeRstMap" parameterType="map">
+		SELECT T.* FROM TYPE T
+		<include refid="query_where" />
+	</select>
+	
+	<insert id="add" parameterType="type">
+		<selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
+			SELECT @@IDENTITY
+		</selectKey>
+		INSERT INTO TYPE(
+			name, seotitle, keyword,
+			description, color, topid,
+			sort
+		) VALUES (
+			#{name}, #{seotitle}, #{keyword},
+			#{description}, #{color}, #{topid},
+			#{sort}
+		)
+	</insert>
+	
+	<update id="update" parameterType="type">
+		update TYPE set
+			name = #{name},
+			seotitle = #{seotitle},
+			keyword = #{keyword},
+			description = #{description},
+			color = #{color},
+			topid = #{topid},
+			sort = #{sort}
+			
+			WHERE id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="type">
+		delete from TYPE where id = #{id}
+	</delete>
+</mapper>

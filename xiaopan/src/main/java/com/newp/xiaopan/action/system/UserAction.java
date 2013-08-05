@@ -60,11 +60,6 @@ public class UserAction extends BaseAction {
 		return Action.LOGIN;
 	}
 
-	public String toEdit() {
-		user = this.getLoginUser();
-		return Constants.ACTION_TO_EDIT;
-	}
-
 	public String toManagePwd() {
 		return "toManagePwd";
 	}

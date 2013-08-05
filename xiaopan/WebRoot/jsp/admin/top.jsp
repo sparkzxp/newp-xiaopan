@@ -111,7 +111,7 @@ body {
 		<area shape="rect" coords="102,2,144,21" href="#" onclick="javascript:history.go(1)" />
 		<area shape="rect" coords="150,1,197,22" href="#"
 			onclick="javascript:top.location.href='<%=basePath%>jsp/admin/index.jsp'" />
-		<area shape="rect" coords="210,2,304,20" href="<%=basePath%>sys/user_toEdit"
+		<area shape="rect" coords="210,2,304,20" href="<%=basePath%>sys/user_toManagePwd"
 			target="I1" />
 		<area shape="rect" coords="314,1,361,23" href="<%=basePath%>sys/user_logout" target="I1" />
 	</map>
