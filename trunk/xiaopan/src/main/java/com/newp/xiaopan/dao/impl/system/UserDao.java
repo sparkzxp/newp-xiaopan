@@ -30,20 +30,4 @@ public class UserDao implements IUserDao {
 	public List<User> queryByPager(Map<String, Object> param) {
 		return this.sqlSession.selectList("userNpc.queryByPager", param);
 	}
-
-	public Integer addUser(User user) {
-		return this.sqlSession.insert("userNpc.addUser", user);
-	}
-
-	public Integer updateUser(User user) {
-		return this.sqlSession.update("userNpc.updateUser", user);
-	}
-
-	public Integer deleteUsers(List<String> ids) {
-		return this.sqlSession.delete("userNpc.deleteUsers", ids);
-	}
-
-	public Integer isLoginNameExist(Map<String, Object> param) {
-		return Integer.valueOf(this.sqlSession.selectOne("userNpc.isLoginNameExist", param).toString());
-	}
 }

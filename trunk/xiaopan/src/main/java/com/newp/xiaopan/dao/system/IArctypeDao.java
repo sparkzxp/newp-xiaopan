@@ -15,4 +15,8 @@ import com.newp.xiaopan.bean.system.Arctype;
 public interface IArctypeDao {
 
 	List<Arctype> query(Map<String, Object> params);
+
+	String add(Arctype arctype);
+
+	Integer update(Arctype arctype);
 }

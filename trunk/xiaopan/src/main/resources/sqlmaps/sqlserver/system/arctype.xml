@@ -19,8 +19,11 @@
 	<sql id="query_where">
 		<where>
 			<if test="arctype != null">
-				<if test="arctype.topid !=null and arctype.topid != ''">
+				<if test="arctype.topid != null">
 					and A.topid = #{arctype.topid}
+				</if>
+				<if test="arctype.id != null and arctype.id != ''">
+					and A.id = #{arctype.id}
 				</if>
 			</if>
 		</where>
@@ -30,4 +33,32 @@
 		SELECT A.* FROM ARCTYPE A
 		<include refid="query_where" />
 	</select>
+	
+	<insert id="add" parameterType="arctype">
+		<selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
+			SELECT @@IDENTITY
+		</selectKey>
+		INSERT INTO ARCTYPE(
+			typename, seotitle, keyword,
+			description, contents, topid,
+			sort
+		) VALUES (
+			#{typename}, #{seotitle}, #{keyword},
+			#{description}, #{contents}, #{topid},
+			#{sort}
+		)
+	</insert>
+	
+	<update id="update" parameterType="arctype">
+		update ARCTYPE set
+			typename = #{typename},
+			seotitle = #{seotitle},
+			keyword = #{keyword},
+			description = #{description},
+			contents = #{contents},
+			topid = #{topid},
+			sort = #{sort}
+			
+			WHERE id = #{id}
+	</update>
 </mapper>

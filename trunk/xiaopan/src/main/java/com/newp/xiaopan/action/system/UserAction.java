@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.newp.xiaopan.bean.system.User;
@@ -19,6 +20,7 @@ import com.opensymphony.xwork2.Action;
  * 用户管理
  */
 @Controller
+@Scope(value = "prototype")
 public class UserAction extends BaseAction {
 	private static final long serialVersionUID = 7054055956492130575L;
 

@@ -11,34 +11,48 @@
     <link type="text/css" href="<%=basePath%>css/admin/tab.css" rel="Stylesheet" />
     <script language="javascript" src="<%=basePath%>js/jquery/jquery-1.7.2.min.js"></script>
     <script language="javascript" src="<%=basePath%>js/common/validation.js"></script>
+    <script language="javascript" src="<%=basePath%>js/common/json2.js"></script>
     <script type="text/javascript" src="<%=basePath%>plugin/editor/kindeditor-min.js"></script>
 	<script type="text/javascript" src="<%=basePath%>plugin/editor/lang/zh_CN.js"></script>
     <script type="text/javascript">
     var editor;
 	KindEditor.ready(function(K) {
-		var item =['source', '|', 'undo', 'redo', '|', 'preview', 'print', 'code', 'cut', 'copy', 'paste',
+		var item =['source', '|', 'undo', 'redo', '|', 'preview', 'cut', 'copy', 'paste',
 		           'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
-		           'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
-		           'superscript', 'clearhtml', 'quickformat', '/',
+		           'justifyfull', 'insertorderedlist', 'insertunorderedlist',
+		           'clearhtml', 'quickformat', '/',
 		           'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
 		           'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image',
-		           'table', 'hr', 'emoticons', , 'pagebreak',
-		           'anchor', 'link', 'unlink', '|', 'about'];
+		           'table', 'hr', 'emoticons',];
 		editor = K.create('#editor_id', {
 	        width : '600px',
 	        height:'416px',
 	        items :item,
 	        resizeType:0,
-	        uploadJson:'<%=basePath%>sys/arctype_uploadKindEditorImg'  
+	        uploadJson:'<%=basePath%>sys/arctype_uploadKindEditorImg',
+	        afterCreate : function() { 
+	        	this.sync(); 
+        	}, 
+        	afterBlur:function(){ 
+	        	this.sync(); 
+        	}
 		});
 	});
 
 		$(function(){
+			alert($('#editForm_arctype_contents').val());
+			if($('#editForm_arctype_id').val() != ''){
+				$('#editor_id').val($('#editForm_arctype_contents').val());
+			}
+			alert($('#editor_id').val());
    			$("#btn_submit").click(function(){
    				if($('#editForm').valid()){
+   					$('#editForm_arctype_contents').val($('#editor_id').val());
 	 	   			$("#btn_submit").attr("disabled","true");
 	 	   			$.post("<%=basePath%>sys/arctype_doEdit",$("#editForm").serialize(),function(data){
+	 	   				data = JSON.parse(data);
 		  	   			if(data.result=="success"){
+		  	   					alert("编辑成功!");
 		 						$('#editForm_atctype_id').val(data.id);
 		 					}else if(data.result=="error"){
 		 						alert("编辑失败!");
@@ -84,7 +98,7 @@
                 <tr>
                     <td align="right" height="25px">所属分类：</td>
                     <td>
-                    	<s:select name="arctype.topid" list="arctypes" listKey="id" listValue="typename" headerKey="" headerValue="--请选择--" cssClass="{required:true}"></s:select>
+                    	<s:select name="arctype.topid" list="arctypes" listKey="id" listValue="typename" headerKey="0" headerValue="顶级分类" cssClass="{required:true}"></s:select>
                     </td>
                 </tr>
                 <tr>

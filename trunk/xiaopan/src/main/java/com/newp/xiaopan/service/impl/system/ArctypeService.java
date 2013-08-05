@@ -39,4 +39,12 @@ public class ArctypeService extends BaseService implements IArctypeService {
 		return null;
 	}
 
+	public String add(Arctype arctype) {
+		return this.arctypeDao.add(arctype);
+	}
+
+	public Integer update(Arctype arctype) {
+		return this.arctypeDao.update(arctype);
+	}
+
 }
