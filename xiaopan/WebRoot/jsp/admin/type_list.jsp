@@ -82,6 +82,7 @@
                                 <div class="l_item">
                                     <div class="list_l list1" aid="<s:property value="#child.id" />">
                                         <s:property value="#child.name" />&nbsp;&nbsp;
+                                        (价格:<s:property value="#child.price" />&nbsp;元)&nbsp;&nbsp;
                                         (ID:<s:property value="#child.id" />)&nbsp;&nbsp;
 										(排序:<s:property value="#child.sort" />)
                                     </div>

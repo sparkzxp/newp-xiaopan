@@ -15,29 +15,29 @@
     <script type="text/javascript" src="<%=basePath%>plugin/editor/kindeditor-min.js"></script>
 	<script type="text/javascript" src="<%=basePath%>plugin/editor/lang/zh_CN.js"></script>
     <script type="text/javascript">
-    var editor;
-	KindEditor.ready(function(K) {
-		var item =['source', '|', 'undo', 'redo', '|', 'preview', 'cut', 'copy', 'paste',
-		           'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
-		           'justifyfull', 'insertorderedlist', 'insertunorderedlist',
-		           'clearhtml', 'quickformat', '/',
-		           'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
-		           'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image',
-		           'table', 'hr', 'emoticons',];
-		editor = K.create('#editor_id', {
-	        width : '600px',
-	        height:'416px',
-	        items :item,
-	        resizeType:0,
-	        uploadJson:'<%=basePath%>sys/arctype_uploadKindEditorImg',
-	        afterCreate : function() { 
-	        	this.sync(); 
-        	}, 
-        	afterBlur:function(){ 
-	        	this.sync(); 
-        	}
+	    var editor;
+		KindEditor.ready(function(K) {
+			var item =['source', '|', 'undo', 'redo', '|', 'preview', 'cut', 'copy', 'paste',
+			           'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+			           'justifyfull', 'insertorderedlist', 'insertunorderedlist',
+			           'clearhtml', 'quickformat', '/',
+			           'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+			           'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image',
+			           'table', 'hr', 'emoticons'];
+			editor = K.create('#editor_id', {
+		        width : '600px',
+		        height:'416px',
+		        items :item,
+		        resizeType:0,
+		        uploadJson:'<%=basePath%>sys/arctype_uploadKindEditorImg',
+		        afterCreate : function() { 
+		        	this.sync(); 
+	        	}, 
+	        	afterBlur:function(){ 
+		        	this.sync(); 
+	        	}
+			});
 		});
-	});
 
 		$(function(){
 			if($('#editForm_arctype_id').val() != ''){
@@ -87,7 +87,7 @@
                 </tr>
                 <tr>
                     <td width="120px" height="25px" align="right">关键词：</td>
-                    <td><s:textfield name="arctype.keyword" cssStyle="width:400px;" cssClass="{required:true,maxlengthCN:200}"/></td>
+                    <td><s:textarea name="arctype.keyword" cssStyle="width:400px;" cssClass="{required:true,maxlengthCN:200}"></s:textarea></td>
                 </tr>
                 <tr>
                     <td width="120px" height="25px" align="right">描述：</td>

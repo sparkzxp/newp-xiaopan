@@ -60,8 +60,12 @@
         <div class="c_c">
             <table border="0" cellpadding="0" cellspacing="0" class="table">
                 <tr>
-                    <td width="120px" height="25px" align="right">标题名称：</td>
+                    <td width="120px" height="25px" align="right">名称：</td>
                     <td><s:textfield name="type.name" cssStyle="width:200px;" cssClass="{required:true,maxlengthCN:80}"/></td>
+                </tr>
+                <tr>
+                    <td width="120px" height="25px" align="right">价格：</td>
+                    <td><s:textfield name="type.price" cssStyle="width:200px;" cssClass="{required:true,decimal:true}"/>&nbsp;(元)</td>
                 </tr>
                 <tr style="display:none;">
                     <td width="120px" height="25px" align="right">颜色：</td>
@@ -69,15 +73,15 @@
                 </tr>
                 <tr>
                     <td width="120px" height="25px" align="right">SEO标题：</td>
-                    <td><s:textfield name="type.seotitle" cssStyle="width:400px;" cssClass="{required:true,maxlengthCN:80}"/></td>
+                    <td><s:textfield name="type.seotitle" cssStyle="width:400px;" cssClass="{maxlengthCN:80}"/></td>
                 </tr>
                 <tr>
                     <td width="120px" height="25px" align="right">关键词：</td>
-                    <td><s:textfield name="type.keyword" cssStyle="width:400px; height:60px;" cssClass="{required:true,maxlengthCN:200}"/></td>
+                    <td><s:textarea name="type.keyword" cssStyle="width:400px; height:60px;" cssClass="{maxlengthCN:200}"></s:textarea></td>
                 </tr>
                 <tr>
                     <td width="120px" height="25px" align="right">描述：</td>
-                    <td><s:textarea name="type.description" cssStyle="width:400px; height:60px;" cssClass="{required:true,maxlengthCN:200}"/></td>
+                    <td><s:textarea name="type.description" cssStyle="width:400px; height:60px;" cssClass="{maxlengthCN:200}"/></td>
                 </tr>
                 <tr>
                     <td align="right" height="25px">所属分类：</td>

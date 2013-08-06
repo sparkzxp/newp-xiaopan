@@ -14,6 +14,7 @@ public class Type extends BaseBean {
 	private String description;
 	private Integer topid;
 	private Integer sort;
+	private Double price;
 
 	public String getName() {
 		return name;
@@ -69,5 +70,13 @@ public class Type extends BaseBean {
 
 	public void setSort(Integer sort) {
 		this.sort = sort;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
 	}
 }

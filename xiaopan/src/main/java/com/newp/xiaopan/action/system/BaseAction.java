@@ -1,14 +1,17 @@
 package com.newp.xiaopan.action.system;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
+import org.json.simple.JSONObject;
 
 import com.newp.xiaopan.bean.system.User;
 import com.newp.xiaopan.common.Constants;
@@ -20,6 +23,8 @@ import com.opensymphony.xwork2.ActionSupport;
 public class BaseAction extends ActionSupport {
 	private static final long serialVersionUID = -1210487690202887835L;
 	private Logger logger = Logger.getLogger(this.getClass());
+
+	protected JSONObject msg = new JSONObject();
 
 	/**
 	 * 获取当前登录的用户
@@ -89,5 +94,53 @@ public class BaseAction extends ActionSupport {
 			this.logger.error("将以逗号分隔的字符串转换成List<String>发生错误!", e);
 		}
 		return strList;
+	}
+
+	/**
+	 * 成功的时候回写KindEditor。
+	 */
+	public boolean makeSuccessRespForKE(HttpServletResponse resp) {
+		// resp.setContentType("text/xml;charset=UTF-8");去除 否则会在谷歌火狐下上传失败
+		PrintWriter out = null;
+		try {
+			out = resp.getWriter();
+			out.write(msg.toJSONString());
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			if (out != null) {
+				out.close();
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * 返回Json
+	 * 
+	 * @param message
+	 * @return
+	 */
+	// 这里封装好json数据error 1 表示错误，message 表示错误信息。
+	@SuppressWarnings("unchecked")
+	protected void getError(String message) {
+		msg.put("error", 1);
+		msg.put("message", message);
+	}
+
+	/**
+	 * @return the msg
+	 */
+	public JSONObject getMsg() {
+		return msg;
+	}
+
+	/**
+	 * @param msg
+	 *            the msg to set
+	 */
+	public void setMsg(JSONObject msg) {
+		this.msg = msg;
 	}
 }
