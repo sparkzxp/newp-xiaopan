@@ -464,9 +464,9 @@ jQuery.validator.addMethod("minlengthCN", function(value,element,param) {
 }, "请输入一个长度最少是{0}的字符串");
 
 jQuery.validator.addMethod("decimal", function(value, element) {
-   var decimal = /^-?\d+(\.\d{1,2})?$/;
+   var decimal = /^-?\d+(\.\d{1})?$/;
    return this.optional(element) || (decimal.test(value));
-}, $.validator.format("小数位数不能超过两位!"));
+}, $.validator.format("请输入一位小数!"));
 
 jQuery.validator.addMethod("specialChar", function(value,element,param) {
 	return /^[\u0391-\uFFE5\w]+$/.test(value);

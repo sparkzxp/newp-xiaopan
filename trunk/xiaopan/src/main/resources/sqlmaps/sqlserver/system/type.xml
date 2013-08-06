@@ -12,6 +12,7 @@
 		<result property="description" column="description" />
 		<result property="topid" column="topid" />
 		<result property="sort" column="sort" />
+		<result property="price" column="price" />
 	</resultMap>
 
 	<!-- 查询条件 -->
@@ -41,11 +42,11 @@
 		INSERT INTO TYPE(
 			name, seotitle, keyword,
 			description, color, topid,
-			sort
+			sort, price
 		) VALUES (
 			#{name}, #{seotitle}, #{keyword},
 			#{description}, #{color}, #{topid},
-			#{sort}
+			#{sort}, #{price}
 		)
 	</insert>
 	
@@ -57,7 +58,8 @@
 			description = #{description},
 			color = #{color},
 			topid = #{topid},
-			sort = #{sort}
+			sort = #{sort},
+			price = #{price}
 			
 			WHERE id = #{id}
 	</update>

@@ -1,8 +1,14 @@
 package com.newp.xiaopan.action.system;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
+import org.apache.struts2.ServletActionContext;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +19,7 @@ import com.newp.xiaopan.bean.system.Shop;
 import com.newp.xiaopan.bean.system.Site;
 import com.newp.xiaopan.bean.system.Type;
 import com.newp.xiaopan.common.Constants;
+import com.newp.xiaopan.common.FileUtil;
 import com.newp.xiaopan.service.system.IShopService;
 import com.newp.xiaopan.service.system.ISiteService;
 import com.newp.xiaopan.service.system.ITypeService;
@@ -26,6 +33,7 @@ import com.newp.xiaopan.service.system.ITypeService;
 public class ShopAction extends BaseAction {
 
 	private static final long serialVersionUID = 1L;
+	private Logger log = Logger.getLogger(getClass());
 
 	@Autowired
 	private IShopService shopService;
@@ -39,52 +47,179 @@ public class ShopAction extends BaseAction {
 	private List<Site> sites;
 	private String typeJson;
 
+	private File imgFile;
+	private String imgFileFileName;
+	private String imgFileContentType;
+	private boolean pathStatus;
+	private String uploadStatus;
+
 	public String toList() {
 		shops = this.shopService.queryList(shop);
 		return Constants.ACTION_TO_LIST;
 	}
 
-	@SuppressWarnings("unchecked")
 	public String toEdit() {
-		if (null != shop && StringUtils.isNotEmpty(shop.getId())) {
+		boolean isUpdate = (null != shop && StringUtils.isNotEmpty(shop.getId()));
+		if (isUpdate) {
 			shop = this.shopService.query(shop);
 		}
-		setSites(this.siteService.queryList(null));
-		List<Type> types = this.typeService.queryList(null);
-		JSONArray jsonArray = new JSONArray();
-		JSONObject jsonObject;
-		for (Type t : types) {
-			jsonObject = new JSONObject();
-			jsonObject.put("id", t.getId());
-			jsonObject.put("pId", t.getTopid());
-			if (null != t.getTopid() && t.getTopid() != 0) {
-				jsonObject.put("open", true);
-				jsonObject.put("nocheck", true);
-			}
-			jsonArray.add(jsonObject);
-		}
-		this.typeJson = jsonArray.toJSONString();
+		initEdit(isUpdate);
+
 		return Constants.ACTION_TO_EDIT;
 	}
 
 	@SuppressWarnings("unchecked")
-	public void doEdit() {
-		JSONObject jsonObject = new JSONObject();
-		if (StringUtils.isEmpty(shop.getId())) {
-			String id = this.shopService.add(shop);
-			jsonObject.put("result", "success");
-			jsonObject.put("id", id);
-		} else {
-			this.shopService.update(shop);
-			jsonObject.put("result", "success");
-			jsonObject.put("id", shop.getId());
+	private void initEdit(boolean isUpdate) {
+		String[] typeIds = null;
+		if (isUpdate) {
+			typeIds = shop.getTypeIds().split(",");
 		}
-		this.ajax(jsonObject.toJSONString());
+		setSites(this.siteService.queryList(null));
+
+		List<Type> allTypes = this.typeService.queryList(null);
+		JSONArray jsonArray = new JSONArray();
+		JSONObject jsonObject;
+		boolean firstOpen = true;
+		for (Type t : allTypes) {
+			jsonObject = new JSONObject();
+			jsonObject.put("id", t.getId());
+			if (isUpdate) {
+				for (String s : typeIds) {
+					if (t.getId().equals(s)) {
+						jsonObject.put("checked", true);
+						break;
+					}
+				}
+			}
+			jsonObject.put("pId", t.getTopid());
+			if (null != t.getTopid() && t.getTopid() == 0) {
+				jsonObject.put("name", t.getName());
+				if (firstOpen) {
+					jsonObject.put("open", true);
+					firstOpen = false;
+				}
+				jsonObject.put("nocheck", true);
+			} else {
+				jsonObject.put("name", t.getName() + "(" + t.getPrice() + "元)");
+			}
+			jsonArray.add(jsonObject);
+		}
+		this.typeJson = jsonArray.toJSONString();
+	}
+
+	@SuppressWarnings("deprecation")
+	public String doEdit() {
+		String oldPath = shop.getImagePath();
+		oldPath = oldPath.substring(oldPath.indexOf("xiaopan") + 7, oldPath.length());
+
+		InputStream fis = null;
+		FileOutputStream fos = null;
+		try {
+			if (pathStatus) {
+				String path = ServletActionContext.getRequest().getRealPath("/upload/shop/images/");
+				File root = new File(path);
+				// 应保证在根目录中有此目录的存在
+				// 如果没有，下面则上创建新的文件夹
+				if (!root.isDirectory()) {
+					System.out.println("创建新文件夹成功" + path);
+					root.mkdirs();
+				}
+
+				fis = new FileInputStream(imgFile);
+				String filename = FileUtil.gainFileName(imgFileFileName);
+				fos = new FileOutputStream(path + "/" + filename);
+
+				byte[] data = new byte[1024];
+				while (fis.read(data) != -1) {
+					fos.write(data);
+				}
+				fos.flush();
+				shop.setImagePath(ServletActionContext.getRequest().getContextPath() + "/upload/shop/images/" + filename);
+			}
+
+			if (StringUtils.isEmpty(shop.getId())) {
+				// 新增
+				String id = this.shopService.add(shop);
+				shop.setId(id);
+			} else {
+				// 修改
+				this.shopService.update(shop);
+				if (pathStatus) {
+					FileUtil.deleteFile(ServletActionContext.getRequest().getRealPath("/") + oldPath);
+				}
+			}
+
+			pathStatus = false;
+			uploadStatus = "success";
+			initEdit(true);
+			return Constants.ACTION_TO_EDIT;
+		} catch (Exception e) {
+			log.error(e);
+			pathStatus = false;
+			uploadStatus = "error";
+			initEdit(true);
+			return Constants.ACTION_TO_EDIT;
+		} finally {
+			try {
+				if (null != fis) {
+					fis.close();
+				}
+				if (null != fos) {
+					fos.close();
+				}
+			} catch (Exception e) {
+				log.error(e);
+			}
+		}
 	}
 
 	public void doDelete() {
 		this.shopService.delete(shop);
 		this.ajax(true);
+	}
+
+	@SuppressWarnings({ "unchecked", "deprecation" })
+	public void uploadKindEditorImg() {
+		InputStream fis = null;
+		FileOutputStream fos = null;
+		try {
+			String path = ServletActionContext.getRequest().getRealPath("/upload/contentImages/shop/");
+			File root = new File(path);
+			// 应保证在根目录中有此目录的存在
+			// 如果没有，下面则上创建新的文件夹
+			if (!root.isDirectory()) {
+				System.out.println("创建新文件夹成功" + path);
+				root.mkdirs();
+			}
+
+			fis = new FileInputStream(imgFile);
+			String filename = FileUtil.gainFileName(imgFileFileName);
+			fos = new FileOutputStream(path + "/" + filename);
+
+			byte[] data = new byte[1024];
+			while (fis.read(data) != -1) {
+				fos.write(data);
+			}
+			fos.flush();
+			msg.put("error", 0);
+			// 上传成功返回文件url地址 。
+			msg.put("url", ServletActionContext.getRequest().getContextPath() + "/upload/contentImages/shop/" + filename);
+			makeSuccessRespForKE(ServletActionContext.getResponse());
+		} catch (Exception e) {
+			log.error(e);
+			getError("上传失败");
+		} finally {
+			try {
+				if (null != fis) {
+					fis.close();
+				}
+				if (null != fos) {
+					fos.close();
+				}
+			} catch (Exception e) {
+				log.error(e);
+			}
+		}
 	}
 
 	/**
@@ -134,5 +269,45 @@ public class ShopAction extends BaseAction {
 
 	public void setTypeJson(String typeJson) {
 		this.typeJson = typeJson;
+	}
+
+	public File getImgFile() {
+		return imgFile;
+	}
+
+	public void setImgFile(File imgFile) {
+		this.imgFile = imgFile;
+	}
+
+	public String getImgFileFileName() {
+		return imgFileFileName;
+	}
+
+	public void setImgFileFileName(String imgFileFileName) {
+		this.imgFileFileName = imgFileFileName;
+	}
+
+	public String getImgFileContentType() {
+		return imgFileContentType;
+	}
+
+	public void setImgFileContentType(String imgFileContentType) {
+		this.imgFileContentType = imgFileContentType;
+	}
+
+	public boolean isPathStatus() {
+		return pathStatus;
+	}
+
+	public void setPathStatus(boolean pathStatus) {
+		this.pathStatus = pathStatus;
+	}
+
+	public String getUploadStatus() {
+		return uploadStatus;
+	}
+
+	public void setUploadStatus(String uploadStatus) {
+		this.uploadStatus = uploadStatus;
 	}
 }
