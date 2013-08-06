@@ -13,13 +13,6 @@
     <script language="javascript" src="<%=basePath%>js/admin/global.js"></script>
     <script language="javascript" >
         $(function() {
-            $(".list:first").css({ borderTop: "solid 1px #d0e3b7" });
-            $(".list0").each(function(i) {
-                $(this).click(function() {
-                    $(".item").eq(i).toggle();
-                });
-            });
-
             $(".delete").each(function(i) {
                 $(this).click(function() {
                 	if(confirm("确定删除吗？")){

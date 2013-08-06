@@ -133,6 +133,8 @@
    					if($('input[type=file]').val() != ''){
 						$("#editForm_pathStatus").val("true");
 			   	   	}
+   					
+   					$("#btn_submit").attr("disabled","true");
    					$("#editForm").submit();
 	   			}
    	   		});
@@ -161,11 +163,11 @@
                 </tr>
                 <tr>
                     <td width="120px" height="25px" align="right">关键词：</td>
-                    <td><s:textarea name="shop.keyword" cssStyle="width:400px; height:60px;" cssClass="{required:true,maxlengthCN:200}"></s:textarea></td>
+                    <td><s:textarea name="shop.keyword" cssStyle="width:400px; height:60px;" cssClass="{maxlengthCN:200}"></s:textarea></td>
                 </tr>
                 <tr>
                     <td width="120px" height="25px" align="right">描述：</td>
-                    <td><s:textarea name="shop.description" cssStyle="width:400px; height:60px;" cssClass="{required:true,maxlengthCN:200}"/></td>
+                    <td><s:textarea name="shop.description" cssStyle="width:400px; height:60px;" cssClass="{maxlengthCN:200}"/></td>
                 </tr>
                 <tr>
                     <td width="120px" height="25px" align="right">地址：</td>

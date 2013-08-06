@@ -16,10 +16,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
-import com.newp.xiaopan.bean.system.Arctype;
+import com.newp.xiaopan.bean.system.Archive;
 import com.newp.xiaopan.common.Constants;
 import com.newp.xiaopan.common.FileUtil;
-import com.newp.xiaopan.service.system.IArctypeService;
+import com.newp.xiaopan.service.system.IArchiveService;
 
 /**
  * @author 张霄鹏
@@ -27,33 +27,30 @@ import com.newp.xiaopan.service.system.IArctypeService;
  */
 @Controller
 @Scope(value = "prototype")
-public class ArctypeAction extends BaseAction {
+public class ArchiveAction extends BaseAction {
 
 	private static final long serialVersionUID = 1L;
 	private Logger log = Logger.getLogger(getClass());
 
 	@Autowired
-	private IArctypeService arctypeService;
+	private IArchiveService archiveService;
 
-	private Arctype arctype;
-	private List<Arctype> arctypes;
+	private Archive archive;
+	private List<Archive> archives;
 
 	private File imgFile;
 	private String imgFileFileName;
 	private String imgFileContentType;
 
 	public String toList() {
-		arctypes = this.arctypeService.queryList(arctype);
+		archives = this.archiveService.queryList(archive);
 		return Constants.ACTION_TO_LIST;
 	}
 
 	public String toEdit() {
-		if (null != arctype && StringUtils.isNotEmpty(arctype.getId())) {
-			arctype = this.arctypeService.query(arctype);
+		if (null != archive && StringUtils.isNotEmpty(archive.getId())) {
+			archive = this.archiveService.query(archive);
 		}
-		Arctype tmp = new Arctype();
-		tmp.setTopid(0);
-		arctypes = this.arctypeService.queryList(tmp);
 		return Constants.ACTION_TO_EDIT;
 	}
 
@@ -63,7 +60,7 @@ public class ArctypeAction extends BaseAction {
 		FileOutputStream fos = null;
 		try {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd/");
-			String base = "/upload/arctype/contents/" + sdf.format(new Date());
+			String base = "/upload/archive/contents/" + sdf.format(new Date());
 			String path = ServletActionContext.getRequest().getRealPath(base);
 			File root = new File(path);
 			if (!root.isDirectory()) {
@@ -103,51 +100,51 @@ public class ArctypeAction extends BaseAction {
 	@SuppressWarnings("unchecked")
 	public void doEdit() {
 		JSONObject jsonObject = new JSONObject();
-		if (StringUtils.isEmpty(arctype.getId())) {
-			String id = this.arctypeService.add(arctype);
+		if (StringUtils.isEmpty(archive.getId())) {
+			String id = this.archiveService.add(archive);
 			jsonObject.put("result", "success");
 			jsonObject.put("id", id);
 		} else {
-			this.arctypeService.update(arctype);
+			this.archiveService.update(archive);
 			jsonObject.put("result", "success");
-			jsonObject.put("id", arctype.getId());
+			jsonObject.put("id", archive.getId());
 		}
 		this.ajax(jsonObject.toJSONString());
 	}
 
 	public void doDelete() {
-		this.arctypeService.delete(arctype);
+		this.archiveService.delete(archive);
 		this.ajax(true);
 	}
 
 	/**
-	 * @return the arctypes
+	 * @return the archives
 	 */
-	public List<Arctype> getArctypes() {
-		return arctypes;
+	public List<Archive> getArchives() {
+		return archives;
 	}
 
 	/**
-	 * @param arctypes
-	 *            the arctypes to set
+	 * @param archives
+	 *            the archives to set
 	 */
-	public void setArctypes(List<Arctype> arctypes) {
-		this.arctypes = arctypes;
+	public void setArchives(List<Archive> archives) {
+		this.archives = archives;
 	}
 
 	/**
-	 * @return the arctype
+	 * @return the archive
 	 */
-	public Arctype getArctype() {
-		return arctype;
+	public Archive getArchive() {
+		return archive;
 	}
 
 	/**
-	 * @param arctype
-	 *            the arctype to set
+	 * @param archive
+	 *            the archive to set
 	 */
-	public void setArctype(Arctype arctype) {
-		this.arctype = arctype;
+	public void setArchive(Archive archive) {
+		this.archive = archive;
 	}
 
 	/**
