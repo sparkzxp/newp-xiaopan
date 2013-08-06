@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE struts PUBLIC     "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"     "http://struts.apache.org/dtds/struts-2.0.dtd">
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
 	<package name="system" extends="root" namespace="/sys">
 		<action name="user_*" class="userAction" method="{1}">
@@ -25,6 +27,10 @@
 		<action name="key_*" class="keyAction" method="{1}">
 			<result name="toList">/jsp/admin/key_list.jsp</result>
 			<result name="toEdit">/jsp/admin/key_edit.jsp</result>
+		</action>
+		<action name="archive_*" class="archiveAction" method="{1}">
+			<result name="toList">/jsp/admin/archive_list.jsp</result>
+			<result name="toEdit">/jsp/admin/archive_edit.jsp</result>
 		</action>
 	</package>
 

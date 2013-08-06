@@ -20,6 +20,7 @@
 		<typeAlias alias="site" type="com.newp.xiaopan.bean.system.Site" />
 		<typeAlias alias="shop" type="com.newp.xiaopan.bean.system.Shop" />
 		<typeAlias alias="key" type="com.newp.xiaopan.bean.system.Key" />
+		<typeAlias alias="archive" type="com.newp.xiaopan.bean.system.Archive" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="sqlmaps/sqlserver/system/user.xml" />
@@ -28,5 +29,6 @@
 		<mapper resource="sqlmaps/sqlserver/system/site.xml" />
 		<mapper resource="sqlmaps/sqlserver/system/shop.xml" />
 		<mapper resource="sqlmaps/sqlserver/system/key.xml" />
+		<mapper resource="sqlmaps/sqlserver/system/archive.xml" />
 	</mappers>
 </configuration>  

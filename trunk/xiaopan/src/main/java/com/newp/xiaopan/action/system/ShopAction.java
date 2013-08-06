@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -71,7 +73,7 @@ public class ShopAction extends BaseAction {
 	@SuppressWarnings("unchecked")
 	private void initEdit(boolean isUpdate) {
 		String[] typeIds = null;
-		if (isUpdate) {
+		if (isUpdate && StringUtils.isNotEmpty(shop.getTypeIds())) {
 			typeIds = shop.getTypeIds().split(",");
 		}
 		setSites(this.siteService.queryList(null));
@@ -83,7 +85,7 @@ public class ShopAction extends BaseAction {
 		for (Type t : allTypes) {
 			jsonObject = new JSONObject();
 			jsonObject.put("id", t.getId());
-			if (isUpdate) {
+			if (isUpdate && null != typeIds) {
 				for (String s : typeIds) {
 					if (t.getId().equals(s)) {
 						jsonObject.put("checked", true);
@@ -173,8 +175,12 @@ public class ShopAction extends BaseAction {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	public void doDelete() {
+		String oldPath = shop.getImagePath();
+		oldPath = oldPath.substring(oldPath.indexOf("xiaopan") + 7, oldPath.length());
 		this.shopService.delete(shop);
+		FileUtil.deleteFile(ServletActionContext.getRequest().getRealPath("/") + oldPath);
 		this.ajax(true);
 	}
 
@@ -183,10 +189,10 @@ public class ShopAction extends BaseAction {
 		InputStream fis = null;
 		FileOutputStream fos = null;
 		try {
-			String path = ServletActionContext.getRequest().getRealPath("/upload/contentImages/shop/");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd/");
+			String base = "/upload/shop/contents/" + sdf.format(new Date());
+			String path = ServletActionContext.getRequest().getRealPath(base);
 			File root = new File(path);
-			// 应保证在根目录中有此目录的存在
-			// 如果没有，下面则上创建新的文件夹
 			if (!root.isDirectory()) {
 				System.out.println("创建新文件夹成功" + path);
 				root.mkdirs();
@@ -202,8 +208,7 @@ public class ShopAction extends BaseAction {
 			}
 			fos.flush();
 			msg.put("error", 0);
-			// 上传成功返回文件url地址 。
-			msg.put("url", ServletActionContext.getRequest().getContextPath() + "/upload/contentImages/shop/" + filename);
+			msg.put("url", ServletActionContext.getRequest().getContextPath() + base + filename);
 			makeSuccessRespForKE(ServletActionContext.getResponse());
 		} catch (Exception e) {
 			log.error(e);

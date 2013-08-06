@@ -24,7 +24,7 @@
                 $(this).click(function() {
                 	if(confirm("确定删除吗？")){
 						var aid = $(this).attr("aid");
-						$.post("<%=basePath%>sys/shop_doDelete",{"shop.id":aid},function(data){
+						$.post("<%=basePath%>sys/shop_doDelete",{"shop.id":aid,"shop.imagePath":$(this).attr("aimagePath")},function(data){
 		   					if(data=="success"){
 		   						alert("操作成功！");
 		   						location.reload();
@@ -71,7 +71,7 @@
                     </div>
                     <div class="list_r">
                         <a href="<%=basePath%>sys/shop_toEdit?shop.id=<s:property value="#parent.id" />">修改</a>|
-                        <a href="javascript:void(0);" aid="<s:property value="#parent.id" />" class="delete">删除</a>
+                        <a href="javascript:void(0);" aid="<s:property value="#parent.id" />" aimagePath="<s:property value="#parent.imagePath" />" class="delete">删除</a>
                     </div>
                     <div class="clear"></div>
                 </div>

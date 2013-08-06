@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="archiveNpc">
+	<!-- 返回值映射关系 -->
+	<resultMap id="archiveRstMap" type="archive">
+		<result property="id" column="id" />
+		<result property="title" column="title" />
+		<result property="keyword" column="keyword" />
+		<result property="description" column="description" />
+		<result property="contents" column="contents" />
+		<result property="click" column="click" />
+		<result property="source" column="source" />
+		<result property="senddate" column="senddate" />
+	</resultMap>
+
+	<!-- 查询条件 -->
+	<sql id="query_where">
+		<where>
+			<if test="archive != null">
+				<if test="archive.source != null and archive.source != ''">
+					and A.source = #{archive.source}
+				</if>
+				<if test="archive.id != null and archive.id != ''">
+					and A.id = #{archive.id}
+				</if>
+			</if>
+		</where>
+	</sql>
+
+	<select id="query" resultMap="archiveRstMap" parameterType="map">
+		SELECT 
+		<if test="top != null">
+			top #{top} 
+		</if>
+		A.* FROM ARCHIVES A
+		<include refid="query_where" />
+		order by A.senddate desc, A.title asc
+	</select>
+	
+	<insert id="add" parameterType="archive">
+		<selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
+			SELECT @@IDENTITY
+		</selectKey>
+		INSERT INTO ARCHIVES(
+			title, source, keyword,
+			description, contents, senddate
+		) VALUES (
+			#{title}, #{source}, #{keyword},
+			#{description}, #{contents}, getDate()
+		)
+	</insert>
+	
+	<update id="update" parameterType="archive">
+		update ARCHIVES set
+			title = #{title},
+			source = #{source},
+			keyword = #{keyword},
+			description = #{description},
+			contents = #{contents},
+			senddate = getDate()
+			
+			WHERE id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="archive">
+		delete from ARCHIVES where id = #{id}
+	</delete>
+</mapper>
