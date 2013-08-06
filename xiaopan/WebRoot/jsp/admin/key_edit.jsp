@@ -7,8 +7,8 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<base href="<%=basePath%>">
     <title>无标题页</title>
-    <link key="text/css" href="<%=basePath%>css/admin/common.css" rel="Stylesheet" />
-    <link key="text/css" href="<%=basePath%>css/admin/tab.css" rel="Stylesheet" />
+    <link type="text/css" href="<%=basePath%>css/admin/common.css" rel="Stylesheet" />
+    <link type="text/css" href="<%=basePath%>css/admin/tab.css" rel="Stylesheet" />
     <script language="javascript" src="<%=basePath%>js/jquery/jquery-1.7.2.min.js"></script>
     <script language="javascript" src="<%=basePath%>js/common/validation.js"></script>
     <script language="javascript" src="<%=basePath%>js/common/json2.js"></script>

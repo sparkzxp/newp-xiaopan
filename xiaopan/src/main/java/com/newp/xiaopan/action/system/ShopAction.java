@@ -112,7 +112,9 @@ public class ShopAction extends BaseAction {
 	@SuppressWarnings("deprecation")
 	public String doEdit() {
 		String oldPath = shop.getImagePath();
-		oldPath = oldPath.substring(oldPath.indexOf("xiaopan") + 7, oldPath.length());
+		if (StringUtils.isNotBlank(oldPath)) {
+			oldPath = oldPath.substring(oldPath.indexOf("xiaopan") + 7, oldPath.length());
+		}
 
 		InputStream fis = null;
 		FileOutputStream fos = null;
@@ -120,8 +122,6 @@ public class ShopAction extends BaseAction {
 			if (pathStatus) {
 				String path = ServletActionContext.getRequest().getRealPath("/upload/shop/images/");
 				File root = new File(path);
-				// 应保证在根目录中有此目录的存在
-				// 如果没有，下面则上创建新的文件夹
 				if (!root.isDirectory()) {
 					System.out.println("创建新文件夹成功" + path);
 					root.mkdirs();
@@ -140,11 +140,9 @@ public class ShopAction extends BaseAction {
 			}
 
 			if (StringUtils.isEmpty(shop.getId())) {
-				// 新增
 				String id = this.shopService.add(shop);
 				shop.setId(id);
 			} else {
-				// 修改
 				this.shopService.update(shop);
 				if (pathStatus) {
 					FileUtil.deleteFile(ServletActionContext.getRequest().getRealPath("/") + oldPath);
@@ -178,9 +176,11 @@ public class ShopAction extends BaseAction {
 	@SuppressWarnings("deprecation")
 	public void doDelete() {
 		String oldPath = shop.getImagePath();
-		oldPath = oldPath.substring(oldPath.indexOf("xiaopan") + 7, oldPath.length());
 		this.shopService.delete(shop);
-		FileUtil.deleteFile(ServletActionContext.getRequest().getRealPath("/") + oldPath);
+		if (StringUtils.isNotBlank(oldPath)) {
+			oldPath = oldPath.substring(oldPath.indexOf("xiaopan") + 7, oldPath.length());
+			FileUtil.deleteFile(ServletActionContext.getRequest().getRealPath("/") + oldPath);
+		}
 		this.ajax(true);
 	}
 

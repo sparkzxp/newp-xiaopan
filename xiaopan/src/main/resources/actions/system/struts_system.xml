@@ -32,6 +32,10 @@
 			<result name="toList">/jsp/admin/archive_list.jsp</result>
 			<result name="toEdit">/jsp/admin/archive_edit.jsp</result>
 		</action>
+		<action name="ads_*" class="adsAction" method="{1}">
+			<result name="toList">/jsp/admin/ads_list.jsp</result>
+			<result name="toEdit">/jsp/admin/ads_edit.jsp</result>
+		</action>
 	</package>
 
 </struts>
