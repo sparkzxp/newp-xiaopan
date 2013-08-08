@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <base href="<%=basePath%>">
-    <title>无标题页</title>
+    <title>校畔网</title>
     <link type="text/css" href="<%=basePath%>css/admin/common.css" rel="Stylesheet" />
     <style type="text/css">
         a

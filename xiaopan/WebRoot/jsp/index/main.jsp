@@ -74,13 +74,13 @@
                     <s:iterator value="archives" var="parent">
 		            	<s:if test="#parent.source == '网站公告'">
 		                <li>
-		                    <a href="<%=basePath%>web/index_toDetail?archive.id=<s:property value="#parent.id"/>"><s:property value="#parent.title"/></a>
+		                    <a href="<%=basePath%>web/main_toNotice?archive.id=<s:property value="#parent.id"/>"><s:property value="#parent.title"/></a>
 		                </li>
 		                </s:if>
 		            </s:iterator>
                     </ul>
                     <div class="clear"></div>
-                    <div style="text-align:right;line-height:30px"><a href="/xiao/list.aspx">更多>></a></div>
+                    <div style="text-align:right;line-height:30px"><a href="<%=basePath%>web/main_toNoticeList">更多&gt;&gt;&nbsp;</a></div>
                 </div>
             </div>
             <s:set name="count" value="1"></s:set>

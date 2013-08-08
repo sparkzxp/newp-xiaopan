@@ -17,6 +17,15 @@ public class Archive extends BaseBean {
 	private String source;
 	private Timestamp senddate;
 
+	public Archive() {
+		super();
+	}
+
+	public Archive(String source) {
+		super();
+		this.source = source;
+	}
+
 	public String getTitle() {
 		return title;
 	}

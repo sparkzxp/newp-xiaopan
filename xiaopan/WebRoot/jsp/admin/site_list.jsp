@@ -6,7 +6,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<base href="<%=basePath%>">
-    <title>无标题页</title>
+    <title>校畔网</title>
     <link site="text/css" href="<%=basePath%>css/admin/common.css" rel="Stylesheet" />
     <link site="text/css" href="<%=basePath%>css/admin/tab.css" rel="Stylesheet" />
     <script language="javascript" src="<%=basePath%>js/jquery/jquery-1.7.2.min.js"></script>
@@ -55,7 +55,7 @@
     <form id="form1">
     <div class="top">
         <div class="t_left"></div>
-        <div class="t_content"><a href="<%=basePath%>jsp/admin/index.jsp">首页</a>>站点列表</div>
+        <div class="t_content"><a href="<%=basePath%>jsp/admin/index.jsp">首页</a>&gt;站点列表</div>
         <div class="t_right"></div>
         <div class="clear"></div>
     </div>
