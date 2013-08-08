@@ -101,7 +101,7 @@
 		<div class="top">
 			<div class="t_left"></div>
 			<div class="t_content">
-				<a href="<%=basePath%>jsp/admin/index.jsp">首页</a>>内容列表
+				<a href="<%=basePath%>jsp/admin/index.jsp">首页</a>&gt;内容列表
 			</div>
 			<div class="t_right"></div>
 			<div class="clear"></div>

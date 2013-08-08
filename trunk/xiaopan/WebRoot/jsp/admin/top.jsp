@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<base href="<%=basePath%>">
-		<title>无标题页</title>
+		<title>校畔网</title>
 		<style type="text/css">
 body {
 	margin-left: 0px;

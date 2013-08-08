@@ -52,7 +52,7 @@
         </div>
     </div>
     <div class="header">
-        <div class="h_left"><a href="/">
+        <div class="h_left"><a href="<%=basePath%>web/main_toShow">
             <img src="<%=basePath%>images/logo.jpg" height="60px" /></a><br />
 			【<a id="siteSel" href="javascript:void(0)" onclick="showMenu();"><s:property value="site.name" /></a>】
         </div>

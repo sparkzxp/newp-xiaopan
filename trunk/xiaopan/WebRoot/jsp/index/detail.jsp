@@ -50,9 +50,9 @@
                 </div>
             </div>
             <!-- UY BEGIN -->
-            <div id="uyan_frame"></div>
-            <script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1769632" async=""></script>
-            <!-- UY END -->
+			<div id="uyan_frame"></div>
+			<script type="text/javascript" id="UYScript" src="http://v2.uyan.cc/code/uyan.js?uid=1824940"></script>
+			<!-- UY END -->
         </div>
         <!--end right-->
         <div class="clear"></div>

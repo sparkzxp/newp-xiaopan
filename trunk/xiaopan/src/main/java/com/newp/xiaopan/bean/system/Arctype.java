@@ -3,7 +3,6 @@
  */
 package com.newp.xiaopan.bean.system;
 
-
 /**
  * @author 张霄鹏
  * 
@@ -19,6 +18,15 @@ public class Arctype extends BaseBean {
 	private String contents;
 	private Integer topid;
 	private Integer sort;
+
+	public Arctype() {
+		super();
+	}
+
+	public Arctype(String typename) {
+		super();
+		this.typename = typename;
+	}
 
 	/**
 	 * @return the typename

@@ -60,6 +60,16 @@
 	margin-left:23px;
 	width:155px;
 }
+.i_c ul li a
+{
+	float:left;
+	margin-left:-18px;
+	width:170px;
+    overflow:hidden; 
+    text-overflow:ellipsis; 
+    white-space:nowrap;
+    -o-text-overflow:ellipsis; 
+}
 .tuijian
 {
 	margin-top:15px;

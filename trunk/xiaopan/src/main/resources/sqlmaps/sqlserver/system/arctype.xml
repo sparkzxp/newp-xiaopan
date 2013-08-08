@@ -24,6 +24,9 @@
 				<if test="arctype.id != null and arctype.id != ''">
 					and A.id = #{arctype.id}
 				</if>
+				<if test="arctype.typename != null and arctype.typename != ''">
+					and A.typename = #{arctype.typename}
+				</if>
 			</if>
 		</where>
 	</sql>

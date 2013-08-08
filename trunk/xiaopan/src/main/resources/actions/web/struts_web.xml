@@ -8,6 +8,9 @@
 			<result name="toShow">/jsp/index/main.jsp</result>
 			<result name="toSearch">/jsp/index/search.jsp</result>
 			<result name="toDetail">/jsp/index/detail.jsp</result>
+			<result name="toInfo">/jsp/index/info.jsp</result>
+			<result name="toNoticeList">/jsp/index/notice_list.jsp</result>
+			<result name="toNotice">/jsp/index/notice.jsp</result>
 		</action>
 	</package>
 

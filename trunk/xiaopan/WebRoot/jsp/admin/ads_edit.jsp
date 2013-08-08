@@ -6,7 +6,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<base href="<%=basePath%>">
-    <title>无标题页</title>
+    <title>校畔网</title>
     <link type="text/css" href="<%=basePath%>css/admin/common.css" rel="Stylesheet" />
     <link type="text/css" href="<%=basePath%>css/admin/tab.css" rel="Stylesheet" />
     <script language="javascript" src="<%=basePath%>js/jquery/jquery-1.7.2.min.js"></script>
@@ -78,7 +78,7 @@
                 <!-- <tr>
                     <td width="120px" align="right" height="25px">预览：</td>
                     <td>
-                        <asp:Image ID="img" runat="server" onerror='$(this).css({display:"none"})' />
+                        <asp:Image ID="img" onerror='$(this).css({display:"none"})' />
                     </td>
                 </tr> -->
                 <tr>

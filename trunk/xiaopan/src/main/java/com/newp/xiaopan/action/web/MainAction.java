@@ -13,6 +13,7 @@ import com.newp.xiaopan.action.listener.MySessionListener;
 import com.newp.xiaopan.action.system.BaseAction;
 import com.newp.xiaopan.bean.system.Ads;
 import com.newp.xiaopan.bean.system.Archive;
+import com.newp.xiaopan.bean.system.Arctype;
 import com.newp.xiaopan.bean.system.Key;
 import com.newp.xiaopan.bean.system.Shop;
 import com.newp.xiaopan.bean.system.Site;
@@ -20,10 +21,10 @@ import com.newp.xiaopan.bean.system.Type;
 import com.newp.xiaopan.common.Constants;
 import com.newp.xiaopan.service.system.IAdsService;
 import com.newp.xiaopan.service.system.IArchiveService;
+import com.newp.xiaopan.service.system.IArctypeService;
 import com.newp.xiaopan.service.system.IKeyService;
 import com.newp.xiaopan.service.system.IShopService;
 import com.newp.xiaopan.service.system.ITypeService;
-import com.opensymphony.xwork2.Action;
 
 /**
  * @author 张霄鹏
@@ -43,6 +44,8 @@ public class MainAction extends BaseAction {
 	private ITypeService typeService;
 	@Autowired
 	private IShopService shopService;
+	@Autowired
+	private IArctypeService arctypeService;
 
 	private String siteJson;
 	private Site site;
@@ -56,9 +59,12 @@ public class MainAction extends BaseAction {
 	private Shop shop;
 	private List<Shop> shops;
 
+	private Archive archive;
+	private Arctype arctype;
+
 	public String toShow() {
 		initHeader();
-		archives = archiveService.queryTopList(null, 3);
+		archives = archiveService.queryTopList(new Archive("网站公告"), 3);
 		types = typeService.queryList(null);
 		adss = adsService.queryList(new Ads(site.getId()));
 
@@ -67,7 +73,7 @@ public class MainAction extends BaseAction {
 
 	public String toSearch() {
 		if (null == key || StringUtils.isBlank(key.getName())) {
-			return Action.NONE;
+			return toShow();
 		}
 		initHeader();
 		shops = shopService.queryListBySiteAndType(site.getId(), key.getName().trim());
@@ -77,7 +83,7 @@ public class MainAction extends BaseAction {
 
 	public String toDetail() {
 		if (null == shop || StringUtils.isEmpty(shop.getId())) {
-			return Action.NONE;
+			return toShow();
 		}
 		initHeader();
 		shop = this.shopService.query(shop);
@@ -129,6 +135,34 @@ public class MainAction extends BaseAction {
 			getCurrentSession().setAttribute(Constants.SESSION_SUPORT_SHOP, shopService.querySuportList(8));
 		}
 		suportShops = (List<Shop>) getCurrentSession().getAttribute(Constants.SESSION_SUPORT_SHOP);
+	}
+
+	public String toInfo() {
+		if (null == arctype || StringUtils.isEmpty(arctype.getTypename())) {
+			return toShow();
+		}
+		initHeader();
+		arctype = this.arctypeService.query(new Arctype(arctype.getTypename()));
+		archives = archiveService.queryTopList(new Archive("网站公告"), 5);
+		return "toInfo";
+	}
+
+	public String toNoticeList() {
+		initHeader();
+		archives = archiveService.queryList(new Archive("网站公告"));
+
+		return "toNoticeList";
+	}
+	
+	public String toNotice() {
+		if (null == archive || StringUtils.isEmpty(archive.getId())) {
+			return toShow();
+		}
+		initHeader();
+		archives = archiveService.queryTopList(new Archive("网站公告"), 5);
+		archive = archiveService.query(archive);
+
+		return "toNotice";
 	}
 
 	public String getSiteJson() {
@@ -209,5 +243,21 @@ public class MainAction extends BaseAction {
 
 	public void setSuportShops(List<Shop> suportShops) {
 		this.suportShops = suportShops;
+	}
+
+	public Arctype getArctype() {
+		return arctype;
+	}
+
+	public void setArctype(Arctype arctype) {
+		this.arctype = arctype;
+	}
+
+	public Archive getArchive() {
+		return archive;
+	}
+
+	public void setArchive(Archive archive) {
+		this.archive = archive;
 	}
 }
