@@ -62,6 +62,23 @@ public class MainAction extends BaseAction {
 	private Archive archive;
 	private Arctype arctype;
 
+	private List<Site> sites;
+	private Ads ads;
+
+	public String toMap() {
+		return "toMap";
+	}
+
+	@SuppressWarnings("unchecked")
+	public String toAdvertise() {
+		Ads t = new Ads();
+		t.setIndexShow("1");
+		adss = this.adsService.queryList(t);
+
+		sites = (List<Site>) MySessionListener.getConfigMap_s().get(Constants.CONFIG_SITE_LIST);
+		return "toAdvertise";
+	}
+
 	public String toShow() {
 		initHeader();
 		archives = archiveService.queryTopList(new Archive("网站公告"), 3);
@@ -96,10 +113,10 @@ public class MainAction extends BaseAction {
 
 	@SuppressWarnings("unchecked")
 	private void initHeader() {
-		List<Site> sites = (List<Site>) MySessionListener.getConfigMap_s().get(Constants.CONFIG_SITE_LIST);
+		List<Site> tmpSites = (List<Site>) MySessionListener.getConfigMap_s().get(Constants.CONFIG_SITE_LIST);
 		JSONArray jsonArray = new JSONArray();
 		JSONObject jsonObject;
-		for (Site t : sites) {
+		for (Site t : tmpSites) {
 			jsonObject = new JSONObject();
 			jsonObject.put("id", t.getId());
 			jsonObject.put("pId", 0);
@@ -111,13 +128,13 @@ public class MainAction extends BaseAction {
 		if (null == site || StringUtils.isEmpty(site.getId())) {
 			Site tmpSite = (Site) getCurrentSession().getAttribute(Constants.SESSION_USER_SITE);
 			if (null == tmpSite) {
-				site = sites.get(0);
+				site = tmpSites.get(0);
 				getCurrentSession().setAttribute(Constants.SESSION_USER_SITE, site);
 			} else {
 				site = tmpSite;
 			}
 		} else {
-			for (Site t : sites) {
+			for (Site t : tmpSites) {
 				if (t.getId().equals(site.getId())) {
 					site = t;
 					break;
@@ -153,7 +170,7 @@ public class MainAction extends BaseAction {
 
 		return "toNoticeList";
 	}
-	
+
 	public String toNotice() {
 		if (null == archive || StringUtils.isEmpty(archive.getId())) {
 			return toShow();
@@ -259,5 +276,21 @@ public class MainAction extends BaseAction {
 
 	public void setArchive(Archive archive) {
 		this.archive = archive;
+	}
+
+	public List<Site> getSites() {
+		return sites;
+	}
+
+	public void setSites(List<Site> sites) {
+		this.sites = sites;
+	}
+
+	public Ads getAds() {
+		return ads;
+	}
+
+	public void setAds(Ads ads) {
+		this.ads = ads;
 	}
 }

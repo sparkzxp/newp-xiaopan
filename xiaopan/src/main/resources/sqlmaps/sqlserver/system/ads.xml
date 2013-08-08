@@ -30,6 +30,9 @@
 				<if test="ads.siteId != null and ads.siteId != ''">
 					and T.siteId = #{ads.siteId}
 				</if>
+				<if test="ads.indexShow != null and ads.indexShow != ''">
+					and T.indexShow = #{ads.indexShow}
+				</if>
 			</if>
 		</where>
 	</sql>
