@@ -106,7 +106,7 @@
 				<img src="<s:property value="#parent.imageurl"/>" class="adsimg" /></a>
 			</s:if>
 			<s:else>
-			<a target="_blank" href="<s:property value="#parent.weburl"/>"><img src="<s:property value="#parent.imageurl"/>" class="adsimg" /></a>
+			<a target="_blank" href="<%=basePath%><s:property value="#parent.weburl"/>"><img src="<s:property value="#parent.imageurl"/>" class="adsimg" /></a>
 			</s:else>
 		</p>
 	</s:iterator>

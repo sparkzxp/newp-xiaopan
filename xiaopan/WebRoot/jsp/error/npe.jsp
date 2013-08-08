@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title><%-- <s:property value='%{@com.iskyinfo.fw.ssi.common.ConfigReaderUtil@getPropertyValue("app.name.cn")}'/>_ --%>nullPointException异常处理页面</title>
+<title>nullPointException异常处理页面</title>
 <style type="text/css">
 /* content */
 .full{width:560px; margin:0 auto;}
@@ -25,14 +25,14 @@
 <body>
 	<div class="full">	
 		<dl class="error">
-			<dt><!-- <img src="<%=basePath%>images/error/pic_dot_jz.gif" alt="SSI 提示页面" title="SSI 提示页面"> -->
-				<h2><%-- <s:property value='%{@com.iskyinfo.fw.ssi.common.ConfigReaderUtil@getPropertyValue("app.name.cn")}'/> --%>空指针 提示页面</h2>
+			<dt>
+				<h2>空指针 提示页面</h2>
 			<dd>
 				<span class="errorNPE"><img src="<%=basePath%>images/error/pic_dot_jz.gif" alt="NPE" title="NPE"></span>
 				<span class="error_NPE_text"><img src="<%=basePath%>images/error/pic_dot_jz.gif" alt="nullPointException" title="nullPointException"></span>
 			</dd>
             <dd style="font-size:19px; font-family:Microsoft YaHei;">
-            	神奇的空指针，你无处不在！
+            	神奇的空指针，你无处不在！点此<a href="<%=basePath%>web/main_toShow">返回首页</a>
             </dd>
 			<dd>
 				<span class="btn_back"><a href="/ssi" ><img src="<%=basePath%>images/error/pic_dot_jz.gif" alt="返回" title="返回"></a></span> 

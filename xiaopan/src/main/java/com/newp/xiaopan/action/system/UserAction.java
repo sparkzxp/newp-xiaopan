@@ -2,6 +2,8 @@ package com.newp.xiaopan.action.system;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,15 @@ public class UserAction extends BaseAction {
 		if (user == null || StringUtils.isEmpty(user.getUsername()) || StringUtils.isEmpty(user.getPassword())) {
 			return Action.LOGIN;
 		}
+
+		HttpServletRequest request = ServletActionContext.getRequest();
+		String kaptchaExpected = (String) request.getSession().getAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
+		String kaptchaReceived = request.getParameter("kaptcha");
+		if (kaptchaReceived == null || !kaptchaReceived.equalsIgnoreCase(kaptchaExpected)) {
+			this.failureReason = "验证码错误！";
+			return Action.LOGIN;
+		}
+
 		User tmp = this.userService.query(user);
 		if (tmp != null) {
 			if (tmp.getPassword().equals(MD5.MD5_32(user.getPassword()))) {
