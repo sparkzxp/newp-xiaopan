@@ -37,13 +37,18 @@
 		$(function() {
 	    	var zNodes = JSON.parse('<s:property value="siteJson" escape="false"/>');
         	$.fn.zTree.init($("#siteTree"), setting, zNodes);
+        	$('#btnsearch').click(function(){
+        		if($.trim($('#txtkeyword').val()) != ''){
+        			window.location.href="<%=basePath%>web/main_toSearch?key.name="+$.trim($('#txtkeyword').val());
+        		}
+        	});
 		});
 	</script>
     <div class="top">
         <div class="t_left">欢迎来到校畔网，感谢您对校畔网的支持！</div>
         <div class="t_right">
-            <a href="#"onClick="window.external.addFavorite(document.location.href,document.title)" title="校畔网">加入收藏</a>|
-            <a href="#"onClick="var strHref=window.location.href;this.style.behavior='url(#default#homepage)';this.setHomePage('http://www.xiaopanwang.com/');" >设为首页</a>
+            <a href="javascript:void(0);" onClick="window.external.addFavorite(document.location.href,document.title)" title="校畔网">加入收藏</a>|
+            <a href="javascript:void(0);" onClick="var strHref=window.location.href;this.style.behavior='url(#default#homepage)';this.setHomePage('http://www.xiaopanwang.com/');" >设为首页</a>
         </div>
     </div>
     <div class="header">
@@ -66,7 +71,7 @@
     </div>
     <div class="search1">
         <input type="text" id="txtkeyword" class="keyword" value="请输入关键字..." onfocus='if($(this).val()=="请输入关键字..."){$(this).val("");}' onblur='if($.trim($(this).val())==""||$.trim($(this).val())==null){$(this).val("请输入关键字...");}' />
-        <input type="button" id="btnsearch" class="search" onclick="btnsearch_Click" />
+        <input type="button" id="btnsearch" class="search" />
         <div class="hot">
             <ul>
                 <li><strong>热门：</strong></li>
@@ -79,3 +84,6 @@
         </div>
         <div class="clear"></div>
     </div>
+    <div id="menuContent" class="menuContent" style="display:none; position: absolute;">
+		<ul id="siteTree" class="ztree" style="clear:both;margin-top:0; width:130px; height: 80px;"></ul>
+	</div>

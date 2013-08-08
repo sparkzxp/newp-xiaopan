@@ -69,4 +69,14 @@ public class ShopService extends BaseService implements IShopService {
 		return this.shopDao.queryBySiteAndType(params);
 	}
 
+	public List<Shop> querySuportList(Integer top) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("top", top);
+		return this.shopDao.querySuport(params);
+	}
+
+	public Integer updatePart(Shop shop) {
+		return this.shopDao.updatePart(shop);
+	}
+
 }

@@ -24,7 +24,7 @@
         <div class="t_title"><strong>热门推荐</strong></div>
         <div class="t_c">
             <ul>
-            <s:iterator value="shops" var="parent">
+            <s:iterator value="suportShops" var="parent">
                 <li>
                     <p><a href="<%=basePath%>web/main_toDetail?shop.id=<s:property value="#parent.id"/>"><s:property value="#parent.title"/></a></p>
                     <p><a href="<%=basePath%>web/main_toDetail?shop.id=<s:property value="#parent.id"/>"><img src="<s:property value="#parent.imagePath"/>" onerror='$(this).remove()' /></a></p>

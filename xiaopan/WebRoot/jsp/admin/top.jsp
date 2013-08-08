@@ -104,12 +104,12 @@ body {
 		</tr>
 	</table>
 	<map name="Map" id="Map">
-		<area shape="rect" coords="3,1,49,22" href="#"
+		<area shape="rect" coords="3,1,49,22" href="javascript:void(0);"
 			onclick="javascript:top.location.href='<%=basePath%>jsp/admin/index.jsp'" />
-		<area shape="rect" coords="52,2,95,21" href="#"
+		<area shape="rect" coords="52,2,95,21" href="javascript:void(0);"
 			onclick="javascript:history.go(-1)" />
-		<area shape="rect" coords="102,2,144,21" href="#" onclick="javascript:history.go(1)" />
-		<area shape="rect" coords="150,1,197,22" href="#"
+		<area shape="rect" coords="102,2,144,21" href="javascript:void(0);" onclick="javascript:history.go(1)" />
+		<area shape="rect" coords="150,1,197,22" href="javascript:void(0);"
 			onclick="javascript:top.location.href='<%=basePath%>jsp/admin/index.jsp'" />
 		<area shape="rect" coords="210,2,304,20" href="<%=basePath%>sys/user_toManagePwd"
 			target="I1" />

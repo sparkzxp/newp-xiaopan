@@ -51,4 +51,12 @@ public class ShopDao implements IShopDao {
 	public void deleteTypes(Shop shop) {
 		this.sqlSession.delete("shopNpc.deleteTypes", shop);
 	}
+
+	public List<Shop> querySuport(Map<String, Object> params) {
+		return this.sqlSession.selectList("shopNpc.querySuport", params);
+	}
+
+	public Integer updatePart(Shop shop) {
+		return this.sqlSession.update("shopNpc.updatePart", shop);
+	}
 }

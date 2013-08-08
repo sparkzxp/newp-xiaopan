@@ -97,8 +97,5 @@
     <!--end main-->
     <%@ include file="footer.jsp"%>
     </form>
-    <div id="menuContent" class="menuContent" style="display:none; position: absolute;">
-		<ul id="siteTree" class="ztree" style="clear:both;margin-top:0; width:130px; height: 80px;"></ul>
-	</div>
 </body>
 </html>

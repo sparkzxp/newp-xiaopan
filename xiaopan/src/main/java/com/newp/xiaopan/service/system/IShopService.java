@@ -21,6 +21,8 @@ public interface IShopService {
 
 	List<Shop> queryList(Shop shop);
 
+	List<Shop> querySuportList(Integer top);
+
 	List<Shop> queryListBySiteAndType(String siteId, String typeName);
 
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
@@ -28,6 +30,9 @@ public interface IShopService {
 
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	Integer update(Shop shop);
+
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+	Integer updatePart(Shop shop);
 
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	Integer delete(Shop shop);
