@@ -5,9 +5,11 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
@@ -54,6 +56,7 @@ public class ShopAction extends BaseAction {
 	private String imgFileContentType;
 	private boolean pathStatus;
 	private String uploadStatus;
+	private String typeIds;
 
 	public String toList() {
 		shops = this.shopService.queryList(shop);
@@ -73,8 +76,11 @@ public class ShopAction extends BaseAction {
 	@SuppressWarnings("unchecked")
 	private void initEdit(boolean isUpdate) {
 		String[] typeIds = null;
-		if (isUpdate && StringUtils.isNotEmpty(shop.getTypeIds())) {
-			typeIds = shop.getTypeIds().split(",");
+		if (isUpdate && CollectionUtils.isNotEmpty(shop.getTypes())) {
+			typeIds = new String[shop.getTypes().size()];
+			for (int i = 0; i < shop.getTypes().size(); i++) {
+				typeIds[i] = shop.getTypes().get(i).getId();
+			}
 		}
 		setSites(this.siteService.queryList(null));
 
@@ -139,6 +145,17 @@ public class ShopAction extends BaseAction {
 				shop.setImagePath(ServletActionContext.getRequest().getContextPath() + "/upload/shop/images/" + filename);
 			}
 
+			if (StringUtils.isNotEmpty(typeIds)) {
+				List<Type> tmpTypes = new ArrayList<Type>();
+				String[] arr = typeIds.split(",");
+				Type t;
+				for (String s : arr) {
+					t = new Type();
+					t.setId(s);
+					tmpTypes.add(t);
+				}
+				shop.setTypes(tmpTypes);
+			}
 			if (StringUtils.isEmpty(shop.getId())) {
 				String id = this.shopService.add(shop);
 				shop.setId(id);
@@ -314,5 +331,13 @@ public class ShopAction extends BaseAction {
 
 	public void setUploadStatus(String uploadStatus) {
 		this.uploadStatus = uploadStatus;
+	}
+
+	public String getTypeIds() {
+		return typeIds;
+	}
+
+	public void setTypeIds(String typeIds) {
+		this.typeIds = typeIds;
 	}
 }

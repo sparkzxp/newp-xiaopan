@@ -13,7 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.newp.xiaopan.action.listener.MySessionListener;
 import com.newp.xiaopan.bean.system.Ads;
+import com.newp.xiaopan.bean.system.Site;
 import com.newp.xiaopan.common.Constants;
 import com.newp.xiaopan.common.FileUtil;
 import com.newp.xiaopan.service.system.IAdsService;
@@ -34,6 +36,7 @@ public class AdsAction extends BaseAction {
 
 	private Ads ads;
 	private List<Ads> adss;
+	private List<Site> sites;
 
 	private File imgFile;
 	private String imgFileFileName;
@@ -46,14 +49,16 @@ public class AdsAction extends BaseAction {
 		return Constants.ACTION_TO_LIST;
 	}
 
+	@SuppressWarnings("unchecked")
 	public String toEdit() {
 		if (null != ads && StringUtils.isNotEmpty(ads.getId())) {
 			ads = this.adsService.query(ads);
 		}
+		sites = (List<Site>) MySessionListener.getConfigMap_s().get(Constants.CONFIG_SITE_LIST);
 		return Constants.ACTION_TO_EDIT;
 	}
 
-	@SuppressWarnings("deprecation")
+	@SuppressWarnings({ "deprecation", "unchecked" })
 	public String doEdit() {
 		String oldPath = ads.getImageurl();
 		if (StringUtils.isNotBlank(oldPath)) {
@@ -95,11 +100,13 @@ public class AdsAction extends BaseAction {
 
 			pathStatus = false;
 			uploadStatus = "success";
+			sites = (List<Site>) MySessionListener.getConfigMap_s().get(Constants.CONFIG_SITE_LIST);
 			return Constants.ACTION_TO_EDIT;
 		} catch (Exception e) {
 			log.error(e);
 			pathStatus = false;
 			uploadStatus = "error";
+			sites = (List<Site>) MySessionListener.getConfigMap_s().get(Constants.CONFIG_SITE_LIST);
 			return Constants.ACTION_TO_EDIT;
 		} finally {
 			try {
@@ -194,5 +201,13 @@ public class AdsAction extends BaseAction {
 
 	public void setUploadStatus(String uploadStatus) {
 		this.uploadStatus = uploadStatus;
+	}
+
+	public List<Site> getSites() {
+		return sites;
+	}
+
+	public void setSites(List<Site> sites) {
+		this.sites = sites;
 	}
 }

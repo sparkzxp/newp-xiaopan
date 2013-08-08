@@ -74,7 +74,7 @@
 			if (v.length > 0 ) v = v.substring(0, v.length-1);
 			if (k.length > 0 ) k = k.substring(0, k.length-1);
 			$("#typeSel").attr("value", v);
-			$("#editForm_shop_typeIds").attr("value", k);
+			$("#editForm_typeIds").attr("value", k);
 		}
 
 		function showMenu() {
@@ -190,7 +190,7 @@
                 <tr>
                     <td width="120px" height="25px" align="right">所属站点：</td>
                     <td>
-                    	<s:select name="shop.siteId" list="sites" listKey="id" listValue="name" headerKey="" headerValue="--请选择--" cssClass="{required:true}"></s:select>
+                    	<s:select name="shop.siteId" list="sites" listKey="id" listValue="name" cssClass="{required:true}"></s:select>
                     </td>
                 </tr>
                 <tr>
@@ -198,7 +198,7 @@
                     <td>
                     	<textarea id="typeSel" readonly="readonly" style="width:400px; height:60px;" onclick="showMenu();"></textarea>
                     	&nbsp;<a id="menuBtn" href="javascript:void(0)" onclick="showMenu();" style="font-size:12px;">选择</a>
-                    	<s:hidden name="shop.typeIds" cssClass="{maxlengthCN:500}"/>
+                    	<s:hidden name="typeIds" cssClass="{maxlengthCN:500}"/>
                     </td>
                 </tr>
                 <tr>

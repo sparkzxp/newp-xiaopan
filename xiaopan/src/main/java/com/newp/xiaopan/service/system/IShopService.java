@@ -21,9 +21,14 @@ public interface IShopService {
 
 	List<Shop> queryList(Shop shop);
 
+	List<Shop> queryListBySiteAndType(String siteId, String typeName);
+
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	String add(Shop shop);
 
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	Integer update(Shop shop);
 
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	Integer delete(Shop shop);
 }

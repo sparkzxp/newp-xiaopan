@@ -3,7 +3,6 @@
   <filter>
     <filter-name>struts2</filter-name>
     <filter-class>
-    	<!-- com.newp.xiaopan.action.filter.KindFilter -->
     	org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter
         <!-- org.apache.struts2.dispatcher.FilterDispatcher -->
     </filter-class>
@@ -26,7 +25,6 @@
     <filter-name>SessionFilter</filter-name>
     <filter-class>com.newp.xiaopan.action.filter.SessionFilter</filter-class>
     <init-param>
-      <description>将当前登录的用户的信息保存在 session 中时使用的key，如果没有配置此参数，则该过滤器不起作用</description>
       <param-name>sessionKey</param-name>
       <param-value>userInfo</param-value>
     </init-param>
@@ -40,7 +38,7 @@
     <url-pattern>/jsp/admin/*</url-pattern>
   </filter-mapping>
   <welcome-file-list>
-    <welcome-file>/jsp/admin/login.jsp</welcome-file>
+    <welcome-file>/jsp/index/index.jsp</welcome-file>
   </welcome-file-list>
   <context-param>
     <param-name>contextConfigLocation</param-name>

@@ -59,4 +59,9 @@
 	
 	<!-- Include configure file -->
 	<!-- <import resource="beans/system/beans_system_applicationContext.xml" /> -->
+	
+	<bean id="configReader" class="com.newp.xiaopan.action.web.ConfigReader"
+		init-method="init">
+		<property name="siteService" ref="siteService"></property>
+	</bean>
 </beans>

@@ -97,12 +97,12 @@
                 <p><a href="<%=basePath%>sys/key_toList" target="I1">热词列表</a></p>
                 <p><a href="<%=basePath%>sys/key_toEdit?key.id=" target="I1">添加热词</a></p>
             </div>
-            <div class="top">系统设置</div>
+            <%-- <div class="top">系统设置</div>
             <div class="item">
                 <!-- <p><a href="clear.jsp" target="I1">清除缓存</a></p> -->
                 <p><a href="config.jsp" target="I1">网站配制</a></p>
                 <p><a href="<%=basePath%>sys/user_toManagePwd" target="I1">修改密码</a></p>
-            </div>
+            </div> --%>
         </div>
     </form>
 </body>

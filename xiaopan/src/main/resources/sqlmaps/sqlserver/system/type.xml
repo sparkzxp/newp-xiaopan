@@ -29,6 +29,13 @@
 		</where>
 	</sql>
 
+	<select id="queryByShopId" resultMap="typeRstMap" parameterType="string">
+		SELECT T.* FROM TYPE T
+		join SHOPTYPE ST on ST.typeId = T.id
+		where ST.shopId = #{id}
+		order by T.sort asc, T.name asc
+	</select>
+
 	<select id="query" resultMap="typeRstMap" parameterType="map">
 		SELECT T.* FROM TYPE T
 		<include refid="query_where" />

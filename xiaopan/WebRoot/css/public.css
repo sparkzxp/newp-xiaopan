@@ -76,7 +76,7 @@ img
 {
 	float:right;
 	width:700px;
-	height:60px;
+	height:90px;
 	overflow:hidden;
 }
 .scroll
@@ -87,8 +87,9 @@ img
 }
 .h_right img
 {
-	margin-right:8px;
-	height:60px;
+	height: 90px;
+    margin-right: 3px;
+    float:left;
 }
 .nav
 {

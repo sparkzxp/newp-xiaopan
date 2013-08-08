@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSessionListener;
 
 import org.apache.log4j.Logger;
 
+import com.newp.xiaopan.action.web.ConfigReader;
 import com.newp.xiaopan.common.Constants;
 
 /**
@@ -27,15 +28,12 @@ public class MySessionListener implements HttpSessionListener {
 	public void sessionCreated(HttpSessionEvent sessionEvent) {
 		HttpSession session = sessionEvent.getSession();
 		try {
-			// 当session生成时，加入标识
-			session.setAttribute(Constants.SESSION_USER_MARK, "INITIAL_VALUE");
+			session.setAttribute(Constants.SESSION_USER_SITE, null);
 			sessionMap_s.put(session.getId(), session);
 
-			// 系统参数缓存
-//			if (configMap_s.isEmpty()) {
-//				configMap_s.put(Constants.SESSION_CONFIG_TOP_LOV_ID, LovReaderUtil.getTopLov());
-//				configMap_s.put(Constants.SESSION_QUERY_DATER, LovReaderUtil.getQueryDate());
-//			}
+			if (configMap_s.isEmpty()) {
+				initConfigMap_s();
+			}
 			logger.info("Session创建:" + session);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
@@ -51,9 +49,25 @@ public class MySessionListener implements HttpSessionListener {
 			logger.info("Session过期: " + session + "已销毁");
 			sessionMap_s.remove(session.getId());
 			session.setAttribute(Constants.SESSION_USER_KEY, null);
-			session.setAttribute(Constants.SESSION_USER_MARK, null);
+			session.setAttribute(Constants.SESSION_USER_SITE, null);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
 	}
+
+	private static void initConfigMap_s() {
+		configMap_s.put(Constants.CONFIG_SITE_LIST, ConfigReader.querySiteList());
+	}
+
+	public static Map<String, Object> getConfigMap_s() {
+		if (configMap_s.isEmpty()) {
+			initConfigMap_s();
+		}
+		return configMap_s;
+	}
+
+	public static void setConfigMap_s(Map<String, Object> configMap_s) {
+		MySessionListener.configMap_s = configMap_s;
+	}
+
 }

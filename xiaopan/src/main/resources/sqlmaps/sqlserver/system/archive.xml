@@ -31,7 +31,7 @@
 	<select id="query" resultMap="archiveRstMap" parameterType="map">
 		SELECT 
 		<if test="top != null">
-			top #{top} 
+			top ${top} 
 		</if>
 		A.* FROM ARCHIVES A
 		<include refid="query_where" />

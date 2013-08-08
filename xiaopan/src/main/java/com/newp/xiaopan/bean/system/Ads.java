@@ -21,6 +21,16 @@ public class Ads extends BaseBean {
 	private String latitude;
 	private String longitude;
 	private String indexShow;
+	private String siteId;
+
+	public Ads() {
+		super();
+	}
+
+	public Ads(String siteId) {
+		super();
+		this.siteId = siteId;
+	}
 
 	public String getTitle() {
 		return title;
@@ -116,5 +126,13 @@ public class Ads extends BaseBean {
 
 	public void setIndexShow(String indexShow) {
 		this.indexShow = indexShow;
+	}
+
+	public String getSiteId() {
+		return siteId;
+	}
+
+	public void setSiteId(String siteId) {
+		this.siteId = siteId;
 	}
 }

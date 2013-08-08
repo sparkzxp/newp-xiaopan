@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.newp.xiaopan.action.listener.MySessionListener;
 import com.newp.xiaopan.bean.system.Site;
 import com.newp.xiaopan.common.Constants;
 import com.newp.xiaopan.service.system.ISiteService;
@@ -52,6 +53,7 @@ public class SiteAction extends BaseAction {
 			jsonObject.put("result", "success");
 			jsonObject.put("id", site.getId());
 		}
+		MySessionListener.configMap_s.put(Constants.CONFIG_SITE_LIST, this.siteService.queryList(null));
 		this.ajax(jsonObject.toJSONString());
 	}
 
