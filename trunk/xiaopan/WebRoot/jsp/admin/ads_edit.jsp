@@ -18,6 +18,10 @@
     	$("input:file").fileEveryWhere({
 			ButtonText : "浏览"
 		});
+    	
+    	if($('#editForm_ads_id').val() != ''){
+    		$('#descWeburl').html('如需指向网站店铺，请填写【web/main_toDetail?shop.id='+$('#editForm_ads_id').val()+'】');
+    	}
 		
 		$("input[type=file]").next("input[type=text]").val($('#editForm_ads_imageurl').val());
 		if($('#editForm_uploadStatus').val() == 'success'){
@@ -64,6 +68,9 @@
                 <tr>
                     <td width="120px" align="right" height="25px">标题说明：</td>
                     <td><s:textfield name="ads.title" cssStyle="width:400px;" cssClass="{required:true,maxlengthCN:200}"/></td>
+                </tr>
+            	<tr>
+                    <td id="descWeburl" colspan="2"></td>
                 </tr>
                 <tr>
                     <td width="120px" align="right" height="25px">网址：</td>

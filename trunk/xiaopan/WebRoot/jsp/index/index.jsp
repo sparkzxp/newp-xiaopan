@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>欢迎使用校畔网</title>
 <script type="text/javascript">
-window.location.href="<%=basePath%>web/main_toShow";
+window.location.href="<%=basePath%>web/main_toAdvertise";
 </script>
 </head>
 <body>
