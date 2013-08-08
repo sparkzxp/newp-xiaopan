@@ -18,9 +18,13 @@ public interface IShopDao {
 
 	List<Shop> queryBySiteAndType(Map<String, Object> params);
 
+	List<Shop> querySuport(Map<String, Object> params);
+
 	String add(Shop shop);
 
 	Integer update(Shop shop);
+
+	Integer updatePart(Shop shop);
 
 	Integer delete(Shop shop);
 

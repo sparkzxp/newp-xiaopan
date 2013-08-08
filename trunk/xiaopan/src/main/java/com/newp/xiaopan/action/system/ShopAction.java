@@ -75,12 +75,19 @@ public class ShopAction extends BaseAction {
 
 	@SuppressWarnings("unchecked")
 	private void initEdit(boolean isUpdate) {
-		String[] typeIds = null;
+		String[] typeIdArr = null;
+		StringBuffer sb = new StringBuffer();
 		if (isUpdate && CollectionUtils.isNotEmpty(shop.getTypes())) {
-			typeIds = new String[shop.getTypes().size()];
+			typeIdArr = new String[shop.getTypes().size()];
 			for (int i = 0; i < shop.getTypes().size(); i++) {
-				typeIds[i] = shop.getTypes().get(i).getId();
+				typeIdArr[i] = shop.getTypes().get(i).getId();
+				if (i == 0) {
+					sb.append(typeIdArr[i]);
+				} else {
+					sb.append(",").append(typeIdArr[i]);
+				}
 			}
+			typeIds = sb.toString();
 		}
 		setSites(this.siteService.queryList(null));
 
@@ -91,8 +98,8 @@ public class ShopAction extends BaseAction {
 		for (Type t : allTypes) {
 			jsonObject = new JSONObject();
 			jsonObject.put("id", t.getId());
-			if (isUpdate && null != typeIds) {
-				for (String s : typeIds) {
+			if (isUpdate && null != typeIdArr) {
+				for (String s : typeIdArr) {
 					if (t.getId().equals(s)) {
 						jsonObject.put("checked", true);
 						break;

@@ -7,6 +7,7 @@
 		<action name="main_*" class="mainAction" method="{1}">
 			<result name="toShow">/jsp/index/main.jsp</result>
 			<result name="toSearch">/jsp/index/search.jsp</result>
+			<result name="toDetail">/jsp/index/detail.jsp</result>
 		</action>
 	</package>
 

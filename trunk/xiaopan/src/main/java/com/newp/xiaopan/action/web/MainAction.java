@@ -23,6 +23,7 @@ import com.newp.xiaopan.service.system.IArchiveService;
 import com.newp.xiaopan.service.system.IKeyService;
 import com.newp.xiaopan.service.system.IShopService;
 import com.newp.xiaopan.service.system.ITypeService;
+import com.opensymphony.xwork2.Action;
 
 /**
  * @author 张霄鹏
@@ -49,8 +50,10 @@ public class MainAction extends BaseAction {
 	private List<Archive> archives;
 	private List<Key> keys;
 	private List<Type> types;
+	private List<Shop> suportShops;
 
 	private Key key;
+	private Shop shop;
 	private List<Shop> shops;
 
 	public String toShow() {
@@ -63,10 +66,26 @@ public class MainAction extends BaseAction {
 	}
 
 	public String toSearch() {
+		if (null == key || StringUtils.isBlank(key.getName())) {
+			return Action.NONE;
+		}
 		initHeader();
-		shops = shopService.queryListBySiteAndType(site.getId(), key.getName());
+		shops = shopService.queryListBySiteAndType(site.getId(), key.getName().trim());
 		types = typeService.queryList(null);
 		return "toSearch";
+	}
+
+	public String toDetail() {
+		if (null == shop || StringUtils.isEmpty(shop.getId())) {
+			return Action.NONE;
+		}
+		initHeader();
+		shop = this.shopService.query(shop);
+		Shop s = new Shop();
+		s.setId(shop.getId());
+		s.setClick(shop.getClick() + 1);
+		this.shopService.updatePart(s);
+		return Constants.ACTION_TO_DETAIL;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -100,7 +119,16 @@ public class MainAction extends BaseAction {
 			}
 			getCurrentSession().setAttribute(Constants.SESSION_USER_SITE, site);
 		}
-		keys = keyService.queryList(null);
+
+		if (null == getCurrentSession().getAttribute(Constants.SESSION_HOT_KEY)) {
+			getCurrentSession().setAttribute(Constants.SESSION_HOT_KEY, keyService.queryList(null));
+		}
+		keys = (List<Key>) getCurrentSession().getAttribute(Constants.SESSION_HOT_KEY);
+
+		if (null == getCurrentSession().getAttribute(Constants.SESSION_SUPORT_SHOP)) {
+			getCurrentSession().setAttribute(Constants.SESSION_SUPORT_SHOP, shopService.querySuportList(8));
+		}
+		suportShops = (List<Shop>) getCurrentSession().getAttribute(Constants.SESSION_SUPORT_SHOP);
 	}
 
 	public String getSiteJson() {
@@ -159,11 +187,27 @@ public class MainAction extends BaseAction {
 		this.key = key;
 	}
 
+	public Shop getShop() {
+		return shop;
+	}
+
+	public void setShop(Shop shop) {
+		this.shop = shop;
+	}
+
 	public List<Shop> getShops() {
 		return shops;
 	}
 
 	public void setShops(List<Shop> shops) {
 		this.shops = shops;
+	}
+
+	public List<Shop> getSuportShops() {
+		return suportShops;
+	}
+
+	public void setSuportShops(List<Shop> suportShops) {
+		this.suportShops = suportShops;
 	}
 }

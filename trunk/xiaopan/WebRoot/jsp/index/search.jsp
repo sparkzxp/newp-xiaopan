@@ -22,7 +22,7 @@
     <%@ include file="header.jsp"%>
     <div class="position">
         <span>
-        <strong><s:property value="key.name" /></strong>的搜索结果
+        <strong><s:property value="key.name" /></strong>&nbsp;的搜索结果
         </span>
     </div>
     <div class="main">
@@ -37,11 +37,20 @@
                     <th style="min-width:180px;">价格（元）</th>
                     <th style="width:80px;border-right:solid 1px #ededed;">详情</th>
                 </tr>
+                <s:if test="null == shops or shops.size() == 0">
+                	<tr><td colspan="4">未查找到包含&nbsp;<strong><s:property value="key.name" /></strong>&nbsp;的店铺</td></tr>
+                </s:if>
                 <s:iterator value="shops" var="parent">
                     <tr>
                         <td><a href="<%=basePath%>web/main_toDetail?shop.id=<s:property value="#parent.id"/>"><s:property value="#parent.title"/></a></td>
                         <td><s:property value="#parent.tel"/></td>
-                        <td><s:property value="#parent.score"/></td>
+                        <td style="text-align: left;">
+                        	<s:iterator value="#parent.types" var="child">
+                        		<s:if test="#child.name.indexOf(key.name) > -1">
+                        		<s:property value="#child.name"/>(<s:property value="#child.price"/>)
+                        		</s:if>
+                        	</s:iterator>
+                        </td>
                         <td><a href="<%=basePath%>web/main_toDetail?shop.id=<s:property value="#parent.id"/>">去看看</a></td>
                     </tr>
                  </s:iterator>
@@ -56,8 +65,5 @@
     </div>
     <%@ include file="footer.jsp"%>
     </form>
-    <div id="menuContent" class="menuContent" style="display:none; position: absolute;">
-		<ul id="siteTree" class="ztree" style="clear:both;margin-top:0; width:130px; height: 80px;"></ul>
-	</div>
 </body>
 </html>

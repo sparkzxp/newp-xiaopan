@@ -13,7 +13,7 @@
 		<result property="tel" column="tel" />
 		<result property="contacter" column="contacter" />
 		<result property="imagePath" column="imagePath" />
-		<result property="typeIds" column="typeIds" />
+		<result property="siteId" column="siteId" />
 		<result property="click" column="click" />
 		<result property="pingnum" column="pingnum" />
 		<collection property="types" javaType="java.util.ArrayList" ofType="type" select="typeNpc.queryByShopId" column="id" />
@@ -24,22 +24,42 @@
 		<where>
 			<if test="shop != null">
 				<if test="shop.id != null and shop.id != ''">
-					and T.id = #{shop.id}
+					and s.id = #{shop.id}
 				</if>
 			</if>
 		</where>
 	</sql>
 	
 	<select id="queryBySiteAndType" resultMap="shopRstMap" parameterType="map">
-		EXEC [dbo].[queryShopBySiteAndType]
-		@siteId = '${siteId}',
-		@searchName = '${typeName}'
+		select distinct
+			s.id,
+			s.title,
+			s.keyword,
+			s.description,
+			'' contents,
+			s.address,
+			s.tel,
+			s.contacter,
+			s.imagePath,
+			s.siteId,
+			s.click,
+			s.pingnum
+		from shop s 
+		join shoptype st on st.shopid = s.id
+		join type t on t.id = st.typeid
+		where s.siteId = #{siteId}
+		and t.name like '%${typeName}%'
 	</select>
 
 	<select id="query" resultMap="shopRstMap" parameterType="map">
-		SELECT T.* FROM SHOP T
+		SELECT s.* FROM SHOP s
 		<include refid="query_where" />
-		order by T.title asc
+		order by s.title asc
+	</select>
+	
+	<select id="querySuport" resultMap="shopRstMap" parameterType="map">
+		SELECT <if test="top != null">top ${top}</if> s.* FROM SHOP s
+		order by s.click desc
 	</select>
 	
 	<insert id="add" parameterType="shop">
@@ -78,6 +98,17 @@
 			contacter = #{contacter},
 			imagePath = #{imagePath},
 			siteId = #{siteId}
+			
+			WHERE id = #{id}
+	</update>
+	
+	<update id="updatePart" parameterType="shop">
+		update SHOP
+			<set>
+				<if test="click != null">
+					click = #{click},
+				</if>
+			</set>
 			
 			WHERE id = #{id}
 	</update>

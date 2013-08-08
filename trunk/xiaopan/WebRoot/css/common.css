@@ -124,7 +124,7 @@
 .table tr td
 {
 	height:45px;
-	line-height:60px;
+	/* line-height:60px; */
 	overflow:hidden;
 }
 .page
