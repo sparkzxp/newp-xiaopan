@@ -4,7 +4,7 @@
 <mapper namespace="shopNpc">
 	<!-- 返回值映射关系 -->
 	<resultMap id="shopRstMap" type="shop">
-		<result property="id" column="id" />
+		<id property="id" column="id" />
 		<result property="title" column="title" />
 		<result property="keyword" column="keyword" />
 		<result property="description" column="description" />
@@ -13,11 +13,10 @@
 		<result property="tel" column="tel" />
 		<result property="contacter" column="contacter" />
 		<result property="imagePath" column="imagePath" />
-		<result property="siteId" column="siteId" />
 		<result property="typeIds" column="typeIds" />
-		<result property="score" column="score" />
 		<result property="click" column="click" />
 		<result property="pingnum" column="pingnum" />
+		<collection property="types" javaType="java.util.ArrayList" ofType="type" select="typeNpc.queryByShopId" column="id" />
 	</resultMap>
 
 	<!-- 查询条件 -->
@@ -30,6 +29,12 @@
 			</if>
 		</where>
 	</sql>
+	
+	<select id="queryBySiteAndType" resultMap="shopRstMap" parameterType="map">
+		EXEC [dbo].[queryShopBySiteAndType]
+		@siteId = '${siteId}',
+		@searchName = '${typeName}'
+	</select>
 
 	<select id="query" resultMap="shopRstMap" parameterType="map">
 		SELECT T.* FROM SHOP T
@@ -44,14 +49,22 @@
 		INSERT INTO SHOP(
 			title, keyword, description,
 			contents, address, tel,
-			contacter, imagePath, siteId,
-			typeIds, score
+			contacter, imagePath, siteId
 		) VALUES (
 			#{title}, #{keyword}, #{description},
 			#{contents}, #{address}, #{tel},
-			#{contacter}, #{imagePath}, #{siteId},
-			#{typeIds}, #{score}
+			#{contacter}, #{imagePath}, #{siteId}
 		)
+	</insert>
+	
+	<insert id="addTypes" parameterType="shop">
+		<foreach collection="types" item="type">
+		INSERT INTO SHOPTYPE(
+			shopId, typeId
+		) VALUES (
+			#{id}, #{type.id}
+		)
+		</foreach>
 	</insert>
 	
 	<update id="update" parameterType="shop">
@@ -64,14 +77,16 @@
 			tel = #{tel},
 			contacter = #{contacter},
 			imagePath = #{imagePath},
-			siteId = #{siteId},
-			typeIds = #{typeIds},
-			score = #{score}
+			siteId = #{siteId}
 			
 			WHERE id = #{id}
 	</update>
 	
 	<delete id="delete" parameterType="shop">
 		delete from SHOP where id = #{id}
+	</delete>
+	
+	<delete id="deleteTypes" parameterType="shop">
+		delete from SHOPTYPE where shopId = #{id}
 	</delete>
 </mapper>

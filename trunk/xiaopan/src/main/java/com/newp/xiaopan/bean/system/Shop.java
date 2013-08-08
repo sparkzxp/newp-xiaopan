@@ -1,5 +1,7 @@
 package com.newp.xiaopan.bean.system;
 
+import java.util.List;
+
 /**
  * @author 张霄鹏
  */
@@ -16,10 +18,18 @@ public class Shop extends BaseBean {
 	private String contacter;
 	private String imagePath;
 	private String siteId;
-	private String typeIds;
-	private Integer score;
+	private List<Type> types;
 	private Integer click;
 	private Integer pingnum;
+
+	public Shop() {
+		super();
+	}
+
+	public Shop(String siteId) {
+		super();
+		this.siteId = siteId;
+	}
 
 	public String getTitle() {
 		return title;
@@ -93,22 +103,6 @@ public class Shop extends BaseBean {
 		this.siteId = siteId;
 	}
 
-	public String getTypeIds() {
-		return typeIds;
-	}
-
-	public void setTypeIds(String typeIds) {
-		this.typeIds = typeIds;
-	}
-
-	public Integer getScore() {
-		return score;
-	}
-
-	public void setScore(Integer score) {
-		this.score = score;
-	}
-
 	public Integer getClick() {
 		return click;
 	}
@@ -123,6 +117,14 @@ public class Shop extends BaseBean {
 
 	public void setPingnum(Integer pingnum) {
 		this.pingnum = pingnum;
+	}
+
+	public List<Type> getTypes() {
+		return types;
+	}
+
+	public void setTypes(List<Type> types) {
+		this.types = types;
 	}
 
 }

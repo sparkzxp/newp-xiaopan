@@ -22,7 +22,9 @@
 }
 .left img
 {
-	width:100%;
+	/* width:100%; */
+	height: 80px;
+    width: 120px;
 }
 .left img:hover
 {
@@ -54,6 +56,8 @@
 {
 	display:inline;
 	margin-top:15px;
+	margin-left: 2px;
+	float:left;
 }
 .m_ads img
 {
@@ -100,5 +104,9 @@
 }
 .right img
 {
-	margin-bottom:5px;
+	/* margin-bottom:5px; */
+	height: 110px;
+    margin-bottom: 2px;
+    margin-left: 15px;
+    width: 170px;
 }

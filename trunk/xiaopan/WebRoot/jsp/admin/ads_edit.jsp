@@ -82,6 +82,12 @@
                     </td>
                 </tr> -->
                 <tr>
+                    <td align="right" height="25">所属站点：</td>
+                    <td>
+                        <s:select name="ads.siteId" list="sites" listKey="id" listValue="name" cssClass="{required:true}"></s:select>
+                    </td>
+                </tr>
+                <tr>
                     <td align="right" height="25">位置：</td>
                     <td>
                         <s:select name="ads.place" list="#{'头部广告':'头部广告','网页左面':'网页左面','网页右面':'网页右面','网页底部':'网页底部' }" cssClass="{required:true}"></s:select>

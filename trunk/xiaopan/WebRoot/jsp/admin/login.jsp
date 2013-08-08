@@ -14,7 +14,7 @@
 	$(document).ready(function(){
 		$("#login_bg").css("height",document.documentElement.clientHeight+"px");
 		if(window.parent!=window){
-			top.location.href = "<%=basePath%>";
+			top.location.href = "<%=basePath%>admin";
 		}
 		
 		if($('#loginForm_user_username').val()==''){

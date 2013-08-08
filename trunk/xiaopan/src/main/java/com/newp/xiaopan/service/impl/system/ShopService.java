@@ -40,15 +40,33 @@ public class ShopService extends BaseService implements IShopService {
 	}
 
 	public String add(Shop shop) {
-		return this.shopDao.add(shop);
+		String ret = this.shopDao.add(shop);
+		if (CollectionUtils.isNotEmpty(shop.getTypes())) {
+			this.shopDao.addTypes(shop);
+		}
+		return ret;
 	}
 
 	public Integer update(Shop shop) {
-		return this.shopDao.update(shop);
+		Integer ret = this.shopDao.update(shop);
+		this.shopDao.deleteTypes(shop);
+		if (CollectionUtils.isNotEmpty(shop.getTypes())) {
+			this.shopDao.addTypes(shop);
+		}
+		return ret;
 	}
 
 	public Integer delete(Shop shop) {
-		return this.shopDao.delete(shop);
+		Integer ret = this.shopDao.delete(shop);
+		this.shopDao.deleteTypes(shop);
+		return ret;
+	}
+
+	public List<Shop> queryListBySiteAndType(String siteId, String typeName) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("siteId", siteId);
+		params.put("typeName", typeName);
+		return this.shopDao.queryBySiteAndType(params);
 	}
 
 }

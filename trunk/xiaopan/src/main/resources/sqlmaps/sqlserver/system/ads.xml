@@ -17,6 +17,7 @@
 		<result property="latitude" column="latitude" />
 		<result property="longitude" column="longitude" />
 		<result property="indexShow" column="indexShow" />
+		<result property="siteId" column="siteId" />
 	</resultMap>
 
 	<!-- 查询条件 -->
@@ -25,6 +26,9 @@
 			<if test="ads != null">
 				<if test="ads.id != null and ads.id != ''">
 					and T.id = #{ads.id}
+				</if>
+				<if test="ads.siteId != null and ads.siteId != ''">
+					and T.siteId = #{ads.siteId}
 				</if>
 			</if>
 		</where>
@@ -44,12 +48,12 @@
 			title, imageurl, weburl,
 			startdate, enddate, indexShow,
 			place, address, tel,
-			latitude, longitude
+			latitude, longitude, siteId
 		) VALUES (
 			#{title}, #{imageurl}, #{weburl},
 			getDate(), getDate(), #{indexShow},
 			#{place}, #{address}, #{tel},
-			#{latitude}, #{longitude}
+			#{latitude}, #{longitude}, #{siteId}
 		)
 	</insert>
 	
@@ -65,7 +69,8 @@
 			address = #{address},
 			tel = #{tel},
 			latitude = #{latitude},
-			longitude = #{longitude}
+			longitude = #{longitude},
+			siteId = #{siteId}
 			
 			WHERE id = #{id}
 	</update>
