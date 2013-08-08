@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <base href="<%=basePath%>">
-<title><%-- <s:property value='%{@com.iskyinfo.fw.ssi.common.ConfigReaderUtil@getPropertyValue("app.name.cn")}'/>_ --%>404异常处理页面</title>
+<title>404异常处理页面</title>
 <style type="text/css">
 /* content */
 .full{width:560px; margin:0 auto;}
@@ -25,15 +25,15 @@
 <body>
 	<div class="full">	
 		<dl class="error">
-			<dt><!-- <img src="<%=basePath%>images/error/pic_dot_jz.gif" alt="SSI 提示页面" title="SSI 提示页面"> -->
-				<h2><%-- <s:property value='%{@com.iskyinfo.fw.ssi.common.ConfigReaderUtil@getPropertyValue("app.name.cn")}'/> --%>404 提示页面</h2>
+			<dt>
+				<h2>404 提示页面</h2>
 			<dd>
 				<span class="error404"><img src="<%=basePath%>images/error/pic_dot_jz.gif" alt="404" title="404"></span>
 				<span class="error_404_text"><img src="<%=basePath%>images/error/pic_dot_jz.gif" alt="你懂的" title="你懂的"></span>
 			</dd>
             <dd style="font-size:19px; font-family:Microsoft YaHei;">
             	<!-- 很多小孩都没找到，我们正在帮他们一起找！ -->
-            	你所跳转的页面不存在
+            	你所跳转的页面不存在，点此<a href="<%=basePath%>web/main_toShow">返回首页</a>
             </dd>
 			<dd>
 				<span class="btn_back"><a href="/ssi" ><img src="<%=basePath%>images/error/pic_dot_jz.gif" alt="返回" title="返回"></a></span> 

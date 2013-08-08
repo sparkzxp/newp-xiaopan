@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title><%-- <s:property value='%{@com.iskyinfo.fw.ssi.common.ConfigReaderUtil@getPropertyValue("app.name.cn")}'/>_ --%>500异常处理页面</title>
+<title>500异常处理页面</title>
 <style type="text/css">
 /* content */
 .full{width:560px; margin:0 auto;}
@@ -25,15 +25,15 @@
 <body>
 	<div class="full">	
 		<dl class="error">
-			<dt><!-- <img src="<%=basePath%>images/error/pic_dot_jz.gif" alt="SSI 提示页面" title="SSI 提示页面"> -->
-				<h2><%-- <s:property value='%{@com.iskyinfo.fw.ssi.common.ConfigReaderUtil@getPropertyValue("app.name.cn")}'/> --%>500 提示页面</h2>
+			<dt>
+				<h2>500 提示页面</h2>
 			<dd>
 				<span class="error500"><img src="<%=basePath%>images/error/pic_dot_jz.gif" alt="500" title="500"></span>
 				<span class="error_500_text"><img src="<%=basePath%>images/error/pic_dot_jz.gif" alt="你懂的" title="你懂的"></span>
 			</dd>
             <dd style="font-size:19px; font-family:Microsoft YaHei;">
             	<!-- 内部服务器爆炸了，我们的技术人员正在努力恢复中！ -->
-            	出错了，建议您重新登录平台！<a href="<%=basePath%>">点我跳转登录页面</a>
+            	出错了，点此<a href="<%=basePath%>web/main_toShow">返回首页</a>
             </dd>
 			<dd>
 				<span class="btn_back"><a href="/ssi" ><img src="<%=basePath%>images/error/pic_dot_jz.gif" alt="返回" title="返回"></a></span> 

@@ -6,7 +6,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>校畔网 后台管理 登陆个人管理</title>
-     <base href="<%=basePath%>">
+    <base href="<%=basePath%>">
     <link rel="stylesheet" type="text/css" href="<%=basePath%>css/admin/common.css" />
     <link rel="stylesheet" type="text/css" href="<%=basePath%>css/admin/login.css" />
     <script language="javascript" src="<%=basePath%>js/jquery/jquery-1.7.2.min.js"></script>
@@ -47,6 +47,12 @@
 		}
 	}
 	</script>
+	<style type="text/css">
+	.code_validate {
+		height: 30px;
+		width: 77px;
+	}
+	</style>
 </head>
 <body>
     <s:form id="loginForm" name="loginForm" method="post" namespace="/sys" action="user_login">
@@ -63,14 +69,17 @@
                         <td align="right">密码：</td>
                         <td><s:password name="user.password" cssStyle="width:100px;"/></td>
                     </tr>
-                    <%-- <tr>
+                    <tr>
                         <td align="right">验证码：</td>
                         <td>
-                            <s:textfield name="txtcode" Width="50px" CssClass="code" style="margin-top:10px;"/>
+				            <input type="text" id="kaptcha" name="kaptcha" maxlength="4" class="code_frame" required="true">
+				            <span> <img src="<%=basePath%>sys/kaptcha" class="code_validate" id="kaptchaImage" style="cursor: pointer" onClick="document.getElementById('kaptchaImage').src='<%=basePath%>sys/kaptcha?update='+Math.random();"/> 
+				            </span>
+                            <%-- <s:textfield name="txtcode" Width="50px" CssClass="code" style="margin-top:10px;"/>
                             <img src="code.aspx" class="code" id="code" style="margin-top:10px" />
-                            <a class="code" onclick="javascript:var time=new Date().getTime();document.getElementById('code').src='code.aspx?'+time;">看不清楚</a>
+                            <a class="code" onclick="javascript:var time=new Date().getTime();document.getElementById('code').src='code.aspx?'+time;">看不清楚</a> --%>
                         </td>
-                    </tr> --%>
+                    </tr>
                     <tr>
                         <td colspan="2">
                             <input type="button" class="btn" value="提交" 
