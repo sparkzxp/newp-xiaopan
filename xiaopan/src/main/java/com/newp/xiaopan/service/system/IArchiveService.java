@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.newp.xiaopan.bean.system.Archive;
+import com.newp.xiaopan.common.bean.Pager;
 
 /**
  * @author 张霄鹏
@@ -22,6 +23,10 @@ public interface IArchiveService {
 	List<Archive> queryTopList(Archive archive, Integer top);
 
 	List<Archive> queryList(Archive archive);
+
+	List<Archive> queryListByPager(Archive archive, Pager pager);
+
+	Integer count(Archive archive);
 
 	String add(Archive archive);
 

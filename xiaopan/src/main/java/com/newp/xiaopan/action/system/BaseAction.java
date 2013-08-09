@@ -15,6 +15,7 @@ import org.json.simple.JSONObject;
 
 import com.newp.xiaopan.bean.system.User;
 import com.newp.xiaopan.common.Constants;
+import com.newp.xiaopan.common.bean.Pager;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
@@ -25,6 +26,7 @@ public class BaseAction extends ActionSupport {
 	private Logger logger = Logger.getLogger(this.getClass());
 
 	protected JSONObject msg = new JSONObject();
+	protected Pager pager;
 
 	/**
 	 * 获取当前登录的用户
@@ -142,5 +144,16 @@ public class BaseAction extends ActionSupport {
 	 */
 	public void setMsg(JSONObject msg) {
 		this.msg = msg;
+	}
+
+	public Pager getPager() {
+		if (null == pager) {
+			pager = new Pager();
+		}
+		return pager;
+	}
+
+	public void setPager(Pager pager) {
+		this.pager = pager;
 	}
 }

@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.newp.xiaopan.bean.system.Shop;
+import com.newp.xiaopan.bean.system.Type;
+import com.newp.xiaopan.common.bean.Pager;
 
 /**
  * @author 张霄鹏
@@ -23,7 +25,9 @@ public interface IShopService {
 
 	List<Shop> querySuportList(Integer top);
 
-	List<Shop> queryListBySiteAndType(String siteId, String typeName);
+	List<Shop> queryListByPager(Shop shop, Type type, Pager pager);
+
+	Integer count(Shop shop, Type type);
 
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	String add(Shop shop);

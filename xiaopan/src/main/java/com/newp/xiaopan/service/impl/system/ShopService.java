@@ -3,6 +3,7 @@
  */
 package com.newp.xiaopan.service.impl.system;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.newp.xiaopan.bean.system.Shop;
+import com.newp.xiaopan.bean.system.Type;
+import com.newp.xiaopan.common.PagerUtil;
+import com.newp.xiaopan.common.bean.Pager;
 import com.newp.xiaopan.dao.system.IShopDao;
 import com.newp.xiaopan.service.system.IShopService;
 
@@ -62,11 +66,17 @@ public class ShopService extends BaseService implements IShopService {
 		return ret;
 	}
 
-	public List<Shop> queryListBySiteAndType(String siteId, String typeName) {
+	public List<Shop> queryListByPager(Shop shop, Type type, Pager pager) {
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("siteId", siteId);
-		params.put("typeName", typeName);
-		return this.shopDao.queryBySiteAndType(params);
+		params.put("shop", shop);
+		params.put("type", type);
+		pager.setTotalSize(this.shopDao.count(params));
+		PagerUtil.setPager(pager);
+		if (pager.getTotalSize() == 0) {
+			return new ArrayList<Shop>();
+		}
+		params.put("pager", pager);
+		return this.shopDao.queryByPager(params);
 	}
 
 	public List<Shop> querySuportList(Integer top) {
@@ -77,6 +87,13 @@ public class ShopService extends BaseService implements IShopService {
 
 	public Integer updatePart(Shop shop) {
 		return this.shopDao.updatePart(shop);
+	}
+
+	public Integer count(Shop shop, Type type) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("shop", shop);
+		params.put("type", type);
+		return this.shopDao.count(params);
 	}
 
 }

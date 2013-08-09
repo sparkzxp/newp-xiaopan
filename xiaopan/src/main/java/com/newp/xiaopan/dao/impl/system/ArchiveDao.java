@@ -27,6 +27,14 @@ public class ArchiveDao implements IArchiveDao {
 		return this.sqlSession.selectList("archiveNpc.query", params);
 	}
 
+	public List<Archive> queryByPager(Map<String, Object> params) {
+		return this.sqlSession.selectList("archiveNpc.queryByPager", params);
+	}
+
+	public Integer count(Map<String, Object> params) {
+		return this.sqlSession.selectOne("archiveNpc.count", params);
+	}
+
 	public String add(Archive archive) {
 		this.sqlSession.insert("archiveNpc.add", archive);
 		return String.valueOf(archive.getId());

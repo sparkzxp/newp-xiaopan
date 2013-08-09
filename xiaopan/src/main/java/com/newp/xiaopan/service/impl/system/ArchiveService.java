@@ -3,6 +3,7 @@
  */
 package com.newp.xiaopan.service.impl.system;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.newp.xiaopan.bean.system.Archive;
+import com.newp.xiaopan.common.PagerUtil;
+import com.newp.xiaopan.common.bean.Pager;
 import com.newp.xiaopan.dao.system.IArchiveDao;
 import com.newp.xiaopan.service.system.IArchiveService;
 
@@ -54,6 +57,24 @@ public class ArchiveService extends BaseService implements IArchiveService {
 
 	public Integer delete(Archive archive) {
 		return this.archiveDao.delete(archive);
+	}
+
+	public List<Archive> queryListByPager(Archive archive, Pager pager) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("archive", archive);
+		pager.setTotalSize(this.archiveDao.count(params));
+		PagerUtil.setPager(pager);
+		if (pager.getTotalSize() == 0) {
+			return new ArrayList<Archive>();
+		}
+		params.put("pager", pager);
+		return this.archiveDao.queryByPager(params);
+	}
+
+	public Integer count(Archive archive) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("archive", archive);
+		return this.archiveDao.count(params);
 	}
 
 }

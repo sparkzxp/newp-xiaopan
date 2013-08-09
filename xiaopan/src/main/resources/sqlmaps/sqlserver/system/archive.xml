@@ -27,6 +27,23 @@
 			</if>
 		</where>
 	</sql>
+	
+	<select id="count" resultType="int" parameterType="map">
+		select count(*) from ARCHIVES A
+		<include refid="query_where" />
+	</select>
+	
+	<select id="queryByPager" resultMap="archiveRstMap" parameterType="map">
+		select top ${pager.pageSize} * from(
+			SELECT ROW_NUMBER() OVER (ORDER BY senddate desc, title asc) AS RowNumber,* from(
+				select * from ARCHIVES A
+				<include refid="query_where" />
+			) t1
+		) t
+		<![CDATA[
+ 		where RowNumber>=${pager.startIndex}
+		]]>
+	</select>
 
 	<select id="query" resultMap="archiveRstMap" parameterType="map">
 		SELECT 

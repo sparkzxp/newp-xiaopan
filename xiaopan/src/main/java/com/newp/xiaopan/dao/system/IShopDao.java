@@ -16,7 +16,9 @@ public interface IShopDao {
 
 	List<Shop> query(Map<String, Object> params);
 
-	List<Shop> queryBySiteAndType(Map<String, Object> params);
+	Integer count(Map<String, Object> params);
+
+	List<Shop> queryByPager(Map<String, Object> params);
 
 	List<Shop> querySuport(Map<String, Object> params);
 

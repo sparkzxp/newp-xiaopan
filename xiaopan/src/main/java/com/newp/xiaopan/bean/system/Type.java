@@ -16,6 +16,15 @@ public class Type extends BaseBean {
 	private Integer sort;
 	private Double price;
 
+	public Type() {
+		super();
+	}
+
+	public Type(String name) {
+		super();
+		this.name = name;
+	}
+
 	public String getName() {
 		return name;
 	}
