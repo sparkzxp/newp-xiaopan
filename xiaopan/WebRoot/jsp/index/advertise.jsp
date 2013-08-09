@@ -43,11 +43,14 @@
 
 	</script>
 	<style type="text/css">
+	body{
+		background : url("<%=basePath%>images/top-bg_37f4dd0d08.png") repeat-x scroll 0 0 #F3F2F3;
+	}
 	.adsimg{
 		float: left;
 	    height: 100px;
-	    margin-left: 2px;
-	    margin-top: 2px;
+	    margin-left: 10px;
+	    margin-top: 5px;
 	    width: 160px;
 	}
 	#showbox{
@@ -86,10 +89,10 @@
     </div>
 </div>
 <div class="main">
-	<div style="margin-top:5px;">
-	我要去：
+	<div style="margin-top:8px; font-size: 22px; font-weight: bold; margin-bottom: 15px;">
+	我要去
 	<s:iterator value="sites" var="parent">
-		&nbsp;【<a target="_blank" href="<%=basePath%>web/main_toShow?site.id=<s:property value="#parent.id"/>"><s:property value="#parent.name"/></a>】
+		【<a target="_blank" href="<%=basePath%>web/main_toShow?site.id=<s:property value="#parent.id"/>"><s:property value="#parent.name"/></a>】
 	</s:iterator>
 	</div>
 	<div class="clear"></div>

@@ -35,7 +35,7 @@
             	小爬虫，禁止访问！点此<a href="<%=basePath%>web/main_toShow">返回首页</a>
             </dd>
 			<dd>
-				<span class="btn_back"><a href="/ssi" ><img src="<%=basePath%>images/error/pic_dot_jz.gif" alt="返回" title="返回"></a></span> 
+				<span class="btn_back"><a href="<%=basePath%>web/main_toShow" ><img src="<%=basePath%>images/error/pic_dot_jz.gif" alt="返回" title="返回"></a></span> 
 			</dd>
 		</dl>
 	</div>
