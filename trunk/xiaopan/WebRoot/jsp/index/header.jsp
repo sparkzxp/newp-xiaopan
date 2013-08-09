@@ -58,11 +58,13 @@
         </div>
         <div class="h_right">
             <ul>
+            	<s:set name="count" value="1"></s:set>
             	<s:iterator value="adss" var="parent">
-	            	<s:if test="#parent.place == '头部广告'">
+	            	<s:if test="#parent.place == '头部广告' and #count == 1">
 	                <li>
 	                    <a href="<s:property value="#parent.weburl"/>"><img src="<s:property value="#parent.imageurl"/>" /></a>
 	                </li>
+	                <s:set name="count" value="#count + 1"></s:set>
 	                </s:if>
 	            </s:iterator>
             </ul>
