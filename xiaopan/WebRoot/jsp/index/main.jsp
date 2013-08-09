@@ -15,6 +15,17 @@
 	<link rel="stylesheet" href="<%=basePath%>plugin/ztree/css/zTreeStyle.css" type="text/css">
     <link type="text/css" href="<%=basePath%>css/public.css?1245" rel="Stylesheet" />
     <link type="text/css" href="<%=basePath%>css/style.css?1258" rel="Stylesheet" />
+    
+    <script type="text/javascript">
+    	function toggleList(pre){
+    		$('#ul_'+pre).toggle();
+    		if($('#ul_'+pre).css('display')=='none'){
+    			$('#img_'+pre).attr('src', '<%=basePath%>images/ico1.gif');
+    		}else{
+    			$('#img_'+pre).attr('src', '<%=basePath%>images/ico2.gif');
+    		}
+    	}
+    </script>
 </head>
 <body>
     <form id="form1">
@@ -41,11 +52,24 @@
         		<div class="item">
                     <ul>
                         <li><strong><s:property value="#parent.name"/></strong></li>
+                        <s:set name="count" value="1"></s:set>
                         <s:iterator value="types" var="child">
                         	<s:if test="#child.topid == #parent.id">
-                            <li><a href="<%=basePath%>web/main_toSearch?key.name=<s:property value="#child.name"/>"><s:property value="#child.name"/></a></li>
+                        		<s:if test="#count == 10">
+                        		<li><a href="javascript:void(0);" style="color:#999999;" onclick="toggleList('<s:property value="#parent.id"/>_<s:property value="#child.id"/>');"><img id="img_<s:property value="#parent.id"/>_<s:property value="#child.id"/>" alt="" src="<%=basePath%>images/ico1.gif"/>&nbsp;其他</a></li>
+                        		<ul id="ul_<s:property value="#parent.id"/>_<s:property value="#child.id"/>" style="display:none;">
+                        		</s:if>
+	                        	<s:if test="#count < 10">
+	                            <li><a href="<%=basePath%>web/main_toSearch?key.name=<s:property value="#child.name"/>"><s:property value="#child.name"/></a></li>
+	                            <s:set name="count" value="#count + 1"></s:set>
+	                            </s:if>
+	                            <s:else>
+	                            <li><a href="<%=basePath%>web/main_toSearch?key.name=<s:property value="#child.name"/>"><s:property value="#child.name"/></a></li>
+	                            <s:set name="count" value="#count + 1"></s:set>
+	                            </s:else>
                             </s:if>
                         </s:iterator>
+                        <s:if test="#count > 9"></ul></s:if>
                     </ul>
                 </div>
         		</s:if>
