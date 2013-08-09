@@ -10,6 +10,7 @@
     <script language="javascript" src="<%=basePath%>js/jquery/jquery-1.7.2.min.js"></script>
     <script language="javascript" src="<%=basePath%>js/GetUrlData.js"></script>
     <script language="javascript" src="<%=basePath%>js/global.js"></script>
+    <script language="javascript" src="<%=basePath%>js/common/pager.js"></script>
 	<script type="text/javascript" src="<%=basePath%>plugin/ztree/jquery.ztree.core-3.2.min.js"></script>
 	
     <link rel="stylesheet" href="<%=basePath%>plugin/ztree/css/select.css" type="text/css">
@@ -18,7 +19,7 @@
     <link type="text/css" href="<%=basePath%>css/common.css" rel="Stylesheet" />
 </head>
 <body>
-    <form id="form1">
+    <s:form id="queryForm">
     <%@ include file="header.jsp"%>
     <div class="position">
         <span>
@@ -37,16 +38,12 @@
                 </ul>
                 <div class="clear"></div>
             </div>
-            <div class="page">
-                <ul>
-                    
-                </ul>
-            </div>
+            <%@ include file="../common/pager.jsp"%>
         </div>
         <!--end right-->
         <div class="clear"></div>
     </div>
     <%@ include file="footer.jsp"%>
-    </form>
+    </s:form>
 </body>
 </html>

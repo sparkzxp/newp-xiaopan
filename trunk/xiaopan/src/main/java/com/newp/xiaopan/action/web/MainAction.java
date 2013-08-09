@@ -89,11 +89,14 @@ public class MainAction extends BaseAction {
 	}
 
 	public String toSearch() {
-		if (null == key || StringUtils.isBlank(key.getName())) {
-			return toShow();
-		}
 		initHeader();
-		shops = shopService.queryListBySiteAndType(site.getId(), key.getName().trim());
+		if (null == key || StringUtils.isBlank(key.getName())) {
+			shops = shopService.queryListByPager(new Shop(site.getId()), null, getPager());
+		} else {
+			key.setName(key.getName().trim());
+			shops = shopService.queryListByPager(new Shop(site.getId()), new Type(key.getName()), getPager());
+		}
+
 		types = typeService.queryList(null);
 		return "toSearch";
 	}
@@ -166,7 +169,7 @@ public class MainAction extends BaseAction {
 
 	public String toNoticeList() {
 		initHeader();
-		archives = archiveService.queryList(new Archive("网站公告"));
+		archives = archiveService.queryListByPager(new Archive("网站公告"), getPager());
 
 		return "toNoticeList";
 	}

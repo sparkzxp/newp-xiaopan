@@ -8,16 +8,6 @@ package com.newp.xiaopan.common.bean;
  */
 public class Pager {
 	
-//	private static Pager pager;
-//	private Pager(){}
-//	
-//	public static Pager getInstance(){
-//		if(pager==null){
-//			pager=new Pager();
-//		}
-//		return pager;
-//	}
-	
 	private int totalPage;// 储存最大页面数
 	private int totalSize;// 总记录数
 	private int currentPage = 1; // 页码数,初始为1

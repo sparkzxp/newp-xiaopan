@@ -16,6 +16,10 @@ public interface IArchiveDao {
 
 	List<Archive> query(Map<String, Object> params);
 
+	Integer count(Map<String, Object> params);
+
+	List<Archive> queryByPager(Map<String, Object> params);
+
 	String add(Archive archive);
 
 	Integer update(Archive archive);

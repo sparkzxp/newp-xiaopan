@@ -40,8 +40,8 @@ public class ShopDao implements IShopDao {
 		return this.sqlSession.delete("shopNpc.delete", shop);
 	}
 
-	public List<Shop> queryBySiteAndType(Map<String, Object> params) {
-		return this.sqlSession.selectList("shopNpc.queryBySiteAndType", params);
+	public List<Shop> queryByPager(Map<String, Object> params) {
+		return this.sqlSession.selectList("shopNpc.queryByPager", params);
 	}
 
 	public void addTypes(Shop shop) {
@@ -58,5 +58,9 @@ public class ShopDao implements IShopDao {
 
 	public Integer updatePart(Shop shop) {
 		return this.sqlSession.update("shopNpc.updatePart", shop);
+	}
+
+	public Integer count(Map<String, Object> params) {
+		return this.sqlSession.selectOne("shopNpc.count", params);
 	}
 }

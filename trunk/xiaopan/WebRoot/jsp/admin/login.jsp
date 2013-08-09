@@ -75,9 +75,6 @@
 				            <input type="text" id="kaptcha" name="kaptcha" maxlength="4" class="code_frame" required="true">
 				            <span> <img src="<%=basePath%>sys/kaptcha" class="code_validate" id="kaptchaImage" style="cursor: pointer" onClick="document.getElementById('kaptchaImage').src='<%=basePath%>sys/kaptcha?update='+Math.random();"/> 
 				            </span>
-                            <%-- <s:textfield name="txtcode" Width="50px" CssClass="code" style="margin-top:10px;"/>
-                            <img src="code.aspx" class="code" id="code" style="margin-top:10px" />
-                            <a class="code" onclick="javascript:var time=new Date().getTime();document.getElementById('code').src='code.aspx?'+time;">看不清楚</a> --%>
                         </td>
                     </tr>
                     <tr>
