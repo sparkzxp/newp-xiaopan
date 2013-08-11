@@ -87,7 +87,7 @@
                 </table>
             </div>
         </div>
-        <div class="l_bottom"><P>Copyright &copy; 2009-2012 <a href="<%=basePath%>web/main_toShow">返回首页</a></P></div>
+        <div class="l_bottom"><P>Copyright &copy; 2013-2014 <a href="<%=basePath%>web/main_toShow">返回首页</a></P></div>
     </s:form>
 </body>
 </html>
