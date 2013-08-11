@@ -48,10 +48,11 @@
 	}
 	.adsimg{
 		float: left;
-	    height: 100px;
-	    margin-left: 10px;
-	    margin-top: 5px;
-	    width: 160px;
+	    width: 260px;
+	    height: 160px;
+	    margin-left: 15px;
+	    margin-top: 10px;
+	    border: 1px solid;
 	}
 	#showbox{
 		background:#2a2a2a;
