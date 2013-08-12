@@ -5,41 +5,32 @@
 <html>
 <head>
 	<base href="<%=basePath%>">
-    <title>校畔网</title>
+    <title>校畔网 首页</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="<%=basePath%>plugin/jquery.mobile-1.3.2/jquery.mobile-1.3.2.min.css" type="text/css">
+    
     <script language="javascript" src="<%=basePath%>js/jquery/jquery-1.7.2.min.js"></script>
 	<script type="text/javascript" src="<%=basePath%>plugin/jquery.mobile-1.3.2/jquery.mobile-1.3.2.min.js"></script>
-	
-    <link rel="stylesheet" href="<%=basePath%>plugin/jquery.mobile-1.3.2/jquery.mobile-1.3.2.min.css" type="text/css">
+    </script>
 </head>
 <body>
 <!-- Home -->
 <div data-role="page" id="page1">
-    <div data-theme="e" data-role="header">
-        <h3 id="pageTitle">
-            欢迎使用校畔网
-        </h3>
+    <div data-theme="e" data-role="header" class="clearfix" id="header">
+        <h3>欢迎使用校畔网</h3>
     </div>
     <div data-role="content">
         <ul data-role="listview" data-divider-theme="e" data-inset="true">
-            <li data-role="list-divider" role="heading">
-                饮料
-            </li>
-            <li data-theme="c">
-                果汁
-            </li>
-            <li data-theme="c">
-                奶昔
-            </li>
-            <li data-role="list-divider" role="heading">
-                Divider
-            </li>
+        	<s:iterator value="sites" var="parent">
+        	<li data-theme="c">
+        		<a href="<%=basePath%>mobile/mobile_toTypeList?site.id=<s:property value="#parent.id"/>" data-transition="slide">
+        			<s:property value="#parent.name"/>
+        		</a>
+        	</li>
+        	</s:iterator>
         </ul>
     </div>
-    <div data-theme="e" data-role="footer">
-        <h3>
-            无锡校畔网&nbsp;@CopyRight 2013-2014
-        </h3>
-    </div>
+    <%@ include file="footer.jsp"%>
 </div>
 </body>
 </html>
