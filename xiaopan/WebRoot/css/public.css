@@ -76,7 +76,7 @@ img
 {
 	float:right;
 	width:700px;
-	height:90px;
+	height:200px;
 	overflow:hidden;
 }
 .scroll
@@ -87,7 +87,8 @@ img
 }
 .h_right img
 {
-	height: 90px;
+	height: 195px;
+	width: 695px;
     margin-right: 3px;
     float:left;
 }
@@ -157,7 +158,7 @@ img
 	line-height:45px;
 	background:url(../images/keyword.jpg) left top no-repeat;
 	margin-top:30px;
-	width:670px;
+	width:500px;
 }
 .search
 {

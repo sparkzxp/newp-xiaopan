@@ -55,11 +55,11 @@
                         <s:set name="count" value="1"></s:set>
                         <s:iterator value="types" var="child">
                         	<s:if test="#child.topid == #parent.id">
-                        		<s:if test="#count == 10">
+                        		<s:if test="#count == 11">
                         		<li><a href="javascript:void(0);" style="color:#999999;" onclick="toggleList('<s:property value="#parent.id"/>_<s:property value="#child.id"/>');"><img id="img_<s:property value="#parent.id"/>_<s:property value="#child.id"/>" alt="" src="<%=basePath%>images/ico1.gif"/>&nbsp;其他</a></li>
                         		<ul id="ul_<s:property value="#parent.id"/>_<s:property value="#child.id"/>" style="display:none;">
                         		</s:if>
-	                        	<s:if test="#count < 10">
+	                        	<s:if test="#count < 11">
 	                            <li><a href="<%=basePath%>web/main_toSearch?key.name=<s:property value="#child.name"/>"><s:property value="#child.name"/></a></li>
 	                            <s:set name="count" value="#count + 1"></s:set>
 	                            </s:if>
@@ -69,7 +69,7 @@
 	                            </s:else>
                             </s:if>
                         </s:iterator>
-                        <s:if test="#count > 9"></ul></s:if>
+                        <s:if test="#count > 10"></ul></s:if>
                     </ul>
                 </div>
         		</s:if>
@@ -92,7 +92,7 @@
         <!--end middle-->
         <div class="right">
             <div class="r_item">
-                <div class="r_t"><strong>网站公告</strong></div>
+                <div class="r_t"><strong>网站公告</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="<%=basePath%>web/main_toNoticeList">更多&gt;&gt;</a></div>
                 <div class="r_c">
                     <ul>
                     <s:iterator value="archives" var="parent">
@@ -104,12 +104,12 @@
 		            </s:iterator>
                     </ul>
                     <div class="clear"></div>
-                    <div style="text-align:right;line-height:30px"><a href="<%=basePath%>web/main_toNoticeList">更多&gt;&gt;&nbsp;</a></div>
+                    <%-- <div style="text-align:right;line-height:30px"><a href="<%=basePath%>web/main_toNoticeList">更多&gt;&gt;&nbsp;</a></div> --%>
                 </div>
             </div>
             <s:set name="count" value="1"></s:set>
             <s:iterator value="adss" var="parent">
-            	<s:if test="#parent.place == '网页右面' and #count <= 3">
+            	<s:if test="#parent.place == '网页右面' and #count < 5">
                     <p><a href="<s:property value="#parent.weburl"/>"><img src="<s:property value="#parent.imageurl"/>" width="100%" /></a></p>
                     <s:set name="count" value="#count + 1"></s:set>
                 </s:if>
