@@ -22,7 +22,6 @@ import com.newp.xiaopan.common.Constants;
 import com.newp.xiaopan.service.system.IAdsService;
 import com.newp.xiaopan.service.system.IArchiveService;
 import com.newp.xiaopan.service.system.IArctypeService;
-import com.newp.xiaopan.service.system.IKeyService;
 import com.newp.xiaopan.service.system.IShopService;
 import com.newp.xiaopan.service.system.ITypeService;
 
@@ -39,8 +38,6 @@ public class MainAction extends BaseAction {
 	@Autowired
 	private IArchiveService archiveService;
 	@Autowired
-	private IKeyService keyService;
-	@Autowired
 	private ITypeService typeService;
 	@Autowired
 	private IShopService shopService;
@@ -51,7 +48,6 @@ public class MainAction extends BaseAction {
 	private Site site;
 	private List<Ads> adss;
 	private List<Archive> archives;
-	private List<Key> keys;
 	private List<Type> types;
 	private List<Shop> suportShops;
 
@@ -83,7 +79,6 @@ public class MainAction extends BaseAction {
 		initHeader();
 		archives = archiveService.queryTopList(new Archive("网站公告"), 3);
 		types = typeService.queryList(null);
-		adss = adsService.queryList(new Ads(site.getId()));
 
 		return "toShow";
 	}
@@ -146,15 +141,12 @@ public class MainAction extends BaseAction {
 			getCurrentSession().setAttribute(Constants.SESSION_USER_SITE, site);
 		}
 
-		if (null == getCurrentSession().getAttribute(Constants.SESSION_HOT_KEY)) {
-			getCurrentSession().setAttribute(Constants.SESSION_HOT_KEY, keyService.queryList(null));
-		}
-		keys = (List<Key>) getCurrentSession().getAttribute(Constants.SESSION_HOT_KEY);
-
 		if (null == getCurrentSession().getAttribute(Constants.SESSION_SUPORT_SHOP)) {
 			getCurrentSession().setAttribute(Constants.SESSION_SUPORT_SHOP, shopService.querySuportList(8));
 		}
 		suportShops = (List<Shop>) getCurrentSession().getAttribute(Constants.SESSION_SUPORT_SHOP);
+
+		adss = adsService.queryList(new Ads(site.getId()));
 	}
 
 	public String toInfo() {
@@ -207,14 +199,6 @@ public class MainAction extends BaseAction {
 
 	public void setArchives(List<Archive> archives) {
 		this.archives = archives;
-	}
-
-	public List<Key> getKeys() {
-		return keys;
-	}
-
-	public void setKeys(List<Key> keys) {
-		this.keys = keys;
 	}
 
 	public List<Type> getTypes() {
