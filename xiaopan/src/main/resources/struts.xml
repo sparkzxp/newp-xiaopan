@@ -15,9 +15,13 @@
 			<result name="main">/jsp/index/main.jsp</result>
 		</global-results>
 		<action name="admin" class="adminAction" method="login"></action>
+		<action name="mobile" class="mobileAction" method="toSite">
+			<result name="toSite">/jsp/mobile/main.jsp</result>
+		</action>
 	</package>
 	
 	<include file="actions/system/struts_system.xml" />
 	<include file="actions/web/struts_web.xml" />
+	<include file="actions/mobile/struts_mobile.xml" />
 </struts>
 
