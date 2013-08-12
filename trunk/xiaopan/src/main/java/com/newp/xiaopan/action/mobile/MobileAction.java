@@ -70,6 +70,10 @@ public class MobileAction extends BaseAction {
 		return "toShop";
 	}
 
+	public String toPhone() {
+		return "toPhone";
+	}
+
 	@SuppressWarnings("unchecked")
 	private void initSite() {
 		List<Site> tmpSites = (List<Site>) MySessionListener.getConfigMap_s().get(Constants.CONFIG_SITE_LIST);

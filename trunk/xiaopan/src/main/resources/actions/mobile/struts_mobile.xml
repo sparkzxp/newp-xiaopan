@@ -8,6 +8,7 @@
 			<result name="toTypeList">/jsp/mobile/type_list.jsp</result>
 			<result name="toSearch">/jsp/mobile/search.jsp</result>
 			<result name="toShop">/jsp/mobile/shop.jsp</result>
+			<result name="toPhone">/jsp/mobile/phone.jsp</result>
 		</action>
 	</package>
 
