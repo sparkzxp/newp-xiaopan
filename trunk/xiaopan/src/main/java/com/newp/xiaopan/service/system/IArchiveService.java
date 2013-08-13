@@ -15,7 +15,7 @@ import com.newp.xiaopan.common.bean.Pager;
  * @author 张霄鹏
  * 
  */
-@Transactional(propagation = Propagation.SUPPORTS, readOnly = false, rollbackFor = Exception.class)
+@Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
 public interface IArchiveService {
 
 	Archive query(Archive archive);
@@ -28,9 +28,12 @@ public interface IArchiveService {
 
 	Integer count(Archive archive);
 
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	String add(Archive archive);
 
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	Integer update(Archive archive);
 
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	Integer delete(Archive archive);
 }

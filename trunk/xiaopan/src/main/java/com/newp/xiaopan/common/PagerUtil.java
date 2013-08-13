@@ -23,7 +23,7 @@ public class PagerUtil {
 			pager.setCurrentPage(pager.getTotalPage());
 		}
 		pager.setEndIndex(pager.getCurrentPage() * pager.getPageSize());
-		pager.setStartIndex(pager.getEndIndex() - pager.getPageSize() + 1);
+		pager.setStartIndex(pager.getEndIndex() - pager.getPageSize());
 		if (pager.getEndIndex() > pager.getTotalSize()) {
 			pager.setEndIndex(pager.getTotalSize());
 		}

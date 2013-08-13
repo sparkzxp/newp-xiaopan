@@ -1,12 +1,14 @@
 package com.newp.xiaopan.action.listener;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.log4j.Logger;
 
 import com.newp.xiaopan.action.web.ConfigReader;
@@ -59,8 +61,9 @@ public class MySessionListener implements HttpSessionListener {
 		configMap_s.put(Constants.CONFIG_SITE_LIST, ConfigReader.querySiteList());
 	}
 
+	@SuppressWarnings("rawtypes")
 	public static Map<String, Object> getConfigMap_s() {
-		if (configMap_s.isEmpty()) {
+		if (configMap_s.isEmpty() || CollectionUtils.isEmpty((List) configMap_s.get(Constants.CONFIG_SITE_LIST))) {
 			initConfigMap_s();
 		}
 		return configMap_s;

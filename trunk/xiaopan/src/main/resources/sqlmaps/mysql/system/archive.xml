@@ -34,37 +34,31 @@
 	</select>
 	
 	<select id="queryByPager" resultMap="archiveRstMap" parameterType="map">
-		select top ${pager.pageSize} * from(
-			SELECT ROW_NUMBER() OVER (ORDER BY senddate desc, title asc) AS RowNumber,* from(
-				select * from ARCHIVES A
-				<include refid="query_where" />
-			) t1
-		) t
-		<![CDATA[
- 		where RowNumber>=${pager.startIndex}
-		]]>
+		select * from ARCHIVES A
+		<include refid="query_where" />
+		ORDER BY senddate desc, title asc
+		limit ${pager.startIndex}, ${pager.pageSize}
 	</select>
 
 	<select id="query" resultMap="archiveRstMap" parameterType="map">
-		SELECT 
-		<if test="top != null">
-			top ${top} 
-		</if>
-		A.* FROM ARCHIVES A
+		SELECT A.* FROM ARCHIVES A
 		<include refid="query_where" />
 		order by A.senddate desc, A.title asc
+		<if test="top != null">
+			limit ${top} 
+		</if>
 	</select>
 	
 	<insert id="add" parameterType="archive">
 		<selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
-			SELECT @@IDENTITY
+			SELECT LAST_INSERT_ID()
 		</selectKey>
 		INSERT INTO ARCHIVES(
 			title, source, keyword,
 			description, contents, senddate
 		) VALUES (
 			#{title}, #{source}, #{keyword},
-			#{description}, #{contents}, getDate()
+			#{description}, #{contents}, now()
 		)
 	</insert>
 	
@@ -75,7 +69,7 @@
 			keyword = #{keyword},
 			description = #{description},
 			contents = #{contents},
-			senddate = getDate()
+			senddate = now()
 			
 			WHERE id = #{id}
 	</update>

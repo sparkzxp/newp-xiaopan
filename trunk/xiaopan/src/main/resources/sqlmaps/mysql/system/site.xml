@@ -29,7 +29,7 @@
 	
 	<insert id="add" parameterType="site">
 		<selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
-			SELECT @@IDENTITY
+			SELECT LAST_INSERT_ID()
 		</selectKey>
 		INSERT INTO SITE(
 			name, description, sort

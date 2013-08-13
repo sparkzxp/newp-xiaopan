@@ -45,7 +45,7 @@
 	
 	<insert id="add" parameterType="ads">
 		<selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
-			SELECT @@IDENTITY
+			SELECT LAST_INSERT_ID()
 		</selectKey>
 		INSERT INTO ADS(
 			title, imageurl, weburl,
@@ -54,7 +54,7 @@
 			latitude, longitude, siteId
 		) VALUES (
 			#{title}, #{imageurl}, #{weburl},
-			getDate(), getDate(), #{indexShow},
+			now(), now(), #{indexShow},
 			#{place}, #{address}, #{tel},
 			#{latitude}, #{longitude}, #{siteId}
 		)
@@ -65,8 +65,8 @@
 			title = #{title},
 			imageurl = #{imageurl},
 			weburl = #{weburl},
-			startdate = getDate(),
-			enddate = getDate(),
+			startdate = now(),
+			enddate = now(),
 			indexShow = #{indexShow},
 			place = #{place},
 			address = #{address},

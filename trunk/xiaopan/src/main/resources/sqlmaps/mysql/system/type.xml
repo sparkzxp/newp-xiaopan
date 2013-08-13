@@ -44,7 +44,7 @@
 	
 	<insert id="add" parameterType="type">
 		<selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
-			SELECT @@IDENTITY
+			SELECT LAST_INSERT_ID()
 		</selectKey>
 		INSERT INTO TYPE(
 			name, seotitle, keyword,

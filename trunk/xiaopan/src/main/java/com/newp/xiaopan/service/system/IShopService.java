@@ -16,7 +16,7 @@ import com.newp.xiaopan.common.bean.Pager;
  * @author 张霄鹏
  * 
  */
-@Transactional(propagation = Propagation.SUPPORTS, readOnly = false, rollbackFor = Exception.class)
+@Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
 public interface IShopService {
 
 	Shop query(Shop shop);
@@ -29,15 +29,15 @@ public interface IShopService {
 
 	Integer count(Shop shop, Type type);
 
-	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	String add(Shop shop);
 
-	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	Integer update(Shop shop);
 
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	Integer updatePart(Shop shop);
 
-	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	Integer delete(Shop shop);
 }
