@@ -7,10 +7,10 @@
 		<result property="id" column="id" />
 		<result property="title" column="title" />
 		<result property="imageurl" column="imageurl" />
+		<result property="imageurl2" column="imageurl2" />
 		<result property="weburl" column="weburl" />
 		<result property="startdate" column="startdate" />
 		<result property="enddate" column="enddate" />
-		<!-- <result property="error" column="error" /> -->
 		<result property="place" column="place" />
 		<result property="address" column="address" />
 		<result property="tel" column="tel" />
@@ -51,12 +51,14 @@
 			title, imageurl, weburl,
 			startdate, enddate, indexShow,
 			place, address, tel,
-			latitude, longitude, siteId
+			latitude, longitude, siteId,
+			imageurl2
 		) VALUES (
 			#{title}, #{imageurl}, #{weburl},
 			now(), now(), #{indexShow},
 			#{place}, #{address}, #{tel},
-			#{latitude}, #{longitude}, #{siteId}
+			#{latitude}, #{longitude}, #{siteId},
+			#{imageurl2}
 		)
 	</insert>
 	
@@ -64,6 +66,7 @@
 		update ADS set
 			title = #{title},
 			imageurl = #{imageurl},
+			imageurl2 = #{imageurl2},
 			weburl = #{weburl},
 			startdate = now(),
 			enddate = now(),

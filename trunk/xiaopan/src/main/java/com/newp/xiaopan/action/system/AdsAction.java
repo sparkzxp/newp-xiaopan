@@ -42,6 +42,10 @@ public class AdsAction extends BaseAction {
 	private String imgFileFileName;
 	private String imgFileContentType;
 	private boolean pathStatus;
+	private File imgFile2;
+	private String imgFile2FileName;
+	private String imgFile2ContentType;
+	private boolean pathStatus2;
 	private String uploadStatus;
 
 	public String toList() {
@@ -63,6 +67,10 @@ public class AdsAction extends BaseAction {
 		String oldPath = ads.getImageurl();
 		if (StringUtils.isNotBlank(oldPath)) {
 			oldPath = oldPath.substring(oldPath.indexOf("xiaopan") + 7, oldPath.length());
+		}
+		String oldPath2 = ads.getImageurl2();
+		if (StringUtils.isNotBlank(oldPath2)) {
+			oldPath2 = oldPath2.substring(oldPath2.indexOf("xiaopan") + 7, oldPath2.length());
 		}
 
 		InputStream fis = null;
@@ -88,6 +96,26 @@ public class AdsAction extends BaseAction {
 				ads.setImageurl(ServletActionContext.getRequest().getContextPath() + "/upload/ads/images/" + filename);
 			}
 
+			if (pathStatus2 && null != imgFile2) {
+				String path = ServletActionContext.getRequest().getRealPath("/upload/ads/images/");
+				File root = new File(path);
+				if (!root.isDirectory()) {
+					System.out.println("创建新文件夹成功" + path);
+					root.mkdirs();
+				}
+
+				fis = new FileInputStream(imgFile2);
+				String filename = FileUtil.gainFileName(imgFile2FileName);
+				fos = new FileOutputStream(path + "/" + filename);
+
+				byte[] data = new byte[1024];
+				while (fis.read(data) != -1) {
+					fos.write(data);
+				}
+				fos.flush();
+				ads.setImageurl2(ServletActionContext.getRequest().getContextPath() + "/upload/ads/images/" + filename);
+			}
+
 			if (StringUtils.isEmpty(ads.getId())) {
 				String id = this.adsService.add(ads);
 				ads.setId(id);
@@ -95,6 +123,9 @@ public class AdsAction extends BaseAction {
 				this.adsService.update(ads);
 				if (pathStatus) {
 					FileUtil.deleteFile(ServletActionContext.getRequest().getRealPath("/") + oldPath);
+				}
+				if (pathStatus2 && StringUtils.isNotEmpty(oldPath2)) {
+					FileUtil.deleteFile(ServletActionContext.getRequest().getRealPath("/") + oldPath2);
 				}
 			}
 
@@ -125,10 +156,15 @@ public class AdsAction extends BaseAction {
 	@SuppressWarnings("deprecation")
 	public void doDelete() {
 		String oldPath = ads.getImageurl();
+		String oldPath2 = ads.getImageurl2();
 		this.adsService.delete(ads);
 		if (StringUtils.isNotBlank(oldPath)) {
 			oldPath = oldPath.substring(oldPath.indexOf("xiaopan") + 7, oldPath.length());
 			FileUtil.deleteFile(ServletActionContext.getRequest().getRealPath("/") + oldPath);
+		}
+		if (StringUtils.isNotBlank(oldPath2)) {
+			oldPath2 = oldPath2.substring(oldPath2.indexOf("xiaopan") + 7, oldPath2.length());
+			FileUtil.deleteFile(ServletActionContext.getRequest().getRealPath("/") + oldPath2);
 		}
 		this.ajax(true);
 	}
@@ -193,6 +229,38 @@ public class AdsAction extends BaseAction {
 
 	public void setPathStatus(boolean pathStatus) {
 		this.pathStatus = pathStatus;
+	}
+
+	public File getImgFile2() {
+		return imgFile2;
+	}
+
+	public void setImgFile2(File imgFile2) {
+		this.imgFile2 = imgFile2;
+	}
+
+	public String getImgFile2FileName() {
+		return imgFile2FileName;
+	}
+
+	public void setImgFile2FileName(String imgFile2FileName) {
+		this.imgFile2FileName = imgFile2FileName;
+	}
+
+	public String getImgFile2ContentType() {
+		return imgFile2ContentType;
+	}
+
+	public void setImgFile2ContentType(String imgFile2ContentType) {
+		this.imgFile2ContentType = imgFile2ContentType;
+	}
+
+	public boolean isPathStatus2() {
+		return pathStatus2;
+	}
+
+	public void setPathStatus2(boolean pathStatus2) {
+		this.pathStatus2 = pathStatus2;
 	}
 
 	public String getUploadStatus() {

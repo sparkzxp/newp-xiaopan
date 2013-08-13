@@ -23,7 +23,8 @@
     		$('#descWeburl').html('如需指向网站店铺，请填写【web/main_toDetail?shop.id='+$('#editForm_ads_id').val()+'】');
     	}
 		
-		$("input[type=file]").next("input[type=text]").val($('#editForm_ads_imageurl').val());
+		$("input[name=imgFile]").next("input[type=text]").val($('#editForm_ads_imageurl').val());
+		$("input[name=imgFile2]").next("input[type=text]").val($('#editForm_ads_imageurl2').val());
 		if($('#editForm_uploadStatus').val() == 'success'){
 				alert("操作成功!");
 			}else if($('#editForm_uploadStatus').val()=="error"){
@@ -33,13 +34,16 @@
 		}
 
     	$("#btn_submit").click(function(){
-    		if($("input[type=file]").next("input[type=text]").val()==''){
+    		if($("input[name=imgFile]").next("input[type=text]").val()==''){
 				alert("请上传广告图片!");
 				return;
    	   		}
 			if($('#editForm').valid()){
-				if($('input[type=file]').val() != ''){
+				if($('input[name=imgFile]').val() != ''){
 					$("#editForm_pathStatus").val("true");
+		   	   	}
+				if($('input[name=imgFile2]').val() != ''){
+					$("#editForm_pathStatus2").val("true");
 		   	   	}
 				
 				$("#btn_submit").attr("disabled","true");
@@ -54,6 +58,8 @@
     <s:hidden name="ads.id"/>
 	<s:hidden name="ads.imageurl"/>
 	<s:hidden name="pathStatus" value="false"/>
+	<s:hidden name="ads.imageurl2"/>
+	<s:hidden name="pathStatus2" value="false"/>
 	<s:hidden name="uploadStatus"/>
     <div class="top">
         <div class="t_left"></div>
@@ -82,12 +88,12 @@
                         <input type="file" name="imgFile"/>
                     </td>
                 </tr>
-                <!-- <tr>
-                    <td width="120px" align="right" height="25px">预览：</td>
+                <tr>
+                    <td width="120px" align="right" height="25px">背面图片：</td>
                     <td>
-                        <asp:Image ID="img" onerror='$(this).css({display:"none"})' />
+                        <input type="file" name="imgFile2"/>
                     </td>
-                </tr> -->
+                </tr>
                 <tr>
                     <td align="right" height="25">所属站点：</td>
                     <td>
