@@ -25,6 +25,159 @@
     			$('#img_'+pre).attr('src', '<%=basePath%>images/ico2.gif');
     		}
     	}
+		
+    	$(function(){
+    		var local = 'left';
+    			num = 0;
+    			left = $($('.left li')).find('ul');
+    			middle = $($('.m_ads li')).find('ul');
+    			right = $('.rightAds').find('ul');
+    			side = 0;
+    			tmp = 0;
+    		var silder;
+    			
+    		function onesilder(){
+    			if(local == 'left'){
+    				if(side == 0){
+	    				if(left.length == 0){
+	    					num = 0;
+	    					local = 'middle';
+	    				}else{
+	    					tmp = parseInt($(left[num]).css('margin-top').split('px')[0]);
+		    				if(tmp >= 0){
+		        				$(left[num]).css('margin-top', '0px');
+		        				if(++num < left.length){
+		        					
+		        				}else{
+		        					num = 0;
+		        					local = 'middle';
+		        				}
+		        			}else{
+		        				$(left[num]).css('margin-top', (tmp+4)>=0?0:(tmp+4)+'px');
+		        			}
+	    				}
+    				}else{
+    					if(left.length == 0 || num < 0){
+    						clearInterval(silder);
+    	    				initLeftSlider();
+    					}else{
+    						tmp = parseInt($(left[num]).css('margin-top').split('px')[0]);
+    						if(tmp <= -82){
+    							$(left[num]).css('margin-top', '-82px');
+		        				if(--num > -1){
+		        					
+		        				}else{
+		        					clearInterval(silder);
+		    	    				initLeftSlider();
+		        				}
+    						}else{
+    							$(left[num]).css('margin-top', (tmp-4)<=-82?-82:(tmp-4)+'px');
+    						}
+    					}
+    				}
+    			}else if(local == 'middle'){
+    				if(side == 0){
+	    				if(middle.length == 0){
+	    					num = right.length-1;
+	    					local = 'right';
+	    				}else{
+	    					tmp = parseInt($(middle[num]).css('margin-left').split('px')[0]);
+		    				if(tmp >= 0){
+		        				$(middle[num]).css('margin-left', '0px');
+		        				if(++num < middle.length){
+		        					
+		        				}else{
+		        					num = right.length-1;
+		        					local = 'right';
+		        				}
+		        			}else{
+		        				$(middle[num]).css('margin-left', (tmp+4)>=0?0:(tmp+4)+'px');
+		        			}
+	    				}
+    				}else{
+    					if(middle.length == 0 || num < 0){
+    						num = left.length-1;
+    						local = 'left';
+    					}else{
+    						tmp = parseInt($(middle[num]).css('margin-left').split('px')[0]);
+    						if(tmp <= -122){
+    							$(middle[num]).css('margin-left', '-122px');
+		        				if(--num > -1){
+		        					
+		        				}else{
+		        					num = left.length-1;
+		    						local = 'left';
+		        				}
+    						}else{
+    							$(middle[num]).css('margin-left', (tmp-4)<=-122?-122:(tmp-4)+'px');
+    						}
+    					}
+    				}
+    			}else if(local == 'right'){
+    				if(side == 0){
+	    				if(right.length == 0 || num < 0){
+	    					clearInterval(silder);
+	    					initRightSlider();
+	    				}else{
+	    					tmp = parseInt($(right[num]).css('margin-top').split('px')[0]);
+		    				if(tmp <= -82){
+		        				$(right[num]).css('margin-top', '-82px');
+		        				if(--num > -1){
+		        					
+		        				}else{
+		        					clearInterval(silder);
+		        					initRightSlider();
+		        				}
+		        			}else{
+		        				$(right[num]).css('margin-top', (tmp-4)<=-82?-82:(tmp-4)+'px');
+		        			}
+	    				}
+	    			}else{
+	    				if(right.length == 0){
+	    					num = middle.length-1;
+	    	    			local = 'middle';
+	    				}else{
+	    					tmp = parseInt($(right[num]).css('margin-top').split('px')[0]);
+	    					if(tmp >= 0){
+	    						$(right[num]).css('margin-top', '0px');
+								if(++num < right.length){
+		        					
+		        				}else{
+		        					num = middle.length-1;
+			    	    			local = 'middle';
+		        				}
+	    					}else{
+	    						$(right[num]).css('margin-top', (tmp+4)>=0?0:(tmp+4)+'px');
+	    					}
+	    				}
+	    			}
+    			}else{
+    				alert('local:'+local+' num:'+num+' side:'+side);
+    				clearInterval(silder);
+    				initLeftSlider();
+    			}
+    		}
+    		
+    		function doSilder(){
+    			silder = setInterval(onesilder, 50);
+    		}
+    		
+    		function initLeftSlider(){
+    			num = 0;
+    			local = 'left';
+    			side = 0;
+    			setTimeout(doSilder, 5000);
+    		}
+    		
+			function initRightSlider(){
+    			num = 0;
+    			local = 'right';
+    			side = 1;
+    			setTimeout(doSilder, 5000);
+    		}
+    		
+    		setTimeout(doSilder, 2000);
+    	});
     </script>
 </head>
 <body>
@@ -38,7 +191,17 @@
             <s:iterator value="adss" var="parent">
             	<s:if test="#parent.place == '网页左面' and #count <= 5">
                 <li>
-                    <p><a href="<s:property value="#parent.weburl"/>"><img src="<s:property value="#parent.imageurl"/>" /></a></p>
+                	<div style="position: relative;height:82px;overflow: hidden;">
+               			<ul style="margin-top: -82px">
+               				<s:if test="null == #parent.imageurl2 or '' == #parent.imageurl2">
+               				<li style="overflow: hidden;margin:0;padding:0;height: 82px;"><a href="<s:property value="#parent.weburl"/>"><img src="<s:property value="#parent.imageurl"/>" /></a></li>
+               				</s:if>
+               				<s:else>
+               				<li style="overflow: hidden;margin:0;padding:0;height: 82px;"><a href="<s:property value="#parent.weburl"/>"><img src="<s:property value="#parent.imageurl2"/>" /></a></li>
+               				</s:else>
+               				<li style="overflow: hidden;margin:0;padding:0;height: 82px;"><a href="<s:property value="#parent.weburl"/>"><img src="<s:property value="#parent.imageurl"/>" /></a></li>
+               			</ul>
+                	</div>
                 </li>
                 <s:set name="count" value="#count + 1"></s:set>
                 </s:if>
@@ -80,9 +243,22 @@
                 	<s:set name="count" value="1"></s:set>
                     <s:iterator value="adss" var="parent">
 		            	<s:if test="#parent.place == '网页底部' and #count <= 4">
-		                <li>
+	               		<li>
+		            		<div style="position: relative;width:122px;height: 82px;overflow: hidden;">
+		               			<ul style="margin-left: -122px">
+		               				<s:if test="null == #parent.imageurl2 or '' == #parent.imageurl2">
+		               				<li style="overflow: hidden;margin:0;padding:0;width:122px;height: 82px;"><a href="<s:property value="#parent.weburl"/>"><img src="<s:property value="#parent.imageurl"/>" /></a></li>
+		               				</s:if>
+		               				<s:else>
+		               				<li style="overflow: hidden;margin:0;padding:0;width:122px;height: 82px;"><a href="<s:property value="#parent.weburl"/>"><img src="<s:property value="#parent.imageurl2"/>" /></a></li>
+		               				</s:else>
+		               				<li style="overflow: hidden;margin:0;padding:0;width:122px;height: 82px;"><a href="<s:property value="#parent.weburl"/>"><img src="<s:property value="#parent.imageurl"/>" /></a></li>
+		               			</ul>
+	                		</div>
+	               		</li>
+		                <%-- <li>
 		                    <p><a href="<s:property value="#parent.weburl"/>"><img src="<s:property value="#parent.imageurl"/>" /></a></p>
-		                </li>
+		                </li> --%>
 		                <s:set name="count" value="#count + 1"></s:set>
 		                </s:if>
 		            </s:iterator>
@@ -110,8 +286,19 @@
             <s:set name="count" value="1"></s:set>
             <s:iterator value="adss" var="parent">
             	<s:if test="#parent.place == '网页右面' and #count < 5">
-                    <p><a href="<s:property value="#parent.weburl"/>"><img src="<s:property value="#parent.imageurl"/>" width="100%" /></a></p>
-                    <s:set name="count" value="#count + 1"></s:set>
+        		<div class="rightAds" style="position: relative;height:82px;overflow: hidden;margin-top: 4px;">
+           			<ul style="margin-top: 0px">
+           				<li style="overflow: hidden;margin:0;padding:0;height: 82px;"><a href="<s:property value="#parent.weburl"/>"><img src="<s:property value="#parent.imageurl"/>" /></a></li>
+           				<s:if test="null == #parent.imageurl2 or '' == #parent.imageurl2">
+           				<li style="overflow: hidden;margin:0;padding:0;height: 82px;"><a href="<s:property value="#parent.weburl"/>"><img src="<s:property value="#parent.imageurl"/>" /></a></li>
+           				</s:if>
+           				<s:else>
+           				<li style="overflow: hidden;margin:0;padding:0;height: 82px;"><a href="<s:property value="#parent.weburl"/>"><img src="<s:property value="#parent.imageurl2"/>" /></a></li>
+           				</s:else>
+           			</ul>
+            	</div>
+                <%-- <p><a href="<s:property value="#parent.weburl"/>"><img src="<s:property value="#parent.imageurl"/>" width="100%" /></a></p> --%>
+                <s:set name="count" value="#count + 1"></s:set>
                 </s:if>
             </s:iterator>
         </div>
