@@ -11,6 +11,7 @@ public class Ads extends BaseBean {
 
 	private String title;
 	private String imageurl;
+	private String imageurl2;
 	private String weburl;
 	private Timestamp startdate;
 	private Timestamp enddate;
@@ -46,6 +47,14 @@ public class Ads extends BaseBean {
 
 	public void setImageurl(String imageurl) {
 		this.imageurl = imageurl;
+	}
+
+	public String getImageurl2() {
+		return imageurl2;
+	}
+
+	public void setImageurl2(String imageurl2) {
+		this.imageurl2 = imageurl2;
 	}
 
 	public String getWeburl() {
