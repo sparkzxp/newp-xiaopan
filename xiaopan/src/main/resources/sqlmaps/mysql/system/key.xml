@@ -21,16 +21,16 @@
 	</sql>
 
 	<select id="query" resultMap="keyRstMap" parameterType="map">
-		SELECT T.* FROM [KEY] T
+		SELECT T.* FROM `key` T
 		<include refid="query_where" />
 		order by T.sort asc, T.name asc
 	</select>
 	
 	<insert id="add" parameterType="key">
 		<selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
-			SELECT @@IDENTITY
+			SELECT LAST_INSERT_ID()
 		</selectKey>
-		INSERT INTO [KEY](
+		INSERT INTO `key`(
 			name, sort
 		) VALUES (
 			#{name}, #{sort}
@@ -38,7 +38,7 @@
 	</insert>
 	
 	<update id="update" parameterType="key">
-		update [KEY] set
+		update `key` set
 			name = #{name},
 			sort = #{sort}
 			
@@ -46,6 +46,6 @@
 	</update>
 	
 	<delete id="delete" parameterType="key">
-		delete from [KEY] where id = #{id}
+		delete from `key` where id = #{id}
 	</delete>
 </mapper>

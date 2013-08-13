@@ -29,6 +29,8 @@
 					$('#loginForm_user_username').focus();
 				}else if($('#loginForm_user_password').val()==''){
 					$('#loginForm_user_password').focus();
+				}else if($('#kaptcha').val()==''){
+					$('#kaptcha').focus();
 				}else{
 					submitLoginForm();
 				}
@@ -72,7 +74,7 @@
                     <tr>
                         <td align="right">验证码：</td>
                         <td>
-				            <input type="text" id="kaptcha" name="kaptcha" maxlength="4" class="code_frame" required="true">
+				            <input type="text" id="kaptcha" name="kaptcha" maxlength="4" class="code_frame" required="true" style="width:60px;">
 				            <span> <img src="<%=basePath%>sys/kaptcha" class="code_validate" id="kaptchaImage" style="cursor: pointer" onClick="document.getElementById('kaptchaImage').src='<%=basePath%>sys/kaptcha?update='+Math.random();"/> 
 				            </span>
                         </td>

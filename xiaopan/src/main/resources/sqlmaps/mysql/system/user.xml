@@ -31,17 +31,10 @@
 
 	<!-- 条件查询(分页) -->
 	<select id="queryByPager" resultMap="userRstMap" parameterType="map">
-		<![CDATA[
-		SELECT TOP ${pager.pageSize} * FROM(
-			SELECT ROW_NUMBER() OVER (ORDER BY USERNAME) AS ROWNUMBER,* FROM(
-				SELECT U.* FROM ADMIN U
-		]]>
+		SELECT U.* FROM ADMIN U
 		<include refid="queryUser_where" />
-		<![CDATA[
-			) T1
-		) T
- 		WHERE ROWNUMBER >= ${pager.startIndex}
-		]]>
+		ORDER BY U.USERNAME asc
+		limit ${pager.startIndex}, ${pager.pageSize}
 	</select>
 	<!-- 数据条数(分页) -->
 	<select id="queryCount" resultType="int" parameterType="map">

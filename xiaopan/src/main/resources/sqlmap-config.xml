@@ -24,13 +24,13 @@
 		<typeAlias alias="ads" type="com.newp.xiaopan.bean.system.Ads" />
 	</typeAliases>
 	<mappers>
-		<mapper resource="sqlmaps/sqlserver/system/user.xml" />
-		<mapper resource="sqlmaps/sqlserver/system/arctype.xml" />
-		<mapper resource="sqlmaps/sqlserver/system/type.xml" />
-		<mapper resource="sqlmaps/sqlserver/system/site.xml" />
-		<mapper resource="sqlmaps/sqlserver/system/shop.xml" />
-		<mapper resource="sqlmaps/sqlserver/system/key.xml" />
-		<mapper resource="sqlmaps/sqlserver/system/archive.xml" />
-		<mapper resource="sqlmaps/sqlserver/system/ads.xml" />
+		<mapper resource="sqlmaps/mysql/system/user.xml" />
+		<mapper resource="sqlmaps/mysql/system/arctype.xml" />
+		<mapper resource="sqlmaps/mysql/system/type.xml" />
+		<mapper resource="sqlmaps/mysql/system/site.xml" />
+		<mapper resource="sqlmaps/mysql/system/shop.xml" />
+		<mapper resource="sqlmaps/mysql/system/key.xml" />
+		<mapper resource="sqlmaps/mysql/system/archive.xml" />
+		<mapper resource="sqlmaps/mysql/system/ads.xml" />
 	</mappers>
 </configuration>  

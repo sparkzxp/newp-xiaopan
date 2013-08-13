@@ -46,21 +46,16 @@
 	</select>
 	
 	<select id="queryByPager" resultMap="shopRstMap" parameterType="map">
-		select top ${pager.pageSize} * from(
-			SELECT ROW_NUMBER() OVER (ORDER BY title asc) AS RowNumber,* from(
-				select distinct
-					s.id, s.title, s.keyword, s.description, '' contents,
-					s.address, s.tel, s.contacter, s.imagePath, s.siteId,
-					s.click, s.pingnum
-				from shop s 
-				left join shoptype st on st.shopid = s.id
-				left join type t on t.id = st.typeid
-				<include refid="query_where" />
-			) t1
-		) t
-		<![CDATA[
- 		where RowNumber>=${pager.startIndex}
-		]]>
+		select distinct
+			s.id, s.title, s.keyword, s.description, '' contents,
+			s.address, s.tel, s.contacter, s.imagePath, s.siteId,
+			s.click, s.pingnum
+		from shop s 
+		left join shoptype st on st.shopid = s.id
+		left join type t on t.id = st.typeid
+		<include refid="query_where" />
+		ORDER BY s.title asc
+		limit ${pager.startIndex}, ${pager.pageSize}
 	</select>
 
 	<select id="query" resultMap="shopRstMap" parameterType="map">
@@ -70,13 +65,14 @@
 	</select>
 	
 	<select id="querySuport" resultMap="shopRstMap" parameterType="map">
-		SELECT <if test="top != null">top ${top}</if> s.* FROM SHOP s
+		SELECT s.* FROM SHOP s
 		order by s.click desc
+		<if test="top != null">limit ${top}</if>
 	</select>
 	
 	<insert id="add" parameterType="shop">
 		<selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
-			SELECT @@IDENTITY
+			SELECT LAST_INSERT_ID()
 		</selectKey>
 		INSERT INTO SHOP(
 			title, keyword, description,
