@@ -1,5 +1,14 @@
-USE `xiaopangwang`;
+-- --------------------------------------------------------
+-- Host:                         127.0.0.1
+-- Server version:               5.5.27 - MySQL Community Server (GPL)
+-- Server OS:                    Win32
+-- HeidiSQL version:             7.0.0.4053
+-- Date/time:                    2013-08-14 14:57:16
+-- --------------------------------------------------------
 
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!40014 SET FOREIGN_KEY_CHECKS=0 */;
 
 -- Dumping structure for table xiaopangwang.admin
 DROP TABLE IF EXISTS `admin`;
@@ -53,13 +62,13 @@ INSERT INTO `ads` (`id`, `title`, `imageurl`, `imageurl2`, `weburl`, `startdate`
 	(13, '772', '/xiaopan/upload/ads/images/201308061641034054.jpg', '/xiaopan/upload/ads/images/201308091205577791.jpg', 'web/main_toDetail?shop.id=13', '2013-08-13 11:54:32', '2013-08-13 11:54:32', NULL, '网页底部', '', '', '', '', '1', 1),
 	(16, NULL, '/xiaopan/upload/ads/images/201308091205577791.jpg', NULL, 'web/main_toDetail?shop.id=16', '2013-08-13 11:54:32', '2013-08-13 11:54:32', NULL, '网页左面', NULL, NULL, NULL, NULL, '0', 1),
 	(19, '广告', '/xiaopan/upload/ads/images/201308111910458757.jpg', '/xiaopan/upload/ads/images/201308091205088713.jpg', '', '2013-08-13 11:54:32', '2013-08-13 11:54:32', NULL, '头部广告', '', '', '31.495', '120.278', '1', 2),
-	(20, NULL, '/xiaopan/upload/ads/images/201308061641034054.jpg', NULL, 'web/main_toDetail?shop.id=20', '2013-08-13 11:54:32', '2013-08-13 11:54:32', NULL, '网页右面', NULL, NULL, NULL, NULL, '0', 1),
+	(20, '020', '/xiaopan/upload/ads/images/201308061641034054.jpg', '', 'web/main_toDetail?shop.id=20', '2013-08-14 14:12:13', '2013-08-14 14:12:13', NULL, '网页右面', '', '', '', '', '2', 1),
 	(22, NULL, '/xiaopan/upload/ads/images/201308061641034054.jpg', NULL, 'web/main_toDetail?shop.id=22', '2013-08-13 11:54:32', '2013-08-13 11:54:32', NULL, '网页右面', NULL, NULL, NULL, NULL, '0', 1),
 	(24, NULL, '/xiaopan/upload/ads/images/201308061641034054.jpg', NULL, 'web/main_toDetail?shop.id=24', '2013-08-13 11:54:32', '2013-08-13 11:54:32', NULL, '网页左面', NULL, NULL, NULL, NULL, '0', 1),
 	(25, '72街茶客', '/xiaopan/upload/ads/images/201308111909575454.jpg', '', 'web/main_toDetail?shop.id=25', '2013-08-13 13:05:49', '2013-08-13 13:05:49', NULL, '头部广告', '11', '22', '33', '44', '1', 1),
-	(27, '头部2', '/xiaopan/upload/ads/images/201308091205577791.jpg', NULL, 'web/main_toDetail?shop.id=27', '2013-08-13 11:54:32', '2013-08-13 11:54:32', NULL, '头部广告', NULL, NULL, NULL, NULL, '0', 1),
-	(28, '网页右面3', '/xiaopan/upload/ads/images/201308061641034054.jpg', NULL, 'web/main_toDetail?shop.id=28', '2013-08-13 11:54:32', '2013-08-13 11:54:32', NULL, '网页右面', NULL, NULL, NULL, NULL, '0', 1),
-	(29, '网页右面4', '/xiaopan/upload/ads/images/201308091205577791.jpg', NULL, 'web/main_toDetail?shop.id=29', '2013-08-13 11:54:32', '2013-08-13 11:54:32', NULL, '网页右面', '', '', '', '', '0', 1),
+	(27, '头部2', '/xiaopan/upload/ads/images/201308091205577791.jpg', '', 'web/main_toDetail?shop.id=27', '2013-08-14 14:11:43', '2013-08-14 14:11:43', NULL, '头部广告', '', '', '', '', '2', 1),
+	(28, '网页右面3', '/xiaopan/upload/ads/images/201308061641034054.jpg', '', 'web/main_toDetail?shop.id=28', '2013-08-14 14:12:21', '2013-08-14 14:12:21', NULL, '网页右面', '', '', '', '', '2', 1),
+	(29, '网页右面4', '/xiaopan/upload/ads/images/201308091205577791.jpg', '', 'web/main_toDetail?shop.id=29', '2013-08-14 14:12:32', '2013-08-14 14:12:32', NULL, '网页右面', '', '', '', '', '2', 1),
 	(30, '网页左面4', '/xiaopan/upload/ads/images/201308061641034054.jpg', '/xiaopan/upload/ads/images/201308091205088713.jpg', 'web/main_toDetail?shop.id=30', '2013-08-13 11:54:33', '2013-08-13 11:54:33', NULL, '网页左面', NULL, NULL, NULL, NULL, '1', 1),
 	(31, '网页左面4', '/xiaopan/upload/ads/images/201308091205577791.jpg', '/xiaopan/upload/ads/images/201308111910458757.jpg', 'web/main_toDetail?shop.id=31', '2013-08-13 11:54:33', '2013-08-13 11:54:33', NULL, '网页左面', NULL, NULL, NULL, NULL, '1', 1),
 	(32, '网页底部5', '/xiaopan/upload/ads/images/201308061641034054.jpg', '/xiaopan/upload/ads/images/201308091205577791.jpg', 'web/main_toDetail?shop.id=32', '2013-08-13 11:54:33', '2013-08-13 11:54:33', NULL, '网页底部', '', '', '', '', '1', 1);
@@ -165,7 +174,7 @@ CREATE TABLE IF NOT EXISTS `shop` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=335 DEFAULT CHARSET=utf8;
 
--- Dumping data for table xiaopangwang.shop: ~100 rows (approximately)
+-- Dumping data for table xiaopangwang.shop: ~94 rows (approximately)
 DELETE FROM `shop`;
 /*!40000 ALTER TABLE `shop` DISABLE KEYS */;
 INSERT INTO `shop` (`id`, `title`, `keyword`, `description`, `contents`, `address`, `tel`, `contacter`, `imagePath`, `siteId`, `click`, `pingnum`) VALUES
