@@ -35,10 +35,36 @@
 		toUrl(str);
 	}
 	$(function(){
+		$('.main').height(($(document).height()-190)+'px');
 		$("#title").click(function(){
 			$(this).parent().animate({top:-300,opacity: 'hide'},500);
 			$(".mask").fadeOut("fast").remove();
 		});
+
+		var total = $('p').length;
+		var n, img, tmp=0, loop=0;
+		
+		function doSilder(){
+			n = parseInt(Math.random()*total);
+			loop = 0;
+			while(tmp == n && loop<10){
+				n = parseInt(Math.random()*total);
+				loop++;
+			}
+			tmp = n;
+			img = $($('p')[n]).find('img');
+			if($(img[0]).css('display') == 'none'){
+				$(img[1]).fadeOut('fast', function(){
+					$(img[0]).fadeIn('fast');
+				});
+			}else{
+				$(img[0]).fadeOut('fast', function(){
+					$(img[1]).fadeIn('fast');
+				});
+			}
+		}
+		
+		var silder = setInterval(doSilder, 2000);
 	});
 
 	</script>
@@ -90,16 +116,20 @@
     </div>
 </div>
 <div class="main">
-	<div style="margin-top:8px; font-size: 22px; font-weight: bold; margin-bottom: 15px;">
-	我要去
-	<s:iterator value="sites" var="parent">
-		【<a target="_blank" href="<%=basePath%>web/main_toShow?site.id=<s:property value="#parent.id"/>"><s:property value="#parent.name"/></a>】
-	</s:iterator>
-	</div>
 	<div class="clear"></div>
 	<div>
+	<s:set name="count" value="1"></s:set>
 	<s:iterator value="adss" var="parent">
-		<p>
+		<s:if test="#count < 9">
+			<s:if test="#count == 5">
+				<div class="adsimg" style="font-size: 22px; font-weight: bold;text-align: center;">
+				<div style="padding-top:5px;padding-bottom: 5px;">&nbsp;我要去：</div>
+				<s:iterator value="sites" var="child">
+				【<a target="_blank" href="<%=basePath%>web/main_toShow?site.id=<s:property value="#child.id"/>"><s:property value="#child.name"/></a>】<br>
+				</s:iterator>
+				</div>
+			</s:if>
+			<p>
 			<s:if test="#parent.weburl == null or #parent.weburl == ''">
 			<a href="javascript:void(0)" 
 				onclick="popup(this,'<s:property value="#parent.longitude"/>',
@@ -107,12 +137,21 @@
 									'<s:property value="#parent.title"/>',
 									'<s:property value="#parent.address"/>',
 									'<s:property value="#parent.tel"/>');">
-				<img src="<s:property value="#parent.imageurl"/>" class="adsimg" /></a>
 			</s:if>
 			<s:else>
-			<a target="_blank" href="<%=basePath%><s:property value="#parent.weburl"/>"><img src="<s:property value="#parent.imageurl"/>" class="adsimg" /></a>
+			<a target="_blank" href="<%=basePath%><s:property value="#parent.weburl"/>">
 			</s:else>
-		</p>
+				<img src="<s:property value="#parent.imageurl"/>" class="adsimg" />
+				<s:if test="null == #parent.imageurl2 or '' == #parent.imageurl2">
+   				<img src="<s:property value="#parent.imageurl"/>" class="adsimg" style="display: none;"/>
+   				</s:if>
+   				<s:else>
+   				<img src="<s:property value="#parent.imageurl2"/>" class="adsimg" style="display: none;"/>
+   				</s:else>
+   			</a>
+			<s:set name="count" value="#count + 1"></s:set>
+			</p>
+		</s:if>
 	</s:iterator>
 	</div>
 	<div class="clear"></div>

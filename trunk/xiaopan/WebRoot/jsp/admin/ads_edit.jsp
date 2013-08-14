@@ -109,7 +109,7 @@
                 <tr>
                     <td align="right" height="25">引导页显示：</td>
                     <td>
-                        <s:radio name="ads.indexShow" list="#{'0':'不显示','1':'显示' }" theme="simple" cssClass="{required:true}"></s:radio>
+                        <s:radio name="ads.indexShow" list="#{'0':'不显示','1':'大图显示','2':'底部显示' }" theme="simple" cssClass="{required:true}"></s:radio>
                     </td>
                 </tr>
                 <tr>

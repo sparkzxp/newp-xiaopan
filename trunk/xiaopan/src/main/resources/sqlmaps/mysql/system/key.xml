@@ -4,7 +4,7 @@
 <mapper namespace="keyNpc">
 	<!-- 返回值映射关系 -->
 	<resultMap id="keyRstMap" type="key">
-		<result property="id" column="id" />
+		<id property="id" column="id" />
 		<result property="name" column="name" />
 		<result property="sort" column="sort" />
 	</resultMap>
