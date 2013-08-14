@@ -68,7 +68,7 @@ public class MainAction extends BaseAction {
 	@SuppressWarnings("unchecked")
 	public String toAdvertise() {
 		Ads t = new Ads();
-		t.setIndexShow("1");
+		t.setIndexShow("0");
 		adss = this.adsService.queryList(t);
 
 		sites = (List<Site>) MySessionListener.getConfigMap_s().get(Constants.CONFIG_SITE_LIST);

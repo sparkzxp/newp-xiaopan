@@ -35,7 +35,7 @@
 		toUrl(str);
 	}
 	$(function(){
-		$('.main').height(($(document).height()-190)+'px');
+		$('.main').height(($($('.clear')[$('.clear').length-1]).offset().top-50)+'px');
 		$("#title").click(function(){
 			$(this).parent().animate({top:-300,opacity: 'hide'},500);
 			$(".mask").fadeOut("fast").remove();
@@ -120,7 +120,7 @@
 	<div>
 	<s:set name="count" value="1"></s:set>
 	<s:iterator value="adss" var="parent">
-		<s:if test="#count < 9">
+		<s:if test="#parent.indexShow == \"1\" and #count < 9">
 			<s:if test="#count == 5">
 				<div class="adsimg" style="font-size: 22px; font-weight: bold;text-align: center;">
 				<div style="padding-top:5px;padding-bottom: 5px;">&nbsp;我要去：</div>
@@ -130,7 +130,7 @@
 				</div>
 			</s:if>
 			<p>
-			<s:if test="#parent.weburl == null or #parent.weburl == ''">
+			<s:if test="#parent.weburl == null or #parent.weburl == \"\"">
 			<a href="javascript:void(0)" 
 				onclick="popup(this,'<s:property value="#parent.longitude"/>',
 									'<s:property value="#parent.latitude"/>',
@@ -142,7 +142,7 @@
 			<a target="_blank" href="<%=basePath%><s:property value="#parent.weburl"/>">
 			</s:else>
 				<img src="<s:property value="#parent.imageurl"/>" class="adsimg" />
-				<s:if test="null == #parent.imageurl2 or '' == #parent.imageurl2">
+				<s:if test="null == #parent.imageurl2 or \"\" == #parent.imageurl2">
    				<img src="<s:property value="#parent.imageurl"/>" class="adsimg" style="display: none;"/>
    				</s:if>
    				<s:else>
@@ -151,6 +151,36 @@
    			</a>
 			<s:set name="count" value="#count + 1"></s:set>
 			</p>
+		</s:if>
+	</s:iterator>
+	</div>
+	<div class="clear"></div>
+	<div style="margin-top: 10px;">
+	<s:set name="count" value="1"></s:set>
+	<s:iterator value="adss" var="parent">
+		<s:if test="#parent.indexShow == \"2\"">
+		<span class="bottomShow">
+			<s:if test="#parent.weburl == null or #parent.weburl == \"\"">
+			<a href="javascript:void(0)" 
+				onclick="popup(this,'<s:property value="#parent.longitude"/>',
+									'<s:property value="#parent.latitude"/>',
+									'<s:property value="#parent.title"/>',
+									'<s:property value="#parent.address"/>',
+									'<s:property value="#parent.tel"/>');">
+			</s:if>
+			<s:else>
+			<a target="_blank" href="<%=basePath%><s:property value="#parent.weburl"/>">
+			</s:else>
+				<img src="<s:property value="#parent.imageurl"/>" class="adsimg" style="width: 120px; height: 80px;" />
+				<s:if test="null == #parent.imageurl2 or \"\" == #parent.imageurl2">
+   				<img src="<s:property value="#parent.imageurl"/>" class="adsimg" style="display: none;width: 120px; height: 80px;"/>
+   				</s:if>
+   				<s:else>
+   				<img src="<s:property value="#parent.imageurl2"/>" class="adsimg" style="display: none;width: 120px; height: 80px;"/>
+   				</s:else>
+   			</a>
+			<s:set name="count" value="#count + 1"></s:set>
+		</span>
 		</s:if>
 	</s:iterator>
 	</div>
