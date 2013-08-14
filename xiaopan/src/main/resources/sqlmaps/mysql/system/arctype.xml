@@ -4,7 +4,7 @@
 <mapper namespace="arctypeNpc">
 	<!-- 返回值映射关系 -->
 	<resultMap id="arctypeRstMap" type="arctype">
-		<result property="id" column="id" />
+		<id property="id" column="id" />
 		<result property="typename" column="typename" />
 		<result property="seotitle" column="seotitle" />
 		<result property="keyword" column="keyword" />

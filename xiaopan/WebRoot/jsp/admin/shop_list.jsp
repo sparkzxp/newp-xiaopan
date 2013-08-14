@@ -67,7 +67,8 @@
                 <div class="list">
                     <div class="list_l list0" aid="<s:property value="#parent.id" />">
                         <s:property value="#parent.title" />&nbsp;&nbsp;
-                        (ID:<s:property value="#parent.id" />)
+                        (ID:<s:property value="#parent.id" />)&nbsp;&nbsp;
+                        (<s:property value="#parent.siteName" />)
                     </div>
                     <div class="list_r">
                         <a href="<%=basePath%>sys/shop_toEdit?shop.id=<s:property value="#parent.id" />">修改</a>|

@@ -4,7 +4,7 @@
 <mapper namespace="archiveNpc">
 	<!-- 返回值映射关系 -->
 	<resultMap id="archiveRstMap" type="archive">
-		<result property="id" column="id" />
+		<id property="id" column="id" />
 		<result property="title" column="title" />
 		<result property="keyword" column="keyword" />
 		<result property="description" column="description" />

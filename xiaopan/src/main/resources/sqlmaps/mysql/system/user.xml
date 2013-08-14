@@ -4,7 +4,7 @@
 <mapper namespace="userNpc">
 	<!-- 返回值映射关系 -->
 	<resultMap id="userRstMap" type="user">
-		<result property="id" column="id" />
+		<id property="id" column="id" />
 		<result property="username" column="username" />
 		<result property="password" column="pwd" />
 		<result property="registerDate" column="registerDate" />

@@ -4,7 +4,7 @@
 <mapper namespace="adsNpc">
 	<!-- 返回值映射关系 -->
 	<resultMap id="adsRstMap" type="ads">
-		<result property="id" column="id" />
+		<id property="id" column="id" />
 		<result property="title" column="title" />
 		<result property="imageurl" column="imageurl" />
 		<result property="imageurl2" column="imageurl2" />

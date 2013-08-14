@@ -4,7 +4,7 @@
 <mapper namespace="siteNpc">
 	<!-- 返回值映射关系 -->
 	<resultMap id="siteRstMap" type="site">
-		<result property="id" column="id" />
+		<id property="id" column="id" />
 		<result property="name" column="name" />
 		<result property="description" column="description" />
 		<result property="sort" column="sort" />

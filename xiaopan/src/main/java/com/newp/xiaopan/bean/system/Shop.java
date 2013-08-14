@@ -18,6 +18,7 @@ public class Shop extends BaseBean {
 	private String contacter;
 	private String imagePath;
 	private String siteId;
+	private String siteName;
 	private List<Type> types;
 	private Integer click;
 	private Integer pingnum;
@@ -101,6 +102,14 @@ public class Shop extends BaseBean {
 
 	public void setSiteId(String siteId) {
 		this.siteId = siteId;
+	}
+
+	public String getSiteName() {
+		return siteName;
+	}
+
+	public void setSiteName(String siteName) {
+		this.siteName = siteName;
 	}
 
 	public Integer getClick() {
