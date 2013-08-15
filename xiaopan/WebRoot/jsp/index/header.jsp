@@ -65,28 +65,20 @@
         <div class="h_right">
         <div id="picplayer" style="position:relative;overflow:hidden;width:695px;height:195px;clear:none;border:solid 1px #ccc;"> 
 		</div>
-            <!-- <ul> -->
-            	<s:set name="count" value="1"></s:set>
-            	<s:iterator value="adss" var="parent">
-            		<s:if test="#parent.place == '头部广告'">
-	            	<script type="text/javascript">
-	            		var p<s:property value="#count"/> = {
-	            			url : '<s:property value="#parent.imageurl"/>',
-	            			link : '<s:property value="#parent.weburl"/>',
-	            			time : 6000
-	            		};
-	            		pics.push(p<s:property value="#count"/>);
-	            	</script>
-	                <s:set name="count" value="#count + 1"></s:set>
-	                </s:if>
-	            	<%-- <s:if test="#parent.place == '头部广告' and #count == 1">
-	                <li>
-	                    <a href="<s:property value="#parent.weburl"/>"><img src="<s:property value="#parent.imageurl"/>" /></a>
-	                </li>
-	                <s:set name="count" value="#count + 1"></s:set>
-	                </s:if> --%>
-	            </s:iterator>
-            <!-- </ul> -->
+           	<s:set name="count" value="1"></s:set>
+           	<s:iterator value="adss" var="parent">
+           		<s:if test="#parent.place == '头部广告'">
+            	<script type="text/javascript">
+            		var p<s:property value="#count"/> = {
+            			url : '<s:property value="#parent.imageurl"/>',
+            			link : '<s:property value="%{(#parent.weburl==null || #parent.weburl==\"\")?\"javascript:void(0);\":#parent.weburl}"/>',
+            			time : 6000
+            		};
+            		pics.push(p<s:property value="#count"/>);
+            	</script>
+                <s:set name="count" value="#count + 1"></s:set>
+                </s:if>
+            </s:iterator>
         </div>
         <div class="clear"></div>
     </div>
@@ -130,7 +122,7 @@
 		var c = $('#piccontent');
 		for ( var i = 0; i < pics.length; i++) {
 			//添加图片到容器中 
-			c.append('<a href="'+pics[i].link+'" target="_blank"><img id="picitem'+i+'" style="display: none;z-index:'+i+'" src="'+pics[i].url+'" /></a>');
+			c.append('<a href="'+pics[i].link+'" ><img id="picitem'+i+'" style="display: none;z-index:'+i+'" src="'+pics[i].url+'" /></a>');
 		}
 		//按钮容器，绝对定位在右下角 
 		p.append('<div id="picbtnHolder" style="position:absolute;top:'
