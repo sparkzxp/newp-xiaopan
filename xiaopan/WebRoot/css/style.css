@@ -25,7 +25,7 @@
 	/* width:100%; */
 	height: 80px;
     width: 120px;
-    border: 1px solid;
+    border: 1px solid #DFDFDF;
 }
 .left img:hover
 {
@@ -57,14 +57,14 @@
 {
 	display:inline;
 	margin-top:15px;
-	margin-left: 2px;
+	margin-left: 4px;
 	float:left;
 }
 .m_ads img
 {
 	width:120px;
 	height:80px;
-	border: 1px solid;
+	border: 1px solid #DFDFDF;
 }
 .right
 {
@@ -74,7 +74,7 @@
 }
 .r_item
 {
-	border:solid 1px #dfdfdf;
+	border:solid 1px #DFDFDF;
 	margin-bottom:13px;
 }
 .r_t
@@ -109,5 +109,5 @@
 	height: 80px;
     margin-left: 15px;
     width: 120px;
-    border: 1px solid;
+    border: 1px solid #DFDFDF;
 }

@@ -78,13 +78,13 @@
 	    height: 160px;
 	    margin-left: 15px;
 	    margin-top: 10px;
-	    border: 1px solid;
+	    border: 1px solid #DFDFDF;
 	}
 	#showbox{
 		background:#2a2a2a;
 		display:none;
 		position:absolute;
-		border:1px solid;
+		border:1px solid #DFDFDF;
 		text-align:center;
 		z-index:1000;
 		color:#fff;

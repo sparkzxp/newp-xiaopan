@@ -252,7 +252,12 @@
                 	<s:set name="count" value="1"></s:set>
                     <s:iterator value="adss" var="parent">
 		            	<s:if test="#parent.place == '网页底部' and #count <= 4">
-	               		<li>
+		            	<s:if test="#count == 1">
+		            	<li style="width:122px;height: 82px;margin-left: 0px;">
+		            	</s:if>
+		            	<s:else>
+	               		<li style="width:122px;height: 82px;">
+	               		</s:else>
 		            		<div style="position: relative;width:122px;height: 82px;overflow: hidden;">
 		               			<ul style="margin-left: -122px;width:244px;">
 		               				<s:if test="null == #parent.imageurl2 or '' == #parent.imageurl2">
