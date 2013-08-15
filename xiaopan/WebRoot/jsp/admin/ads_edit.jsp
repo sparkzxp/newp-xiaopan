@@ -7,21 +7,25 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<base href="<%=basePath%>">
     <title>校畔网</title>
+    <link rel="stylesheet" type="text/css" href="<%=basePath%>plugin/jquery-impromptu/jquery-impromptu.css">
     <link type="text/css" href="<%=basePath%>css/admin/common.css" rel="Stylesheet" />
     <link type="text/css" href="<%=basePath%>css/admin/tab.css" rel="Stylesheet" />
     <script language="javascript" src="<%=basePath%>js/jquery/jquery-1.7.2.min.js"></script>
     <script language="javascript" src="<%=basePath%>js/admin/global.js"></script>
     <script language="javascript" src="<%=basePath%>js/common/validation.js"></script>
     <script type="text/javascript" src="<%=basePath%>js/common/fileEveryWhere.js"></script>
+    <script type="text/javascript" src="<%=basePath%>plugin/jquery-impromptu/jquery-impromptu.js"></script>
     <script type="text/javascript">
+	
+	function selOneShop(obj){
+		$('.selShop').removeClass('selOneShop');
+		$(obj).addClass('selOneShop');
+	}
+	
     $(function() {
     	$("input:file").fileEveryWhere({
 			ButtonText : "浏览"
 		});
-    	
-    	if($('#editForm_ads_id').val() != ''){
-    		$('#descWeburl').html('如需指向网站店铺，请填写【web/main_toDetail?shop.id='+$('#editForm_ads_id').val()+'】');
-    	}
 		
 		$("input[name=imgFile]").next("input[type=text]").val($('#editForm_ads_imageurl').val());
 		$("input[name=imgFile2]").next("input[type=text]").val($('#editForm_ads_imageurl2').val());
@@ -50,8 +54,48 @@
 				$("#editForm").submit();
    			}
    		});
+    	
+    	$('#selShop').click(function(){
+    		var siteId = $('#editForm_ads_siteId').val();
+    		$.getJSON('<%=basePath%>sys/shop_getSelShop?shop.siteId='+siteId, function(data){
+        		var txt = '<table style="font-size:13px;">';
+        		for(var i=0; i<data.length; i++){
+        			if(i%4 == 0){
+        				txt += '<tr>';
+        			}
+        			if(i == data.length-1){
+        				txt += '<td colspan="'+(5-(data.length%4))+'">';
+        			}else{
+        				txt += '<td style="width:25%;">';
+        			}
+        			txt += '<a href="javascript:void(0);" siteId="'+data[i].id+'" class="selShop" onclick="selOneShop(this)">'+data[i].name+'</a></td>';
+        			
+        			if(i%4 == 3 || i == data.length-1){
+        				txt += '</tr>';
+        			}
+        		}
+        		txt += '</table>';
+        		$.prompt(txt, {
+        			title: $('#editForm_ads_siteId [value='+siteId+']').text()+" 的店铺有",
+        			buttons: { "确认": true, "取消": false },
+        			submit: function(e,v,m,f){
+        				if(v && m.find('.selOneShop').attr('siteId') != null){
+        					$('#editForm_ads_weburl').val('web/main_toDetail?shop.id='+m.find('.selOneShop').attr('siteId'));
+        				}
+        			}
+        		});
+    		});
+    	});
     });
     </script>
+    <style type="text/css">
+    .selOneShop{
+    	background-color: yellow;
+    }
+    div.jqi{ 
+		width: 600px;
+	}
+    </style>
 </head>
 <body>
     <s:form name="editForm" id="editForm" action="ads_doEdit" namespace="/sys" enctype="multipart/form-data">
@@ -75,12 +119,12 @@
                     <td width="120px" align="right" height="25px">标题说明：</td>
                     <td><s:textfield name="ads.title" cssStyle="width:400px;" cssClass="{required:true,maxlengthCN:200}"/></td>
                 </tr>
-            	<tr>
-                    <td id="descWeburl" colspan="2"></td>
-                </tr>
                 <tr>
                     <td width="120px" align="right" height="25px">网址：</td>
-                    <td><s:textfield name="ads.weburl" cssStyle="width:400px;" cssClass="{maxlengthCN:200}"/></td>
+                    <td>
+                    	<s:textfield name="ads.weburl" cssStyle="width:400px;" cssClass="{maxlengthCN:200}"/>
+                    	<input id="selShop" type="button" value="选择站内店铺"/>
+                    </td>
                 </tr>
                 <tr>
                     <td width="120px" align="right" height="25px">图片：</td>
