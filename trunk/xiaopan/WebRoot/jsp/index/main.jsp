@@ -194,12 +194,21 @@
                 	<div style="position: relative;height:82px;overflow: hidden;">
                			<ul style="margin-top: -82px">
                				<s:if test="null == #parent.imageurl2 or '' == #parent.imageurl2">
-               				<li style="overflow: hidden;margin:0;padding:0;height: 82px;"><a href="<s:property value="#parent.weburl"/>"><img src="<s:property value="#parent.imageurl"/>" /></a></li>
+               				<li style="overflow: hidden;margin:0;padding:0;height: 82px;">
+               					<a href="<s:property value="%{(#parent.weburl==null || #parent.weburl==\"\")?\"javascript:void(0);\":#parent.weburl}"/>">
+               					<img src="<s:property value="#parent.imageurl"/>" /></a>
+               				</li>
                				</s:if>
                				<s:else>
-               				<li style="overflow: hidden;margin:0;padding:0;height: 82px;"><a href="<s:property value="#parent.weburl"/>"><img src="<s:property value="#parent.imageurl2"/>" /></a></li>
+               				<li style="overflow: hidden;margin:0;padding:0;height: 82px;">
+               					<a href="<s:property value="%{(#parent.weburl==null || #parent.weburl==\"\")?\"javascript:void(0);\":#parent.weburl}"/>">
+               					<img src="<s:property value="#parent.imageurl2"/>" /></a>
+               				</li>
                				</s:else>
-               				<li style="overflow: hidden;margin:0;padding:0;height: 82px;"><a href="<s:property value="#parent.weburl"/>"><img src="<s:property value="#parent.imageurl"/>" /></a></li>
+               				<li style="overflow: hidden;margin:0;padding:0;height: 82px;">
+               					<a href="<s:property value="%{(#parent.weburl==null || #parent.weburl==\"\")?\"javascript:void(0);\":#parent.weburl}"/>">
+               					<img src="<s:property value="#parent.imageurl"/>" /></a>
+               				</li>
                			</ul>
                 	</div>
                 </li>
@@ -247,18 +256,24 @@
 		            		<div style="position: relative;width:122px;height: 82px;overflow: hidden;">
 		               			<ul style="margin-left: -122px;width:244px;">
 		               				<s:if test="null == #parent.imageurl2 or '' == #parent.imageurl2">
-		               				<li style="overflow: hidden;margin:0;padding:0;width:122px;height: 82px;float: left;"><a href="<s:property value="#parent.weburl"/>"><img src="<s:property value="#parent.imageurl"/>" /></a></li>
+		               				<li style="overflow: hidden;margin:0;padding:0;width:122px;height: 82px;float: left;">
+		               					<a href="<s:property value="%{(#parent.weburl==null || #parent.weburl==\"\")?\"javascript:void(0);\":#parent.weburl}"/>">
+		               					<img src="<s:property value="#parent.imageurl"/>" /></a>
+		               				</li>
 		               				</s:if>
 		               				<s:else>
-		               				<li style="overflow: hidden;margin:0;padding:0;width:122px;height: 82px;float: left;"><a href="<s:property value="#parent.weburl"/>"><img src="<s:property value="#parent.imageurl2"/>" /></a></li>
+		               				<li style="overflow: hidden;margin:0;padding:0;width:122px;height: 82px;float: left;">
+		               					<a href="<s:property value="%{(#parent.weburl==null || #parent.weburl==\"\")?\"javascript:void(0);\":#parent.weburl}"/>">
+		               					<img src="<s:property value="#parent.imageurl2"/>" /></a>
+		               				</li>
 		               				</s:else>
-		               				<li style="overflow: hidden;margin:0;padding:0;width:122px;height: 82px;float: left;"><a href="<s:property value="#parent.weburl"/>"><img src="<s:property value="#parent.imageurl"/>" /></a></li>
+		               				<li style="overflow: hidden;margin:0;padding:0;width:122px;height: 82px;float: left;">
+		               					<a href="<s:property value="%{(#parent.weburl==null || #parent.weburl==\"\")?\"javascript:void(0);\":#parent.weburl}"/>">
+		               					<img src="<s:property value="#parent.imageurl"/>" /></a>
+		               				</li>
 		               			</ul>
 	                		</div>
 	               		</li>
-		                <%-- <li>
-		                    <p><a href="<s:property value="#parent.weburl"/>"><img src="<s:property value="#parent.imageurl"/>" /></a></p>
-		                </li> --%>
 		                <s:set name="count" value="#count + 1"></s:set>
 		                </s:if>
 		            </s:iterator>
@@ -280,7 +295,6 @@
 		            </s:iterator>
                     </ul>
                     <div class="clear"></div>
-                    <%-- <div style="text-align:right;line-height:30px"><a href="<%=basePath%>web/main_toNoticeList">更多&gt;&gt;&nbsp;</a></div> --%>
                 </div>
             </div>
             <s:set name="count" value="1"></s:set>
@@ -288,16 +302,24 @@
             	<s:if test="#parent.place == '网页右面' and #count < 5">
         		<div class="rightAds" style="position: relative;height:82px;overflow: hidden;margin-top: 4px;">
            			<ul style="margin-top: 0px">
-           				<li style="overflow: hidden;margin:0;padding:0;height: 82px;"><a href="<s:property value="#parent.weburl"/>"><img src="<s:property value="#parent.imageurl"/>" /></a></li>
+           				<li style="overflow: hidden;margin:0;padding:0;height: 82px;">
+           					<a href="<s:property value="%{(#parent.weburl==null || #parent.weburl==\"\")?\"javascript:void(0);\":#parent.weburl}"/>">
+           					<img src="<s:property value="#parent.imageurl"/>" /></a>
+           				</li>
            				<s:if test="null == #parent.imageurl2 or '' == #parent.imageurl2">
-           				<li style="overflow: hidden;margin:0;padding:0;height: 82px;"><a href="<s:property value="#parent.weburl"/>"><img src="<s:property value="#parent.imageurl"/>" /></a></li>
+           				<li style="overflow: hidden;margin:0;padding:0;height: 82px;">
+           					<a href="<s:property value="%{(#parent.weburl==null || #parent.weburl==\"\")?\"javascript:void(0);\":#parent.weburl}"/>">
+           					<img src="<s:property value="#parent.imageurl"/>" /></a>
+           				</li>
            				</s:if>
            				<s:else>
-           				<li style="overflow: hidden;margin:0;padding:0;height: 82px;"><a href="<s:property value="#parent.weburl"/>"><img src="<s:property value="#parent.imageurl2"/>" /></a></li>
+           				<li style="overflow: hidden;margin:0;padding:0;height: 82px;">
+           					<a href="<s:property value="%{(#parent.weburl==null || #parent.weburl==\"\")?\"javascript:void(0);\":#parent.weburl}"/>">
+           					<img src="<s:property value="#parent.imageurl2"/>" /></a>
+           				</li>
            				</s:else>
            			</ul>
             	</div>
-                <%-- <p><a href="<s:property value="#parent.weburl"/>"><img src="<s:property value="#parent.imageurl"/>" width="100%" /></a></p> --%>
                 <s:set name="count" value="#count + 1"></s:set>
                 </s:if>
             </s:iterator>
