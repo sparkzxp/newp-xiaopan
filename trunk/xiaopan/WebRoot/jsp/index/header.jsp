@@ -1,5 +1,6 @@
 ﻿<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 	<script language="javascript" src="<%=basePath%>js/tween.js"></script>
+	<script language="javascript" src="<%=basePath%>js/common/json2.js"></script>
     <script type="text/javascript">
 		var setting = {
 			view: {
