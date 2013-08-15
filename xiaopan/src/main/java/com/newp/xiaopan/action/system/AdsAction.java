@@ -65,11 +65,11 @@ public class AdsAction extends BaseAction {
 	@SuppressWarnings({ "deprecation", "unchecked" })
 	public String doEdit() {
 		String oldPath = ads.getImageurl();
-		if (StringUtils.isNotBlank(oldPath)) {
+		if (StringUtils.isNotBlank(oldPath) && oldPath.indexOf("xiaopan") > -1) {
 			oldPath = oldPath.substring(oldPath.indexOf("xiaopan") + 7, oldPath.length());
 		}
 		String oldPath2 = ads.getImageurl2();
-		if (StringUtils.isNotBlank(oldPath2)) {
+		if (StringUtils.isNotBlank(oldPath2) && oldPath2.indexOf("xiaopan") > -1) {
 			oldPath2 = oldPath2.substring(oldPath2.indexOf("xiaopan") + 7, oldPath2.length());
 		}
 
@@ -159,11 +159,15 @@ public class AdsAction extends BaseAction {
 		String oldPath2 = ads.getImageurl2();
 		this.adsService.delete(ads);
 		if (StringUtils.isNotBlank(oldPath)) {
-			oldPath = oldPath.substring(oldPath.indexOf("xiaopan") + 7, oldPath.length());
+			if (oldPath.indexOf("xiaopan") > -1) {
+				oldPath = oldPath.substring(oldPath.indexOf("xiaopan") + 7, oldPath.length());
+			}
 			FileUtil.deleteFile(ServletActionContext.getRequest().getRealPath("/") + oldPath);
 		}
 		if (StringUtils.isNotBlank(oldPath2)) {
-			oldPath2 = oldPath2.substring(oldPath2.indexOf("xiaopan") + 7, oldPath2.length());
+			if (oldPath2.indexOf("xiaopan") > -1) {
+				oldPath2 = oldPath2.substring(oldPath2.indexOf("xiaopan") + 7, oldPath2.length());
+			}
 			FileUtil.deleteFile(ServletActionContext.getRequest().getRealPath("/") + oldPath2);
 		}
 		this.ajax(true);
