@@ -251,6 +251,23 @@ public class ShopAction extends BaseAction {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
+	public void getSelShop() {
+		JSONArray jsonArray = new JSONArray();
+		JSONObject jsonObject;
+		List<Shop> tmpShops = this.shopService.queryList(shop);
+		if (CollectionUtils.isNotEmpty(tmpShops)) {
+			for (Shop t : tmpShops) {
+				jsonObject = new JSONObject();
+				jsonObject.put("id", t.getId());
+				jsonObject.put("name", t.getTitle());
+
+				jsonArray.add(jsonObject);
+			}
+		}
+		this.ajax(jsonArray.toJSONString());
+	}
+
 	/**
 	 * @return the shops
 	 */
