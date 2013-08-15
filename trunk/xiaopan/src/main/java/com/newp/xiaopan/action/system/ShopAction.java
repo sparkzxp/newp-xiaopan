@@ -125,7 +125,7 @@ public class ShopAction extends BaseAction {
 	@SuppressWarnings("deprecation")
 	public String doEdit() {
 		String oldPath = shop.getImagePath();
-		if (StringUtils.isNotBlank(oldPath)) {
+		if (StringUtils.isNotBlank(oldPath) && oldPath.indexOf("xiaopan") > -1) {
 			oldPath = oldPath.substring(oldPath.indexOf("xiaopan") + 7, oldPath.length());
 		}
 
@@ -200,11 +200,17 @@ public class ShopAction extends BaseAction {
 	@SuppressWarnings("deprecation")
 	public void doDelete() {
 		String oldPath = shop.getImagePath();
+		System.out.println("------------------del shop start----------------");
+		System.out.println("id:" + shop.getId() + " imagePath:" + oldPath);
 		this.shopService.delete(shop);
 		if (StringUtils.isNotBlank(oldPath)) {
-			oldPath = oldPath.substring(oldPath.indexOf("xiaopan") + 7, oldPath.length());
+			if (oldPath.indexOf("xiaopan") > -1) {
+				oldPath = oldPath.substring(oldPath.indexOf("xiaopan") + 7, oldPath.length());
+			}
+			System.out.println("del imagePath:" + oldPath);
 			FileUtil.deleteFile(ServletActionContext.getRequest().getRealPath("/") + oldPath);
 		}
+		System.out.println("------------------del shop end----------------");
 		this.ajax(true);
 	}
 
