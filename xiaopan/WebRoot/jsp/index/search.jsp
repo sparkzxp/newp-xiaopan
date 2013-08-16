@@ -45,7 +45,12 @@
                     <th style="width:80px;border-right:solid 1px #ededed;">详情</th>
                 </tr>
                 <s:if test="null == shops or shops.size() == 0">
-                	<tr><td colspan="4">未查找到包含&nbsp;<strong><s:property value="key.name" /></strong>&nbsp;的店铺</td></tr>
+                	<s:if test="key == null or key.name == null or key.name == ''">
+		        	<tr><td colspan="4">该站点还没有添加店铺信息</td></tr>
+		        	</s:if>
+		        	<s:else>
+		        	<tr><td colspan="4">未查找到包含&nbsp;<strong><s:property value="key.name" /></strong>&nbsp;的店铺</td></tr>
+		        	</s:else>
                 </s:if>
                 <s:iterator value="shops" var="parent">
                     <tr>
