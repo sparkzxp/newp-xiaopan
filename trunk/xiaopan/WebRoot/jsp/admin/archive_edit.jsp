@@ -37,12 +37,12 @@
 		        	this.sync(); 
 	        	}
 			});
+			if($('#editForm_archive_id').val() != ''){
+				editor.html($('#editForm_archive_contents').val());
+			}
 		});
 
 		$(function(){
-			if($('#editForm_archive_id').val() != ''){
-				$('#editor_id').val($('#editForm_archive_contents').val());
-			}
    			$("#btn_submit").click(function(){
    				if($('#editForm').valid()){
    					$('#editForm_archive_contents').val($('#editor_id').val());

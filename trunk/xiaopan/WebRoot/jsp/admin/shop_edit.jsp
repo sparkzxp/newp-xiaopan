@@ -43,6 +43,9 @@
 		        	this.sync(); 
 	        	}
 			});
+			if($('#editForm_shop_id').val() != ''){
+				editor.html($('#editForm_shop_contents').val());
+			}
 		});
     	var setting = {
 			check: {
@@ -120,9 +123,6 @@
 				alert($('#editForm_uploadStatus').val());	
 			}
 
-    		if($('#editForm_shop_id').val() != ''){
-				$('#editor_id').val($('#editForm_shop_contents').val());
-			}
         	$("#btn_submit").click(function(){
         		if($("input[type=file]").next("input[type=text]").val()==''){
 					alert("请上传店铺图片!");
