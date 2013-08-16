@@ -45,7 +45,10 @@
         		<table style="width:100%;">
         			<tr>
         				<td style="width:80%;">
-        					<div style="margin-bottom: 10px;"><a href="<%=basePath%>mobile/mobile_toShop?shop.id=<s:property value="#parent.id"/>" data-transition="slide"><s:property value="#parent.title"/></a></div>
+        					<div style="margin-bottom: 10px;">
+        						<%-- <a href="<%=basePath%>mobile/mobile_toShop?shop.id=<s:property value="#parent.id"/>" data-transition="slide"><s:property value="#parent.title"/></a> --%>
+        						<s:property value="#parent.title"/>
+        					</div>
         					<div><a href="tel:<s:property value="#parent.tel"/>"><s:property value="#parent.tel"/></a></div>
         				</td>
         				<td style="width:20%;">
@@ -54,11 +57,6 @@
 						</td>
         			</tr>
         		</table>
-        		<%-- <s:iterator value="#parent.types" var="child">
-               		<s:if test="#child.name.indexOf(type.name) > -1">
-               		<s:property value="#child.name"/>(<s:property value="#child.price"/>&nbsp;元)
-               		</s:if>
-               	</s:iterator> --%>
         	</li>
         	</s:iterator>
         </ul>
