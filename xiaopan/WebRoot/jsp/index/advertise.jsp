@@ -139,7 +139,7 @@
 									'<s:property value="#parent.tel"/>');">
 			</s:if>
 			<s:else>
-			<a target="_blank" href="<%=basePath%><s:property value="#parent.weburl"/>">
+			<a target="_blank" href="<s:property value="#parent.weburl"/>">
 			</s:else>
 				<img src="<s:property value="#parent.imageurl"/>" class="adsimg" />
 				<s:if test="null == #parent.imageurl2 or \"\" == #parent.imageurl2">
@@ -177,7 +177,7 @@
 									'<s:property value="#parent.tel"/>');">
 			</s:if>
 			<s:else>
-			<a target="_blank" href="<%=basePath%><s:property value="#parent.weburl"/>">
+			<a target="_blank" href="<s:property value="#parent.weburl"/>">
 			</s:else>
 				<img src="<s:property value="#parent.imageurl"/>" class="adsimg" style="width: 120px; height: 80px;" />
 				<s:if test="null == #parent.imageurl2 or \"\" == #parent.imageurl2">

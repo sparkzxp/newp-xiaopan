@@ -76,7 +76,7 @@
         		}
         		txt += '</table>';
         		$.prompt(txt, {
-        			title: $('#editForm_ads_siteId [value='+siteId+']').text()+" 的店铺有",
+        			title: "<span style='font-weight:bold;'>"+$('#editForm_ads_siteId [value='+siteId+']').text()+"</span> 的店铺有",
         			buttons: { "确认": true, "取消": false },
         			submit: function(e,v,m,f){
         				if(v && m.find('.selOneShop').attr('siteId') != null){
@@ -123,7 +123,8 @@
                     <td width="120px" align="right" height="25px">网址：</td>
                     <td>
                     	<s:textfield name="ads.weburl" cssStyle="width:400px;" cssClass="{maxlengthCN:200}"/>
-                    	<input id="selShop" type="button" value="选择站内店铺"/>
+                    	<input id="selShop" type="button" value="选择站内店铺"/><br>
+                    	此处如需填写外网地址，请加前缀&nbsp;http://
                     </td>
                 </tr>
                 <tr>
