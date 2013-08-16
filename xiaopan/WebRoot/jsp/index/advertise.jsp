@@ -123,9 +123,9 @@
 		<s:if test="#parent.indexShow == \"1\" and #count < 9">
 			<s:if test="#count == 5">
 				<div class="adsimg" style="font-size: 22px; font-weight: bold;text-align: center;">
-				<div style="padding-top:5px;padding-bottom: 5px;">&nbsp;我要去：</div>
+				<!-- <div style="padding-top:5px;padding-bottom: 5px;">&nbsp;我要去：</div> -->
 				<s:iterator value="sites" var="child">
-				【<a target="_blank" href="<%=basePath%>web/main_toShow?site.id=<s:property value="#child.id"/>"><s:property value="#child.name"/></a>】<br>
+				<span><img alt="" src="<%=basePath%>images/pointer.png" style="width:35px;height:19px;"/>【<a target="_blank" href="<%=basePath%>web/main_toShow?site.id=<s:property value="#child.id"/>"><s:property value="#child.name"/></a>】</span><br>
 				</s:iterator>
 				</div>
 			</s:if>
@@ -155,9 +155,9 @@
 	</s:iterator>
 	<s:if test="adss == null or #count < 5">
 	<div class="adsimg" style="font-size: 22px; font-weight: bold;text-align: center;">
-		<div style="padding-top:5px;padding-bottom: 5px;">&nbsp;我要去：</div>
+		<!-- <div style="padding-top:5px;padding-bottom: 5px;">&nbsp;我要去：</div> -->
 		<s:iterator value="sites" var="child">
-		【<a target="_blank" href="<%=basePath%>web/main_toShow?site.id=<s:property value="#child.id"/>"><s:property value="#child.name"/></a>】<br>
+		<span><img alt="" src="<%=basePath%>images/pointer.png" style="width:35px;height:19px;"/>【<a target="_blank" href="<%=basePath%>web/main_toShow?site.id=<s:property value="#child.id"/>"><s:property value="#child.name"/></a>】</span><br>
 		</s:iterator>
 	</div>
 	</s:if>
