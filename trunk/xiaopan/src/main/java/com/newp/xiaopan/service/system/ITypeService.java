@@ -21,6 +21,8 @@ public interface ITypeService {
 
 	List<Type> queryList(Type type);
 
+	List<Type> queryDistinctList(Type type);
+
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	String add(Type type);
 

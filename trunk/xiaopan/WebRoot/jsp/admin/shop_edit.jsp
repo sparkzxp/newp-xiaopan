@@ -45,6 +45,7 @@
 			});
 			if($('#editForm_shop_id').val() != ''){
 				editor.html($('#editForm_shop_contents').val());
+				$('#editor_id').val($('#editForm_shop_contents').val());
 			}
 		});
     	var setting = {

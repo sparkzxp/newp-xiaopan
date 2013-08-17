@@ -228,8 +228,8 @@
                         <s:iterator value="types" var="child">
                         	<s:if test="#child.topid == #parent.id">
                         		<s:if test="#count == 11">
-                        		<li><a href="javascript:void(0);" style="color:#999999;" onclick="toggleList('<s:property value="#parent.id"/>_<s:property value="#child.id"/>');"><img id="img_<s:property value="#parent.id"/>_<s:property value="#child.id"/>" alt="" src="<%=basePath%>images/ico1.gif"/>&nbsp;其他</a></li>
-                        		<ul id="ul_<s:property value="#parent.id"/>_<s:property value="#child.id"/>" style="display:none;">
+                        		<li><a href="javascript:void(0);" style="color:#999999;" onclick="toggleList('<s:property value="#parent.id"/>_<s:property value="#child.name"/>');"><img id="img_<s:property value="#parent.id"/>_<s:property value="#child.name"/>" alt="" src="<%=basePath%>images/ico1.gif"/>&nbsp;其他</a></li>
+                        		<ul id="ul_<s:property value="#parent.id"/>_<s:property value="#child.name"/>" style="display:none;">
                         		</s:if>
 	                        	<s:if test="#count < 11">
 	                            <li><a href="<%=basePath%>web/main_toSearch?key.name=<s:property value="#child.name"/>"><s:property value="#child.name"/></a></li>

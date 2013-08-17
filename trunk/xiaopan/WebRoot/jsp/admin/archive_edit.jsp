@@ -39,6 +39,7 @@
 			});
 			if($('#editForm_archive_id').val() != ''){
 				editor.html($('#editForm_archive_contents').val());
+				$('#editor_id').val($('#editForm_shop_contents').val());
 			}
 		});
 

@@ -78,7 +78,7 @@ public class MainAction extends BaseAction {
 	public String toShow() {
 		initHeader();
 		archives = archiveService.queryTopList(new Archive("网站公告"), 3);
-		types = typeService.queryList(null);
+		types = typeService.queryDistinctList(null);
 
 		return "toShow";
 	}
@@ -92,7 +92,7 @@ public class MainAction extends BaseAction {
 			shops = shopService.queryListByPager(new Shop(site.getId()), new Type(key.getName()), getPager());
 		}
 
-		types = typeService.queryList(null);
+		types = typeService.queryDistinctList(null);
 		return "toSearch";
 	}
 

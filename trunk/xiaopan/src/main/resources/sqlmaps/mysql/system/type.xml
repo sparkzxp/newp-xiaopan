@@ -34,6 +34,16 @@
 		order by T.sort asc, T.name asc
 	</select>
 
+	<select id="queryDistinct" resultMap="typeRstMap" parameterType="map">
+		SELECT distinct 
+		name, topid, case topid when '0' then id else '0' end id,
+		'' color,'' seotitle, '' keyword, 
+		'' description, '' sort, '' price
+		FROM TYPE T
+		<include refid="query_where" />
+		order by T.sort asc, T.name asc
+	</select>
+	
 	<select id="query" resultMap="typeRstMap" parameterType="map">
 		SELECT T.* FROM TYPE T
 		<include refid="query_where" />
