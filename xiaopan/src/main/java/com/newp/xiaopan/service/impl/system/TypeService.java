@@ -31,6 +31,12 @@ public class TypeService extends BaseService implements ITypeService {
 		return this.typeDao.query(params);
 	}
 
+	public List<Type> queryDistinctList(Type type) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("type", type);
+		return this.typeDao.queryDistinct(params);
+	}
+
 	public Type query(Type type) {
 		List<Type> list = this.queryList(type);
 		if (CollectionUtils.isNotEmpty(list)) {

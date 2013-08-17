@@ -9,7 +9,7 @@
                 <ul>
                 <s:iterator value="types" var="child">
                    	<s:if test="#child.topid == #parent.id">
-                    <li class="<s:property value="#child.id"/>"><a href="<%=basePath%>web/main_toSearch?key.name=<s:property value="#child.name"/>"><s:property value="#child.name"/></a></li>
+                    <li class="<s:property value="#child.name"/>"><a href="<%=basePath%>web/main_toSearch?key.name=<s:property value="#child.name"/>"><s:property value="#child.name"/></a></li>
                     </s:if>
                 </s:iterator>
                 </ul>

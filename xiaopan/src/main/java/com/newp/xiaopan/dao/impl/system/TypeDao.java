@@ -27,6 +27,10 @@ public class TypeDao implements ITypeDao {
 		return this.sqlSession.selectList("typeNpc.query", params);
 	}
 
+	public List<Type> queryDistinct(Map<String, Object> params) {
+		return this.sqlSession.selectList("typeNpc.queryDistinct", params);
+	}
+
 	public String add(Type type) {
 		this.sqlSession.insert("typeNpc.add", type);
 		return String.valueOf(type.getId());

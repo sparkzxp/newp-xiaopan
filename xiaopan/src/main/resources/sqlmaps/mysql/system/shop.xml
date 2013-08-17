@@ -88,10 +88,11 @@
 	</insert>
 	
 	<insert id="addTypes" parameterType="shop">
-		<foreach collection="types" item="type">
-		INSERT INTO SHOPTYPE(
+		INSERT INTO SHOPTYPE (
 			shopId, typeId
-		) VALUES (
+		) VALUES 
+		<foreach collection="types" item="type" index="index" separator=",">
+		(
 			#{id}, #{type.id}
 		)
 		</foreach>
