@@ -141,12 +141,12 @@
 			<s:else>
 			<a target="_blank" href="<s:property value="#parent.weburl"/>">
 			</s:else>
-				<img src="<s:property value="#parent.imageurl"/>" class="adsimg" />
+				<img src="<%=basePath%><s:property value="#parent.imageurl"/>" class="adsimg" />
 				<s:if test="null == #parent.imageurl2 or \"\" == #parent.imageurl2">
-   				<img src="<s:property value="#parent.imageurl"/>" class="adsimg" style="display: none;"/>
+   				<img src="<%=basePath%><s:property value="#parent.imageurl"/>" class="adsimg" style="display: none;"/>
    				</s:if>
    				<s:else>
-   				<img src="<s:property value="#parent.imageurl2"/>" class="adsimg" style="display: none;"/>
+   				<img src="<%=basePath%><s:property value="#parent.imageurl2"/>" class="adsimg" style="display: none;"/>
    				</s:else>
    			</a>
 			<s:set name="count" value="#count + 1"></s:set>
@@ -179,12 +179,12 @@
 			<s:else>
 			<a target="_blank" href="<s:property value="#parent.weburl"/>">
 			</s:else>
-				<img src="<s:property value="#parent.imageurl"/>" class="adsimg" style="width: 120px; height: 80px;" />
+				<img src="<%=basePath%><s:property value="#parent.imageurl"/>" class="adsimg" style="width: 120px; height: 80px;" />
 				<s:if test="null == #parent.imageurl2 or \"\" == #parent.imageurl2">
-   				<img src="<s:property value="#parent.imageurl"/>" class="adsimg" style="display: none;width: 120px; height: 80px;"/>
+   				<img src="<%=basePath%><s:property value="#parent.imageurl"/>" class="adsimg" style="display: none;width: 120px; height: 80px;"/>
    				</s:if>
    				<s:else>
-   				<img src="<s:property value="#parent.imageurl2"/>" class="adsimg" style="display: none;width: 120px; height: 80px;"/>
+   				<img src="<%=basePath%><s:property value="#parent.imageurl2"/>" class="adsimg" style="display: none;width: 120px; height: 80px;"/>
    				</s:else>
    			</a>
 			<s:set name="count" value="#count + 1"></s:set>

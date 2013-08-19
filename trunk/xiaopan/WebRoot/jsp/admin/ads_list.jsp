@@ -53,7 +53,7 @@
                 <s:iterator value="adss" var="parent">
                     <tr class="<s:property value="#parent.id" />">
                         <td><s:property value="#parent.id" /></td>
-                        <td><img alt="图片" src="<s:property value="#parent.imageurl" />" style="width:100px;margin:5px;" /></td>
+                        <td><img alt="图片" src="<%=basePath%><s:property value="#parent.imageurl" />" style="width:100px;margin:5px;" /></td>
                         <td><s:property value="#parent.title" /></td>
                         <td><s:property value="#parent.place" /></td>
                         <td>
