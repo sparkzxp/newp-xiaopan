@@ -42,9 +42,13 @@
 		});
 
 		var total = $('p').length;
-		var n, img, tmp=0, loop=0;
+		var n, img, tmp=0, loop=0, doing=false;
 		
 		function doSilder(){
+			if(doing){
+				return false;
+			}
+			doing = true;
 			n = parseInt(Math.random()*total);
 			loop = 0;
 			while(tmp == n && loop<10){
@@ -56,10 +60,12 @@
 			if($(img[0]).css('display') == 'none'){
 				$(img[1]).fadeOut('fast', function(){
 					$(img[0]).fadeIn('fast');
+					doing = false;
 				});
 			}else{
 				$(img[0]).fadeOut('fast', function(){
 					$(img[1]).fadeIn('fast');
+					doing = false;
 				});
 			}
 		}
