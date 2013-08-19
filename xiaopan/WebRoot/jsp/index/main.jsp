@@ -21,8 +21,10 @@
     		$('#ul_'+pre).toggle();
     		if($('#ul_'+pre).css('display')=='none'){
     			$('#img_'+pre).attr('src', '<%=basePath%>images/ico1.gif');
+    			$('.main').height($('.middle').height()+'px');
     		}else{
     			$('#img_'+pre).attr('src', '<%=basePath%>images/ico2.gif');
+    			$('.main').height($('.middle').height()+'px');
     		}
     	}
 		
@@ -196,18 +198,18 @@
                				<s:if test="null == #parent.imageurl2 or '' == #parent.imageurl2">
                				<li style="overflow: hidden;margin:0;padding:0;height: 82px;">
                					<a href="<s:property value="%{(#parent.weburl==null || #parent.weburl==\"\")?\"javascript:void(0);\":#parent.weburl}"/>">
-               					<img src="<s:property value="#parent.imageurl"/>" /></a>
+               					<img src="<%=basePath%><s:property value="#parent.imageurl"/>" /></a>
                				</li>
                				</s:if>
                				<s:else>
                				<li style="overflow: hidden;margin:0;padding:0;height: 82px;">
                					<a href="<s:property value="%{(#parent.weburl==null || #parent.weburl==\"\")?\"javascript:void(0);\":#parent.weburl}"/>">
-               					<img src="<s:property value="#parent.imageurl2"/>" /></a>
+               					<img src="<%=basePath%><s:property value="#parent.imageurl2"/>" /></a>
                				</li>
                				</s:else>
                				<li style="overflow: hidden;margin:0;padding:0;height: 82px;">
                					<a href="<s:property value="%{(#parent.weburl==null || #parent.weburl==\"\")?\"javascript:void(0);\":#parent.weburl}"/>">
-               					<img src="<s:property value="#parent.imageurl"/>" /></a>
+               					<img src="<%=basePath%><s:property value="#parent.imageurl"/>" /></a>
                				</li>
                			</ul>
                 	</div>
@@ -263,18 +265,18 @@
 		               				<s:if test="null == #parent.imageurl2 or '' == #parent.imageurl2">
 		               				<li style="overflow: hidden;margin:0;padding:0;width:122px;height: 82px;float: left;">
 		               					<a href="<s:property value="%{(#parent.weburl==null || #parent.weburl==\"\")?\"javascript:void(0);\":#parent.weburl}"/>">
-		               					<img src="<s:property value="#parent.imageurl"/>" /></a>
+		               					<img src="<%=basePath%><s:property value="#parent.imageurl"/>" /></a>
 		               				</li>
 		               				</s:if>
 		               				<s:else>
 		               				<li style="overflow: hidden;margin:0;padding:0;width:122px;height: 82px;float: left;">
 		               					<a href="<s:property value="%{(#parent.weburl==null || #parent.weburl==\"\")?\"javascript:void(0);\":#parent.weburl}"/>">
-		               					<img src="<s:property value="#parent.imageurl2"/>" /></a>
+		               					<img src="<%=basePath%><s:property value="#parent.imageurl2"/>" /></a>
 		               				</li>
 		               				</s:else>
 		               				<li style="overflow: hidden;margin:0;padding:0;width:122px;height: 82px;float: left;">
 		               					<a href="<s:property value="%{(#parent.weburl==null || #parent.weburl==\"\")?\"javascript:void(0);\":#parent.weburl}"/>">
-		               					<img src="<s:property value="#parent.imageurl"/>" /></a>
+		               					<img src="<%=basePath%><s:property value="#parent.imageurl"/>" /></a>
 		               				</li>
 		               			</ul>
 	                		</div>
@@ -309,18 +311,18 @@
            			<ul style="margin-top: 0px">
            				<li style="overflow: hidden;margin:0;padding:0;height: 82px;">
            					<a href="<s:property value="%{(#parent.weburl==null || #parent.weburl==\"\")?\"javascript:void(0);\":#parent.weburl}"/>">
-           					<img src="<s:property value="#parent.imageurl"/>" /></a>
+           					<img src="<%=basePath%><s:property value="#parent.imageurl"/>" /></a>
            				</li>
            				<s:if test="null == #parent.imageurl2 or '' == #parent.imageurl2">
            				<li style="overflow: hidden;margin:0;padding:0;height: 82px;">
            					<a href="<s:property value="%{(#parent.weburl==null || #parent.weburl==\"\")?\"javascript:void(0);\":#parent.weburl}"/>">
-           					<img src="<s:property value="#parent.imageurl"/>" /></a>
+           					<img src="<%=basePath%><s:property value="#parent.imageurl"/>" /></a>
            				</li>
            				</s:if>
            				<s:else>
            				<li style="overflow: hidden;margin:0;padding:0;height: 82px;">
            					<a href="<s:property value="%{(#parent.weburl==null || #parent.weburl==\"\")?\"javascript:void(0);\":#parent.weburl}"/>">
-           					<img src="<s:property value="#parent.imageurl2"/>" /></a>
+           					<img src="<%=basePath%><s:property value="#parent.imageurl2"/>" /></a>
            				</li>
            				</s:else>
            			</ul>

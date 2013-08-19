@@ -71,7 +71,7 @@
            		<s:if test="#parent.place == '头部广告'">
             	<script type="text/javascript">
             		var p<s:property value="#count"/> = {
-            			url : '<s:property value="#parent.imageurl"/>',
+            			url : '<%=basePath%><s:property value="#parent.imageurl"/>',
             			link : '<s:property value="%{(#parent.weburl==null || #parent.weburl==\"\")?\"javascript:void(0);\":#parent.weburl}"/>',
             			time : 6000
             		};
