@@ -3,7 +3,7 @@
 -- Server version:               5.1.69 - Source distribution
 -- Server OS:                    redhat-linux-gnu
 -- HeidiSQL version:             7.0.0.4053
--- Date/time:                    2013-08-19 09:16:56
+-- Date/time:                    2013-08-19 14:09:57
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -165,7 +165,7 @@ CREATE TABLE IF NOT EXISTS `shop` (
   `click` int(11) NOT NULL DEFAULT '0',
   `pingnum` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table xiaopangwang.shop: ~7 rows (approximately)
 DELETE FROM `shop`;
@@ -176,8 +176,9 @@ INSERT INTO `shop` (`id`, `title`, `keyword`, `description`, `contents`, `addres
 	(18, '喜相逢', '校畔网 喜相逢', '无锡市喜相逢餐饮有限公司\r\n喜相逢澳洲牛排\r\nktv包房', '<p style="text-indent:2em;" align="center">\r\n	<span style="background-color:#ffffff;color:#e53333;font-size:18px;">专营</span> \r\n</p>\r\n<p style="text-indent:2em;" align="center">\r\n	<span style="background-color:#ffffff;color:#e53333;font-size:18px;">澳大利亚进口牛排</span> \r\n</p>\r\n<p style="text-indent:2em;" align="center">\r\n	<span style="background-color:#ffffff;color:#e53333;font-size:18px;">特价牛排23元</span> \r\n</p>\r\n<p style="text-indent:2em;" align="center">\r\n	<span style="background-color:#ffffff;color:#e53333;font-size:18px;">意大利进口软式冰激凌</span> \r\n</p>\r\n<p style="text-indent:2em;" align="center">\r\n	<span style="background-color:#ffffff;color:#e53333;font-size:18px;">石锅饭3份起送</span> \r\n</p>\r\n<p style="text-indent:2em;" align="center">\r\n	<span style="background-color:#ffffff;color:#e53333;font-size:18px;">牛排2份起送</span> \r\n</p>\r\n<p style="text-indent:2em;" align="center">\r\n	<span style="background-color:#ffffff;color:#e53333;font-size:18px;">高品位低价位</span> \r\n</p>', '无锡市藕塘职教园商业街', '83272767  或  13921525950', '喜相逢', '/upload/shop/images/20130816154546631.jpg', 2, 21, 0),
 	(20, '金陵酸菜鱼盖浇饭', '', '', '&nbsp;\r\n<p>\r\n	<span style="font-family:宋体;font-size:16px;">西红柿鸡蛋</span><span><span style="font-size:16px;">&nbsp; </span><span style="font-size:16px;">8</span></span><span style="font-family:宋体;font-size:16px;">元</span><span style="font-size:16px;"><span style="font-size:16px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-family:宋体;font-size:16px;">洋葱肉丝</span><span><span style="font-size:16px;">&nbsp; </span><span style="font-size:16px;">9</span></span><span style="font-family:宋体;font-size:16px;">元</span>\r\n</p>\r\n<p>\r\n	<span style="font-family:宋体;font-size:16px;">青椒鸡蛋</span><span><span style="font-size:16px;">&nbsp;&nbsp;&nbsp; </span><span style="font-size:16px;">8</span></span><span style="font-family:宋体;font-size:16px;">元</span><span style="font-size:16px;"><span style="font-size:16px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-family:宋体;font-size:16px;">土豆肉丝</span><span><span style="font-size:16px;">&nbsp; </span><span style="font-size:16px;">9</span></span><span style="font-family:宋体;font-size:16px;">元</span>\r\n</p>\r\n<p>\r\n	<span style="font-family:宋体;font-size:16px;">韭菜鸡蛋</span><span><span style="font-size:16px;">&nbsp;&nbsp;&nbsp; </span><span style="font-size:16px;">8</span></span><span style="font-family:宋体;font-size:16px;">元</span><span style="font-size:16px;"><span style="font-size:16px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-family:宋体;font-size:16px;">白菜肉丝</span><span><span style="font-size:16px;">&nbsp; </span><span style="font-size:16px;">9</span></span><span style="font-family:宋体;font-size:16px;">元</span>\r\n</p>\r\n<p>\r\n	<span style="font-family:宋体;font-size:16px;">宫保鸡丁</span><span><span style="font-size:16px;">&nbsp;&nbsp;&nbsp; </span><span style="font-size:16px;">9</span></span><span style="font-family:宋体;font-size:16px;">元</span><span style="font-size:16px;"><span style="font-size:16px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-family:宋体;font-size:16px;">回锅肉</span><span><span style="font-size:16px;">&nbsp;&nbsp;&nbsp; </span><span style="font-size:16px;">10</span></span><span style="font-family:宋体;font-size:16px;">元</span>\r\n</p>\r\n<p>\r\n	<span style="font-family:宋体;font-size:16px;">鱼香肉丝</span><span><span style="font-size:16px;">&nbsp;&nbsp;&nbsp; </span><span style="font-size:16px;">9</span></span><span style="font-family:宋体;font-size:16px;">元</span><span style="font-size:16px;"><span style="font-size:16px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-family:宋体;font-size:16px;">红烧鸡块</span><span><span style="font-size:16px;">&nbsp; </span><span style="font-size:16px;">12</span></span><span style="font-family:宋体;font-size:16px;">元</span>\r\n</p>\r\n<p>\r\n	<span style="font-family:宋体;font-size:16px;">青椒肉丝</span><span><span style="font-size:16px;">&nbsp;&nbsp;&nbsp; </span><span style="font-size:16px;">9</span></span><span style="font-family:宋体;font-size:16px;">元</span><span style="font-size:16px;"><span style="font-size:16px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-family:宋体;font-size:16px;">红烧肥肠</span><span><span style="font-size:16px;">&nbsp; </span><span style="font-size:16px;">12</span></span><span style="font-family:宋体;font-size:16px;">元</span>\r\n</p>\r\n<p>\r\n	<span style="font-family:宋体;font-size:16px;">麻婆豆腐</span><span><span style="font-size:16px;">&nbsp;&nbsp;&nbsp; </span><span style="font-size:16px;">8</span></span><span style="font-family:宋体;font-size:16px;">元</span><span style="font-size:16px;"><span style="font-size:16px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-family:宋体;font-size:16px;">白菜排骨</span><span><span style="font-size:16px;">&nbsp; </span><span style="font-size:16px;">12</span></span><span style="font-family:宋体;font-size:16px;">元</span>\r\n</p>\r\n<p>\r\n	<span style="font-family:宋体;font-size:16px;">三鲜饭</span><span><span style="font-size:16px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="font-size:16px;">10</span></span><span style="font-family:宋体;font-size:16px;">元</span><span style="font-size:16px;"><span style="font-size:16px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-family:宋体;font-size:16px;">青椒百叶</span><span><span style="font-size:16px;">&nbsp; </span><span style="font-size:16px;">7</span></span><span style="font-family:宋体;font-size:16px;">元</span>\r\n</p>\r\n<p>\r\n	<span style="font-size:16px;"><span style="font-size:16px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span>\r\n</p>\r\n<p>\r\n	<span style="font-size:16px;"><span style="font-size:16px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span style="font-family:宋体;font-size:16px;">特色食谱</span>\r\n</p>\r\n<p>\r\n	<span style="font-family:宋体;font-size:16px;">鸡汁素鸡</span><span><span style="font-size:16px;">&nbsp;&nbsp;&nbsp; </span><span style="font-size:16px;">15</span></span><span style="font-family:宋体;font-size:16px;">元</span><span style="font-size:16px;"><span style="font-size:16px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-family:宋体;font-size:16px;">酸菜鱼</span><span><span style="font-size:16px;">&nbsp;&nbsp;&nbsp; </span><span style="font-size:16px;">22</span></span><span style="font-family:宋体;font-size:16px;">元</span>\r\n</p>\r\n<p>\r\n	<span style="font-family:宋体;font-size:16px;">剁椒鱼头</span><span><span style="font-size:16px;">&nbsp;&nbsp;&nbsp; </span><span style="font-size:16px;">35</span></span><span style="font-family:宋体;font-size:16px;">元</span><span style="font-size:16px;"><span style="font-size:16px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-family:宋体;font-size:16px;">香辣烤虾</span><span><span style="font-size:16px;">&nbsp; </span><span style="font-size:16px;">38</span></span><span style="font-family:宋体;font-size:16px;">元</span>\r\n</p>', '江南大学南门，恒华科技园', '13914263926', '', '/upload/shop/images/201308171525516502.jpg', 3, 4, 0),
 	(21, '重庆食府', '校畔网  重庆食府', '校畔网  川人川味 经济实惠', '<p style="text-indent:2em;">\r\n	&nbsp;\r\n</p>\r\n<p style="text-indent:2em;" align="center">\r\n	<span style="font-family:宋体;font-size:18px;">盖浇饭</span>\r\n</p>\r\n<p style="text-indent:2em;" align="center">\r\n	<span style="font-family:宋体;font-size:18px;">鱼香肉丝</span><span style="font-size:18px;">7</span><span style="font-family:宋体;font-size:18px;">元&nbsp; 宫保鸡丁</span><span style="font-size:18px;">8</span><span style="font-family:宋体;font-size:18px;">元&nbsp; 木耳鸡蛋</span><span style="font-size:18px;">7</span><span style="font-family:宋体;font-size:18px;">元</span>\r\n</p>\r\n<p style="text-indent:2em;" align="center">\r\n	<span style="font-family:宋体;font-size:18px;">青椒肉丝</span><span style="font-size:18px;">7</span><span style="font-family:宋体;font-size:18px;">元&nbsp;&nbsp; 回锅肉</span><span style="font-size:18px;">8</span><span style="font-family:宋体;font-size:18px;">元&nbsp;&nbsp; 黄瓜炒蛋</span><span style="font-size:18px;">7</span><span style="font-family:宋体;font-size:18px;">元</span>\r\n</p>\r\n<p style="text-indent:2em;" align="center">\r\n	<span style="font-family:宋体;font-size:18px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 土豆肉丝 </span><span style="font-size:18px;">7</span><span style="font-family:宋体;font-size:18px;">元&nbsp;&nbsp;青椒牛柳</span><span style="font-size:18px;">9</span><span style="font-family:宋体;font-size:18px;">元&nbsp;&nbsp;&nbsp;西红柿炒蛋</span><span style="font-size:18px;">7</span><span style="font-family:宋体;font-size:18px;">元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="font-family:宋体;font-size:18px;">白菜肉丝</span><span style="font-size:18px;">7</span><span style="font-family:宋体;font-size:18px;">元&nbsp;&nbsp;&nbsp;&nbsp; 木耳肉片</span><span style="font-size:18px;">7</span><span style="font-family:宋体;font-size:18px;">元&nbsp;&nbsp;&nbsp;&nbsp; 鱼香茄子</span><span style="font-size:18px;">7</span><span style="font-family:宋体;font-size:18px;">元</span>\r\n</p>\r\n<p style="text-indent:2em;" align="center">\r\n	<span style="font-family:宋体;font-size:18px;">木耳肉丝</span><span style="font-size:18px;">7</span><span style="font-family:宋体;font-size:18px;">元&nbsp;&nbsp;&nbsp;&nbsp; 麻辣肉片</span><span style="font-size:18px;">7</span><span style="font-family:宋体;font-size:18px;">元&nbsp;&nbsp;&nbsp;&nbsp; 青椒土豆丝</span><span style="font-size:18px;">6</span><span style="font-family:宋体;font-size:18px;">元</span>\r\n</p>\r\n<p style="text-indent:2em;" align="center">\r\n	<span style="font-family:宋体;font-size:18px;">雪菜肉丝</span><span style="font-size:18px;">7</span><span style="font-family:宋体;font-size:18px;">元&nbsp;&nbsp;&nbsp;三鲜肉片</span><span style="font-size:18px;">7</span><span style="font-family:宋体;font-size:18px;">元&nbsp;&nbsp;&nbsp;&nbsp;麻辣豆腐</span><span style="font-size:18px;">6</span><span style="font-family:宋体;font-size:18px;">元</span>\r\n</p>\r\n<p style="text-indent:2em;" align="center">\r\n	<span style="font-family:宋体;font-size:18px;">榨菜肉丝</span><span style="font-size:18px;">7</span><span style="font-family:宋体;font-size:18px;">元&nbsp;&nbsp;平菇炒蛋</span><span style="font-size:18px;">7</span><span style="font-family:宋体;font-size:18px;">元&nbsp;&nbsp;&nbsp;&nbsp;鸡蛋炒饭</span><span style="font-size:18px;">5</span><span style="font-family:宋体;font-size:18px;">元</span>\r\n</p>', '无锡商院美食街', '15261501386', '重庆食府', '/upload/shop/images/201308171711521425.jpg', 2, 4, 0),
-	(22, '品福轩火锅', '', '', '<br />\r\n<br />\r\n<p>\r\n	<span style="font-family:宋体;font-size:24px;">品福轩火锅</span>\r\n</p>\r\n<p>\r\n	<span style="font-family:宋体;"></span><span style="font-family:宋体;font-size:16px;">火锅系列</span><span> </span><br />\r\n<span style="font-family:宋体;font-size:16px;">饮料</span>\r\n</p>\r\n<p>\r\n	<span style="font-family:宋体;"></span><span style="font-family:宋体;font-size:16px;">啤酒</span><span> </span><br />\r\n<span style="font-family:宋体;font-size:16px;">粥</span>\r\n</p>\r\n<p>\r\n	<span style="font-family:宋体;font-size:24px;">干锅系列</span><span style="font-size:24px;"><span style="font-size:24px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-family:宋体;font-size:24px;">特色小吃</span><br />\r\n<span style="font-family:宋体;font-size:16px;">干锅牛蛙</span><span><span><span style="font-size:16px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span></span><span style="font-family:宋体;font-size:16px;">担担面</span>\r\n</p>\r\n<p>\r\n	<span style="font-family:宋体;font-size:16px;">干锅肥肠</span><span><span><span style="font-size:16px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span></span><span style="font-family:宋体;font-size:16px;">川北凉粉</span><br />\r\n<span style="font-family:宋体;font-size:16px;">干锅鱿鱼虾</span><span style="font-size:16px;"><span style="font-size:16px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span style="font-family:宋体;font-size:16px;">麻辣凉皮</span><br />\r\n<span style="font-family:宋体;"><span style="font-size:16px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="font-size:16px;">鸡汤馄饨</span></span><br />\r\n<span style="font-family:宋体;"><span style="font-size:16px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="font-size:16px;">酸辣粉</span></span>\r\n</p>\r\n<p>\r\n	<span style="font-family:宋体;font-size:16px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="font-family:宋体;font-size:16px;">鸡汤臊子面</span>\r\n</p>', '江大南门西侧150米', '18861816594,13921290872', '', '/upload/shop/images/201308190756015229.jpg', 3, 3, 0),
-	(23, '尚膳宫', '', '尚膳宫是您聊天、休闲的好去处。本店经营烤肉、寿司、水果沙拉、海鲜等品种齐全，平价消费。', '', '恒华科技园18-26', '15861410991', '王文胜', '/upload/shop/images/201308190858489359.jpg', 3, 0, 0);
+	(22, '品福轩火锅', '', '', '<br />\r\n<br />\r\n<p>\r\n	<span style="font-family:宋体;font-size:24px;">品福轩火锅</span> \r\n</p>\r\n<p>\r\n	<span style="font-family:宋体;"></span><span style="font-family:宋体;font-size:16px;">火锅系列</span><span> </span><br />\r\n<span style="font-family:宋体;font-size:16px;">饮料</span> \r\n</p>\r\n<p>\r\n	<span style="font-family:宋体;"></span><span style="font-family:宋体;font-size:16px;">啤酒</span><span> </span><br />\r\n<span style="font-family:宋体;font-size:16px;">粥</span> \r\n</p>\r\n<p>\r\n	<span style="font-family:宋体;font-size:24px;">干锅系列</span><span style="font-size:24px;"><span style="font-size:24px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-family:宋体;font-size:24px;">特色小吃</span><br />\r\n<span style="font-family:宋体;font-size:16px;">干锅牛蛙</span><span><span><span style="font-size:16px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span></span><span style="font-family:宋体;font-size:16px;">担担面</span> \r\n</p>\r\n<p>\r\n	<span style="font-family:宋体;font-size:16px;">干锅肥肠</span><span><span><span style="font-size:16px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span></span><span style="font-family:宋体;font-size:16px;">川北凉粉</span><br />\r\n<span style="font-family:宋体;font-size:16px;">干锅鱿鱼虾</span><span style="font-size:16px;"><span style="font-size:16px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span style="font-family:宋体;font-size:16px;">麻辣凉皮</span><br />\r\n<span style="font-family:宋体;"><span style="font-size:16px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="font-size:16px;">鸡汤馄饨</span></span><br />\r\n<span style="font-family:宋体;"><span style="font-size:16px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="font-size:16px;">酸辣粉</span></span> \r\n</p>\r\n<p>\r\n	<span style="font-family:宋体;font-size:16px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="font-family:宋体;font-size:16px;">鸡汤臊子面</span> \r\n</p>', '江大南门西侧150米', '18861816594,13921290872', '', '/upload/shop/images/201308190756015229.jpg', 3, 3, 0),
+	(23, '尚膳宫', '', '尚膳宫是您聊天、休闲的好去处。本店经营烤肉、寿司、水果沙拉、海鲜等品种齐全，平价消费。', '', '恒华科技园18-26', '15861410991', '王文胜', '/upload/shop/images/201308190858489359.jpg', 3, 0, 0),
+	(24, 'KI优米餐厅', '', '', '<table style="width:301pt;border-collapse:collapse;" border="0" cellspacing="0" cellpadding="0" width="399">\r\n	<tbody>\r\n		<tr>\r\n			<td height="21" width="130">\r\n				盖浇饭\r\n			</td>\r\n			<td width="70">\r\n				价格\r\n			</td>\r\n			<td width="129">\r\n				炒菜\r\n			</td>\r\n			<td width="70">\r\n				价格\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td height="21">\r\n				韦氏红烧肉\r\n			</td>\r\n			<td>\r\n				15\r\n			</td>\r\n			<td>\r\n				辣白菜炒五花肉\r\n			</td>\r\n			<td>\r\n				22\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td height="21">\r\n				特选香猪烩腐乳\r\n			</td>\r\n			<td>\r\n				15\r\n			</td>\r\n			<td>\r\n				雪菜鱿鱼\r\n			</td>\r\n			<td>\r\n				20\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td height="21">\r\n				牛肉石锅拌饭\r\n			</td>\r\n			<td>\r\n				15\r\n			</td>\r\n			<td>\r\n				尖椒牛柳\r\n			</td>\r\n			<td>\r\n				20\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td height="21">\r\n				五花肉石锅拌饭\r\n			</td>\r\n			<td>\r\n				15\r\n			</td>\r\n			<td>\r\n				红烧肉\r\n			</td>\r\n			<td>\r\n				25\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td height="21">\r\n				秘制梅汁焗排骨\r\n			</td>\r\n			<td>\r\n				15\r\n			</td>\r\n			<td>\r\n				梅汁排骨\r\n			</td>\r\n			<td>\r\n				25\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td height="21">\r\n				尖椒烩牛柳\r\n			</td>\r\n			<td>\r\n				13\r\n			</td>\r\n			<td>\r\n				什锦蘑菇\r\n			</td>\r\n			<td>\r\n				10\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td height="21">\r\n				黄金猪扒饭\r\n			</td>\r\n			<td>\r\n				12\r\n			</td>\r\n			<td>\r\n				番茄炒鸡蛋\r\n			</td>\r\n			<td>\r\n				12\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td height="21">\r\n				老坛雪菜鱿鱼烧\r\n			</td>\r\n			<td>\r\n				12\r\n			</td>\r\n			<td>\r\n				韩式炒年糕\r\n			</td>\r\n			<td>\r\n				10\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td height="21">\r\n				石锅拌饭\r\n			</td>\r\n			<td>\r\n				10\r\n			</td>\r\n			<td>\r\n			</td>\r\n			<td>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td height="21">\r\n				三丁饭\r\n			</td>\r\n			<td>\r\n				12\r\n			</td>\r\n			<td>\r\n			</td>\r\n			<td>\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td height="21">\r\n				番茄配黄油鸡蛋\r\n			</td>\r\n			<td>\r\n				8\r\n			</td>\r\n			<td>\r\n			</td>\r\n			<td>\r\n			</td>\r\n		</tr>\r\n	</tbody>\r\n</table>', '江南大学南门', '18915262098,18951508922', '', '/upload/shop/images/201308191021236870.jpg', 3, 6, 0);
 /*!40000 ALTER TABLE `shop` ENABLE KEYS */;
 
 
@@ -188,7 +189,7 @@ CREATE TABLE IF NOT EXISTS `shoptype` (
   `typeId` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table xiaopangwang.shoptype: ~25 rows (approximately)
+-- Dumping data for table xiaopangwang.shoptype: ~29 rows (approximately)
 DELETE FROM `shoptype`;
 /*!40000 ALTER TABLE `shoptype` DISABLE KEYS */;
 INSERT INTO `shoptype` (`shopId`, `typeId`) VALUES
@@ -216,7 +217,11 @@ INSERT INTO `shoptype` (`shopId`, `typeId`) VALUES
 	('16', '47'),
 	('22', '16'),
 	('22', '17'),
-	('22', '20');
+	('22', '20'),
+	('22', '112'),
+	('23', '47'),
+	('24', '64'),
+	('24', '62');
 /*!40000 ALTER TABLE `shoptype` ENABLE KEYS */;
 
 
@@ -253,7 +258,7 @@ CREATE TABLE IF NOT EXISTS `type` (
   `sort` int(11) NOT NULL,
   `price` decimal(10,1) NOT NULL DEFAULT '0.0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=112 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=113 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table xiaopangwang.type: ~107 rows (approximately)
 DELETE FROM `type`;
@@ -274,13 +279,13 @@ INSERT INTO `type` (`id`, `name`, `color`, `seotitle`, `keyword`, `description`,
 	(13, '盖浇面', '#333333', '', '', '', 3, 2, 0.0),
 	(14, '麻辣烫', '#333333', '', '', '', 3, 3, 0.0),
 	(15, '米线', '#333333', '', '', '', 3, 4, 0.0),
-	(16, '馄饨', '', '', '', '', 3, 5, 6.0),
-	(17, '凉面凉皮', '', '', '', '', 3, 6, 5.0),
-	(18, '砂锅', '', '', '', '', 3, 7, 5.0),
-	(19, '水饺', '', '', '', '', 3, 8, 5.0),
-	(20, '酸辣粉', '', '', '', '', 3, 9, 5.0),
-	(21, '特色粥', '', '', '', '', 3, 9, 5.0),
-	(22, '泡饭', '', '', '', '', 3, 9, 5.0),
+	(16, '馄饨', '#333333', '', '', '', 3, 5, 0.0),
+	(17, '凉面凉皮凉粉', '#333333', '', '', '', 3, 6, 0.0),
+	(18, '砂锅', '#333333', '', '', '', 3, 7, 0.0),
+	(19, '水饺', '#333333', '', '', '', 3, 8, 0.0),
+	(20, '酸辣粉', '#333333', '', '', '', 3, 9, 0.0),
+	(21, '特色粥', '#333333', '', '', '', 3, 9, 0.0),
+	(22, '泡饭', '#333333', '', '', '', 3, 9, 0.0),
 	(23, '鱼香茄子盖浇', '#333333', '', '', '', 1, 4, 7.0),
 	(24, '韭菜鸡蛋盖浇', '#333333', '', '', '', 1, 5, 7.0),
 	(25, '宫保鸡丁盖浇', '#333333', '', '', '', 1, 6, 8.0),
@@ -295,7 +300,7 @@ INSERT INTO `type` (`id`, `name`, `color`, `seotitle`, `keyword`, `description`,
 	(34, '火腿炒饭', '', '', '', '', 2, 5, 7.0),
 	(36, '菜饭', '', '', '', '', 2, 7, 10.0),
 	(37, '蒸饭', '', '', '', '', 2, 7, 7.0),
-	(38, '铁板烧', '', '', '', '', 2, 9, 6.0),
+	(38, '铁板烧', '#333333', '', '', '', 2, 9, 0.0),
 	(39, '鸡腿饭', '', '', '', '', 2, 9, 8.0),
 	(40, '鸭肫炒饭', '', '', '', '', 2, 9, 7.0),
 	(41, '披萨', '#333333', '', '', '', 4, 2, 0.0),
@@ -303,7 +308,6 @@ INSERT INTO `type` (`id`, `name`, `color`, `seotitle`, `keyword`, `description`,
 	(43, '熏肉卷', '#333333', '', '', '', 4, 5, 0.0),
 	(44, '蛋挞', '#333333', '', '', '', 4, 6, 0.0),
 	(45, '鸭脖', '#333333', '', '', '', 4, 7, 0.0),
-	(46, '馒头', '#333333', '', '', '', 4, 9, 0.0),
 	(47, '烧烤', '#333333', '', '', '', 4, 9, 0.0),
 	(48, '小笼包', '#333333', '', '', '', 4, 9, 0.0),
 	(49, '鸡蛋灌饼', '#333333', '', '', '', 4, 9, 0.0),
@@ -318,8 +322,8 @@ INSERT INTO `type` (`id`, `name`, `color`, `seotitle`, `keyword`, `description`,
 	(58, '茶', '#333333', '', '', '', 5, 9, 0.0),
 	(59, '圣代', '#333333', '', '', '', 5, 9, 0.0),
 	(60, '乳酸菌', '#333333', '', '', '', 5, 9, 0.0),
-	(61, '米皮', '', '', '', '', 3, 9, 6.0),
-	(62, '石锅拌饭', '', '', '校畔网  石锅拌饭', '校畔网  石锅拌饭', 2, 2, 8.0),
+	(61, '米皮', '#333333', '', '', '', 3, 9, 0.0),
+	(62, '石锅拌饭', '#333333', '', '校畔网  石锅拌饭', '校畔网  石锅拌饭', 2, 2, 0.0),
 	(63, '宫保鸡丁盖浇', '#333333', '', '', '', 1, 9, 9.0),
 	(64, '西红柿鸡蛋盖浇', '', '', '', '', 1, 1, 8.0),
 	(65, '青椒鸡蛋盖浇', '', '', '', '', 1, 9, 8.0),
@@ -365,7 +369,8 @@ INSERT INTO `type` (`id`, `name`, `color`, `seotitle`, `keyword`, `description`,
 	(107, '油焖茄子盖浇', '#333333', '', '', '', 1, 9, 7.0),
 	(108, '香干肉丝盖浇', '#333333', '', '', '', 1, 9, 8.0),
 	(110, '寿司', '', '', '', '', 4, 9, 0.0),
-	(111, '沙拉', '', '', '', '', 4, 9, 0.0);
+	(111, '沙拉', '', '', '', '', 4, 9, 0.0),
+	(112, '馒头', '', '', '', '', 3, 9, 0.0);
 /*!40000 ALTER TABLE `type` ENABLE KEYS */;
 /*!40014 SET FOREIGN_KEY_CHECKS=1 */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
