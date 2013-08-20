@@ -43,7 +43,7 @@ public class MobileAction extends BaseAction {
 	}
 
 	public String toTypeList() {
-		types = typeService.queryList(null);
+		types = typeService.queryDistinctList(null);
 		initSite();
 		return "toTypeList";
 	}
