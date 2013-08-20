@@ -40,7 +40,13 @@
        			地址：<s:property value="shop.address"/>
         	</li>
         	<li data-theme="c">
-       			电话：<a style="clear: both;" href="tel:<s:property value="shop.tel"/>"><s:property value="shop.tel"/></a>
+   				电话：
+   				<a style="clear: both;" href="tel:<s:property value="shop.tel"/>">
+   					<s:property value="shop.tel"/>
+   				</a>&nbsp;
+   				<a href="tel:<s:property value="#parent.tel"/>" style="text-decoration:none;">
+					<img style="width:20px; height: 20px;" alt="" src="<%=basePath%>images/tel.png">
+				</a>
         	</li>
         	<li data-theme="c">
        			联系人：<s:property value="shop.contacter"/>
