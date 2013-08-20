@@ -70,7 +70,7 @@ public class FileUtil {
 	 */
 	public static String gainFileName(String oldFileName) {
 		String fileName = "";
-		fileName += new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()); // 以yyyyMMdd的方式生成时间
+		fileName += new SimpleDateFormat("yyyyMMddHHmmss_").format(new Date()); // 以yyyyMMdd的方式生成时间
 		fileName += new Random().nextInt(10000); // 时间文件名称生成随机数
 		fileName += "." + gainExt(oldFileName); // 连接上后缀名
 		return fileName;
