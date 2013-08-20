@@ -49,7 +49,14 @@
         						<%-- <a href="<%=basePath%>mobile/mobile_toShop?shop.id=<s:property value="#parent.id"/>" data-transition="slide"><s:property value="#parent.title"/></a> --%>
         						<s:property value="#parent.title"/>
         					</div>
-        					<div><a href="tel:<s:property value="#parent.tel"/>"><s:property value="#parent.tel"/></a></div>
+        					<div>
+        						<a href="tel:<s:property value="#parent.tel"/>" style="text-decoration:none;">
+        							<img style="width:20px; height: 20px;" alt="" src="<%=basePath%>images/tel.png">
+        						</a>&nbsp;
+        						<a href="tel:<s:property value="#parent.tel"/>">
+        							<s:property value="#parent.tel"/>
+        						</a>
+        					</div>
         				</td>
         				<td style="width:20%;">
         					<a data-inline="true" href="<%=basePath%>mobile/mobile_toShop?shop.id=<s:property value="#parent.id"/>">
