@@ -1,11 +1,23 @@
 package com.newp.xiaopan.bean.system;
 
+import java.io.Serializable;
+
 /**
  * @author 张霄鹏
  */
-public class Site extends BaseBean {
+public class Site implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+
+	private String id;
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 
 	private String name;
 	private String description;
