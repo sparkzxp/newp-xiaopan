@@ -134,14 +134,14 @@ public class AdsAction extends BaseAction {
 			pathStatus = false;
 			uploadStatus = "success";
 //			sites = (List<Site>) MySessionListener.getConfigMap_s().get(Constants.CONFIG_SITE_LIST);
-			this.siteService.queryList(null);
+			sites = this.siteService.queryList(null);
 			return Constants.ACTION_TO_EDIT;
 		} catch (Exception e) {
 			log.error(e);
 			pathStatus = false;
 			uploadStatus = "error";
 //			sites = (List<Site>) MySessionListener.getConfigMap_s().get(Constants.CONFIG_SITE_LIST);
-			this.siteService.queryList(null);
+			sites = this.siteService.queryList(null);
 			return Constants.ACTION_TO_EDIT;
 		} finally {
 			try {

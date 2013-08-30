@@ -27,7 +27,7 @@
     <div data-role="content">
     	<form id="queryForm" action="<%=basePath%>mobile/mobile_toSearch">
 	    	<div data-role="fieldcontain">
-	            <input name="type.name" id="searchinput1" placeholder="输入菜谱查询...." value="" type="search">
+	            <input name="type.name" id="searchinput1" placeholder="输入菜名或店铺名查询...." value="" type="search">
 	        </div>
         </form>
     	<div>

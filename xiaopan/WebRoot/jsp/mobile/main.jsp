@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta name="baidu-tc-verification" content="230142c1a26d097a9bf22c0abef7a5ff" />
 	<base href="<%=basePath%>">
     <title>校畔网 首页</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">

@@ -55,12 +55,18 @@
         <div class="t_left">欢迎来到校畔网，感谢您对校畔网的支持！</div>
         <div class="t_right">
             <a href="javascript:void(0);" onClick="window.external.addFavorite(document.location.href,document.title)" title="校畔网">加入收藏</a>|
-            <a href="javascript:void(0);" onClick="var strHref=window.location.href;this.style.behavior='url(#default#homepage)';this.setHomePage('http://www.xiaopanwang.com/');" >设为首页</a>
+            <a href="javascript:void(0);" onClick="var strHref=window.location.href;this.style.behavior='url(#default#homepage)';this.setHomePage('http://www.xiaopanwang.com/');" >设为首页</a>|
+            <a href="<%=basePath%>" >返回首页</a>|
+            <a href="javascript:void(0);" onClick="history.back();" >返回上页</a>
         </div>
+    </div>
+    <div style="float: left;text-align: center;margin-left: 5px;">
+    	<img src="<%=basePath%>images/qrcode_3g.jpg" alt="" style="height:100px;width:100px;"/>
+    	<br><span>同步推出手机校畔网<br>请扫二维码</span>
     </div>
     <div class="header">
         <div class="h_left"><a href="<%=basePath%>web/main_toShow">
-            <img src="<%=basePath%>images/logo.jpg" height="60px" /></a><br />
+            <img src="<%=basePath%>images/logo.jpg" style="height:85px;" /></a><br />
 			【<a id="siteSel" href="javascript:void(0)" onclick="showMenu();"><s:property value="site.name" /></a>】
         </div>
         <div class="h_right">
@@ -84,7 +90,7 @@
         <div class="clear"></div>
     </div>
     <div class="search1">
-        <input type="text" id="txtkeyword" class="keyword" value="请输入关键字..." onfocus='if($(this).val()=="请输入关键字..."){$(this).val("");}' onblur='if($.trim($(this).val())==""||$.trim($(this).val())==null){$(this).val("请输入关键字...");}' />
+        <input type="text" id="txtkeyword" class="keyword" value="请输入菜名或店铺名查询...." onfocus='if($(this).val()=="请输入菜名或店铺名查询...."){$(this).val("");}' onblur='if($.trim($(this).val())==""||$.trim($(this).val())==null){$(this).val("请输入菜名或店铺名查询....");}' />
         <input type="button" id="btnsearch" class="search" />
         <%-- <div class="hot">
             <ul>

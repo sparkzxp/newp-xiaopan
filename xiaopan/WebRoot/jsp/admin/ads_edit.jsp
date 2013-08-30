@@ -148,7 +148,7 @@
                 <tr>
                     <td align="right" height="25">位置：</td>
                     <td>
-                        <s:select name="ads.place" list="#{'头部广告':'头部广告','网页左面':'网页左面','网页右面':'网页右面','网页底部':'网页底部' }" cssClass="{required:true}"></s:select>
+                        <s:select name="ads.place" list="#{'不显示':'不显示','头部广告':'头部广告','网页左面':'网页左面','网页右面':'网页右面','网页底部':'网页底部' }" cssClass="{required:true}"></s:select>
                     </td>
                 </tr>
                 <tr>
