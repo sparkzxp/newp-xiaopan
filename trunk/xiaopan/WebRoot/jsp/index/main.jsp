@@ -17,7 +17,41 @@
     <link type="text/css" href="<%=basePath%>css/style.css?1258" rel="Stylesheet" />
     
     <script type="text/javascript">
-    	function toggleList(pre){
+	    function popupbox(boxid,o){
+			var sh = boxid.height();
+			var sw = boxid.width();
+			var l = o.offset().left;
+			var t = o.offset().top;
+			var th= $(window).scrollTop()+$(window).height()/2-sh/2;
+			var h =document.body.clientHeight;
+			var rw =$(window).width()/2-sw/2;
+			boxid.css({height:0,width:0,top:t,left:l});
+			$("body").prepend("<div class='mask'></div>");
+			$(".mask").css({opacity:0,height:h}).animate({opacity:0.5},500,function(){
+				boxid.animate({top:th,opacity: 'show',left:rw,height:sh,width:sw},500);													 
+			});
+		}
+		function popup(obj){
+			var _o = $('#ul_'+obj);
+			popupbox($("#showbox"),_o);
+			var _s = '<table style="width:100%;margin-top: 20px;padding-left:10px;"><tr><td colspan="4" style="color: #15229F;">其他：</td></tr>';
+			for(var i=0; i<_o.find('li').length;i++){
+				if(i%4==0){
+					_s += '<tr>';
+				}
+				if(i==_o.find('li').length-1){
+					_s += '<td colspan="'+(4-_o.find('li').length%4)+'">'+$(_o.find('li')[i]).html()+'</td>';
+				}else{
+					_s += '<td>'+$(_o.find('li')[i]).html()+'</td>';
+				}
+				if(i%4==3 || i==_o.find('li').length-1){
+					_s += '</tr>';
+				}
+			}
+			_s += '</table>';
+			$('#content').html(_s);
+		}
+    	<%-- function toggleList(pre){
     		$('#ul_'+pre).toggle();
     		if($('#ul_'+pre).css('display')=='none'){
     			$('#img_'+pre).attr('src', '<%=basePath%>images/ico1.gif');
@@ -26,9 +60,13 @@
     			$('#img_'+pre).attr('src', '<%=basePath%>images/ico2.gif');
     			$('.main').height($('.middle').height()+'px');
     		}
-    	}
+    	} --%>
 		
     	$(function(){
+    		$("#title").click(function(){
+    			$(this).parent().animate({top:-300,opacity: 'hide'},500);
+    			$(".mask").fadeOut("fast").remove();
+    		});
     		var local = 'left';
     			num = 0;
     			left = $($('.left li')).find('ul');
@@ -181,6 +219,37 @@
     		setTimeout(doSilder, 2000);
     	});
     </script>
+    <style type="text/css">
+    #showbox{
+		/* background:#2a2a2a; */
+		background:#dfdfdf;
+		display:none;
+		position:absolute;
+		border:1px solid #DFDFDF;
+		text-align:center;
+		z-index:1000;
+		/* color:#fff; */
+		width:420px;
+		height:300px;
+	}
+	#showbox span{
+		float:right;
+		cursor:pointer;
+	}
+	#showbox a{
+		color: #15229F;
+	}
+	.mask{
+		width:100%;
+		background:#333;
+		position:absolute;
+		overflow:hidden;
+		left:0;
+		top:0;
+		height:100%;
+		z-index:990;
+	}
+    </style>
 </head>
 <body>
     <form id="form1">
@@ -224,14 +293,17 @@
         	<s:iterator value="types" var="parent">
         		<s:if test="#parent.topid == 0">
         		<div class="item">
-                    <ul>
+                    <ul id="ul_<s:property value="#parent.id"/>">
                         <li><strong><s:property value="#parent.name"/></strong></li>
                         <s:set name="count" value="1"></s:set>
                         <s:iterator value="types" var="child">
                         	<s:if test="#child.topid == #parent.id">
                         		<s:if test="#count == 11">
-                        		<li><a href="javascript:void(0);" style="color:#999999;" onclick="toggleList('<s:property value="#parent.id"/>_<s:property value="#child.name"/>');"><img id="img_<s:property value="#parent.id"/>_<s:property value="#child.name"/>" alt="" src="<%=basePath%>images/ico1.gif"/>&nbsp;其他</a></li>
-                        		<ul id="ul_<s:property value="#parent.id"/>_<s:property value="#child.name"/>" style="display:none;">
+                        		<li>
+                        		<%-- <a href="javascript:void(0);" style="color:#999999;" onclick="toggleList('<s:property value="#parent.id"/>_<s:property value="#parent.name"/>');"> --%>
+                        		<a href="javascript:void(0);" style="color:#999999;" onclick="popup('<s:property value="#parent.id"/>_<s:property value="#parent.name"/>');">
+                        		<img id="img_<s:property value="#parent.id"/>_<s:property value="#parent.name"/>" alt="" src="<%=basePath%>images/ico1.gif"/>&nbsp;其他</a></li>
+                        		<ul id="ul_<s:property value="#parent.id"/>_<s:property value="#parent.name"/>" style="display:none;">
                         		</s:if>
 	                        	<s:if test="#count < 11">
 	                            <li><a href="<%=basePath%>web/main_toSearch?key.name=<s:property value="#child.name"/>"><s:property value="#child.name"/></a></li>
@@ -334,6 +406,13 @@
         <!--end right-->
         <div class="clear"></div>
     </div>
+    <div id="showbox">
+		<span id="title">
+			<span>【X】</span><br>
+		</span>
+		<div id="content" style="height: 95%;">
+		</div>
+	</div>
     <!--end main-->
     <%@ include file="footer.jsp"%>
     </form>

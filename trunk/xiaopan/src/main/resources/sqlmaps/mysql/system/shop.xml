@@ -31,10 +31,14 @@
 			</if>
 			<if test="type != null">
 				<if test="type.name != null and type.name != ''">
-					and t.name like '%${type.name}%'
+					and (t.name like '%${type.name}%'
+					or s.title like '%${type.name}%')
 				</if>
 			</if>
 		</where>
+	</sql>
+	<sql id="order">
+		ORDER BY s.siteId asc, s.title asc
 	</sql>
 	
 	<select id="count" resultType="int" parameterType="map">
@@ -54,7 +58,7 @@
 		left join shoptype st on st.shopid = s.id
 		left join type t on t.id = st.typeid
 		<include refid="query_where" />
-		ORDER BY s.title asc
+		<include refid="order"/>
 		limit ${pager.startIndex}, ${pager.pageSize}
 	</select>
 
@@ -62,7 +66,7 @@
 		SELECT s.*, si.name siteName FROM SHOP s
 		join site si on si.id = s.siteId
 		<include refid="query_where" />
-		order by s.title asc
+		<include refid="order"/>
 	</select>
 	
 	<select id="querySuport" resultMap="shopRstMap" parameterType="map">
