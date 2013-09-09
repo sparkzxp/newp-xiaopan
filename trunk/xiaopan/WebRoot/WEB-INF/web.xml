@@ -54,7 +54,8 @@
     <url-pattern>/jsp/index/*</url-pattern>
   </filter-mapping> -->
   <welcome-file-list>
-    <welcome-file>/jsp/index/index.jsp</welcome-file>
+    <!-- <welcome-file>/jsp/index/index.jsp</welcome-file> -->
+    <welcome-file>web/main_toAdvertise</welcome-file>
   </welcome-file-list>
   <context-param>
     <param-name>contextConfigLocation</param-name>
@@ -80,7 +81,7 @@
   <session-config>
     <session-timeout>30</session-timeout>
   </session-config>
-  <error-page>
+	<error-page>
 		<error-code>401</error-code>
 		<location>/jsp/error/404.jsp</location>
 	</error-page>
@@ -92,9 +93,9 @@
 		<error-code>403</error-code>
 		<location>/jsp/error/403.jsp</location>
 	</error-page>
-  <error-page>
+	<error-page>
 		<error-code>404</error-code>
-		<location>/jsp/error/404.jsp</location>
+		<location>/jsp/error/notFound.jsp</location>
 	</error-page>
 	<error-page>
 		<error-code>500</error-code>
