@@ -32,6 +32,7 @@ public class SessionFilter implements Filter {
 	private String forwardUrl;
 
 	public void init(FilterConfig cfg) throws ServletException {
+		System.out.println("Session Filter init");
 		sessionKey = cfg.getInitParameter("sessionKey");
 
 		String excepUrlRegex = cfg.getInitParameter("excepUrlRegex");
@@ -43,6 +44,7 @@ public class SessionFilter implements Filter {
 	}
 
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
+		System.out.println("Session Filter doFilter");
 		// 如果 sessionKey 为空，则直接放行
 		if (StringUtils.isBlank(sessionKey)) {
 			chain.doFilter(req, res);
@@ -86,6 +88,6 @@ public class SessionFilter implements Filter {
 	}
 
 	public void destroy() {
-		
+		System.out.println("Session Filter destroy");
 	}
 }

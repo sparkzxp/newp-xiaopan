@@ -4,6 +4,16 @@
 	"http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
 	<package name="web" extends="root" namespace="/web">
+		<interceptors>
+			<interceptor-stack name="myStack">
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<interceptor-ref name="mobile"></interceptor-ref>
+			</interceptor-stack>
+			<interceptor name="mobile"
+				class="com.newp.xiaopan.action.interceptor.MobileInterceptor" />
+		</interceptors>
+		<default-interceptor-ref name="myStack" />
+		
 		<action name="main_*" class="mainAction" method="{1}">
 			<result name="toShow">/jsp/index/main.jsp</result>
 			<result name="toSearch">/jsp/index/search.jsp</result>
