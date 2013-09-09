@@ -13,6 +13,7 @@
 		<global-results>
 			<result name="login">/jsp/admin/login.jsp</result>
 			<result name="main">/jsp/index/main.jsp</result>
+			<result type="redirect" name="mobile">/mobile</result>
 		</global-results>
 		<action name="admin" class="adminAction" method="login"></action>
 		<action name="mobile" class="mobileAction" method="toSite">
