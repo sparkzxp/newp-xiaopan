@@ -34,13 +34,6 @@
 		</action>
 	</package>
 
-	<!-- <package name="default" extends="struts-default">
-		<default-action-ref name="exceptionError" />
-		<action name="exceptionError" class="errorAction" method="toExceptionError">
-			<result>/jsp/error/404.jsp</result>
-		</action>
-	</package> -->
-
 	<include file="actions/system/struts_system.xml" />
 	<include file="actions/web/struts_web.xml" />
 	<include file="actions/mobile/struts_mobile.xml" />
