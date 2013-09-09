@@ -27,7 +27,7 @@ public class ErrorAction extends BaseAction {
 				break;
 			}
 		}
-		String browser = ".*(ANDROID.*MOBILE|IPHONE.*MOBILE).*";
+		String browser = ".*(ANDROID.*MOBILE|IPHONE.*MOBILE|BAIDU TRANSCODER).*";
 		System.out.println(userAgent.toUpperCase());
 
 		if (userAgent.toUpperCase().matches(browser)) {
