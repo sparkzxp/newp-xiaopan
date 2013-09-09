@@ -13,6 +13,7 @@
 				class="com.newp.xiaopan.action.interceptor.MobileInterceptor" />
 		</interceptors>
 		<default-interceptor-ref name="myStack" />
+		<default-action-ref name="exceptionError" />
 		
 		<action name="main_*" class="mainAction" method="{1}">
 			<result name="toShow">/jsp/index/main.jsp</result>
