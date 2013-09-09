@@ -15,6 +15,7 @@
 				class="com.newp.xiaopan.action.interceptor.AuthorityInterceptor" />
 		</interceptors>
 		<default-interceptor-ref name="myStack" />
+		<default-action-ref name="exceptionError" />
 		
 		<action name="user_*" class="userAction" method="{1}">
 			<result name="toLogin">/jsp/admin/index.jsp</result>

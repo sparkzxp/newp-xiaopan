@@ -5,22 +5,42 @@
 	<constant name="struts.devMode" value="false" />
 	<constant name="struts.i18n.encoding" value="UTF-8" />
 	<constant name="struts.ui.theme" value="simple" />
-	<constant name="struts.objectFactory" value="spring"/>
-	<constant name="struts.ognl.allowStaticMethodAccess" value="true"/>
-	
+	<constant name="struts.objectFactory" value="spring" />
+	<constant name="struts.ognl.allowStaticMethodAccess" value="true" />
+
 	<!-- 全局页面 -->
 	<package name="root" extends="struts-default" namespace="/">
+		<default-action-ref name="exceptionError" />
 		<global-results>
 			<result name="login">/jsp/admin/login.jsp</result>
 			<result name="main">/jsp/index/main.jsp</result>
 			<result type="redirect" name="mobile">/mobile</result>
+			<result type="dispatcher" name="exceptionError">/exceptionError</result>
 		</global-results>
+		<global-exception-mappings><!-- 全局异常处理 -->
+			<exception-mapping result="exceptionError"
+				exception="java.lang.NullPointerException" />
+			<exception-mapping result="exceptionError"
+				exception="java.lang.NoSuchMethodException" />
+			<exception-mapping result="exceptionError"
+				exception="java.lang.Exception" />
+		</global-exception-mappings>
 		<action name="admin" class="adminAction" method="login"></action>
 		<action name="mobile" class="mobileAction" method="toSite">
 			<result name="toSite">/jsp/mobile/main.jsp</result>
 		</action>
+		<action name="exceptionError" class="errorAction" method="toExceptionError">
+			<result name="toExceptionError">/jsp/error/404.jsp</result>
+		</action>
 	</package>
-	
+
+	<!-- <package name="default" extends="struts-default">
+		<default-action-ref name="exceptionError" />
+		<action name="exceptionError" class="errorAction" method="toExceptionError">
+			<result>/jsp/error/404.jsp</result>
+		</action>
+	</package> -->
+
 	<include file="actions/system/struts_system.xml" />
 	<include file="actions/web/struts_web.xml" />
 	<include file="actions/mobile/struts_mobile.xml" />
