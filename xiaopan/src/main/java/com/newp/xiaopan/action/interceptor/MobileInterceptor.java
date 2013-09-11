@@ -4,6 +4,7 @@ import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -15,6 +16,7 @@ import com.opensymphony.xwork2.interceptor.MethodFilterInterceptor;
  */
 public class MobileInterceptor extends MethodFilterInterceptor {
 	private static final long serialVersionUID = 1L;
+	private Logger log = Logger.getLogger(getClass());
 
 	/**
 	 * @author 张霄鹏
@@ -51,6 +53,7 @@ public class MobileInterceptor extends MethodFilterInterceptor {
 //		IPHONE4 MOZILLA/5.0 (IPHONE; CPU IPHONE OS 6_1_3 LIKE MAC OS X) APPLEWEBKIT/536.26 (KHTML, LIKE GECKO) VERSION/6.0 MOBILE/10A523 SAFARI/8536.25
 //		BAIDU TRANSCODER MOZILLA/5.0 (WINDOWS; U; WINDOWS NT 5.1; ZH-CN; RV:1.9.2.8;BAIDU TRANSCODER) GECKO/20100722 FIREFOX/3.6.8 ( .NET CLR 3.5.30729)
 		System.out.println(userAgent.toUpperCase());
+		log.info(userAgent.toUpperCase());
 //		System.out.println(userAgent.toUpperCase().matches(browser));
 
 		if (userAgent.toUpperCase().matches(browser)) {
