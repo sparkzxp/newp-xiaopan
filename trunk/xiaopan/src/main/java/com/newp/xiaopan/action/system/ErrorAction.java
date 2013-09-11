@@ -4,6 +4,7 @@ import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.stereotype.Controller;
 
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Controller;
 public class ErrorAction extends BaseAction {
 
 	private static final long serialVersionUID = 1L;
+	private Logger log = Logger.getLogger(getClass());
 
 	public String toExceptionError() {
 		HttpServletRequest request = ServletActionContext.getRequest();
@@ -29,6 +31,7 @@ public class ErrorAction extends BaseAction {
 		}
 		String browser = ".*(ANDROID.*MOBILE|IPHONE.*MOBILE|BAIDU TRANSCODER).*";
 		System.out.println(userAgent.toUpperCase());
+		log.info(userAgent.toUpperCase());
 
 		if (userAgent.toUpperCase().matches(browser)) {
 			return "mobile";
