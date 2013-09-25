@@ -20,4 +20,6 @@ public interface Constants {
 	String ACTION_TO_LIST = "toList";
 	String ACTION_TO_EDIT = "toEdit";
 	String ACTION_TO_DETAIL = "toDetail";
+
+	String ANDROID_IPHONE_BAIDUTC_FILTER = ".*(ANDROID.*MOBILE|IPHONE.*MOBILE|BAIDU TRANSCODER).*";
 }
