@@ -37,7 +37,7 @@ public class MySessionListener implements HttpSessionListener {
 //				initConfigMap_s();
 //			}
 			initConfigMap_s();
-			logger.info("Session创建:" + session);
+			logger.debug("Session创建:" + session);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
@@ -49,7 +49,7 @@ public class MySessionListener implements HttpSessionListener {
 	public void sessionDestroyed(HttpSessionEvent sessionEvent) {
 		HttpSession session = sessionEvent.getSession();
 		try {
-			logger.info("Session过期: " + session + "已销毁");
+			logger.debug("Session过期: " + session + "已销毁");
 //			sessionMap_s.remove(session.getId());
 			session.setAttribute(Constants.SESSION_USER_KEY, null);
 			session.setAttribute(Constants.SESSION_USER_SITE, null);
