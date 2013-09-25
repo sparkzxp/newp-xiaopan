@@ -8,6 +8,8 @@ import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.stereotype.Controller;
 
+import com.newp.xiaopan.common.Constants;
+
 /**
  * @author 张霄鹏
  * @version 创建时间：2013-9-9 下午2:53:11
@@ -29,7 +31,7 @@ public class ErrorAction extends BaseAction {
 				break;
 			}
 		}
-		String browser = ".*(ANDROID.*MOBILE|IPHONE.*MOBILE|BAIDU TRANSCODER).*";
+		String browser = Constants.ANDROID_IPHONE_BAIDUTC_FILTER;
 		System.out.println(userAgent.toUpperCase());
 		log.info(userAgent.toUpperCase());
 

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 
+import com.newp.xiaopan.common.Constants;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.MethodFilterInterceptor;
@@ -25,9 +26,7 @@ public class MobileInterceptor extends MethodFilterInterceptor {
 		ActionContext ctx = invocation.getInvocationContext();
 
 		HttpServletRequest request = (HttpServletRequest) ctx.get(ServletActionContext.HTTP_REQUEST);
-//		String servletPath = request.getServletPath();
 
-//		String host = "";
 		String userAgent = "";
 		Enumeration<String> headerNames = request.getHeaderNames();
 		while (headerNames.hasMoreElements()) {
@@ -36,16 +35,9 @@ public class MobileInterceptor extends MethodFilterInterceptor {
 				userAgent = request.getHeader(headerName);
 				break;
 			}
-
-//			if (headerName.equals("host")) {
-//				host = request.getHeader(headerName);
-//			}
 		}
 
-//		String contextPath = request.getContextPath();
-//		System.out.println("contextPath:" + contextPath);
-//		String browser = ".*(FIREFOX|MSIE).*";
-		String browser = ".*(ANDROID.*MOBILE|IPHONE.*MOBILE|BAIDU TRANSCODER).*";
+		String browser = Constants.ANDROID_IPHONE_BAIDUTC_FILTER;
 //		UC MOZILLA/5.0 (LINUX; U; ANDROID 4.0.4; ZH-CN; LT26I BUILD/6.1.A.0.452) APPLEWEBKIT/534.31 (KHTML, LIKE GECKO) UCBROWSER/9.2.3.324 U3/0.8.0 MOBILE SAFARI/534.31
 //		360 MOZILLA/5.0 (LINUX; U; ANDROID 4.0.4; ZH-CN; LT26I BUILD/6.1.A.0.452) APPLEWEBKIT/534.30 (KHTML, LIKE GECKO) VERSION/4.0 MOBILE SAFARI/534.30; 360BROWSER(SECURITYPAY,SECURITYINSTALLED); 360(ANDROID,UPPAYPLUGIN); 360 APHONE BROWSER (4.8.3)
 //		QQ MOZILLA/5.0 (LINUX; U; ANDROID 4.0.4; ZH-CN; LT26I BUILD/6.1.A.0.452) APPLEWEBKIT/533.1 (KHTML, LIKE GECKO)VERSION/4.0 MQQBROWSER/4.4 MOBILE SAFARI/533.1
