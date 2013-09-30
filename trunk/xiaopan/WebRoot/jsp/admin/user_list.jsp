@@ -17,7 +17,7 @@
                 $(this).click(function() {
                 	if(confirm("确定删除吗？")){
 						var aid = $(this).attr("aid");
-						$.post("<%=basePath%>sys/key_doDelete",{"key.id":aid},function(data){
+						$.post("<%=basePath%>sys/user_doDelete",{"user.id":aid},function(data){
 		   					if(data=="success"){
 		   						alert("操作成功！");
 		   						location.reload();
@@ -48,23 +48,23 @@
     <form id="form1">
     <div class="top">
         <div class="t_left"></div>
-        <div class="t_content"><a href="<%=basePath%>jsp/admin/index.jsp">首页</a>&gt;热词列表</div>
+        <div class="t_content"><a href="<%=basePath%>jsp/admin/index.jsp">首页</a>&gt;用户列表</div>
         <div class="t_right"></div>
         <div class="clear"></div>
     </div>
     <div class="content">
         <div class="c_l"></div>
         <div class="c_c">
-            <div class="nav"><a href="<%=basePath%>sys/key_toEdit?key.id=">添加热词</a></div>
-            <s:iterator value="keys" var="parent">
+            <div class="nav"><a href="<%=basePath%>sys/user_toEdit?user.id=">添加用户</a></div>
+            <s:iterator value="users" var="parent">
                 <div class="list">
                     <div class="list_l list0" aid="<s:property value="#parent.id" />">
-                        <s:property value="#parent.name" />&nbsp;&nbsp;
+                        <s:property value="#parent.username" />&nbsp;&nbsp;
                         (ID:<s:property value="#parent.id" />)&nbsp;&nbsp;
-						(排序:<s:property value="#parent.sort" />)
+						(权限:<s:property value="#parent.role.name" />)
                     </div>
                     <div class="list_r">
-                        <a href="<%=basePath%>sys/key_toEdit?key.id=<s:property value="#parent.id" />">修改</a>|
+                        <a href="<%=basePath%>sys/user_toEdit?user.id=<s:property value="#parent.id" />">修改</a>|
                         <a href="javascript:void(0);" aid="<s:property value="#parent.id" />" class="delete">删除</a>
                     </div>
                     <div class="clear"></div>

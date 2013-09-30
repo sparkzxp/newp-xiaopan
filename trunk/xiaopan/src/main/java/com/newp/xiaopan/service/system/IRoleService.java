@@ -5,24 +5,24 @@ import java.util.List;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.newp.xiaopan.bean.system.Key;
+import com.newp.xiaopan.bean.system.Role;
 
 /**
  * @author 张霄鹏
  */
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
-public interface IKeyService {
+public interface IRoleService {
 
-	Key query(Key key);
+	Role query(Role role);
 
-	List<Key> queryList(Key key);
-
-	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
-	String add(Key key);
+	List<Role> queryList(Role role);
 
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
-	Integer update(Key key);
+	String add(Role role);
 
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
-	Integer delete(Key key);
+	Integer update(Role role);
+
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+	Integer delete(Role role);
 }

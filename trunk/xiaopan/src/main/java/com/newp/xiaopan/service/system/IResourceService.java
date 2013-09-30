@@ -5,24 +5,24 @@ import java.util.List;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.newp.xiaopan.bean.system.Key;
+import com.newp.xiaopan.bean.system.Resource;
 
 /**
  * @author 张霄鹏
  */
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
-public interface IKeyService {
+public interface IResourceService {
 
-	Key query(Key key);
+	Resource query(Resource resource);
 
-	List<Key> queryList(Key key);
-
-	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
-	String add(Key key);
+	List<Resource> queryList(Resource resource);
 
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
-	Integer update(Key key);
+	String add(Resource resource);
 
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
-	Integer delete(Key key);
+	Integer update(Resource resource);
+
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+	Integer delete(Resource resource);
 }

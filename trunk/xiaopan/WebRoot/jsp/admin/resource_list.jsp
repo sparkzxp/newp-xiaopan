@@ -17,7 +17,7 @@
                 $(this).click(function() {
                 	if(confirm("确定删除吗？")){
 						var aid = $(this).attr("aid");
-						$.post("<%=basePath%>sys/key_doDelete",{"key.id":aid},function(data){
+						$.post("<%=basePath%>sys/resource_doDelete",{"key.id":aid},function(data){
 		   					if(data=="success"){
 		   						alert("操作成功！");
 		   						location.reload();
@@ -48,15 +48,15 @@
     <form id="form1">
     <div class="top">
         <div class="t_left"></div>
-        <div class="t_content"><a href="<%=basePath%>jsp/admin/index.jsp">首页</a>&gt;热词列表</div>
+        <div class="t_content"><a href="<%=basePath%>jsp/admin/index.jsp">首页</a>&gt;资源列表</div>
         <div class="t_right"></div>
         <div class="clear"></div>
     </div>
     <div class="content">
         <div class="c_l"></div>
         <div class="c_c">
-            <div class="nav"><a href="<%=basePath%>sys/key_toEdit?key.id=">添加热词</a></div>
-            <s:iterator value="keys" var="parent">
+            <div class="nav"><a href="<%=basePath%>sys/resource_toEdit?resource.id=">添加资源</a></div>
+            <s:iterator value="resources" var="parent">
                 <div class="list">
                     <div class="list_l list0" aid="<s:property value="#parent.id" />">
                         <s:property value="#parent.name" />&nbsp;&nbsp;
@@ -64,7 +64,7 @@
 						(排序:<s:property value="#parent.sort" />)
                     </div>
                     <div class="list_r">
-                        <a href="<%=basePath%>sys/key_toEdit?key.id=<s:property value="#parent.id" />">修改</a>|
+                        <a href="<%=basePath%>sys/resource_toEdit?resource.id=<s:property value="#parent.id" />">修改</a>|
                         <a href="javascript:void(0);" aid="<s:property value="#parent.id" />" class="delete">删除</a>
                     </div>
                     <div class="clear"></div>

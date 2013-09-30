@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="roleNpc">
+	<resultMap id="roleRstMap" type="role">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="siteId" column="siteId" />
+		<collection property="resources" javaType="java.util.ArrayList" ofType="resource" select="resourceNpc.queryByRoleId" column="id" />
+	</resultMap>
+
+	<sql id="query_where">
+		<where>
+			<if test="role != null">
+				<if test="role.id != null and role.id != ''">
+					and T.id = #{role.id}
+				</if>
+			</if>
+		</where>
+	</sql>
+
+	<select id="query" resultMap="roleRstMap" parameterType="map">
+		SELECT T.* FROM `role` T
+		<include refid="query_where" />
+		order by T.name asc
+	</select>
+	
+	<insert id="add" parameterType="role">
+		<selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		INSERT INTO `role`(
+			name, siteId
+		) VALUES (
+			#{name}, #{siteId}
+		)
+	</insert>
+	
+	<insert id="addResources" parameterType="role">
+		INSERT INTO ROLERESOURCE (
+			roleId, resourceId
+		) VALUES 
+		<foreach collection="resources" item="resource" index="index" separator=",">
+		(
+			#{id}, #{resource.id}
+		)
+		</foreach>
+	</insert>
+	
+	<update id="update" parameterType="role">
+		update `role` set
+			name = #{name},
+			siteId = #{siteId}
+			
+			WHERE id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="role">
+		delete from `role` where id = #{id}
+	</delete>
+	
+	<delete id="deleteResources" parameterType="role">
+		delete from ROLERESOURCE where roleId = #{id}
+	</delete>
+</mapper>

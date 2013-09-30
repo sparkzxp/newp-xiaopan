@@ -92,10 +92,25 @@
                 <p><a href="<%=basePath%>sys/ads_toList" target="I1">广告列表</a></p>
                 <p><a href="<%=basePath%>sys/ads_toEdit?ads.id=" target="I1">添加广告</a></p>
             </div>
-            <div class="top">热词管理</div>
+            <%-- <div class="top">热词管理</div>
             <div class="item">
                 <p><a href="<%=basePath%>sys/key_toList" target="I1">热词列表</a></p>
                 <p><a href="<%=basePath%>sys/key_toEdit?key.id=" target="I1">添加热词</a></p>
+            </div> --%>
+            <div class="top">资源管理</div>
+            <div class="item">
+                <p><a href="<%=basePath%>sys/resource_toList" target="I1">资源列表</a></p>
+                <p><a href="<%=basePath%>sys/resource_toEdit?resource.id=" target="I1">添加资源</a></p>
+            </div>
+            <div class="top">角色管理</div>
+            <div class="item">
+                <p><a href="<%=basePath%>sys/role_toList" target="I1">角色列表</a></p>
+                <p><a href="<%=basePath%>sys/role_toEdit?role.id=" target="I1">添加角色</a></p>
+            </div>
+            <div class="top">用户管理</div>
+            <div class="item">
+                <p><a href="<%=basePath%>sys/user_toList" target="I1">用户列表</a></p>
+                <p><a href="<%=basePath%>sys/user_toEdit?user.id=" target="I1">添加用户</a></p>
             </div>
             <%-- <div class="top">系统设置</div>
             <div class="item">

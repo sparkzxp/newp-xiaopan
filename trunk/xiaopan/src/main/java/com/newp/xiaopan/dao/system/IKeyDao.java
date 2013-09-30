@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.newp.xiaopan.dao.system;
 
 import java.util.List;
@@ -10,7 +7,6 @@ import com.newp.xiaopan.bean.system.Key;
 
 /**
  * @author 张霄鹏
- * 
  */
 public interface IKeyDao {
 

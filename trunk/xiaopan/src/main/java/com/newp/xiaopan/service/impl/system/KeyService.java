@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.newp.xiaopan.service.impl.system;
 
 import java.util.HashMap;
@@ -17,7 +14,6 @@ import com.newp.xiaopan.service.system.IKeyService;
 
 /**
  * @author 张霄鹏
- * 
  */
 @Service
 public class KeyService extends BaseService implements IKeyService {

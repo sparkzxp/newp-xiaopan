@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="resourceNpc">
+	<resultMap id="resourceRstMap" type="resource">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="type" column="type" />
+	</resultMap>
+
+	<sql id="query_where">
+		<where>
+			<if test="resource != null">
+				<if test="resource.id != null and resource.id != ''">
+					and T.id = #{resource.id}
+				</if>
+			</if>
+		</where>
+	</sql>
+
+	<select id="query" resultMap="resourceRstMap" parameterType="map">
+		SELECT T.* FROM `resource` T
+		<include refid="query_where" />
+		order by T.type asc, T.name asc
+	</select>
+	
+	<select id="queryByRoleId" resultMap="resourceRstMap" parameterType="string">
+		SELECT T.* FROM RESOURCE T
+		join ROLERESOURCE RS on RS.resourceId = T.id
+		where RS.roleId = #{id}
+	</select>
+	
+	<insert id="add" parameterType="resource">
+		<selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		INSERT INTO `resource`(
+			name, type
+		) VALUES (
+			#{name}, #{type}
+		)
+	</insert>
+	
+	<update id="update" parameterType="resource">
+		update `resource` set
+			name = #{name},
+			type = #{type}
+			
+			WHERE id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="resource">
+		delete from `resource` where id = #{id}
+	</delete>
+</mapper>
