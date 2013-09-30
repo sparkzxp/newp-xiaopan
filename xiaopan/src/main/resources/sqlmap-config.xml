@@ -22,6 +22,8 @@
 		<typeAlias alias="key" type="com.newp.xiaopan.bean.system.Key" />
 		<typeAlias alias="archive" type="com.newp.xiaopan.bean.system.Archive" />
 		<typeAlias alias="ads" type="com.newp.xiaopan.bean.system.Ads" />
+		<typeAlias alias="resource" type="com.newp.xiaopan.bean.system.Resource" />
+		<typeAlias alias="role" type="com.newp.xiaopan.bean.system.Role" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="sqlmaps/mysql/system/user.xml" />
@@ -32,5 +34,7 @@
 		<mapper resource="sqlmaps/mysql/system/key.xml" />
 		<mapper resource="sqlmaps/mysql/system/archive.xml" />
 		<mapper resource="sqlmaps/mysql/system/ads.xml" />
+		<mapper resource="sqlmaps/mysql/system/resource.xml" />
+		<mapper resource="sqlmaps/mysql/system/role.xml" />
 	</mappers>
 </configuration>  

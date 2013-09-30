@@ -20,6 +20,8 @@
 		<action name="user_*" class="userAction" method="{1}">
 			<result name="toLogin">/jsp/admin/index.jsp</result>
 			<result name="toManagePwd">/jsp/admin/admin_password.jsp</result>
+			<result name="toList">/jsp/admin/user_list.jsp</result>
+			<result name="toEdit">/jsp/admin/user_edit.jsp</result>
 		</action>
 		<action name="arctype_*" class="arctypeAction" method="{1}">
 			<result name="toList">/jsp/admin/arctype_list.jsp</result>
@@ -48,6 +50,14 @@
 		<action name="ads_*" class="adsAction" method="{1}">
 			<result name="toList">/jsp/admin/ads_list.jsp</result>
 			<result name="toEdit">/jsp/admin/ads_edit.jsp</result>
+		</action>
+		<action name="resource_*" class="resourceAction" method="{1}">
+			<result name="toList">/jsp/admin/resource_list.jsp</result>
+			<result name="toEdit">/jsp/admin/resource_edit.jsp</result>
+		</action>
+		<action name="role_*" class="roleAction" method="{1}">
+			<result name="toList">/jsp/admin/role_list.jsp</result>
+			<result name="toEdit">/jsp/admin/role_edit.jsp</result>
 		</action>
 		<action name="kaptcha" class="kaptchaImageAction" method="getKaptcha"></action>
 	</package>

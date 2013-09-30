@@ -14,6 +14,7 @@ public class User extends BaseBean implements Serializable {
 	private String password;// 密码
 	private Timestamp registerDate;// 注册日期
 	private Timestamp loginDate;// 登录日期
+	private Role role;
 
 	public User() {
 		super();
@@ -54,6 +55,14 @@ public class User extends BaseBean implements Serializable {
 
 	public void setLoginDate(Timestamp loginDate) {
 		this.loginDate = loginDate;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
 }

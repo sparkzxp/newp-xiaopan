@@ -82,6 +82,11 @@ public class UserAction extends BaseAction {
 		this.ajax(true);
 	}
 
+	public String toList() {
+		users = this.userService.queryList(null);
+		return Constants.ACTION_TO_LIST;
+	}
+
 	public List<User> getUsers() {
 		return users;
 	}
