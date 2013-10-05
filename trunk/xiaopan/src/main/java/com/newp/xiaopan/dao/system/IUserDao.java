@@ -16,4 +16,10 @@ public interface IUserDao {
 	Integer count(Map<String, Object> param);
 
 	Integer updatePart(User user);
+
+	String add(User key);
+
+	Integer update(User key);
+
+	Integer delete(User key);
 }

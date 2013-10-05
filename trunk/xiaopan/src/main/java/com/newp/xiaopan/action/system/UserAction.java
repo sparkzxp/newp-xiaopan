@@ -4,15 +4,22 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.ServletActionContext;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.newp.xiaopan.bean.system.Resource;
+import com.newp.xiaopan.bean.system.Role;
 import com.newp.xiaopan.bean.system.User;
 import com.newp.xiaopan.common.Constants;
 import com.newp.xiaopan.common.MD5;
+import com.newp.xiaopan.service.system.IResourceService;
+import com.newp.xiaopan.service.system.IRoleService;
 import com.newp.xiaopan.service.system.IUserService;
 import com.opensymphony.xwork2.Action;
 
@@ -26,10 +33,15 @@ public class UserAction extends BaseAction {
 
 	@Autowired
 	private IUserService userService;// user业务对象
+	@Autowired
+	private IRoleService roleService;
+	@Autowired
+	private IResourceService resourceService;
 
 	private List<User> users;// 用户集合
 	private User user;// 用户对象
 	private String failureReason;// login页面登录失败原因
+	private List<Role> roles;
 
 	public String login() {
 		if (user == null || StringUtils.isEmpty(user.getUsername()) || StringUtils.isEmpty(user.getPassword())) {
@@ -61,10 +73,9 @@ public class UserAction extends BaseAction {
 	}
 
 	/**
-	 * user logout(didn't distinguish company and government)
+	 * user logout
 	 * 
 	 * @author 张霄鹏
-	 * @return
 	 */
 	public String logout() {
 		ServletActionContext.getRequest().getSession().invalidate();
@@ -77,7 +88,9 @@ public class UserAction extends BaseAction {
 
 	public void doManagePwd() {
 		user.setPassword(MD5.MD5_32(user.getPassword()));
-		user.setId(this.getLoginUser().getId());
+		if (StringUtils.isEmpty(user.getId())) {
+			user.setId(this.getLoginUser().getId());
+		}
 		this.userService.updatePart(user);
 		this.ajax(true);
 	}
@@ -85,6 +98,50 @@ public class UserAction extends BaseAction {
 	public String toList() {
 		users = this.userService.queryList(null);
 		return Constants.ACTION_TO_LIST;
+	}
+
+	public String toEdit() {
+		if (null != user && StringUtils.isNotEmpty(user.getId())) {
+			user = this.userService.query(user);
+		}
+		roles = this.roleService.queryList(null);
+		return Constants.ACTION_TO_EDIT;
+	}
+
+	@SuppressWarnings("unchecked")
+	public void doEdit() {
+		JSONObject jsonObject = new JSONObject();
+		if (StringUtils.isEmpty(user.getId())) {
+			user.setPassword(MD5.MD5_32(user.getPassword()));
+			String id = this.userService.add(user);
+			jsonObject.put("result", "success");
+			jsonObject.put("id", id);
+		} else {
+			this.userService.update(user);
+			jsonObject.put("result", "success");
+			jsonObject.put("id", user.getId());
+		}
+		this.ajax(jsonObject.toJSONString());
+	}
+
+	public void doDelete() {
+		this.userService.delete(user);
+		this.ajax(true);
+	}
+
+	@SuppressWarnings("unchecked")
+	public void getResource() {
+		List<Resource> resources = this.resourceService.queryList(null, this.getLoginUser().getRole());
+		JSONArray jsonArray = new JSONArray();
+		JSONObject jsonObject;
+		if (CollectionUtils.isNotEmpty(resources)) {
+			for (Resource t : resources) {
+				jsonObject = new JSONObject();
+				jsonObject.put("resourceName", t.getName());
+				jsonArray.add(jsonObject);
+			}
+		}
+		this.ajax(jsonArray.toJSONString());
 	}
 
 	public List<User> getUsers() {
@@ -109,6 +166,21 @@ public class UserAction extends BaseAction {
 
 	public void setFailureReason(String failureReason) {
 		this.failureReason = failureReason;
+	}
+
+	/**
+	 * @return the roles
+	 */
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	/**
+	 * @param roles
+	 *            the roles to set
+	 */
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
 	}
 
 }

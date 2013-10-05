@@ -24,4 +24,13 @@ public interface IUserService {
 
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	Integer updatePart(User user);
+
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+	String add(User user);
+
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+	Integer update(User user);
+
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+	Integer delete(User user);
 }

@@ -34,4 +34,17 @@ public class UserDao implements IUserDao {
 	public Integer updatePart(User user) {
 		return this.sqlSession.update("userNpc.updatePart", user);
 	}
+
+	public String add(User user) {
+		this.sqlSession.insert("userNpc.add", user);
+		return String.valueOf(user.getId());
+	}
+
+	public Integer update(User user) {
+		return this.sqlSession.update("userNpc.update", user);
+	}
+
+	public Integer delete(User user) {
+		return this.sqlSession.delete("userNpc.delete", user);
+	}
 }

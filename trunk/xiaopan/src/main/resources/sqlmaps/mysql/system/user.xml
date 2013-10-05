@@ -8,11 +8,15 @@
 		<result property="password" column="pwd" />
 		<result property="registerDate" column="registerDate" />
 		<result property="loginDate" column="loginDate" />
+		<association property="role" column="roleId" select="roleNpc.queryByRoleId"/>
 	</resultMap>
 
 	<sql id="queryUser_where">
 		<where>
 			<if test="user != null">
+				<if test="user.id !=null and user.id != ''">
+					and U.ID = #{user.id}
+				</if>
 				<if test="user.username !=null and user.username != ''">
 					and U.USERNAME = #{user.username}
 				</if>
@@ -52,4 +56,27 @@
 		</set>
 		where id = #{id}
 	</update>
+	
+	<insert id="add" parameterType="user">
+		<selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		INSERT INTO ADMIN(
+			username, password, roleId, registerDate
+		) VALUES (
+			#{username}, #{password}, #{role.id}, CURRENT_TIMESTAMP
+		)
+	</insert>
+	
+	<update id="update" parameterType="user">
+		update ADMIN set
+			username = #{username},
+			roleId = #{role.id}
+			
+			WHERE id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="user">
+		delete from ADMIN where id = #{id}
+	</delete>
 </mapper>

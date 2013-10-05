@@ -52,4 +52,16 @@ public class UserService implements IUserService {
 	public Integer updatePart(User user) {
 		return this.userDao.updatePart(user);
 	}
+
+	public String add(User user) {
+		return this.userDao.add(user);
+	}
+
+	public Integer update(User user) {
+		return this.userDao.update(user);
+	}
+
+	public Integer delete(User user) {
+		return this.userDao.delete(user);
+	}
 }
