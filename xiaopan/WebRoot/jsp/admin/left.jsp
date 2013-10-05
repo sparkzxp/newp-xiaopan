@@ -58,6 +58,16 @@
                    $(".item").eq(i).css({display:"block"});
                });
             });
+            $.getJSON("<%=basePath%>sys/user_getResource",function(data){
+				for(var t = 0; t < $('.top').length; t++){
+					for(var r in data){
+						if($($('.top')[t]).text() == data[r].resourceName){
+							$($('.top')[t]).show();
+							break;
+						}
+					}
+				}
+			});
         });
     </script>
 </head>
@@ -65,59 +75,59 @@
     <form id="form1">
         <img src="<%=basePath%>css/images/main_21.gif" />
         <div class="left">
-            <div class="top">站点管理</div>
+            <div class="top" style="display: none;">站点管理</div>
             <div class="item">
                 <p><a href="<%=basePath%>sys/site_toList" target="I1">站点列表</a></p>
                 <p><a href="<%=basePath%>sys/site_toEdit?site.id=" target="I1">添加站点</a></p>
             </div>
-            <div class="top">栏目管理</div>
+            <div class="top" style="display: none;">栏目管理</div>
             <div class="item">
                 <p><a href="<%=basePath%>sys/arctype_toList" target="I1">栏目列表</a></p>
                 <p><a href="<%=basePath%>sys/arctype_toEdit?arctype.id=" target="I1">添加栏目</a></p>
                 <p><a href="<%=basePath%>sys/archive_toList" target="I1">内容列表</a></p>
                 <p><a href="<%=basePath%>sys/archive_toEdit?archive.id=" target="I1">添加内容</a></p>
             </div>
-            <div class="top">分类管理</div>
+            <div class="top" style="display: none;">分类管理</div>
             <div class="item">
                 <p><a href="<%=basePath%>sys/type_toList" target="I1">分类列表</a></p>
                 <p><a href="<%=basePath%>sys/type_toEdit?type.id=" target="I1">添加分类</a></p>
             </div>
-            <div class="top">店铺管理</div>
+            <div class="top" style="display: none;">店铺管理</div>
             <div class="item">
                 <p><a href="<%=basePath%>sys/shop_toList" target="I1">店铺列表</a></p>
                 <p><a href="<%=basePath%>sys/shop_toEdit?shop.id=" target="I1">添加店铺</a></p>
             </div>
-            <div class="top">广告管理</div>
+            <div class="top" style="display: none;">广告管理</div>
             <div class="item">
                 <p><a href="<%=basePath%>sys/ads_toList" target="I1">广告列表</a></p>
                 <p><a href="<%=basePath%>sys/ads_toEdit?ads.id=" target="I1">添加广告</a></p>
             </div>
-            <%-- <div class="top">热词管理</div>
+            <%-- <div class="top" style="display: none;">热词管理</div>
             <div class="item">
                 <p><a href="<%=basePath%>sys/key_toList" target="I1">热词列表</a></p>
                 <p><a href="<%=basePath%>sys/key_toEdit?key.id=" target="I1">添加热词</a></p>
             </div> --%>
-            <div class="top">资源管理</div>
+            <div class="top" style="display: none;">资源管理</div>
             <div class="item">
                 <p><a href="<%=basePath%>sys/resource_toList" target="I1">资源列表</a></p>
                 <p><a href="<%=basePath%>sys/resource_toEdit?resource.id=" target="I1">添加资源</a></p>
             </div>
-            <div class="top">角色管理</div>
+            <div class="top" style="display: none;">角色管理</div>
             <div class="item">
                 <p><a href="<%=basePath%>sys/role_toList" target="I1">角色列表</a></p>
                 <p><a href="<%=basePath%>sys/role_toEdit?role.id=" target="I1">添加角色</a></p>
             </div>
-            <div class="top">用户管理</div>
+            <div class="top" style="display: none;">用户管理</div>
             <div class="item">
                 <p><a href="<%=basePath%>sys/user_toList" target="I1">用户列表</a></p>
                 <p><a href="<%=basePath%>sys/user_toEdit?user.id=" target="I1">添加用户</a></p>
             </div>
-            <%-- <div class="top">系统设置</div>
+            <div class="top" style="display: none;">系统设置</div>
             <div class="item">
-                <!-- <p><a href="clear.jsp" target="I1">清除缓存</a></p> -->
-                <p><a href="config.jsp" target="I1">网站配制</a></p>
-                <p><a href="<%=basePath%>sys/user_toManagePwd" target="I1">修改密码</a></p>
-            </div> --%>
+                <!-- <p><a href="clear.jsp" target="I1">清除缓存</a></p>
+                <p><a href="config.jsp" target="I1">网站配制</a></p> -->
+                <p><a href="#" target="I1">模拟网络忙</a></p>
+            </div>
         </div>
     </form>
 </body>

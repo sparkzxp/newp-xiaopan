@@ -15,11 +15,17 @@
 					and T.id = #{resource.id}
 				</if>
 			</if>
+			<if test="role != null">
+				<if test="role.id != null and role.id != ''">
+					and RS.roleId = #{role.id}
+				</if>
+			</if>
 		</where>
 	</sql>
 
 	<select id="query" resultMap="resourceRstMap" parameterType="map">
 		SELECT T.* FROM `resource` T
+		join ROLERESOURCE RS on RS.resourceId = T.id
 		<include refid="query_where" />
 		order by T.type asc, T.name asc
 	</select>

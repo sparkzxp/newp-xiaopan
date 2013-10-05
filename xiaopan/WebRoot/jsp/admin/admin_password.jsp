@@ -33,6 +33,7 @@
 </head>
 <body>
     <s:form id="editForm">
+    <s:hidden name="user.id"/>
     <div class="top">
         <div class="t_left"></div>
         <div class="t_content"><strong>修改密码</strong></div>
@@ -45,7 +46,7 @@
             <table border="0" cellpadding="0" cellspacing="0" class="tableg" style="margin-top:40px;">
                 <tr>
                     <td width=200 align="right" height=40>新密码：</td>
-                    <td><s:password name="user.password" cssStyle="width:200px;" cssClass="{required:true,minlength:6,maxlength:20}"/>
+                    <td><s:password name="user.password" cssStyle="width:200px;" cssClass="{required:true,minlength:6,maxlength:20}"/></td>
                 </tr>
                 <tr>
                     <td height=40 align=right>确认密码：</td>

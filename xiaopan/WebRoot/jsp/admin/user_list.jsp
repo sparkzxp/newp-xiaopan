@@ -65,6 +65,7 @@
                     </div>
                     <div class="list_r">
                         <a href="<%=basePath%>sys/user_toEdit?user.id=<s:property value="#parent.id" />">修改</a>|
+                        <a href="<%=basePath%>sys/user_toManagePwd?user.id=<s:property value="#parent.id" />">修改密码</a>|
                         <a href="javascript:void(0);" aid="<s:property value="#parent.id" />" class="delete">删除</a>
                     </div>
                     <div class="clear"></div>

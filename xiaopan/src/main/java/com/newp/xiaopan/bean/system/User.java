@@ -57,10 +57,17 @@ public class User extends BaseBean implements Serializable {
 		this.loginDate = loginDate;
 	}
 
+	/**
+	 * @return the role
+	 */
 	public Role getRole() {
 		return role;
 	}
 
+	/**
+	 * @param role
+	 *            the role to set
+	 */
 	public void setRole(Role role) {
 		this.role = role;
 	}

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.newp.xiaopan.bean.system.Resource;
+import com.newp.xiaopan.bean.system.Role;
 import com.newp.xiaopan.dao.system.IResourceDao;
 import com.newp.xiaopan.service.system.IResourceService;
 
@@ -22,8 +23,13 @@ public class ResourceService extends BaseService implements IResourceService {
 	private IResourceDao resourceDao;
 
 	public List<Resource> queryList(Resource resource) {
+		return this.queryList(resource, null);
+	}
+
+	public List<Resource> queryList(Resource resource, Role role) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("resource", resource);
+		params.put("role", role);
 		return this.resourceDao.query(params);
 	}
 

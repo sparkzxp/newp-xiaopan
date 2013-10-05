@@ -25,6 +25,11 @@
 		order by T.name asc
 	</select>
 	
+	<select id="queryByRoleId" resultMap="roleRstMap" parameterType="map">
+		SELECT T.* FROM `role` T
+		where T.id = #{id}
+	</select>
+	
 	<insert id="add" parameterType="role">
 		<selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
 			SELECT LAST_INSERT_ID()

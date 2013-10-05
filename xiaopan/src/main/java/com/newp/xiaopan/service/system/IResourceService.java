@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.newp.xiaopan.bean.system.Resource;
+import com.newp.xiaopan.bean.system.Role;
 
 /**
  * @author 张霄鹏
@@ -16,6 +17,8 @@ public interface IResourceService {
 	Resource query(Resource resource);
 
 	List<Resource> queryList(Resource resource);
+
+	List<Resource> queryList(Resource resource, Role role);
 
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	String add(Resource resource);
