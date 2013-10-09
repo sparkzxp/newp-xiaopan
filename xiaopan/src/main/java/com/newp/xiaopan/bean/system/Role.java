@@ -12,6 +12,7 @@ public class Role extends BaseBean {
 	private String name;
 	private List<Resource> resources;
 	private Site site;
+	private Shop shop;
 
 	public String getName() {
 		return name;
@@ -42,5 +43,20 @@ public class Role extends BaseBean {
 	 */
 	public void setSite(Site site) {
 		this.site = site;
+	}
+
+	/**
+	 * @return the shop
+	 */
+	public Shop getShop() {
+		return shop;
+	}
+
+	/**
+	 * @param shop
+	 *            the shop to set
+	 */
+	public void setShop(Shop shop) {
+		this.shop = shop;
 	}
 }

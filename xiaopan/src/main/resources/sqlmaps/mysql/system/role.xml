@@ -6,6 +6,7 @@
 		<id property="id" column="id" />
 		<result property="name" column="name" />
 		<association property="site" column="siteId" select="siteNpc.queryBySiteId"/>
+		<association property="shop" column="shopId" select="shopNpc.queryByShopId"/>
 		<collection property="resources" javaType="java.util.ArrayList" ofType="resource" select="resourceNpc.queryByRoleId" column="id" />
 	</resultMap>
 
@@ -35,9 +36,9 @@
 			SELECT LAST_INSERT_ID()
 		</selectKey>
 		INSERT INTO `role`(
-			name, siteId
+			name, siteId, shopId
 		) VALUES (
-			#{name}, #{site.id}
+			#{name}, #{site.id}, #{shop.id}
 		)
 	</insert>
 	
@@ -55,7 +56,8 @@
 	<update id="update" parameterType="role">
 		update `role` set
 			name = #{name},
-			siteId = #{site.id}
+			siteId = #{site.id},
+			shopId = #{shop.id}
 			
 			WHERE id = #{id}
 	</update>
