@@ -37,6 +37,9 @@ public interface ITypeService {
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	Integer update(Map<String, Object> params);
 
+	/**
+	 * @param params:1,type.id;2,siteId
+	 */
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
-	Integer delete(Type type);
+	String delete(Map<String, Object> params);
 }

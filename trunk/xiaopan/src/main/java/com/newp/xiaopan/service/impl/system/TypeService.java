@@ -116,8 +116,24 @@ public class TypeService extends BaseService implements ITypeService {
 		return ret;
 	}
 
-	public Integer delete(Type type) {
-		return this.typeDao.delete(type);
+	public String delete(Map<String, Object> params) {
+		Type type = (Type) params.get("type");
+		if (params.get("siteId") == null) {
+			this.typeDao.delete(type);
+			this.typeDao.deleteSites(params);
+		} else {
+			Type _t = new Type();
+			_t.setId(type.getId());
+			_t = this.query(_t);
+			if (_t.getSites().size() > 1) {
+				params.put("siteIds", params.get("siteId"));
+				this.typeDao.deleteSites(params);
+			} else {
+				this.typeDao.delete(type);
+				this.typeDao.deleteSites(params);
+			}
+		}
+		return null;
 	}
 
 	public List<Type> queryquerySecondNodes() {

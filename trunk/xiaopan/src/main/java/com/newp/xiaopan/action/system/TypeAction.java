@@ -175,7 +175,6 @@ public class TypeAction extends BaseAction {
 			params.put("siteId", this.getLoginUserSite().getId());
 		}
 		params.put("siteIds", siteIds);
-		// 新增
 		if (StringUtils.isEmpty(type.getId())) {
 			// 管理员，全删全加
 			// 站点人员，判断本站点是否重名，重名则失败
@@ -223,7 +222,14 @@ public class TypeAction extends BaseAction {
 	}
 
 	public void doDelete() {
-		this.typeService.delete(type);
+		// 管理员，全删
+		// 站点人员。判断是否有其它站点关联菜单，是则删除本站点关联，否则删除关联后再删除菜单
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("type", type);
+		if (this.getLoginUserSite() != null) {
+			params.put("siteId", this.getLoginUserSite().getId());
+		}
+		this.typeService.delete(params);
 		this.ajax(true);
 	}
 
