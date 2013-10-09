@@ -1,6 +1,7 @@
 package com.newp.xiaopan.service.system;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,17 +17,25 @@ public interface ITypeService {
 
 	Type query(Type type);
 
+	List<Type> queryList(Map<String, Object> params);
+
 	List<Type> queryList(Type type);
 
 	List<Type> queryquerySecondNodes();
 
 	List<Type> queryDistinctList(Type type);
 
+	/**
+	 * @param params:1,type;2,siteId;3,siteIds
+	 */
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
-	String add(Type type);
+	String add(Map<String, Object> params);
 
+	/**
+	 * @param params:1,type;2,siteId;3,siteIds
+	 */
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
-	Integer update(Type type);
+	Integer update(Map<String, Object> params);
 
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	Integer delete(Type type);

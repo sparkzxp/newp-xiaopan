@@ -16,7 +16,7 @@ public class Type extends BaseBean {
 	private String description;
 	private Integer topid;
 	private Integer sort;
-	private Double price;
+	private String price;
 	private List<Site> sites;
 
 	public Type() {
@@ -84,11 +84,11 @@ public class Type extends BaseBean {
 		this.sort = sort;
 	}
 
-	public Double getPrice() {
+	public String getPrice() {
 		return price;
 	}
 
-	public void setPrice(Double price) {
+	public void setPrice(String price) {
 		this.price = price;
 	}
 

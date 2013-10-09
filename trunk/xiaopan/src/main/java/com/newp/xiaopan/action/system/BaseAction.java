@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 import org.json.simple.JSONObject;
 
+import com.newp.xiaopan.bean.system.Site;
 import com.newp.xiaopan.bean.system.User;
 import com.newp.xiaopan.common.Constants;
 import com.newp.xiaopan.common.bean.Pager;
@@ -36,6 +37,11 @@ public class BaseAction extends ActionSupport {
 	public User getLoginUser() {
 		Object obj = getCurrentSession().getAttribute(Constants.SESSION_USER_KEY);
 		return obj == null ? null : (User) obj;
+	}
+
+	public Site getLoginUserSite() {
+		Object obj = getCurrentSession().getAttribute(Constants.SESSION_USER_SITE);
+		return obj == null ? null : (Site) obj;
 	}
 
 	/**

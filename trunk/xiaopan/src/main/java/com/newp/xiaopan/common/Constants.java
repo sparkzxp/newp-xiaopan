@@ -22,4 +22,6 @@ public interface Constants {
 	String ACTION_TO_DETAIL = "toDetail";
 
 	String ANDROID_IPHONE_BAIDUTC_FILTER = ".*(ANDROID.*MOBILE|IPHONE.*MOBILE|BAIDU TRANSCODER).*";
+
+	String SYS_ADMIN_ID = "1";
 }

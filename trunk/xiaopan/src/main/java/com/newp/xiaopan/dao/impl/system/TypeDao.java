@@ -29,8 +29,7 @@ public class TypeDao implements ITypeDao {
 	}
 
 	public String add(Type type) {
-		this.sqlSession.insert("typeNpc.add", type);
-		return String.valueOf(type.getId());
+		return String.valueOf(this.sqlSession.insert("typeNpc.add", type));
 	}
 
 	public Integer update(Type type) {
@@ -43,5 +42,14 @@ public class TypeDao implements ITypeDao {
 
 	public List<Type> queryquerySecondNodes() {
 		return this.sqlSession.selectList("typeNpc.querySecondNodes");
+	}
+
+	public String addSites(Type type) {
+		this.sqlSession.insert("typeNpc.addSites", type);
+		return String.valueOf(type.getId());
+	}
+
+	public Integer deleteSites(Map<String, Object> params) {
+		return this.sqlSession.delete("typeNpc.deleteSites", params);
 	}
 }

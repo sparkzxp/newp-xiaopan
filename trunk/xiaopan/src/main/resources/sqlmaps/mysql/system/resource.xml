@@ -24,7 +24,7 @@
 	</sql>
 
 	<select id="query" resultMap="resourceRstMap" parameterType="map">
-		SELECT T.* FROM `resource` T
+		SELECT distinct T.* FROM `resource` T
 		join ROLERESOURCE RS on RS.resourceId = T.id
 		<include refid="query_where" />
 		order by T.type asc, T.name asc

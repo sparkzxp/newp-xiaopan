@@ -24,6 +24,15 @@
 				<if test="type.id != null and type.id != ''">
 					and T.id = #{type.id}
 				</if>
+				<if test="type.name != null and type.name != ''">
+					and T.name = #{type.name}
+				</if>
+				<if test="type.price != null and type.price != ''">
+					and T.price = #{type.price}
+				</if>
+				<if test="siteId != null and siteId != ''">
+					and TS.siteId = #{siteId}
+				</if>
 			</if>
 		</where>
 	</sql>
@@ -46,7 +55,8 @@
 	</select>
 	
 	<select id="query" resultMap="typeRstMap" parameterType="map">
-		SELECT T.* FROM TYPE T
+		SELECT distinct T.* FROM TYPE T
+		left join TYPESITE TS on TS.typeId = T.id
 		<include refid="query_where" />
 		order by T.sort asc, T.name asc
 	</select>
@@ -72,6 +82,17 @@
 		)
 	</insert>
 	
+	<insert id="addSites" parameterType="type">
+		INSERT INTO TYPESITE (
+			typeId, siteId
+		) VALUES 
+		<foreach collection="sites" item="site" index="index" separator=",">
+		(
+			#{id}, #{site.id}
+		)
+		</foreach>
+	</insert>
+	
 	<update id="update" parameterType="type">
 		update TYPE set
 			name = #{name},
@@ -88,5 +109,12 @@
 	
 	<delete id="delete" parameterType="type">
 		delete from TYPE where id = #{id}
+	</delete>
+	
+	<delete id="deleteSites" parameterType="map">
+		delete from TYPESITE where typeId = #{type.id}
+		<if test="siteIds != null and siteIds != ''">
+			and siteId in (${siteIds})
+		</if>
 	</delete>
 </mapper>

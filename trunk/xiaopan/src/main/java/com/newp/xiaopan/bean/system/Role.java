@@ -11,7 +11,7 @@ public class Role extends BaseBean {
 
 	private String name;
 	private List<Resource> resources;
-	private String siteId;
+	private Site site;
 
 	public String getName() {
 		return name;
@@ -29,11 +29,18 @@ public class Role extends BaseBean {
 		this.resources = resources;
 	}
 
-	public String getSiteId() {
-		return siteId;
+	/**
+	 * @return the site
+	 */
+	public Site getSite() {
+		return site;
 	}
 
-	public void setSiteId(String siteId) {
-		this.siteId = siteId;
+	/**
+	 * @param site
+	 *            the site to set
+	 */
+	public void setSite(Site site) {
+		this.site = site;
 	}
 }

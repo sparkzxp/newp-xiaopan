@@ -22,7 +22,14 @@ public interface ITypeDao {
 
 	String add(Type type);
 
+	String addSites(Type type);
+
 	Integer update(Type type);
 
 	Integer delete(Type type);
+
+	/**
+	 * @param params:1,type.id;2,siteIds
+	 */
+	Integer deleteSites(Map<String, Object> params);
 }

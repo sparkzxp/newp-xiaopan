@@ -1,6 +1,8 @@
 package com.newp.xiaopan.action.system;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -36,15 +38,26 @@ public class TypeAction extends BaseAction {
 	private String siteIds;
 	private String siteJson;
 	private String typeJson;
+	private Boolean isAdmin;
 
 	public String toList() {
+		Map<String, Object> params = new HashMap<String, Object>();
 		type.setTopid(0);
-		types = this.typeService.queryList(type);
+		params.put("type", type);
+		if (this.getLoginUserSite() != null) {
+			params.put("siteId", this.getLoginUserSite().getId());
+		}
+		types = this.typeService.queryList(params);
 		return Constants.ACTION_TO_LIST;
 	}
 
 	public void getTypeMenu() {
-		types = this.typeService.queryList(type);
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("type", type);
+		if (this.getLoginUserSite() != null) {
+			params.put("siteId", this.getLoginUserSite().getId());
+		}
+		types = this.typeService.queryList(params);
 		net.sf.json.JSONObject jsonObject = new net.sf.json.JSONObject();
 		if (CollectionUtils.isNotEmpty(types)) {
 			jsonObject.put("list", net.sf.json.JSONArray.fromObject(types));
@@ -60,6 +73,7 @@ public class TypeAction extends BaseAction {
 		if (isUpdate) {
 			type = this.typeService.query(type);
 		}
+		setIsAdmin(this.getLoginUser().getId().equals(Constants.SYS_ADMIN_ID));
 		initEdit(isUpdate);
 		return Constants.ACTION_TO_EDIT;
 	}
@@ -148,16 +162,64 @@ public class TypeAction extends BaseAction {
 	@SuppressWarnings("unchecked")
 	public void doEdit() {
 		JSONObject jsonObject = new JSONObject();
+
+		String isExist = isExist();
+		if (StringUtils.isNotEmpty(isExist) && !"{}".equals(isExist)) {
+			this.ajax(isExist);
+			return;
+		}
+
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("type", type);
+		if (this.getLoginUserSite() != null) {
+			params.put("siteId", this.getLoginUserSite().getId());
+		}
+		params.put("siteIds", siteIds);
+		// 新增
 		if (StringUtils.isEmpty(type.getId())) {
-			String id = this.typeService.add(type);
+			// 管理员，全删全加
+			// 站点人员，判断本站点是否重名，重名则失败
+			// 判断数据库是否已存在重名，存在则直接添加站点关联，不存在则新增后再添加站点关联
+			String id = this.typeService.add(params);
 			jsonObject.put("result", "success");
 			jsonObject.put("id", id);
 		} else {
-			this.typeService.update(type);
+			// 管理员，全删全加
+			// 站点人员，判断本站点是否重名，重名则失败，不重名直接修改
+			this.typeService.update(params);
 			jsonObject.put("result", "success");
 			jsonObject.put("id", type.getId());
 		}
 		this.ajax(jsonObject.toJSONString());
+	}
+
+	@SuppressWarnings("unchecked")
+	private String isExist() {
+		JSONObject jsonObject = new JSONObject();
+
+		Type _t = new Type();
+		_t.setName(type.getName());
+		_t.setPrice(type.getPrice());
+		Map<String, Object> _p = new HashMap<String, Object>();
+		_p.put("type", _t);
+		if (this.getLoginUserSite() != null) {
+			_p.put("siteId", this.getLoginUserSite().getId());
+		}
+		List<Type> _ts = this.typeService.queryList(_p);
+		if (StringUtils.isEmpty(type.getId())) {
+			if (CollectionUtils.isNotEmpty(_ts)) {
+				jsonObject.put("result", "菜单 " + type.getName() + "(" + type.getPrice() + ") 已存在");
+			}
+		} else {
+			if (CollectionUtils.isNotEmpty(_ts)) {
+				if (_ts.size() > 1) {
+					jsonObject.put("result", "菜单 " + type.getName() + "(" + type.getPrice() + ") 已存在");
+				} else if (_ts.size() == 1 && !_ts.get(0).getId().equals(type.getId())) {
+					jsonObject.put("result", "菜单 " + type.getName() + "(" + type.getPrice() + ") 已存在");
+				}
+			}
+		}
+		return jsonObject.toJSONString();
 	}
 
 	public void doDelete() {
@@ -238,5 +300,20 @@ public class TypeAction extends BaseAction {
 	 */
 	public void setTypeJson(String typeJson) {
 		this.typeJson = typeJson;
+	}
+
+	/**
+	 * @return the isAdmin
+	 */
+	public Boolean getIsAdmin() {
+		return isAdmin;
+	}
+
+	/**
+	 * @param isAdmin
+	 *            the isAdmin to set
+	 */
+	public void setIsAdmin(Boolean isAdmin) {
+		this.isAdmin = isAdmin;
 	}
 }

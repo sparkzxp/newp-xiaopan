@@ -121,7 +121,7 @@
                 <tr>
                     <td width="120px" height="25px" align="right">所属站点：</td>
                     <td>
-                    	<s:select name="role.siteId" list="sites" listKey="id" listValue="name" headerKey="" headerValue="全部站点"></s:select>
+                    	<s:select name="role.site.id" list="sites" listKey="id" listValue="name" headerKey="" headerValue="全部站点"></s:select>
                     </td>
                 </tr>
                 <tr>
