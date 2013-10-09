@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.newp.xiaopan.service.impl.system;
 
 import java.util.HashMap;
@@ -55,6 +52,10 @@ public class TypeService extends BaseService implements ITypeService {
 
 	public Integer delete(Type type) {
 		return this.typeDao.delete(type);
+	}
+
+	public List<Type> queryquerySecondNodes() {
+		return this.typeDao.queryquerySecondNodes();
 	}
 
 }

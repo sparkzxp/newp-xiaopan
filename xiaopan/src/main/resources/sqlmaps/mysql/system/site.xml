@@ -25,6 +25,12 @@
 		order by T.sort asc, T.name asc
 	</select>
 	
+	<select id="queryByTypeId" resultMap="siteRstMap" parameterType="map">
+		SELECT T.* FROM SITE T
+		join TYPESITE TS on TS.siteId = T.id
+		where TS.typeId = #{id}
+	</select>
+	
 	<insert id="add" parameterType="site">
 		<selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
 			SELECT LAST_INSERT_ID()

@@ -16,10 +16,30 @@
             $(".list:first").css({ borderTop: "solid 1px #d0e3b7" });
             $(".list0").each(function(i) {
                 $(this).click(function() {
-                    $(".item").eq(i).toggle();
+                	if($(this).attr('refreshid')=='true'){
+                		$(this).attr('refreshid', 'false');
+	                	$.getJSON("<%=basePath%>sys/type_getTypeMenu", "type.topid="+$(this).attr('aid'), function(data){
+	                		if(data.success){
+	                			var _html = '';
+	                			for(var n=0; n<data.list.length; n++){
+	                				_html += '<div class="l_item"><div class="list_l list1" aid="'+data.list[n].id+'" refreshid="true" onclick="clickList1(this)">';
+	                				_html += data.list[n].name+'&nbsp;&nbsp;(价格:'+data.list[n].price+'&nbsp;元)&nbsp;&nbsp;';
+	                				_html += '(ID:'+data.list[n].id+')&nbsp;&nbsp;(排序:'+data.list[n].sort+')</div>';
+	                				_html += '<div class="list_r">';
+	                				_html += '<a href="<%=basePath%>sys/type_toEdit?type.id='+data.list[n].id+'">修改</a>|';
+	                				_html += '<a href="javascript:void(0);" aid="'+data.list[n].id+'" class="delete">删除</a>';
+	                				_html += '</div><div class="clear"></div><div class="item1"></div></div>';
+	                			}
+	                			$(".item").eq(i).html(_html);
+	                        	$(".item").eq(i).toggle();
+	                		}
+	                	});
+                	}else{
+                		$(".item").eq(i).toggle();
+                	}
                 });
             });
-
+            
             $(".delete").each(function(i) {
                 $(this).click(function() {
                 	if(confirm("删除前请先确定有没有下级分类，确定删除吗？")){
@@ -36,6 +56,30 @@
                 });
             });
         });
+        
+        function clickList1(o){
+        	if($(o).attr('refreshid')=='true'){
+        		$(o).attr('refreshid', 'false');
+            	$.getJSON("<%=basePath%>sys/type_getTypeMenu", "type.topid="+$(o).attr('aid'), function(data){
+            		if(data.success){
+            			var _html = '';
+            			for(var n=0; n<data.list.length; n++){
+            				_html += '<div class="l_item"><div class="list_l list2" aid="'+data.list[n].id+'">';
+            				_html += data.list[n].name+'&nbsp;&nbsp;(价格:'+data.list[n].price+'&nbsp;元)&nbsp;&nbsp;';
+            				_html += '(ID:'+data.list[n].id+')&nbsp;&nbsp;(排序:'+data.list[n].sort+')</div>';
+            				_html += '<div class="list_r">';
+            				_html += '<a href="<%=basePath%>sys/type_toEdit?type.id='+data.list[n].id+'">修改</a>|';
+            				_html += '<a href="javascript:void(0);" aid="'+data.list[n].id+'" class="delete">删除</a>';
+            				_html += '</div><div class="clear"></div><div class="item2"></div></div>';
+            			}
+            			$(o).parent().find(".item1").html(_html);
+            			$(o).parent().find(".item1").toggle();
+            		}
+            	});
+        	}else{
+        		$(o).parent().find(".item1").toggle();
+        	}
+        }
     </script>
     <style type="text/css">
         .nav{text-align:right;margin-right:10px;}
@@ -66,7 +110,7 @@
             <s:iterator value="types" var="parent">
             	<s:if test="#parent.topid == 0">
                     <div class="list">
-                        <div class="list_l list0" aid="<s:property value="#parent.id" />">
+                        <div class="list_l list0" aid="<s:property value="#parent.id" />" refreshid="true">
                             <s:property value="#parent.name" />&nbsp;&nbsp;
                             (ID:<s:property value="#parent.id" />)&nbsp;&nbsp;
   							(排序:<s:property value="#parent.sort" />)
@@ -76,8 +120,8 @@
                             <a href="javascript:void(0);" aid="<s:property value="#parent.id" />" class="delete">删除</a>
                         </div>
                         <div class="clear"></div>
-                        <div class="item">
-                            <s:iterator value="types" var="child">
+                        <div class="item"></div>
+                            <%-- <s:iterator value="types" var="child">
 								<s:if test="#child.topid == #parent.id">
                                 <div class="l_item">
                                     <div class="list_l list1" aid="<s:property value="#child.id" />">
@@ -95,7 +139,7 @@
                                 </div>
                                 </s:if>
                              </s:iterator>
-                         </div>
+                         </div> --%>
                     </div>
                 </s:if>
             </s:iterator>

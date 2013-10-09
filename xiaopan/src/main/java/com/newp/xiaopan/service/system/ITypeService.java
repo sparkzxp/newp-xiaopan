@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.newp.xiaopan.service.system;
 
 import java.util.List;
@@ -20,6 +17,8 @@ public interface ITypeService {
 	Type query(Type type);
 
 	List<Type> queryList(Type type);
+
+	List<Type> queryquerySecondNodes();
 
 	List<Type> queryDistinctList(Type type);
 

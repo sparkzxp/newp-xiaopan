@@ -1,5 +1,7 @@
 package com.newp.xiaopan.bean.system;
 
+import java.util.List;
+
 /**
  * @author 张霄鹏
  */
@@ -15,6 +17,7 @@ public class Type extends BaseBean {
 	private Integer topid;
 	private Integer sort;
 	private Double price;
+	private List<Site> sites;
 
 	public Type() {
 		super();
@@ -87,5 +90,20 @@ public class Type extends BaseBean {
 
 	public void setPrice(Double price) {
 		this.price = price;
+	}
+
+	/**
+	 * @return the sites
+	 */
+	public List<Site> getSites() {
+		return sites;
+	}
+
+	/**
+	 * @param sites
+	 *            the sites to set
+	 */
+	public void setSites(List<Site> sites) {
+		this.sites = sites;
 	}
 }

@@ -23,7 +23,7 @@
 		<repository>
 			<id>nexus</id>
 			<name>Team Nexus Repository</name>
-			<url>http://127.0.0.1:7777/nexus/content/groups/public</url>
+			<url>http://192.168.1.101:7777/nexus/content/groups/public</url>
 		</repository>
 	</repositories>
 
@@ -156,6 +156,16 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.26</version>
 			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.ezmorph</groupId>
+			<artifactId>ezmorph</artifactId>
+			<version>1.0.6</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>1.8.3</version>
 		</dependency>
 	</dependencies>
 </project>
