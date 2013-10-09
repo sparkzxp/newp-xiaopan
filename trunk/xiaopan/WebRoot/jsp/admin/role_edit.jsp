@@ -68,6 +68,48 @@
 			}
 		}
 		
+		var settingShop = {
+			check: {
+				enable: true,
+				chkStyle: "radio",
+				radioType: "all"
+			},
+			data: {
+				simpleData: {
+					enable: true
+				}
+			},
+			callback: {
+				onCheck: onCheckShop
+			}
+		};
+		function onCheckShop(e, treeId, treeNode) {
+			if(treeNode.checked){
+				$("#shopSel").attr("value", treeNode.name);
+				$("#editForm_role_shop_id").attr("value", treeNode.id);
+			}else{
+				$("#shopSel").attr("value", '');
+				$("#editForm_role_shop_id").attr("value", '');
+			}
+		}
+
+		function showMenuShop() {
+			var typeObj = $("#shopSel");
+			var typeOffset = $("#shopSel").offset();
+			$("#menuContentShop").css({left:typeOffset.left + "px", top:typeOffset.top + typeObj.outerHeight() + "px"}).slideDown("fast");
+
+			$("body").bind("mousedown", onBodyDownShop);
+		}
+		function hideMenuShop() {
+			$("#menuContentShop").fadeOut("fast");
+			$("body").unbind("mousedown", onBodyDownShop);
+		}
+		function onBodyDownShop(event) {
+			if (!(event.target.id == "menuBtnShop" || event.target.id == "shopSel" || event.target.id == "menuContentShop" || $(event.target).parents("#menuContentShop").length>0)) {
+				hideMenuShop();
+			}
+		}
+		
         $(function() {
         	var zNodes = JSON.parse('<s:property value="resourceJson" escape="false"/>');
         	$.fn.zTree.init($("#resourceTree"), setting, zNodes);
@@ -80,6 +122,15 @@
 			}
 			if (v.length > 0 ) v = v.substring(0, v.length-1);
 			$("#resourceSel").attr("value", v);
+			
+			var zNodesShop = JSON.parse('<s:property value="shopJson" escape="false"/>');
+        	$.fn.zTree.init($("#shopTree"), settingShop, zNodesShop);
+        	
+        	var zTreeShop = $.fn.zTree.getZTreeObj("shopTree"),
+        	nodesShop = zTreeShop.getCheckedNodes(true);
+        	if(nodesShop.length == 1){
+				$("#shopSel").attr("value", nodesShop[0].name);
+        	}
 			
         	$("#btn_submit").click(function(){
    				if($('#editForm').valid()){
@@ -133,6 +184,14 @@
 					</td>
                 </tr>
                 <tr>
+                    <td align="right" height="25px">监管店铺：</td>
+                    <td>
+                    	<input type="text" id="shopSel" readonly="readonly" style="width:200px;" onclick="showMenuShop();"/>
+                    	&nbsp;<a id="menuBtnShop" href="javascript:void(0)" onclick="showMenuShop();" style="font-size:12px;">选择</a>
+                    	<s:hidden name="role.shop.id"/>
+                    </td>
+                </tr>
+                <tr>
                     <td height="45px"></td>
                     <td>
                         <input type="button" id="btn_submit" class="btn_submit" value="提交"/>
@@ -150,6 +209,9 @@
     </s:form>
     <div id="menuContent" class="menuContent" style="display:none; position: absolute;">
 		<ul id="resourceTree" class="ztree" style="clear:both;margin-top:0; width:250px; height: 300px;"></ul>
+	</div>
+    <div id="menuContentShop" class="menuContent" style="display:none; position: absolute;">
+		<ul id="shopTree" class="ztree" style="clear:both;margin-top:0; width:250px; height: 300px;"></ul>
 	</div>
 </body>
 </html>

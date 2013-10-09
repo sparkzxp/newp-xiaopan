@@ -68,6 +68,12 @@
 		<include refid="query_where" />
 		<include refid="order"/>
 	</select>
+
+	<select id="queryByShopId" resultMap="shopRstMap" parameterType="map">
+		SELECT s.*, si.name siteName FROM SHOP s
+		join site si on si.id = s.siteId
+		where s.id = #{id}
+	</select>
 	
 	<select id="querySuport" resultMap="shopRstMap" parameterType="map">
 		SELECT s.*, si.name siteName FROM SHOP s

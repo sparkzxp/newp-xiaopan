@@ -13,10 +13,13 @@ import org.springframework.stereotype.Controller;
 
 import com.newp.xiaopan.bean.system.Resource;
 import com.newp.xiaopan.bean.system.Role;
+import com.newp.xiaopan.bean.system.Shop;
 import com.newp.xiaopan.bean.system.Site;
 import com.newp.xiaopan.common.Constants;
+import com.newp.xiaopan.common.PinyinUtil;
 import com.newp.xiaopan.service.system.IResourceService;
 import com.newp.xiaopan.service.system.IRoleService;
+import com.newp.xiaopan.service.system.IShopService;
 import com.newp.xiaopan.service.system.ISiteService;
 
 /**
@@ -35,12 +38,15 @@ public class RoleAction extends BaseAction {
 	private IResourceService resourceService;
 	@Autowired
 	private ISiteService siteService;
+	@Autowired
+	private IShopService shopService;
 
 	private Role role;
 	private List<Role> roles;
 	private String resourceJson;
 	private String resourceIds;
 	private List<Site> sites;
+	private String shopJson;
 
 	public String toList() {
 		roles = this.roleService.queryList(role);
@@ -58,6 +64,7 @@ public class RoleAction extends BaseAction {
 
 	@SuppressWarnings("unchecked")
 	private void initEdit(boolean isUpdate) {
+		// 1
 		String[] resourceIdArr = null;
 		StringBuffer sb = new StringBuffer();
 		if (isUpdate && CollectionUtils.isNotEmpty(role.getResources())) {
@@ -73,8 +80,10 @@ public class RoleAction extends BaseAction {
 			resourceIds = sb.toString();
 		}
 
+		// 2
 		setSites(this.siteService.queryList(null));
 
+		// 3
 		List<Resource> allResource = this.resourceService.queryList(null);
 		JSONArray jsonArray = new JSONArray();
 		JSONObject jsonObject;
@@ -99,10 +108,121 @@ public class RoleAction extends BaseAction {
 			jsonArray.add(jsonObject);
 		}
 		this.resourceJson = jsonArray.toJSONString();
+
+		// 4
+		jsonArray = new JSONArray();
+
+		jsonObject = new JSONObject();
+		jsonObject.put("id", "A_G");
+		jsonObject.put("pId", 0);
+		jsonObject.put("name", "A-G开头");
+		jsonObject.put("nocheck", true);
+		jsonArray.add(jsonObject);
+
+		jsonObject = new JSONObject();
+		jsonObject.put("id", "H_N");
+		jsonObject.put("pId", 0);
+		jsonObject.put("name", "H-N开头");
+		jsonObject.put("nocheck", true);
+		jsonArray.add(jsonObject);
+
+		jsonObject = new JSONObject();
+		jsonObject.put("id", "O_T");
+		jsonObject.put("pId", 0);
+		jsonObject.put("name", "O-T开头");
+		jsonObject.put("nocheck", true);
+		jsonArray.add(jsonObject);
+
+		jsonObject = new JSONObject();
+		jsonObject.put("id", "U_Z");
+		jsonObject.put("pId", 0);
+		jsonObject.put("name", "U-Z开头");
+		jsonObject.put("nocheck", true);
+		jsonArray.add(jsonObject);
+
+		jsonObject = new JSONObject();
+		jsonObject.put("id", "OTHER");
+		jsonObject.put("pId", 0);
+		jsonObject.put("name", "其它开头");
+		jsonObject.put("nocheck", true);
+		jsonArray.add(jsonObject);
+
+		boolean checked = true;
+		List<Shop> shops = this.shopService.queryList(null);
+		if (CollectionUtils.isNotEmpty(shops)) {
+			String _head;
+			for (Shop s : shops) {
+				_head = PinyinUtil.getHeadPinYinHeadChar(s.getTitle());
+				if (_head.toUpperCase().equals("A") || _head.toUpperCase().equals("B") || _head.toUpperCase().equals("C") || _head.toUpperCase().equals("D") || _head.toUpperCase().equals("E") || _head.toUpperCase().equals("F") || _head.toUpperCase().equals("G")) {
+					jsonObject = new JSONObject();
+					jsonObject.put("id", s.getId());
+					jsonObject.put("pId", "A_G");
+					jsonObject.put("name", s.getTitle());
+					if (checked && role.getShop() != null && role.getShop().getId().equals(s.getId())) {
+						jsonObject.put("checked", true);
+						checked = false;
+					}
+					jsonArray.add(jsonObject);
+				} else if (_head.toUpperCase().equals("H") || _head.toUpperCase().equals("I") || _head.toUpperCase().equals("J") || _head.toUpperCase().equals("K") || _head.toUpperCase().equals("L") || _head.toUpperCase().equals("M") || _head.toUpperCase().equals("N")) {
+					jsonObject = new JSONObject();
+					jsonObject.put("id", s.getId());
+					jsonObject.put("pId", "H_N");
+					jsonObject.put("name", s.getTitle());
+					if (checked && role.getShop() != null && role.getShop().getId().equals(s.getId())) {
+						jsonObject.put("checked", true);
+						checked = false;
+					}
+					jsonArray.add(jsonObject);
+				} else if (_head.toUpperCase().equals("O") || _head.toUpperCase().equals("P") || _head.toUpperCase().equals("Q") || _head.toUpperCase().equals("R") || _head.toUpperCase().equals("S") || _head.toUpperCase().equals("T")) {
+					jsonObject = new JSONObject();
+					jsonObject.put("id", s.getId());
+					jsonObject.put("pId", "O_T");
+					jsonObject.put("name", s.getTitle());
+					if (checked && role.getShop() != null && role.getShop().getId().equals(s.getId())) {
+						jsonObject.put("checked", true);
+						checked = false;
+					}
+					jsonArray.add(jsonObject);
+				} else if (_head.toUpperCase().equals("U") || _head.toUpperCase().equals("V") || _head.toUpperCase().equals("W") || _head.toUpperCase().equals("X") || _head.toUpperCase().equals("Y") || _head.toUpperCase().equals("Z")) {
+					jsonObject = new JSONObject();
+					jsonObject.put("id", s.getId());
+					jsonObject.put("pId", "U_Z");
+					jsonObject.put("name", s.getTitle());
+					if (checked && role.getShop() != null && role.getShop().getId().equals(s.getId())) {
+						jsonObject.put("checked", true);
+						checked = false;
+					}
+					jsonArray.add(jsonObject);
+				} else {
+					jsonObject = new JSONObject();
+					jsonObject.put("id", s.getId());
+					jsonObject.put("pId", "OTHER");
+					jsonObject.put("name", s.getTitle());
+					if (checked && role.getShop() != null && role.getShop().getId().equals(s.getId())) {
+						jsonObject.put("checked", true);
+						checked = false;
+					}
+					jsonArray.add(jsonObject);
+				}
+			}
+		}
+		shopJson = jsonArray.toJSONString();
 	}
 
 	@SuppressWarnings("unchecked")
 	public void doEdit() {
+		JSONObject jsonObject = new JSONObject();
+		// 1
+		if (StringUtils.isNotEmpty(role.getSite().getId()) && StringUtils.isNotEmpty(role.getShop().getId())) {
+			Shop s = this.shopService.query(role.getShop());
+			if (!s.getSiteId().equals(role.getSite().getId())) {
+				jsonObject.put("result", "监管店铺不在所选站点内");
+				this.ajax(jsonObject.toJSONString());
+				return;
+			}
+		}
+
+		// 2
 		if (StringUtils.isNotEmpty(resourceIds)) {
 			List<Resource> tmpResources = new ArrayList<Resource>();
 			String[] arr = resourceIds.split(",");
@@ -115,7 +235,7 @@ public class RoleAction extends BaseAction {
 			role.setResources(tmpResources);
 		}
 
-		JSONObject jsonObject = new JSONObject();
+		// 3
 		if (StringUtils.isEmpty(role.getId())) {
 			String id = this.roleService.add(role);
 			jsonObject.put("result", "success");
@@ -185,5 +305,20 @@ public class RoleAction extends BaseAction {
 
 	public void setSites(List<Site> sites) {
 		this.sites = sites;
+	}
+
+	/**
+	 * @return the shopJson
+	 */
+	public String getShopJson() {
+		return shopJson;
+	}
+
+	/**
+	 * @param shopJson
+	 *            the shopJson to set
+	 */
+	public void setShopJson(String shopJson) {
+		this.shopJson = shopJson;
 	}
 }
