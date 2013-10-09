@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.newp.xiaopan.dao.impl.system;
 
 import java.util.List;
@@ -42,5 +39,9 @@ public class TypeDao implements ITypeDao {
 
 	public Integer delete(Type type) {
 		return this.sqlSession.delete("typeNpc.delete", type);
+	}
+
+	public List<Type> queryquerySecondNodes() {
+		return this.sqlSession.selectList("typeNpc.querySecondNodes");
 	}
 }

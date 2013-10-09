@@ -12,15 +12,126 @@
     <script language="javascript" src="<%=basePath%>js/jquery/jquery-1.7.2.min.js"></script>
     <script language="javascript" src="<%=basePath%>js/common/validation.js"></script>
     <script language="javascript" src="<%=basePath%>js/common/json2.js"></script>
-    <script language="javascript" src="<%=basePath%>js/admin/jquery.colorpicker.js"></script>
+    
+    <link rel="stylesheet" href="<%=basePath%>plugin/ztree/css/select.css" type="text/css">
+	<link rel="stylesheet" href="<%=basePath%>plugin/ztree/css/zTreeStyle.css" type="text/css">
+	<script type="text/javascript" src="<%=basePath%>plugin/ztree/jquery.ztree.core-3.2.min.js"></script>
+	<script type="text/javascript" src="<%=basePath%>plugin/ztree/jquery.ztree.excheck-3.2.min.js"></script>
     <script language="javascript">
+    	var setting = {
+			check: {
+				enable: true,
+				chkboxType: {"Y":"", "N":""}
+			},
+			view: {
+				dblClickExpand: false
+			},
+			data: {
+				simpleData: {
+					enable: true
+				}
+			},
+			callback: {
+				onCheck: onCheck
+			}
+		};
+		
+		function onCheck(e, treeId, treeNode) {
+			var zTree = $.fn.zTree.getZTreeObj("siteTree"),
+			nodes = zTree.getCheckedNodes(true);
+			var v = "";
+			var k = "";
+			for (var i=0, l=nodes.length; i<l; i++) {
+				v += nodes[i].name + ",";
+				k += nodes[i].id + ",";
+			}
+			if (v.length > 0 ) v = v.substring(0, v.length-1);
+			if (k.length > 0 ) k = k.substring(0, k.length-1);
+			$("#siteSel").attr("value", v);
+			$("#editForm_siteIds").attr("value", k);
+		}
+
+		function showMenu() {
+			var typeObj = $("#siteSel");
+			var typeOffset = $("#siteSel").offset();
+			$("#menuContent").css({left:typeOffset.left + "px", top:typeOffset.top + typeObj.outerHeight() + "px"}).slideDown("fast");
+
+			$("body").bind("mousedown", onBodyDown);
+		}
+		function hideMenu() {
+			$("#menuContent").fadeOut("fast");
+			$("body").unbind("mousedown", onBodyDown);
+		}
+		function onBodyDown(event) {
+			if (!(event.target.id == "menuBtn" || event.target.id == "siteSel" || event.target.id == "menuContent" || $(event.target).parents("#menuContent").length>0)) {
+				hideMenu();
+			}
+		}
+
+
+    	var settingType = {
+			check: {
+				enable: true,
+				chkStyle: "radio",
+				radioType: "all"
+			},
+			data: {
+				simpleData: {
+					enable: true
+				}
+			},
+			callback: {
+				onCheck: onCheckType
+			}
+		};
+		function onCheckType(e, treeId, treeNode) {
+			if(treeNode.checked){
+				$("#typeSel").attr("value", treeNode.name);
+				$("#editForm_type_topid").attr("value", treeNode.id);
+			}else{
+				$("#typeSel").attr("value", '');
+				$("#editForm_type_topid").attr("value", '');
+			}
+		}
+
+		function showMenuType() {
+			var typeObj = $("#typeSel");
+			var typeOffset = $("#typeSel").offset();
+			$("#menuContentType").css({left:typeOffset.left + "px", top:typeOffset.top + typeObj.outerHeight() + "px"}).slideDown("fast");
+
+			$("body").bind("mousedown", onBodyDownType);
+		}
+		function hideMenuType() {
+			$("#menuContentType").fadeOut("fast");
+			$("body").unbind("mousedown", onBodyDownType);
+		}
+		function onBodyDownType(event) {
+			if (!(event.target.id == "menuBtnType" || event.target.id == "typeSel" || event.target.id == "menuContentType" || $(event.target).parents("#menuContentType").length>0)) {
+				hideMenuType();
+			}
+		}
+		
         $(function() {
-        	$(".color").colorpicker({
-                fillcolor: true,
-                success: function(o, color) {
-                    $(o).css("color",color);
-                }
-            });
+            var zNodes = JSON.parse('<s:property value="siteJson" escape="false"/>');
+        	$.fn.zTree.init($("#siteTree"), setting, zNodes);
+        	
+        	var zTree = $.fn.zTree.getZTreeObj("siteTree"),
+			nodes = zTree.getCheckedNodes(true);
+			var v = "";
+			for (var i=0, l=nodes.length; i<l; i++) {
+				v += nodes[i].name + ",";
+			}
+			if (v.length > 0 ) v = v.substring(0, v.length-1);
+			$("#siteSel").attr("value", v);
+			
+			var zNodesType = JSON.parse('<s:property value="typeJson" escape="false"/>');
+        	$.fn.zTree.init($("#typeTree"), settingType, zNodesType);
+        	
+        	var zTreeType = $.fn.zTree.getZTreeObj("typeTree"),
+        	nodesType = zTreeType.getCheckedNodes(true);
+        	if(nodesType.length == 1){
+				$("#typeSel").attr("value", nodesType[0].name);
+        	}
         	
         	if($('#editForm_type_id').val() != ''){
         		$('#editForm_type_color').val('#333333');
@@ -86,7 +197,18 @@
                 <tr>
                     <td align="right" height="25px">所属分类：</td>
                     <td>
-                    	<s:select name="type.topid" list="types" listKey="id" listValue="name" headerKey="0" headerValue="顶级分类" cssClass="{required:true}"></s:select>
+                    	<%-- <s:select name="type.topid" list="types" listKey="id" listValue="name" headerKey="0" headerValue="顶级分类" cssClass="{required:true}"></s:select> --%>
+                    	<input type="text" id="typeSel" readonly="readonly" style="width:200px;" onclick="showMenuType();"/>
+                    	&nbsp;<a id="menuBtnType" href="javascript:void(0)" onclick="showMenuType();" style="font-size:12px;">选择</a>
+                    	<s:hidden name="type.topid"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="120px" height="25px" align="right">所属站点：</td>
+                    <td>
+                    	<textarea id="siteSel" readonly="readonly" style="width:400px; height:60px;" onclick="showMenu();"></textarea>
+                    	&nbsp;<a id="menuBtn" href="javascript:void(0)" onclick="showMenu();" style="font-size:12px;">选择</a>
+                    	<s:hidden name="siteIds" cssClass="{maxlengthCN:500}"/>
                     </td>
                 </tr>
                 <tr>
@@ -109,5 +231,11 @@
         <div class="clear"></div>
     </div>
     </s:form>
+    <div id="menuContent" class="menuContent" style="display:none; position: absolute;">
+		<ul id="siteTree" class="ztree" style="clear:both;margin-top:0; width:250px; height: 300px;"></ul>
+	</div>
+    <div id="menuContentType" class="menuContent" style="display:none; position: absolute;">
+		<ul id="typeTree" class="ztree" style="clear:both;margin-top:0; width:250px; height: 300px;"></ul>
+	</div>
 </body>
 </html>

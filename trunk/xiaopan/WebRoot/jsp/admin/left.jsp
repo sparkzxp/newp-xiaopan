@@ -87,10 +87,10 @@
                 <p><a href="<%=basePath%>sys/archive_toList" target="I1">内容列表</a></p>
                 <p><a href="<%=basePath%>sys/archive_toEdit?archive.id=" target="I1">添加内容</a></p>
             </div>
-            <div class="top" style="display: none;">分类管理</div>
+            <div class="top" style="display: none;">菜单管理</div>
             <div class="item">
-                <p><a href="<%=basePath%>sys/type_toList" target="I1">分类列表</a></p>
-                <p><a href="<%=basePath%>sys/type_toEdit?type.id=" target="I1">添加分类</a></p>
+                <p><a href="<%=basePath%>sys/type_toList?type.id=" target="I1">菜单列表</a></p>
+                <p><a href="<%=basePath%>sys/type_toEdit?type.id=" target="I1">添加菜单</a></p>
             </div>
             <div class="top" style="display: none;">店铺管理</div>
             <div class="item">

@@ -16,6 +16,8 @@ public interface ITypeDao {
 
 	List<Type> query(Map<String, Object> params);
 
+	List<Type> queryquerySecondNodes();
+
 	List<Type> queryDistinct(Map<String, Object> params);
 
 	String add(Type type);
