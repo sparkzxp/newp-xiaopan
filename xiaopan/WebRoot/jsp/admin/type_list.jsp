@@ -27,7 +27,7 @@
 	                				_html += '(ID:'+data.list[n].id+')&nbsp;&nbsp;(排序:'+data.list[n].sort+')</div>';
 	                				_html += '<div class="list_r">';
 	                				_html += '<a href="<%=basePath%>sys/type_toEdit?type.id='+data.list[n].id+'">修改</a>|';
-	                				_html += '<a href="javascript:void(0);" aid="'+data.list[n].id+'" class="delete">删除</a>';
+	                				_html += '<a href="javascript:void(0);" aid="'+data.list[n].id+'" class="delete" onclick="del(this)">删除</a>';
 	                				_html += '</div><div class="clear"></div><div class="item1"></div></div>';
 	                			}
 	                			$(".item").eq(i).html(_html);
@@ -57,6 +57,20 @@
             });
         });
         
+        function del(obj){
+        	if(confirm("删除前请先确定有没有下级分类，确定删除吗？")){
+        		var aid = $(obj).attr("aid");
+				$.post("<%=basePath%>sys/type_doDelete",{"type.id":aid},function(data){
+   					if(data=="success"){
+   						alert("操作成功！");
+   						location.reload();
+   					}else{
+   						alert("操作失败！");
+   					}
+   				});
+			}
+        }
+        
         function clickList1(o){
         	if($(o).attr('refreshid')=='true'){
         		$(o).attr('refreshid', 'false');
@@ -69,7 +83,7 @@
             				_html += '(ID:'+data.list[n].id+')&nbsp;&nbsp;(排序:'+data.list[n].sort+')</div>';
             				_html += '<div class="list_r">';
             				_html += '<a href="<%=basePath%>sys/type_toEdit?type.id='+data.list[n].id+'">修改</a>|';
-            				_html += '<a href="javascript:void(0);" aid="'+data.list[n].id+'" class="delete">删除</a>';
+            				_html += '<a href="javascript:void(0);" aid="'+data.list[n].id+'" class="delete" onclick="del(this)">删除</a>';
             				_html += '</div><div class="clear"></div><div class="item2"></div></div>';
             			}
             			$(o).parent().find(".item1").html(_html);

@@ -42,6 +42,7 @@ public class UserAction extends BaseAction {
 	private User user;// 用户对象
 	private String failureReason;// login页面登录失败原因
 	private List<Role> roles;
+	private String adminId;
 
 	public String login() {
 		if (user == null || StringUtils.isEmpty(user.getUsername()) || StringUtils.isEmpty(user.getPassword())) {
@@ -61,6 +62,7 @@ public class UserAction extends BaseAction {
 			if (tmp.getPassword().equals(MD5.MD5_32(user.getPassword()))) {
 				// record user info into session
 				this.getCurrentSession().setAttribute(Constants.SESSION_USER_KEY, tmp);
+				this.getCurrentSession().setAttribute(Constants.SESSION_USER_SITE, tmp.getRole().getSite());
 				user = tmp;
 				return "toLogin";
 			} else {
@@ -96,6 +98,7 @@ public class UserAction extends BaseAction {
 	}
 
 	public String toList() {
+		adminId = Constants.SYS_ADMIN_ID;
 		users = this.userService.queryList(null);
 		return Constants.ACTION_TO_LIST;
 	}
@@ -181,6 +184,21 @@ public class UserAction extends BaseAction {
 	 */
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
+	}
+
+	/**
+	 * @return the adminId
+	 */
+	public String getAdminId() {
+		return adminId;
+	}
+
+	/**
+	 * @param adminId
+	 *            the adminId to set
+	 */
+	public void setAdminId(String adminId) {
+		this.adminId = adminId;
 	}
 
 }

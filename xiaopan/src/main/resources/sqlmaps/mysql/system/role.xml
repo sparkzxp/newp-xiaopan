@@ -5,7 +5,7 @@
 	<resultMap id="roleRstMap" type="role">
 		<id property="id" column="id" />
 		<result property="name" column="name" />
-		<result property="siteId" column="siteId" />
+		<association property="site" column="siteId" select="siteNpc.queryBySiteId"/>
 		<collection property="resources" javaType="java.util.ArrayList" ofType="resource" select="resourceNpc.queryByRoleId" column="id" />
 	</resultMap>
 
@@ -37,7 +37,7 @@
 		INSERT INTO `role`(
 			name, siteId
 		) VALUES (
-			#{name}, #{siteId}
+			#{name}, #{site.id}
 		)
 	</insert>
 	
@@ -55,7 +55,7 @@
 	<update id="update" parameterType="role">
 		update `role` set
 			name = #{name},
-			siteId = #{siteId}
+			siteId = #{site.id}
 			
 			WHERE id = #{id}
 	</update>

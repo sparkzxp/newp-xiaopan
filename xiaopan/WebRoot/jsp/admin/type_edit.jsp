@@ -112,17 +112,20 @@
 		}
 		
         $(function() {
-            var zNodes = JSON.parse('<s:property value="siteJson" escape="false"/>');
-        	$.fn.zTree.init($("#siteTree"), setting, zNodes);
-        	
-        	var zTree = $.fn.zTree.getZTreeObj("siteTree"),
-			nodes = zTree.getCheckedNodes(true);
-			var v = "";
-			for (var i=0, l=nodes.length; i<l; i++) {
-				v += nodes[i].name + ",";
-			}
-			if (v.length > 0 ) v = v.substring(0, v.length-1);
-			$("#siteSel").attr("value", v);
+        	if(<s:property value="isAdmin"/>){
+        		$('#typesite').show();
+	            var zNodes = JSON.parse('<s:property value="siteJson" escape="false"/>');
+	        	$.fn.zTree.init($("#siteTree"), setting, zNodes);
+	        	
+	        	var zTree = $.fn.zTree.getZTreeObj("siteTree"),
+				nodes = zTree.getCheckedNodes(true);
+				var v = "";
+				for (var i=0, l=nodes.length; i<l; i++) {
+					v += nodes[i].name + ",";
+				}
+				if (v.length > 0 ) v = v.substring(0, v.length-1);
+				$("#siteSel").attr("value", v);
+        	}
 			
 			var zNodesType = JSON.parse('<s:property value="typeJson" escape="false"/>');
         	$.fn.zTree.init($("#typeTree"), settingType, zNodesType);
@@ -143,12 +146,12 @@
 	 	   			$.post("<%=basePath%>sys/type_doEdit",$("#editForm").serialize(),function(data){
 	 	   				data = JSON.parse(data);
 		  	   			if(data.result=="success"){
-		  	   					alert("编辑成功!");
-		 						$('#editForm_type_id').val(data.id);
-		 					}else if(data.result=="error"){
-		 						alert("编辑失败!");
-		 					}else{
-		 						alert(data.result);
+	  	   					alert("编辑成功!");
+	 						$('#editForm_type_id').val(data.id);
+	 					}else if(data.result=="error"){
+	 						alert("编辑失败!");
+	 					}else{
+	 						alert(data.result);
 		  				}
 		  	   			$("#btn_submit").removeAttr("disabled");
 		 			});
@@ -176,7 +179,7 @@
                 </tr>
                 <tr>
                     <td width="120px" height="25px" align="right">价格：</td>
-                    <td><s:textfield name="type.price" cssStyle="width:200px;" cssClass="{required:true,decimal:true}"/>&nbsp;(元)</td>
+                    <td><s:textfield name="type.price" cssStyle="width:180px;" cssClass="{required:true,maxlengthCN:50}"/></td>
                 </tr>
                 <tr style="display:none;">
                     <td width="120px" height="25px" align="right">颜色：</td>
@@ -203,7 +206,7 @@
                     	<s:hidden name="type.topid"/>
                     </td>
                 </tr>
-                <tr>
+                <tr id="typesite" style="display: none;">
                     <td width="120px" height="25px" align="right">所属站点：</td>
                     <td>
                     	<textarea id="siteSel" readonly="readonly" style="width:400px; height:60px;" onclick="showMenu();"></textarea>
@@ -232,7 +235,7 @@
     </div>
     </s:form>
     <div id="menuContent" class="menuContent" style="display:none; position: absolute;">
-		<ul id="siteTree" class="ztree" style="clear:both;margin-top:0; width:250px; height: 300px;"></ul>
+		<ul id="siteTree" class="ztree" style="clear:both;margin-top:0; width:220px; height: 200px;"></ul>
 	</div>
     <div id="menuContentType" class="menuContent" style="display:none; position: absolute;">
 		<ul id="typeTree" class="ztree" style="clear:both;margin-top:0; width:250px; height: 300px;"></ul>

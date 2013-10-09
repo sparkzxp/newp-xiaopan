@@ -44,7 +44,7 @@ public class RoleService extends BaseService implements IRoleService {
 	public Integer update(Role role) {
 		Integer ret = this.roleDao.update(role);
 		this.roleDao.deleteResources(role);
-		this.roleDao.deleteResources(role);
+		this.roleDao.addResources(role);
 		return ret;
 	}
 

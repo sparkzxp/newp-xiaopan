@@ -91,7 +91,7 @@ public class ShopAction extends BaseAction {
 		}
 		setSites(this.siteService.queryList(null));
 
-		List<Type> allTypes = this.typeService.queryList(null);
+		List<Type> allTypes = this.typeService.queryList(new Type());
 		JSONArray jsonArray = new JSONArray();
 		JSONObject jsonObject;
 		boolean firstOpen = true;
