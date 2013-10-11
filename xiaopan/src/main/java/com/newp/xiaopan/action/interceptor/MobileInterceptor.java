@@ -46,7 +46,7 @@ public class MobileInterceptor extends MethodFilterInterceptor {
 //		BAIDU TRANSCODER MOZILLA/5.0 (WINDOWS; U; WINDOWS NT 5.1; ZH-CN; RV:1.9.2.8;BAIDU TRANSCODER) GECKO/20100722 FIREFOX/3.6.8 ( .NET CLR 3.5.30729)
 		System.out.println(userAgent.toUpperCase());
 		log.info(userAgent.toUpperCase());
-//		System.out.println(userAgent.toUpperCase().matches(browser));
+//		log.debug(userAgent.toUpperCase().matches(browser));
 
 		if (userAgent.toUpperCase().matches(browser)) {
 			return "mobile";

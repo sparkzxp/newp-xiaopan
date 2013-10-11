@@ -1,9 +1,7 @@
-/**
- * 
- */
 package com.newp.xiaopan.service.system;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +20,8 @@ public interface IShopService {
 	Shop query(Shop shop);
 
 	List<Shop> queryList(Shop shop);
+
+	List<Shop> queryList(Map<String, Object> params);
 
 	List<Shop> querySuportList(Integer top);
 

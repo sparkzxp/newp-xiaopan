@@ -64,7 +64,7 @@ public class ArchiveAction extends BaseAction {
 			String path = ServletActionContext.getRequest().getRealPath(base);
 			File root = new File(path);
 			if (!root.isDirectory()) {
-				System.out.println("创建新文件夹成功" + path);
+				log.info("创建新文件夹成功" + path);
 				root.mkdirs();
 			}
 

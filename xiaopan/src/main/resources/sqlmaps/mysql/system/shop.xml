@@ -35,6 +35,9 @@
 					or s.title like '%${type.name}%')
 				</if>
 			</if>
+			<if test="siteId != null and siteId != ''">
+				and s.siteId = #{siteId}
+			</if>
 		</where>
 	</sql>
 	<sql id="order">

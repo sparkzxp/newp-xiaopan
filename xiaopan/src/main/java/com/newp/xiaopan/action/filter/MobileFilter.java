@@ -12,18 +12,21 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 /**
  * @author 张霄鹏
- * @version 创建时间：2013-9-9 上午11:03:39
  */
 public class MobileFilter implements Filter {
 
+	private Logger log = Logger.getLogger(getClass());
+
 	public void destroy() {
-		System.out.println("Mobile Filter destroy");
+		log.debug("Mobile Filter destroy");
 	}
 
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
-		System.out.println("Mobile Filter doFilter");
+		log.debug("Mobile Filter doFilter");
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) res;
 		String servletPath = request.getServletPath();
@@ -49,8 +52,8 @@ public class MobileFilter implements Filter {
 
 		String contextPath = request.getContextPath();
 		String browser = ".*(FIREFOX|MSIE).*";
-		System.out.println(userAgent.toUpperCase());
-		System.out.println(userAgent.toUpperCase().matches(browser));
+		log.debug(userAgent.toUpperCase());
+		log.debug(userAgent.toUpperCase().matches(browser));
 		chain.doFilter(req, res);
 //		if (StringUtils.isNotBlank(contextPath) && !userAgent.toUpperCase().matches(browser)) {
 //			response.sendRedirect(contextPath + StringUtils.defaultIfEmpty(forwardUrl, "/") + "?redirect=");
@@ -60,7 +63,7 @@ public class MobileFilter implements Filter {
 	}
 
 	public void init(FilterConfig cfg) throws ServletException {
-		System.out.println("Mobile Filter init");
+		log.debug("Mobile Filter init");
 	}
 
 }

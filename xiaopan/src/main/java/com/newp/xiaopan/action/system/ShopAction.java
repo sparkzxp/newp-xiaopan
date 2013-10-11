@@ -7,7 +7,9 @@ import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -27,6 +29,7 @@ import com.newp.xiaopan.common.FileUtil;
 import com.newp.xiaopan.service.system.IShopService;
 import com.newp.xiaopan.service.system.ISiteService;
 import com.newp.xiaopan.service.system.ITypeService;
+import com.opensymphony.xwork2.Action;
 
 /**
  * @author 张霄鹏
@@ -57,9 +60,18 @@ public class ShopAction extends BaseAction {
 	private boolean pathStatus;
 	private String uploadStatus;
 	private String typeIds;
+	private Boolean isAdmin;
 
 	public String toList() {
-		shops = this.shopService.queryList(shop);
+		Map<String, Object> params = new HashMap<String, Object>();
+		if (this.getLoginUser().getRole() != null && this.getLoginUser().getRole().getShop() != null && StringUtils.isNotEmpty(this.getLoginUser().getRole().getShop().getId())) {
+			this.getShop().setId(this.getLoginUser().getRole().getShop().getId());
+		}
+		params.put("shop", this.getShop());
+		if (this.getLoginUserSite() != null) {
+			params.put("siteId", this.getLoginUserSite().getId());
+		}
+		shops = this.shopService.queryList(params);
 		return Constants.ACTION_TO_LIST;
 	}
 
@@ -67,6 +79,8 @@ public class ShopAction extends BaseAction {
 		boolean isUpdate = (null != shop && StringUtils.isNotEmpty(shop.getId()));
 		if (isUpdate) {
 			shop = this.shopService.query(shop);
+		} else if (this.getLoginUser().getRole() != null && this.getLoginUser().getRole().getShop() != null && StringUtils.isNotEmpty(this.getLoginUser().getRole().getShop().getId())) {
+			return Action.NONE;
 		}
 		initEdit(isUpdate);
 
@@ -75,6 +89,7 @@ public class ShopAction extends BaseAction {
 
 	@SuppressWarnings("unchecked")
 	private void initEdit(boolean isUpdate) {
+		// 1
 		String[] typeIdArr = null;
 		StringBuffer sb = new StringBuffer();
 		if (isUpdate && CollectionUtils.isNotEmpty(shop.getTypes())) {
@@ -89,9 +104,20 @@ public class ShopAction extends BaseAction {
 			}
 			typeIds = sb.toString();
 		}
+
+		// 2
+		isAdmin = this.getLoginUser().getRole().getId().equals(Constants.SYS_ADMIN_ID);
+
+		// 3
 		setSites(this.siteService.queryList(null));
 
-		List<Type> allTypes = this.typeService.queryList(new Type());
+		// 4
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("type", new Type());
+		if (this.getLoginUserSite() != null) {
+			params.put("siteId", this.getLoginUserSite().getId());
+		}
+		List<Type> allTypes = this.typeService.queryList(params);
 		JSONArray jsonArray = new JSONArray();
 		JSONObject jsonObject;
 		boolean firstOpen = true;
@@ -124,6 +150,10 @@ public class ShopAction extends BaseAction {
 
 	@SuppressWarnings("deprecation")
 	public String doEdit() {
+		if (!this.getLoginUser().getRole().getId().equals(Constants.SYS_ADMIN_ID)) {
+			shop.setSiteId(this.getLoginUserSite().getId());
+		}
+
 		String oldPath = shop.getImagePath();
 		if (StringUtils.isNotBlank(oldPath) && oldPath.indexOf("xiaopan") > -1) {
 			oldPath = oldPath.substring(oldPath.indexOf("xiaopan") + 7, oldPath.length());
@@ -136,7 +166,7 @@ public class ShopAction extends BaseAction {
 				String path = ServletActionContext.getRequest().getRealPath("/upload/shop/images/");
 				File root = new File(path);
 				if (!root.isDirectory()) {
-					System.out.println("创建新文件夹成功" + path);
+					log.info("创建新文件夹成功" + path);
 					root.mkdirs();
 				}
 
@@ -200,17 +230,17 @@ public class ShopAction extends BaseAction {
 	@SuppressWarnings("deprecation")
 	public void doDelete() {
 		String oldPath = shop.getImagePath();
-		System.out.println("------------------del shop start----------------");
-		System.out.println("id:" + shop.getId() + " imagePath:" + oldPath);
+		log.info("------------------del shop start----------------");
+		log.info("id:" + shop.getId() + " imagePath:" + oldPath);
 		this.shopService.delete(shop);
 		if (StringUtils.isNotBlank(oldPath)) {
 			if (oldPath.indexOf("xiaopan") > -1) {
 				oldPath = oldPath.substring(oldPath.indexOf("xiaopan") + 7, oldPath.length());
 			}
-			System.out.println("del imagePath:" + oldPath);
+			log.info("del imagePath:" + oldPath);
 			FileUtil.deleteFile(ServletActionContext.getRequest().getRealPath("/") + oldPath);
 		}
-		System.out.println("------------------del shop end----------------");
+		log.info("------------------del shop end----------------");
 		this.ajax(true);
 	}
 
@@ -224,7 +254,7 @@ public class ShopAction extends BaseAction {
 			String path = ServletActionContext.getRequest().getRealPath(base);
 			File root = new File(path);
 			if (!root.isDirectory()) {
-				System.out.println("创建新文件夹成功" + path);
+				log.info("创建新文件夹成功" + path);
 				root.mkdirs();
 			}
 
@@ -293,6 +323,9 @@ public class ShopAction extends BaseAction {
 	 * @return the shop
 	 */
 	public Shop getShop() {
+		if (shop == null) {
+			shop = new Shop();
+		}
 		return shop;
 	}
 
@@ -369,5 +402,20 @@ public class ShopAction extends BaseAction {
 
 	public void setTypeIds(String typeIds) {
 		this.typeIds = typeIds;
+	}
+
+	/**
+	 * @return the isAdmin
+	 */
+	public Boolean getIsAdmin() {
+		return isAdmin;
+	}
+
+	/**
+	 * @param isAdmin
+	 *            the isAdmin to set
+	 */
+	public void setIsAdmin(Boolean isAdmin) {
+		this.isAdmin = isAdmin;
 	}
 }

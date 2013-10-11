@@ -114,6 +114,9 @@
 			if (v.length > 0 ) v = v.substring(0, v.length-1);
 			$("#typeSel").attr("value", v);
 			
+			if(<s:property value="isAdmin"/>){
+				$('#siteIdTR').show();
+			}
 			
 			$("input[type=file]").next("input[type=text]").val($('#editForm_shop_imagePath').val());
 			if($('#editForm_uploadStatus').val() == 'success'){
@@ -188,7 +191,7 @@
                     	<input type="file" name="imgFile"/>
                     </td>
                 </tr>
-                <tr>
+                <tr id="siteIdTR" style="display: none;">
                     <td width="120px" height="25px" align="right">所属站点：</td>
                     <td>
                     	<s:select name="shop.siteId" list="sites" listKey="id" listValue="name" cssClass="{required:true}"></s:select>

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 
 /**
  * 用于检查用户是否登录了系统的过滤器
@@ -21,6 +22,8 @@ import org.apache.commons.lang.StringUtils;
  * @author 张霄鹏
  */
 public class SessionFilter implements Filter {
+
+	private Logger log = Logger.getLogger(getClass());
 
 	/** 要检查的 session 的名称 */
 	private String sessionKey;
@@ -32,7 +35,7 @@ public class SessionFilter implements Filter {
 	private String forwardUrl;
 
 	public void init(FilterConfig cfg) throws ServletException {
-		System.out.println("Session Filter init");
+		log.debug("Session Filter init");
 		sessionKey = cfg.getInitParameter("sessionKey");
 
 		String excepUrlRegex = cfg.getInitParameter("excepUrlRegex");
@@ -44,7 +47,7 @@ public class SessionFilter implements Filter {
 	}
 
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
-		System.out.println("Session Filter doFilter");
+		log.debug("Session Filter doFilter");
 		// 如果 sessionKey 为空，则直接放行
 		if (StringUtils.isBlank(sessionKey)) {
 			chain.doFilter(req, res);
@@ -88,6 +91,6 @@ public class SessionFilter implements Filter {
 	}
 
 	public void destroy() {
-		System.out.println("Session Filter destroy");
+		log.debug("Session Filter destroy");
 	}
 }

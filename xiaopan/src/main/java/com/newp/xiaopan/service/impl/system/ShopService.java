@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.newp.xiaopan.service.impl.system;
 
 import java.util.ArrayList;
@@ -32,6 +29,10 @@ public class ShopService extends BaseService implements IShopService {
 	public List<Shop> queryList(Shop shop) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("shop", shop);
+		return this.shopDao.query(params);
+	}
+
+	public List<Shop> queryList(Map<String, Object> params) {
 		return this.shopDao.query(params);
 	}
 
