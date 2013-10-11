@@ -148,7 +148,7 @@ public class RoleAction extends BaseAction {
 		jsonArray.add(jsonObject);
 
 		boolean checked = true;
-		List<Shop> shops = this.shopService.queryList(null);
+		List<Shop> shops = this.shopService.queryList(new Shop());
 		if (CollectionUtils.isNotEmpty(shops)) {
 			String _head;
 			for (Shop s : shops) {

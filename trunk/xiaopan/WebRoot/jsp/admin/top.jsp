@@ -61,7 +61,7 @@ body {
 											style="table-layout: fixed;">
 											<tr>
 												<td style="width: 1px;">&nbsp;</td>
-												<td><span class="STYLE1">Admin</span></td>
+												<td><span class="STYLE1"><s:property value="user.userName" /> </span></td>
 											</tr>
 										</table></td>
 								</tr>
@@ -81,8 +81,7 @@ body {
 								width="100%" border="0" cellspacing="0" cellpadding="0">
 								<tr>
 									<td width="11%" height="23">&nbsp;</td>
-									<td width="89%" valign="bottom"><span class="date"
-										id="date">日期：2008年7月22日 星期二</span></td>
+									<td width="89%" valign="bottom"><span class="date" id="date"></span></td>
 								</tr>
 							</table>
 						</td>
