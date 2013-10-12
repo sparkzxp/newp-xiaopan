@@ -5,23 +5,14 @@ import java.io.Serializable;
 /**
  * @author 张霄鹏
  */
-public class Site implements Serializable {
+public class Site extends BaseBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
-	private String id;
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
 
 	private String name;
 	private String description;
 	private Integer sort;
+	private City city;
 
 	public String getName() {
 		return name;
@@ -45,5 +36,20 @@ public class Site implements Serializable {
 
 	public void setSort(Integer sort) {
 		this.sort = sort;
+	}
+
+	/**
+	 * @return the city
+	 */
+	public City getCity() {
+		return city;
+	}
+
+	/**
+	 * @param city
+	 *            the city to set
+	 */
+	public void setCity(City city) {
+		this.city = city;
 	}
 }

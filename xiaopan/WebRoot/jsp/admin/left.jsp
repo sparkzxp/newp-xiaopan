@@ -75,6 +75,11 @@
     <form id="form1">
         <img src="<%=basePath%>css/images/main_21.gif" />
         <div class="left">
+            <div class="top" style="display: none;">城市管理</div>
+            <div class="item">
+                <p><a href="<%=basePath%>sys/city_toList" target="I1">城市列表</a></p>
+                <p><a href="<%=basePath%>sys/city_toEdit?city.id=" target="I1">添加城市</a></p>
+            </div>
             <div class="top" style="display: none;">站点管理</div>
             <div class="item">
                 <p><a href="<%=basePath%>sys/site_toList" target="I1">站点列表</a></p>

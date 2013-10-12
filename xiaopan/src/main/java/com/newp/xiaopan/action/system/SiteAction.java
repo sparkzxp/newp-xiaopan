@@ -9,8 +9,10 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.newp.xiaopan.action.listener.MySessionListener;
+import com.newp.xiaopan.bean.system.City;
 import com.newp.xiaopan.bean.system.Site;
 import com.newp.xiaopan.common.Constants;
+import com.newp.xiaopan.service.system.ICityService;
 import com.newp.xiaopan.service.system.ISiteService;
 
 /**
@@ -25,9 +27,12 @@ public class SiteAction extends BaseAction {
 
 	@Autowired
 	private ISiteService siteService;
+	@Autowired
+	private ICityService cityService;
 
 	private Site site;
 	private List<Site> sites;
+	private List<City> citys;
 
 	public String toList() {
 		sites = this.siteService.queryList(site);
@@ -38,6 +43,7 @@ public class SiteAction extends BaseAction {
 		if (null != site && StringUtils.isNotEmpty(site.getId())) {
 			site = this.siteService.query(site);
 		}
+		citys = this.cityService.queryList(null);
 		return Constants.ACTION_TO_EDIT;
 	}
 
@@ -90,5 +96,20 @@ public class SiteAction extends BaseAction {
 	 */
 	public void setSite(Site site) {
 		this.site = site;
+	}
+
+	/**
+	 * @return the citys
+	 */
+	public List<City> getCitys() {
+		return citys;
+	}
+
+	/**
+	 * @param citys
+	 *            the citys to set
+	 */
+	public void setCitys(List<City> citys) {
+		this.citys = citys;
 	}
 }

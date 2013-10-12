@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cityNpc">
+	<resultMap id="cityRstMap" type="city">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+	</resultMap>
+
+	<sql id="query_where">
+		<where>
+			<if test="city != null">
+				<if test="city.id != null and city.id != ''">
+					and T.id = #{city.id}
+				</if>
+			</if>
+		</where>
+	</sql>
+
+	<select id="query" resultMap="cityRstMap" parameterType="map">
+		SELECT T.* FROM `city` T
+		<include refid="query_where" />
+		order by T.name asc
+	</select>
+	
+	<select id="queryByCityId" resultMap="cityRstMap" parameterType="map">
+		SELECT T.* FROM `city` T
+		where T.id = #{id}
+	</select>
+	
+	<insert id="add" parameterType="city">
+		<selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		INSERT INTO `city`(
+			name
+		) VALUES (
+			#{name}
+		)
+	</insert>
+	
+	<update id="update" parameterType="city">
+		update `city` set
+			name = #{name}
+			
+			WHERE id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="city">
+		delete from `city` where id = #{id}
+	</delete>
+</mapper>
