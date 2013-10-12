@@ -7,6 +7,7 @@
 		<result property="name" column="name" />
 		<result property="description" column="description" />
 		<result property="sort" column="sort" />
+		<association property="city" column="cityId" select="cityNpc.queryByCityId"/>
 	</resultMap>
 
 	<sql id="query_where">
@@ -41,9 +42,9 @@
 			SELECT LAST_INSERT_ID()
 		</selectKey>
 		INSERT INTO SITE(
-			name, description, sort
+			name, description, sort, cityId
 		) VALUES (
-			#{name}, #{description}, #{sort}
+			#{name}, #{description}, #{sort}, #{city.id}
 		)
 	</insert>
 	
@@ -51,7 +52,8 @@
 		update SITE set
 			name = #{name},
 			description = #{description},
-			sort = #{sort}
+			sort = #{sort},
+			cityId = #{city.id}
 			
 			WHERE id = #{id}
 	</update>

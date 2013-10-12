@@ -59,6 +59,10 @@
 			<result name="toList">/jsp/admin/role_list.jsp</result>
 			<result name="toEdit">/jsp/admin/role_edit.jsp</result>
 		</action>
+		<action name="city_*" class="cityAction" method="{1}">
+			<result name="toList">/jsp/admin/city_list.jsp</result>
+			<result name="toEdit">/jsp/admin/city_edit.jsp</result>
+		</action>
 		<action name="kaptcha" class="kaptchaImageAction" method="getKaptcha"></action>
 	</package>
 
