@@ -30,9 +30,9 @@
 				<if test="type.price != null and type.price != ''">
 					and T.price = #{type.price}
 				</if>
-				<if test="siteId != null and siteId != ''">
-					and TS.siteId = #{siteId}
-				</if>
+			</if>
+			<if test="siteId != null and siteId != ''">
+				and TS.siteId = #{siteId}
 			</if>
 		</where>
 	</sql>
@@ -46,11 +46,13 @@
 
 	<select id="queryDistinct" resultMap="typeRstMap" parameterType="map">
 		SELECT distinct 
-		name, topid, case topid when '0' then id else '0' end id,
+		name, topid, min(id) id,
 		'' color,'' seotitle, '' keyword, 
 		'' description, '' sort, '' price
 		FROM TYPE T
+		left join TYPESITE TS on TS.typeId = T.id
 		<include refid="query_where" />
+		group by name
 		order by T.sort asc, T.name asc
 	</select>
 	

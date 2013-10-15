@@ -1,6 +1,8 @@
 package com.newp.xiaopan.action.web;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.simple.JSONArray;
@@ -9,11 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
-import com.newp.xiaopan.action.listener.MySessionListener;
 import com.newp.xiaopan.action.system.BaseAction;
 import com.newp.xiaopan.bean.system.Ads;
 import com.newp.xiaopan.bean.system.Archive;
 import com.newp.xiaopan.bean.system.Arctype;
+import com.newp.xiaopan.bean.system.City;
 import com.newp.xiaopan.bean.system.Key;
 import com.newp.xiaopan.bean.system.Shop;
 import com.newp.xiaopan.bean.system.Site;
@@ -22,7 +24,9 @@ import com.newp.xiaopan.common.Constants;
 import com.newp.xiaopan.service.system.IAdsService;
 import com.newp.xiaopan.service.system.IArchiveService;
 import com.newp.xiaopan.service.system.IArctypeService;
+import com.newp.xiaopan.service.system.ICityService;
 import com.newp.xiaopan.service.system.IShopService;
+import com.newp.xiaopan.service.system.ISiteService;
 import com.newp.xiaopan.service.system.ITypeService;
 
 /**
@@ -43,6 +47,10 @@ public class MainAction extends BaseAction {
 	private IShopService shopService;
 	@Autowired
 	private IArctypeService arctypeService;
+	@Autowired
+	private ICityService cityService;
+	@Autowired
+	private ISiteService siteService;
 
 	private String siteJson;
 	private Site site;
@@ -50,6 +58,8 @@ public class MainAction extends BaseAction {
 	private List<Archive> archives;
 	private List<Type> types;
 	private List<Shop> suportShops;
+	private City city;
+	private List<City> citys;
 
 	private Key key;
 	private Shop shop;
@@ -65,20 +75,43 @@ public class MainAction extends BaseAction {
 		return "toMap";
 	}
 
-	@SuppressWarnings("unchecked")
 	public String toAdvertise() {
 		Ads t = new Ads();
 		t.setIndexShow("0");
 		adss = this.adsService.queryList(t);
 
-		sites = (List<Site>) MySessionListener.getConfigMap_s().get(Constants.CONFIG_SITE_LIST);
+		if (city == null) {
+			if (this.getCurrentSession().getAttribute(Constants.SESSION_CITY) != null) {
+				city = (City) this.getCurrentSession().getAttribute(Constants.SESSION_CITY);
+			} else {
+				this.getCity().setId("1");
+			}
+		}
+		this.setCity(this.cityService.query(getCity()));
+		Site _site = new Site();
+		_site.setCity(getCity());
+		this.getCurrentSession().setAttribute(Constants.SESSION_CITY, this.getCity());
+
+		// sites = (List<Site>)
+		// MySessionListener.getConfigMap_s().get(Constants.CONFIG_SITE_LIST);
+		sites = this.siteService.queryList(_site);
+		if (null != this.getCurrentSession().getAttribute(Constants.SESSION_USER_SITE)) {
+			if (!getCity().getId().equals(((Site) getCurrentSession().getAttribute(Constants.SESSION_USER_SITE)).getCity().getId())) {
+				getCurrentSession().setAttribute(Constants.SESSION_USER_SITE, sites.get(0));
+			}
+		}
+		citys = this.cityService.queryList(null);
 		return "toAdvertise";
 	}
 
 	public String toShow() {
 		initHeader();
 		archives = archiveService.queryTopList(new Archive("网站公告"), 3);
-		types = typeService.queryDistinctList(null);
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("type", null);
+		params.put("siteId", site.getId());
+		types = typeService.queryDistinctList(params);
+		citys = this.cityService.queryList(null);
 
 		return "toShow";
 	}
@@ -92,7 +125,10 @@ public class MainAction extends BaseAction {
 			shops = shopService.queryListByPager(new Shop(site.getId()), new Type(key.getName()), getPager());
 		}
 
-		types = typeService.queryDistinctList(null);
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("type", null);
+		params.put("siteId", site.getId());
+		types = typeService.queryDistinctList(params);
 		return "toSearch";
 	}
 
@@ -111,7 +147,27 @@ public class MainAction extends BaseAction {
 
 	@SuppressWarnings("unchecked")
 	private void initHeader() {
-		List<Site> tmpSites = (List<Site>) MySessionListener.getConfigMap_s().get(Constants.CONFIG_SITE_LIST);
+		if (city == null) {
+			if (this.getCurrentSession().getAttribute(Constants.SESSION_CITY) != null) {
+				city = (City) this.getCurrentSession().getAttribute(Constants.SESSION_CITY);
+			} else {
+				this.getCity().setId("1");
+			}
+		}
+		this.setCity(this.cityService.query(getCity()));
+		Site _site = new Site();
+		_site.setCity(getCity());
+		this.getCurrentSession().setAttribute(Constants.SESSION_CITY, this.getCity());
+		citys = this.cityService.queryList(null);
+
+		List<Site> tmpSites = this.siteService.queryList(_site);
+		if (null != this.getCurrentSession().getAttribute(Constants.SESSION_USER_SITE)) {
+			if (!getCity().getId().equals(((Site) getCurrentSession().getAttribute(Constants.SESSION_USER_SITE)).getCity().getId())) {
+				getCurrentSession().setAttribute(Constants.SESSION_USER_SITE, tmpSites.get(0));
+			}
+		}
+		// List<Site> tmpSites = (List<Site>)
+		// MySessionListener.getConfigMap_s().get(Constants.CONFIG_SITE_LIST);
 		JSONArray jsonArray = new JSONArray();
 		JSONObject jsonObject;
 		for (Site t : tmpSites) {
@@ -210,6 +266,9 @@ public class MainAction extends BaseAction {
 	}
 
 	public Site getSite() {
+		if (site == null) {
+			site = new Site();
+		}
 		return site;
 	}
 
@@ -279,5 +338,38 @@ public class MainAction extends BaseAction {
 
 	public void setAds(Ads ads) {
 		this.ads = ads;
+	}
+
+	/**
+	 * @return the citys
+	 */
+	public List<City> getCitys() {
+		return citys;
+	}
+
+	/**
+	 * @param citys
+	 *            the citys to set
+	 */
+	public void setCitys(List<City> citys) {
+		this.citys = citys;
+	}
+
+	/**
+	 * @return the city
+	 */
+	public City getCity() {
+		if (city == null) {
+			city = new City();
+		}
+		return city;
+	}
+
+	/**
+	 * @param city
+	 *            the city to set
+	 */
+	public void setCity(City city) {
+		this.city = city;
 	}
 }
