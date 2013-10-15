@@ -68,7 +68,7 @@ public class ShopAction extends BaseAction {
 			this.getShop().setId(this.getLoginUser().getRole().getShop().getId());
 		}
 		params.put("shop", this.getShop());
-		if (this.getLoginUserSite() != null) {
+		if (!this.getLoginUser().getRole().getId().equals(Constants.SYS_ADMIN_ID) && this.getLoginUserSite() != null) {
 			params.put("siteId", this.getLoginUserSite().getId());
 		}
 		shops = this.shopService.queryList(params);
@@ -114,7 +114,7 @@ public class ShopAction extends BaseAction {
 		// 4
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("type", new Type());
-		if (this.getLoginUserSite() != null) {
+		if (!this.getLoginUser().getRole().getId().equals(Constants.SYS_ADMIN_ID) && this.getLoginUserSite() != null) {
 			params.put("siteId", this.getLoginUserSite().getId());
 		}
 		List<Type> allTypes = this.typeService.queryList(params);

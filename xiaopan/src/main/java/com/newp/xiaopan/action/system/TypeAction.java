@@ -44,7 +44,7 @@ public class TypeAction extends BaseAction {
 		Map<String, Object> params = new HashMap<String, Object>();
 		type.setTopid(0);
 		params.put("type", type);
-		if (this.getLoginUserSite() != null) {
+		if (!this.getLoginUser().getRole().getId().equals(Constants.SYS_ADMIN_ID) && this.getLoginUserSite() != null) {
 			params.put("siteId", this.getLoginUserSite().getId());
 		}
 		types = this.typeService.queryList(params);
@@ -54,7 +54,7 @@ public class TypeAction extends BaseAction {
 	public void getTypeMenu() {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("type", type);
-		if (this.getLoginUserSite() != null) {
+		if (!this.getLoginUser().getRole().getId().equals(Constants.SYS_ADMIN_ID) && this.getLoginUserSite() != null) {
 			params.put("siteId", this.getLoginUserSite().getId());
 		}
 		types = this.typeService.queryList(params);
@@ -171,7 +171,7 @@ public class TypeAction extends BaseAction {
 
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("type", type);
-		if (this.getLoginUserSite() != null) {
+		if (!this.getLoginUser().getRole().getId().equals(Constants.SYS_ADMIN_ID) && this.getLoginUserSite() != null) {
 			params.put("siteId", this.getLoginUserSite().getId());
 		}
 		params.put("siteIds", siteIds);
@@ -226,7 +226,7 @@ public class TypeAction extends BaseAction {
 		// 站点人员。判断是否有其它站点关联菜单，是则删除本站点关联，否则删除关联后再删除菜单
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("type", type);
-		if (this.getLoginUserSite() != null) {
+		if (!this.getLoginUser().getRole().getId().equals(Constants.SYS_ADMIN_ID) && this.getLoginUserSite() != null) {
 			params.put("siteId", this.getLoginUserSite().getId());
 		}
 		this.typeService.delete(params);

@@ -34,7 +34,18 @@
 		var str = '<%=basePath%>web/main_toMap?ads.longitude='+lng+'&ads.latitude='+lat;
 		toUrl(str);
 	}
-	$(function(){
+	
+	function showCityMenu(){
+		if($('#menu').css('visibility') == 'hidden'){
+			menu.style.visibility='visible';
+		}else{
+			menu.style.visibility="hidden";
+		}
+	}
+
+	$(function() {
+		$('#nowCity').html('<s:property value="city.name"/>');
+		
 		$('.main').height(($($('.clear')[$('.clear').length-1]).offset().top-50)+'px');
 		$("#title").click(function(){
 			$(this).parent().animate({top:-300,opacity: 'hide'},500);
@@ -115,7 +126,21 @@
 </head>
 <body>
 <div class="top">
-    <div class="t_left">欢迎来到校畔网，感谢您对校畔网的支持！</div>
+    <div class="t_left">
+    	欢迎来到校畔网，感谢您对校畔网的支持！
+    	<span id="nowCity" style="cursor: pointer;">无锡</span>&nbsp;
+       	<span style="position:absolute;width:160;height:40;z-index:1;visibility:visible;">
+       		<span id="menubar" style="color: blue;cursor: pointer;" onclick="showCityMenu();">[切换]</span>
+			<div border=1  id="menu" style="position:absolute;top:15;left:0; width:200px;height:10;z-index:2;visibility:hidden;background-color: #DFDFDF;">
+			<s:set name="count" value="1"></s:set>
+			<s:iterator value="citys" var="parent">
+			<s:if test="#count != 1 and #count % 5 == 1"><br></s:if>
+			<a id="link" style="color:blue;margin-left: 10px;" href="<%=basePath%>web/main_toAdvertise?city.id=<s:property value="#parent.id"/>"><s:property value="#parent.name"/></a>
+			<s:set name="count" value="#count + 1"></s:set>
+			</s:iterator>
+			</div>
+		</span>
+    </div>
     <div class="t_right">
         <a href="javascript:void(0);" onClick="window.external.addFavorite(document.location.href,document.title)" title="校畔网">加入收藏</a>|
         <a href="javascript:void(0);" onClick="var strHref=window.location.href;this.style.behavior='url(#default#homepage)';this.setHomePage('http://www.xiaopanwang.com/');" >设为首页</a>

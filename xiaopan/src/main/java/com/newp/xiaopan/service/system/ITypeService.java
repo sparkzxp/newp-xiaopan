@@ -26,6 +26,11 @@ public interface ITypeService {
 	List<Type> queryDistinctList(Type type);
 
 	/**
+	 * @param params:1,type;2,siteId
+	 */
+	List<Type> queryDistinctList(Map<String, Object> params);
+
+	/**
 	 * @param params:1,type;2,siteId;3,siteIds
 	 */
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)

@@ -16,6 +16,11 @@
 				<if test="site.id != null and site.id != ''">
 					and T.id = #{site.id}
 				</if>
+				<if test="site.city != null">
+					<if test="site.city.id != null and site.city.id != ''">
+					and T.cityId = #{site.city.id}
+					</if>
+				</if>
 			</if>
 		</where>
 	</sql>

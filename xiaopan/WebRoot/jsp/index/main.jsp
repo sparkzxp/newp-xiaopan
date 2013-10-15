@@ -18,6 +18,12 @@
     
     <script type="text/javascript">
 	    function popupbox(boxid,o){
+	    	if($('#showbox').css('display') != 'none'){
+	    		$('#showbox').hide();
+	    	}
+	    	if($('.mask').length > 0){
+	    		$('.mask').remove();
+	    	}
 			var sh = boxid.height();
 			var sw = boxid.width();
 			var l = o.offset().left;
@@ -31,13 +37,14 @@
 				boxid.animate({top:th,opacity: 'show',left:rw,height:sh,width:sw},500);													 
 			});
 		}
-		function popup(obj){
+		function popup(obj, name){
 			var _o = $('#ul_'+obj);
-			popupbox($("#showbox"),_o);
-			var _s = '<table style="width:100%;margin-top: 20px;padding-left:10px;"><tr><td colspan="4" style="color: #15229F;">其他：</td></tr>';
+			var _s = '<table style="width:100%;margin-top: 20px;padding-left:10px;"><tr><td colspan="4" style="color: #15229F;">'+((name==null||name=='')?'其他':name)+'：</td></tr>';
+			var _count = 2;
 			for(var i=0; i<_o.find('li').length;i++){
 				if(i%4==0){
 					_s += '<tr>';
+					_count++;
 				}
 				if(i==_o.find('li').length-1){
 					_s += '<td colspan="'+(4-_o.find('li').length%4)+'">'+$(_o.find('li')[i]).html()+'</td>';
@@ -50,6 +57,8 @@
 			}
 			_s += '</table>';
 			$('#content').html(_s);
+			$('#showbox').height((27*_count));
+			popupbox($("#showbox"),_o);
 		}
     	<%-- function toggleList(pre){
     		$('#ul_'+pre).toggle();
@@ -306,11 +315,28 @@
                         		<ul id="ul_<s:property value="#parent.id"/>_<s:property value="#parent.name"/>" style="display:none;">
                         		</s:if>
 	                        	<s:if test="#count < 11">
-	                            <li><a href="<%=basePath%>web/main_toSearch?key.name=<s:property value="#child.name"/>"><s:property value="#child.name"/></a></li>
+	                            <li><a href="javascript:void(0);"<%-- "<%=basePath%>web/main_toSearch?key.name=<s:property value="#child.name"/>" --%> 
+	                            		onclick="popup('<s:property value="#child.id"/>_<s:property value="#child.name"/>', '<s:property value="#child.name"/>');"><s:property value="#child.name"/></a></li>
+	                            	<ul id="ul_<s:property value="#child.id"/>_<s:property value="#child.name"/>" style="display:none;">
+	                            	<s:iterator value="types" var="leaf">
+                        			<s:if test="#leaf.topid == #child.id">
+                        			<li><a href="<%=basePath%>web/main_toSearch?key.name=<s:property value="#leaf.name"/>"><s:property value="#leaf.name"/></a></li>
+                        			</s:if>
+                        			</s:iterator>
+	                            	</ul>
 	                            <s:set name="count" value="#count + 1"></s:set>
 	                            </s:if>
 	                            <s:else>
-	                            <li><a href="<%=basePath%>web/main_toSearch?key.name=<s:property value="#child.name"/>"><s:property value="#child.name"/></a></li>
+	                            <%-- <li><a href="<%=basePath%>web/main_toSearch?key.name=<s:property value="#child.name"/>"><s:property value="#child.name"/></a></ --%>li>
+	                            <li><a href="javascript:void(0);"<%-- "<%=basePath%>web/main_toSearch?key.name=<s:property value="#child.name"/>" --%> 
+	                            		onclick="popup('<s:property value="#child.id"/>_<s:property value="#child.name"/>', '<s:property value="#child.name"/>');"><s:property value="#child.name"/></a></li>
+	                            	<ul id="ul_<s:property value="#child.id"/>_<s:property value="#child.name"/>" style="display:none;">
+	                            	<s:iterator value="types" var="leaf">
+                        			<s:if test="#leaf.topid == #child.id">
+                        			<li><a href="<%=basePath%>web/main_toSearch?key.name=<s:property value="#leaf.name"/>"><s:property value="#leaf.name"/></a></li>
+                        			</s:if>
+                        			</s:iterator>
+	                            	</ul></li>
 	                            <s:set name="count" value="#count + 1"></s:set>
 	                            </s:else>
                             </s:if>
