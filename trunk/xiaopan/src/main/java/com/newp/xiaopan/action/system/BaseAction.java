@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -28,6 +29,10 @@ public class BaseAction extends ActionSupport {
 
 	protected JSONObject msg = new JSONObject();
 	protected Pager pager;
+
+	public HttpServletRequest getCurrentRequest() {
+		return ServletActionContext.getRequest();
+	}
 
 	/**
 	 * 获取当前登录的用户

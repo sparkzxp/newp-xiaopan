@@ -24,6 +24,7 @@
 			<result name="toNotice">/jsp/index/notice.jsp</result>
 			<result name="toAdvertise">/jsp/index/advertise.jsp</result>
 			<result name="toMap">/jsp/index/map.jsp</result>
+			<result name="toFeedback">/jsp/index/feedback.jsp</result>
 		</action>
 	</package>
 

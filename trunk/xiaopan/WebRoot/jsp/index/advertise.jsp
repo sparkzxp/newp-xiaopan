@@ -142,8 +142,9 @@
 		</span>
     </div>
     <div class="t_right">
-        <a href="javascript:void(0);" onClick="window.external.addFavorite(document.location.href,document.title)" title="校畔网">加入收藏</a>|
-        <a href="javascript:void(0);" onClick="var strHref=window.location.href;this.style.behavior='url(#default#homepage)';this.setHomePage('http://www.xiaopanwang.com/');" >设为首页</a>
+    	<a href="<%=basePath%>web/main_toFeedback" target="_blank" title="校畔网 联系我们">联系我们</a>|
+        <a href="javascript:void(0);" onClick="window.external.addFavorite(document.location.href,document.title)" title="校畔网 加入收藏">加入收藏</a>|
+        <a href="javascript:void(0);" onClick="var strHref=window.location.href;this.style.behavior='url(#default#homepage)';this.setHomePage('http://www.xiaopanwang.com/');" title="校畔网 设为首页">设为首页</a>
     </div>
 </div>
 <div class="main">

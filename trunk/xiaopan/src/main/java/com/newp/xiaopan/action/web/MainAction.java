@@ -16,15 +16,18 @@ import com.newp.xiaopan.bean.system.Ads;
 import com.newp.xiaopan.bean.system.Archive;
 import com.newp.xiaopan.bean.system.Arctype;
 import com.newp.xiaopan.bean.system.City;
+import com.newp.xiaopan.bean.system.Feedback;
 import com.newp.xiaopan.bean.system.Key;
 import com.newp.xiaopan.bean.system.Shop;
 import com.newp.xiaopan.bean.system.Site;
 import com.newp.xiaopan.bean.system.Type;
 import com.newp.xiaopan.common.Constants;
+import com.newp.xiaopan.common.IPUtil;
 import com.newp.xiaopan.service.system.IAdsService;
 import com.newp.xiaopan.service.system.IArchiveService;
 import com.newp.xiaopan.service.system.IArctypeService;
 import com.newp.xiaopan.service.system.ICityService;
+import com.newp.xiaopan.service.system.IFeedbackService;
 import com.newp.xiaopan.service.system.IShopService;
 import com.newp.xiaopan.service.system.ISiteService;
 import com.newp.xiaopan.service.system.ITypeService;
@@ -51,6 +54,8 @@ public class MainAction extends BaseAction {
 	private ICityService cityService;
 	@Autowired
 	private ISiteService siteService;
+	@Autowired
+	private IFeedbackService feedbackService;
 
 	private String siteJson;
 	private Site site;
@@ -70,6 +75,9 @@ public class MainAction extends BaseAction {
 
 	private List<Site> sites;
 	private Ads ads;
+
+	private List<Feedback> feedbacks;
+	private Feedback feedback;
 
 	public String toMap() {
 		return "toMap";
@@ -233,6 +241,25 @@ public class MainAction extends BaseAction {
 		return "toNotice";
 	}
 
+	public String toFeedback() {
+		initHeader();
+		archives = archiveService.queryTopList(new Archive("网站公告"), 3);
+		Map<String, Object> params = new HashMap<String, Object>();
+		this.getFeedback().setIsDelete("0");
+		params.put("feedback", this.getFeedback());
+		params.put("pager", this.getPager());
+		feedbacks = this.feedbackService.queryList(params);
+		return "toFeedback";
+	}
+
+	public void addFeedback() {
+		feedback.setIpAddress(IPUtil.getIpAddr(this.getCurrentRequest()));
+		feedback.setIsDelete("0");
+		this.feedbackService.add(feedback);
+
+		this.ajax(true);
+	}
+
 	public String getSiteJson() {
 		return siteJson;
 	}
@@ -371,5 +398,38 @@ public class MainAction extends BaseAction {
 	 */
 	public void setCity(City city) {
 		this.city = city;
+	}
+
+	/**
+	 * @return the feedbacks
+	 */
+	public List<Feedback> getFeedbacks() {
+		return feedbacks;
+	}
+
+	/**
+	 * @param feedbacks
+	 *            the feedbacks to set
+	 */
+	public void setFeedbacks(List<Feedback> feedbacks) {
+		this.feedbacks = feedbacks;
+	}
+
+	/**
+	 * @return the feedback
+	 */
+	public Feedback getFeedback() {
+		if (feedback == null) {
+			feedback = new Feedback();
+		}
+		return feedback;
+	}
+
+	/**
+	 * @param feedback
+	 *            the feedback to set
+	 */
+	public void setFeedback(Feedback feedback) {
+		this.feedback = feedback;
 	}
 }

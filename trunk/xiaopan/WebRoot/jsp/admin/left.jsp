@@ -127,6 +127,10 @@
                 <p><a href="<%=basePath%>sys/user_toList" target="I1">用户列表</a></p>
                 <p><a href="<%=basePath%>sys/user_toEdit?user.id=" target="I1">添加用户</a></p>
             </div>
+            <div class="top" style="display: none;">用户反馈</div>
+            <div class="item">
+                <p><a href="<%=basePath%>sys/feedback_toList" target="I1">反馈列表</a></p>
+            </div>
             <div class="top" style="display: none;">系统设置</div>
             <div class="item">
                 <!-- <p><a href="clear.jsp" target="I1">清除缓存</a></p>
