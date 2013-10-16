@@ -19,7 +19,7 @@
                 $(this).click(function() {
                 	if(confirm("确定删除吗？")){
 						var aid = $(this).attr("aid");
-						$.post("<%=basePath%>sys/feedback_doDelete",{"feedback.id":aid},function(data){
+						$.post("<%=basePath%>sys/comment_doDelete",{"comment.id":aid},function(data){
 		   					if(data=="success"){
 		   						alert("操作成功！");
 		   						location.reload();
@@ -43,7 +43,7 @@
         function reply(fid){
 			if($('#form_'+fid).valid()){
 	  			$("#btn_submit").attr("disabled","true");
-	  			$.post("<%=basePath%>sys/feedback_doReply",$('#form_'+fid).serialize(),function(data){
+	  			$.post("<%=basePath%>sys/comment_doReply",$('#form_'+fid).serialize(),function(data){
 		   			if(data=="success"){
 	 	   				location.reload();
 					}else{
@@ -71,34 +71,34 @@
 <body>
     <div class="top">
         <div class="t_left"></div>
-        <div class="t_content"><a href="<%=basePath%>jsp/admin/index.jsp">首页</a>&gt;用户反馈列表</div>
+        <div class="t_content"><a href="<%=basePath%>jsp/admin/index.jsp">首页</a>&gt;用户评论列表</div>
         <div class="t_right"></div>
         <div class="clear"></div>
     </div>
     <div class="content">
         <div class="c_l"></div>
         <div class="c_c">
-            <s:iterator value="feedbacks" var="parent">
+            <s:iterator value="comments" var="parent">
                 <div class="list">
                     <div class="list_l list0" aid="<s:property value="#parent.id" />">
                     	<div style="float: left;width: 99%;">
-                			用户&nbsp;<s:property value="#parent.ipAddress"/>&nbsp;<s:property value="%{getText('global.datetime',{#parent.feedbackTime})}"/>&nbsp;说：<br/>
-                			<s:property value="#parent.feedback"/>
+                			用户&nbsp;<s:property value="#parent.ipAddress"/>&nbsp;<s:property value="%{getText('global.datetime',{#parent.commentDT})}"/>&nbsp;对店铺<span style="font-weight: bold;">【<s:property value="#parent.shop.title" />】</span>评论说：<br/>
+                			<s:property value="#parent.comment"/>
                 		</div>
                 		<s:if test="#parent.reply != null and #parent.reply != ''">
                 		<div style="float: left;width: 99%; margin-left: 25px;">
-                			<span style="color: blue;">校畔网&nbsp;<s:property value="%{getText('global.datetime',{#parent.replyTime})}"/>&nbsp;回复：</span><br/>
+                			<span style="color: blue;"><s:property value="%{getText('global.datetime',{#parent.replyDT})}"/>&nbsp;回复：</span><br/>
                 			<s:property value="#parent.reply"/>
                 		</div>
                 		</s:if>
                 		<s:else>
-                		<div style="float: left;width: 99%;text-align: center;color: red;">建议还未回复</div>
+                		<div style="float: left;width: 99%;text-align: center;color: red;">评论还未回复</div>
                 		</s:else>
 				        <form id="form_<s:property value="#parent.id" />" style="display:none;">
                 		<div style="border: 1px solid #DFDFDF;margin-top: 5px;">
 				            <div style="text-align: center;">
-				            <input type="hidden" name="feedback.id" value="<s:property value="#parent.id" />"/>
-				            <s:textarea name="feedback.reply" cssStyle="width: 99%;resize:none;" rows="4" cssClass="{required:true,maxlengthCN:1000}"></s:textarea>
+				            <input type="hidden" name="comment.id" value="<s:property value="#parent.id" />"/>
+				            <s:textarea name="comment.reply" cssStyle="width: 99%;resize:none;" rows="4" cssClass="{required:true,maxlengthCN:1000}"></s:textarea>
 				            <input type="button" value="提交" onclick="reply('<s:property value="#parent.id" />');"/>
 				            </div>
 			            </div>

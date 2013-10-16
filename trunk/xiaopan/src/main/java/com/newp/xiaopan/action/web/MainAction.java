@@ -16,6 +16,7 @@ import com.newp.xiaopan.bean.system.Ads;
 import com.newp.xiaopan.bean.system.Archive;
 import com.newp.xiaopan.bean.system.Arctype;
 import com.newp.xiaopan.bean.system.City;
+import com.newp.xiaopan.bean.system.Comment;
 import com.newp.xiaopan.bean.system.Feedback;
 import com.newp.xiaopan.bean.system.Key;
 import com.newp.xiaopan.bean.system.Shop;
@@ -27,6 +28,7 @@ import com.newp.xiaopan.service.system.IAdsService;
 import com.newp.xiaopan.service.system.IArchiveService;
 import com.newp.xiaopan.service.system.IArctypeService;
 import com.newp.xiaopan.service.system.ICityService;
+import com.newp.xiaopan.service.system.ICommentService;
 import com.newp.xiaopan.service.system.IFeedbackService;
 import com.newp.xiaopan.service.system.IShopService;
 import com.newp.xiaopan.service.system.ISiteService;
@@ -56,6 +58,8 @@ public class MainAction extends BaseAction {
 	private ISiteService siteService;
 	@Autowired
 	private IFeedbackService feedbackService;
+	@Autowired
+	private ICommentService commentService;
 
 	private String siteJson;
 	private Site site;
@@ -78,6 +82,9 @@ public class MainAction extends BaseAction {
 
 	private List<Feedback> feedbacks;
 	private Feedback feedback;
+
+	private List<Comment> comments;
+	private Comment comment;
 
 	public String toMap() {
 		return "toMap";
@@ -150,7 +157,22 @@ public class MainAction extends BaseAction {
 		s.setId(shop.getId());
 		s.setClick(shop.getClick() + 1);
 		this.shopService.updatePart(s);
+
+		Map<String, Object> params = new HashMap<String, Object>();
+		this.getComment().setIsDelete("0");
+		this.getComment().setShop(s);
+		params.put("comment", this.getComment());
+		params.put("pager", this.getPager());
+		this.setComments(this.commentService.queryList(params));
 		return Constants.ACTION_TO_DETAIL;
+	}
+
+	public void addComment() {
+		this.getComment().setIpAddress(IPUtil.getIpAddr(this.getCurrentRequest()));
+		this.getComment().setIsDelete("0");
+		this.commentService.add(this.getComment());
+
+		this.ajax(true);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -431,5 +453,38 @@ public class MainAction extends BaseAction {
 	 */
 	public void setFeedback(Feedback feedback) {
 		this.feedback = feedback;
+	}
+
+	/**
+	 * @return the comments
+	 */
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	/**
+	 * @param comments
+	 *            the comments to set
+	 */
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+
+	/**
+	 * @return the comment
+	 */
+	public Comment getComment() {
+		if (comment == null) {
+			comment = new Comment();
+		}
+		return comment;
+	}
+
+	/**
+	 * @param comment
+	 *            the comment to set
+	 */
+	public void setComment(Comment comment) {
+		this.comment = comment;
 	}
 }

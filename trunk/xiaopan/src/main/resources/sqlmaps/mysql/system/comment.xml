@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="commentNpc">
+	<resultMap id="commentRstMap" type="comment">
+		<id property="id" column="id" />
+		<result property="comment" column="comment" />
+		<result property="commentDT" column="commentDT" />
+		<result property="reply" column="reply" />
+		<result property="replyDT" column="replyDT" />
+		<result property="ipAddress" column="ipAddress" />
+		<result property="isDelete" column="isDelete" />
+		<association property="shop" column="shopId" select="shopNpc.queryByShopId"/>
+	</resultMap>
+
+	<sql id="query_where">
+		<where>
+			<if test="comment != null">
+				<if test="comment.id != null and comment.id != ''">
+					and T.id = #{comment.id}
+				</if>
+				<if test="comment.isDelete != null and comment.isDelete != ''">
+					and T.isDelete = #{comment.isDelete}
+				</if>
+				<if test="comment.shop != null">
+					<if test="comment.shop.id != null and comment.shop.id != ''">
+						and T.shopId = #{comment.shop.id}
+					</if>
+				</if>
+			</if>
+		</where>
+	</sql>
+	
+	<sql id="query_limit">
+		<if test="pager != null">
+			limit ${pager.startIndex}, ${pager.pageSize}
+		</if>
+	</sql>
+
+	<select id="query" resultMap="commentRstMap" parameterType="map">
+		SELECT T.* FROM `comment` T
+		<include refid="query_where" />
+		order by T.commentDT desc
+	</select>
+	
+	<insert id="add" parameterType="comment">
+		<selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		INSERT INTO `comment`(
+			comment, commentDT, reply, replyDT, ipAddress,
+			isDelete, shopId
+		) VALUES (
+			#{comment}, now(), #{reply}, #{replyDT}, #{ipAddress},
+			#{isDelete}, #{shop.id}
+		)
+	</insert>
+	
+	<update id="updatePart" parameterType="comment">
+		update `comment`
+			<set>
+				<if test="reply != null and reply != ''">reply = #{reply},</if>
+				<if test="replyDT != null and replyDT != ''">replyDT = #{replyDT},</if>
+				<if test="isDelete != null and isDelete != ''">isDelete = #{isDelete},</if>
+			</set>
+			WHERE id = #{id}
+	</update>
+</mapper>
