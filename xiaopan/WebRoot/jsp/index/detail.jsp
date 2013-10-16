@@ -66,8 +66,33 @@
             <div class="list">
                 <div class="l_title"><h3>菜单</h3></div>
                 <div class="l_c">
-                	<%-- <s:iterator value="">
-                	</s:iterator> --%>
+                	<table style="width: 99%;border: 1px solid #3F3F3F;">
+                		<tr>
+                			<th style="width:15%;">名称</th><th style="width:10%;">价格</th>
+                			<th style="width:15%;">名称</th><th style="width:10%;">价格</th>
+                			<th style="width:15%;">名称</th><th style="width:10%;">价格</th>
+                			<th style="width:15%;">名称</th><th style="width:10%;">价格</th>
+                		</tr>
+                	<s:set name="count" value="1"></s:set>
+                	<s:iterator value="shop.types" var="parent">
+                	<s:if test="#count != 1 and #count % 4 == 1">
+                		<tr>
+                	</s:if>
+                		<td>
+                			<s:property value="#parent.name"/>
+                		</td>
+                		<td>
+                			<s:property value="#parent.price"/>
+                		</td>
+                	<s:if test="#count % 4 == 0">
+                		</tr>
+                	</s:if>
+                	<s:set name="count" value="#count + 1"></s:set>
+                	</s:iterator>
+                	<s:if test="#count != 1 and #count % 4 != 0">
+                		</tr>
+                	</s:if>
+                	</table>
                 	<s:property value="shop.contents" escape="false"/>
                     <div class="clear"></div>
                 </div>
