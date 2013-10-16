@@ -53,9 +53,12 @@
         <div class="right">
             <div class="n_c">
                 <ul>
+                <s:if test="feedbacks == null or feedbacks.size() == 0">
+                	<div style="text-align: center;color: red;">还没有人联系我们，快来做第一人吧！！</div>
+                </s:if>
                 <s:iterator value="feedbacks" var="parent">
                 	<li>
-                		<div style="border: 1px solid #DFDFDF;">
+                		<div style="border: 2px solid #DFDFDF;float: left;width: 99%;">
 	                		<div style="float: left;width: 99%;">
 	                			用户&nbsp;<s:property value="#parent.ipAddress"/>&nbsp;<s:property value="%{getText('global.datetime',{#parent.feedbackTime})}"/>&nbsp;说：<br/>
 	                			<s:property value="#parent.feedback"/>
@@ -80,7 +83,7 @@
             <div style="border: 1px solid #DFDFDF;margin-top: 5px;">
 	            <div>请留下您宝贵的建议，我们会及时给你回复：</div>
 	            <div style="text-align: center;">
-	            <s:textarea name="feedback.feedback" cssStyle="width: 99%;resize:none;" cssClass="{required:true,maxlengthCN:1000}"></s:textarea>
+	            <s:textarea name="feedback.feedback" cssStyle="width: 99%;resize:none;" rows="5" cssClass="{required:true,maxlengthCN:1000}"></s:textarea>
 	            <input type="button" id="btn_submit" value="提交"/>
 	            </div>
             </div>

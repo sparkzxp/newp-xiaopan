@@ -66,6 +66,9 @@
 		<action name="feedback_*" class="feedbackAction" method="{1}">
 			<result name="toList">/jsp/admin/feedback_list.jsp</result>
 		</action>
+		<action name="comment_*" class="commentAction" method="{1}">
+			<result name="toList">/jsp/admin/comment_list.jsp</result>
+		</action>
 		<action name="kaptcha" class="kaptchaImageAction" method="getKaptcha"></action>
 	</package>
 

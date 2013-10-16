@@ -131,6 +131,10 @@
             <div class="item">
                 <p><a href="<%=basePath%>sys/feedback_toList" target="I1">反馈列表</a></p>
             </div>
+            <div class="top" style="display: none;">用户评论</div>
+            <div class="item">
+                <p><a href="<%=basePath%>sys/comment_toList" target="I1">评论列表</a></p>
+            </div>
             <div class="top" style="display: none;">系统设置</div>
             <div class="item">
                 <!-- <p><a href="clear.jsp" target="I1">清除缓存</a></p>
