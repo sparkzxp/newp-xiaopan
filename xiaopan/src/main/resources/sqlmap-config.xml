@@ -25,6 +25,7 @@
 		<typeAlias alias="resource" type="com.newp.xiaopan.bean.system.Resource" />
 		<typeAlias alias="role" type="com.newp.xiaopan.bean.system.Role" />
 		<typeAlias alias="city" type="com.newp.xiaopan.bean.system.City" />
+		<typeAlias alias="feedback" type="com.newp.xiaopan.bean.system.Feedback" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="sqlmaps/mysql/system/user.xml" />
@@ -38,5 +39,6 @@
 		<mapper resource="sqlmaps/mysql/system/resource.xml" />
 		<mapper resource="sqlmaps/mysql/system/role.xml" />
 		<mapper resource="sqlmaps/mysql/system/city.xml" />
+		<mapper resource="sqlmaps/mysql/system/feedback.xml" />
 	</mappers>
 </configuration>  
