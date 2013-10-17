@@ -53,5 +53,6 @@
 	<bean id="configReader" class="com.newp.xiaopan.action.web.ConfigReader"
 		init-method="init">
 		<property name="siteService" ref="siteService"></property>
+		<property name="settingService" ref="settingService"></property>
 	</bean>
 </beans>
