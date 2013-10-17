@@ -60,7 +60,7 @@
                         <td style="text-align: left;">
                         	<s:iterator value="#parent.types" var="child">
                         		<s:if test="#child.name.indexOf(key.name) > -1">
-                        		<s:property value="#child.name"/>(<s:property value="#child.price"/>)
+                        		<s:property value="#child.name"/><s:if test="!#child.price.equals(\"0\") and !#child.price.equals(\"0.0\")">(<s:property value="#child.price"/>)</s:if>
                         		</s:if>
                         	</s:iterator>
                         </td>
