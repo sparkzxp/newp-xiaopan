@@ -166,6 +166,10 @@
                     <td><s:textfield name="shop.title" cssStyle="width:200px;" cssClass="{required:true,maxlengthCN:80}"/></td>
                 </tr>
                 <tr>
+                    <td width="120px" height="25px" align="right">是否关店：</td>
+                    <td><s:select name="shop.isClosed" list="#{'0':'否','1':'是' }" cssStyle="width:100px;" cssClass="{required:true}"/></td>
+                </tr>
+                <tr>
                     <td width="120px" height="25px" align="right">关键词：</td>
                     <td><s:textarea name="shop.keyword" cssStyle="width:400px; height:60px;" cssClass="{maxlengthCN:200}"></s:textarea></td>
                 </tr>

@@ -22,6 +22,7 @@ public class Shop extends BaseBean {
 	private List<Type> types;
 	private Integer click;
 	private Integer pingnum;
+	private String isClosed;
 
 	public Shop() {
 		super();
@@ -134,6 +135,21 @@ public class Shop extends BaseBean {
 
 	public void setTypes(List<Type> types) {
 		this.types = types;
+	}
+
+	/**
+	 * @return the isClosed
+	 */
+	public String getIsClosed() {
+		return isClosed;
+	}
+
+	/**
+	 * @param isClosed
+	 *            the isClosed to set
+	 */
+	public void setIsClosed(String isClosed) {
+		this.isClosed = isClosed;
 	}
 
 }

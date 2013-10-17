@@ -16,6 +16,7 @@
 		<result property="siteName" column="siteName" />
 		<result property="click" column="click" />
 		<result property="pingnum" column="pingnum" />
+		<result property="isClosed" column="isClosed" />
 		<collection property="types" javaType="java.util.ArrayList" ofType="type" select="typeNpc.queryByShopId" column="id" />
 	</resultMap>
 
@@ -55,7 +56,7 @@
 		select distinct
 			s.id, s.title, s.keyword, s.description, '' contents,
 			s.address, s.tel, s.contacter, s.imagePath, s.siteId,
-			s.click, s.pingnum, si.name siteName
+			s.click, s.pingnum, s.isClosed, si.name siteName
 		from shop s 
 		join site si on si.id = s.siteId
 		left join shoptype st on st.shopid = s.id
@@ -92,11 +93,13 @@
 		INSERT INTO SHOP(
 			title, keyword, description,
 			contents, address, tel,
-			contacter, imagePath, siteId
+			contacter, imagePath, siteId,
+			isClosed
 		) VALUES (
 			#{title}, #{keyword}, #{description},
 			#{contents}, #{address}, #{tel},
-			#{contacter}, #{imagePath}, #{siteId}
+			#{contacter}, #{imagePath}, #{siteId},
+			#{isClosed}
 		)
 	</insert>
 	
@@ -121,7 +124,8 @@
 			tel = #{tel},
 			contacter = #{contacter},
 			imagePath = #{imagePath},
-			siteId = #{siteId}
+			siteId = #{siteId},
+			isClosed = #{isClosed}
 			
 			WHERE id = #{id}
 	</update>
