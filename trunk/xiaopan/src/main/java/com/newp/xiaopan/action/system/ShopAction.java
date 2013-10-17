@@ -141,7 +141,7 @@ public class ShopAction extends BaseAction {
 				}
 				jsonObject.put("nocheck", true);
 			} else {
-				jsonObject.put("name", t.getName() + "(" + t.getPrice() + "元)");
+				jsonObject.put("name", t.getName() + "(" + t.getPrice() + ")");
 			}
 			jsonArray.add(jsonObject);
 		}
