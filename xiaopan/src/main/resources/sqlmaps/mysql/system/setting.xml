@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="settingNpc">
+	<resultMap id="settingRstMap" type="setting">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="value" column="value" />
+	</resultMap>
+
+	<sql id="query_where">
+		<where>
+			<if test="setting != null">
+				<if test="setting.id != null and setting.id != ''">
+					and T.id = #{setting.id}
+				</if>
+				<if test="setting.name != null and setting.name != ''">
+					and T.name = #{setting.name}
+				</if>
+			</if>
+		</where>
+	</sql>
+
+	<select id="query" resultMap="settingRstMap" parameterType="map">
+		SELECT T.* FROM `setting` T
+		<include refid="query_where" />
+		order by T.name asc
+	</select>
+	
+	<update id="update" parameterType="setting">
+		update `setting` set
+			name = #{name},
+			value = #{value}
+			
+			WHERE id = #{id}
+	</update>
+</mapper>

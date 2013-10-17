@@ -2,7 +2,9 @@ package com.newp.xiaopan.action.web;
 
 import java.util.List;
 
+import com.newp.xiaopan.bean.system.Setting;
 import com.newp.xiaopan.bean.system.Site;
+import com.newp.xiaopan.service.system.ISettingService;
 import com.newp.xiaopan.service.system.ISiteService;
 
 /**
@@ -11,6 +13,7 @@ import com.newp.xiaopan.service.system.ISiteService;
 public class ConfigReader {
 
 	private ISiteService siteService;
+	private ISettingService settingService;
 
 	private static ConfigReader configReader;
 
@@ -23,6 +26,10 @@ public class ConfigReader {
 		return configReader.siteService.queryList(null);
 	}
 
+	public static Setting querySetting(Setting setting) {
+		return configReader.settingService.query(setting);
+	}
+
 	public ISiteService getSiteService() {
 		return siteService;
 	}
@@ -33,5 +40,20 @@ public class ConfigReader {
 
 	public static void setConfigReader(ConfigReader configReader) {
 		ConfigReader.configReader = configReader;
+	}
+
+	/**
+	 * @return the settingService
+	 */
+	public ISettingService getSettingService() {
+		return settingService;
+	}
+
+	/**
+	 * @param settingService
+	 *            the settingService to set
+	 */
+	public void setSettingService(ISettingService settingService) {
+		this.settingService = settingService;
 	}
 }

@@ -15,23 +15,25 @@
 			<result name="login">/jsp/admin/login.jsp</result>
 			<result name="main">/jsp/index/main.jsp</result>
 			<result type="redirect" name="mobile">/mobile</result>
+			<result type="dispatcher" name="networkBusy">/jsp/common/networkBusy.jsp</result>
 			<result type="dispatcher" name="exceptionError">/exceptionError</result>
 		</global-results>
-		<global-exception-mappings><!-- 全局异常处理 -->
+		<!-- 全局异常处理 -->
+		<!-- <global-exception-mappings>
 			<exception-mapping result="exceptionError"
 				exception="java.lang.NullPointerException" />
 			<exception-mapping result="exceptionError"
 				exception="java.lang.NoSuchMethodException" />
 			<exception-mapping result="exceptionError"
 				exception="java.lang.Exception" />
-		</global-exception-mappings>
+		</global-exception-mappings> -->
 		<action name="admin" class="adminAction" method="login"></action>
 		<action name="mobile" class="mobileAction" method="toSite">
 			<result name="toSite">/jsp/mobile/main.jsp</result>
 		</action>
-		<action name="exceptionError" class="errorAction" method="toExceptionError">
+		<!-- <action name="exceptionError" class="errorAction" method="toExceptionError">
 			<result name="toExceptionError">/jsp/error/404.jsp</result>
-		</action>
+		</action> -->
 	</package>
 
 	<include file="actions/system/struts_system.xml" />

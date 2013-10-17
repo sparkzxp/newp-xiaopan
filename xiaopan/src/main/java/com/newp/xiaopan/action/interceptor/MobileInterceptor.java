@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 
+import com.newp.xiaopan.action.web.ConfigReader;
+import com.newp.xiaopan.bean.system.Setting;
 import com.newp.xiaopan.common.Constants;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionInvocation;
@@ -51,7 +53,17 @@ public class MobileInterceptor extends MethodFilterInterceptor {
 		if (userAgent.toUpperCase().matches(browser)) {
 			return "mobile";
 		} else {
-			return invocation.invoke();
+			// 判断是否模拟网络忙
+//			WebApplicationContext webApplicationContext = WebApplicationContextUtils.getWebApplicationContext(request.getSession().getServletContext());
+//			WebApplicationContext webApplicationContext = (WebApplicationContext) request.getSession().getServletContext().getAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
+//			ISettingService settingService = (SettingService) webApplicationContext.getBean("settingService");
+//			Setting setting = settingService.query(new Setting("模拟网络忙"));
+			Setting setting = ConfigReader.querySetting(new Setting("模拟网络忙"));
+			if(setting.getValue().equals("0")) {
+				return invocation.invoke();
+			} else {
+				return "networkBusy";
+			}
 		}
 	}
 

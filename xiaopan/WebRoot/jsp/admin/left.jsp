@@ -139,7 +139,7 @@
             <div class="item">
                 <!-- <p><a href="clear.jsp" target="I1">清除缓存</a></p>
                 <p><a href="config.jsp" target="I1">网站配制</a></p> -->
-                <p><a href="#" target="I1">模拟网络忙</a></p>
+                <p><a href="<%=basePath%>sys/setting_toEdit?setting.name=模拟网络忙" target="I1">模拟网络忙</a></p>
             </div>
         </div>
     </form>
