@@ -48,7 +48,7 @@
         <div class="right">
             <div class="r_d">
                 <div class="r_d_l">
-                    <p><h3><s:property value="shop.title" /></h3></p>
+                    <p><h3><s:property value="shop.title" /><s:if test="shop.isClosed.equals(\"1\")"><span style="color: red;">（本店已打烊）</span></s:if></h3></p>
                     <p>地址：<s:property value="shop.address" /></p>
                     <p>电话：<s:property value="shop.tel" /></p>
                     <p>联系人：<s:property value="shop.contacter" /></p>

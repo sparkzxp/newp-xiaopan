@@ -41,7 +41,7 @@
                 <tr>
                     <th style="width:160px;">店铺名称</th>
                     <th style="width:140px;">电话</th>
-                    <th style="min-width:180px;">价格（元）</th>
+                    <th style="min-width:180px;">价格</th>
                     <th style="width:80px;border-right:solid 1px #ededed;">详情</th>
                 </tr>
                 <s:if test="null == shops or shops.size() == 0">
@@ -54,7 +54,8 @@
                 </s:if>
                 <s:iterator value="shops" var="parent">
                     <tr>
-                        <td><a href="<%=basePath%>web/main_toDetail?shop.id=<s:property value="#parent.id"/>"><s:property value="#parent.title"/></a></td>
+                        <td><a href="<%=basePath%>web/main_toDetail?shop.id=<s:property value="#parent.id"/>"><s:property value="#parent.title"/></a><s:if test="#parent.isClosed.equals(\"1\")"><span style="color: red;">（已打烊）</span></s:if>
+                        </td>
                         <td><s:property value="#parent.tel"/></td>
                         <td style="text-align: left;">
                         	<s:iterator value="#parent.types" var="child">
