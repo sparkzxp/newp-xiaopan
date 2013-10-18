@@ -30,17 +30,26 @@
         	<s:if test="#parent.topid == 0">
         	<div data-role="collapsible" data-collapsed="true">
         		<h3><s:property value="#parent.name"/></h3>
-	        	<ul data-role="listview" data-divider-theme="e" data-inset="true">
-	        	<s:iterator value="types" var="child">
-	                <s:if test="#child.topid == #parent.id">
-	                <li data-theme="c">
-		                <a href="<%=basePath%>mobile/mobile_toSearch?type.name=<s:property value="#child.name"/>" data-transition="slide">
-		        			<s:property value="#child.name"/>
-		        		</a>
-		        	</li>
-	                </s:if>
-	            </s:iterator>
-	      		</ul>
+                <s:iterator value="types" var="child">
+                <s:if test="#child.topid == #parent.id">
+        		<div data-role="collapsible-set">
+                    <div data-role="collapsible" data-collapsed="true">
+                        <h3><s:property value="#child.name"/></h3>
+                        <ul data-role="listview" data-divider-theme="e" data-inset="true">
+                        <s:iterator value="types" var="leaf">
+			                <s:if test="#leaf.topid == #child.id">
+			                <li data-theme="c">
+				                <a href="<%=basePath%>mobile/mobile_toSearch?type.name=<s:property value="#leaf.name"/>" data-transition="slide">
+				        			<s:property value="#leaf.name"/>
+				        		</a>
+				        	</li>
+			                </s:if>
+			            </s:iterator>
+			            </ul>
+                    </div>
+                </div>
+        		</s:if>
+        		</s:iterator>
       		</div>
         	</s:if>
         	</s:iterator>

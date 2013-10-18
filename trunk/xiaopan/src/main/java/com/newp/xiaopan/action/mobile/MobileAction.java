@@ -1,18 +1,22 @@
 package com.newp.xiaopan.action.mobile;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import com.newp.xiaopan.action.listener.MySessionListener;
 import com.newp.xiaopan.action.system.BaseAction;
+import com.newp.xiaopan.bean.system.City;
 import com.newp.xiaopan.bean.system.Shop;
 import com.newp.xiaopan.bean.system.Site;
 import com.newp.xiaopan.bean.system.Type;
 import com.newp.xiaopan.common.Constants;
+import com.newp.xiaopan.service.system.ICityService;
 import com.newp.xiaopan.service.system.IShopService;
+import com.newp.xiaopan.service.system.ISiteService;
 import com.newp.xiaopan.service.system.ITypeService;
 import com.opensymphony.xwork2.Action;
 
@@ -28,6 +32,10 @@ public class MobileAction extends BaseAction {
 	private ITypeService typeService;
 	@Autowired
 	private IShopService shopService;
+	@Autowired
+	private ICityService cityService;
+	@Autowired
+	private ISiteService siteService;
 
 	private List<Site> sites;
 	private List<Type> types;
@@ -36,14 +44,40 @@ public class MobileAction extends BaseAction {
 	private Type type;
 	private Shop shop;
 
-	@SuppressWarnings("unchecked")
+	private List<City> citys;
+	private City city;
+
 	public String toSite() {
-		sites = (List<Site>) MySessionListener.getConfigMap_s().get(Constants.CONFIG_SITE_LIST);
+		if (city == null) {
+			if (this.getCurrentSession().getAttribute(Constants.SESSION_CITY) != null) {
+				city = (City) this.getCurrentSession().getAttribute(Constants.SESSION_CITY);
+			} else {
+				this.getCity().setId("1");
+			}
+		}
+		this.setCity(this.cityService.query(getCity()));
+		Site _site = new Site();
+		_site.setCity(getCity());
+		this.getCurrentSession().setAttribute(Constants.SESSION_CITY, this.getCity());
+		sites = this.siteService.queryList(_site);
+		if (null != this.getCurrentSession().getAttribute(Constants.SESSION_USER_SITE)) {
+			if (!getCity().getId().equals(((Site) getCurrentSession().getAttribute(Constants.SESSION_USER_SITE)).getCity().getId())) {
+				getCurrentSession().setAttribute(Constants.SESSION_USER_SITE, sites.get(0));
+			}
+		}
+
+		// sites = (List<Site>)
+		// MySessionListener.getConfigMap_s().get(Constants.CONFIG_SITE_LIST);
 		return "toSite";
 	}
 
 	public String toTypeList() {
-		types = typeService.queryDistinctList(new Type());
+		initSite();
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("type", null);
+		params.put("siteId", site.getId());
+		types = typeService.queryDistinctList(params);
+//		types = typeService.queryDistinctList(new Type());
 		initSite();
 		return "toTypeList";
 	}
@@ -74,9 +108,22 @@ public class MobileAction extends BaseAction {
 		return "toPhone";
 	}
 
-	@SuppressWarnings("unchecked")
 	private void initSite() {
-		List<Site> tmpSites = (List<Site>) MySessionListener.getConfigMap_s().get(Constants.CONFIG_SITE_LIST);
+		if (city == null) {
+			if (this.getCurrentSession().getAttribute(Constants.SESSION_CITY) != null) {
+				city = (City) this.getCurrentSession().getAttribute(Constants.SESSION_CITY);
+			} else {
+				this.getCity().setId("1");
+			}
+		}
+		this.setCity(this.cityService.query(getCity()));
+		Site _site = new Site();
+		_site.setCity(getCity());
+		this.getCurrentSession().setAttribute(Constants.SESSION_CITY, this.getCity());
+
+		List<Site> tmpSites = this.siteService.queryList(_site);
+		// List<Site> tmpSites = (List<Site>)
+		// MySessionListener.getConfigMap_s().get(Constants.CONFIG_SITE_LIST);
 		if (null == site || StringUtils.isEmpty(site.getId())) {
 			Site tmpSite = (Site) getCurrentSession().getAttribute(Constants.SESSION_USER_SITE);
 			if (null == tmpSite) {
@@ -94,6 +141,20 @@ public class MobileAction extends BaseAction {
 			}
 			getCurrentSession().setAttribute(Constants.SESSION_USER_SITE, site);
 		}
+	}
+
+	public String toCityList() {
+		if (city == null) {
+			if (this.getCurrentSession().getAttribute(Constants.SESSION_CITY) != null) {
+				city = (City) this.getCurrentSession().getAttribute(Constants.SESSION_CITY);
+			} else {
+				this.getCity().setId("1");
+			}
+		}
+		this.setCity(this.cityService.query(getCity()));
+
+		citys = this.cityService.queryList(null);
+		return "toCityList";
 	}
 
 	public List<Site> getSites() {
@@ -142,5 +203,38 @@ public class MobileAction extends BaseAction {
 
 	public void setShop(Shop shop) {
 		this.shop = shop;
+	}
+
+	/**
+	 * @return the city
+	 */
+	public City getCity() {
+		if (city == null) {
+			city = new City();
+		}
+		return city;
+	}
+
+	/**
+	 * @param city
+	 *            the city to set
+	 */
+	public void setCity(City city) {
+		this.city = city;
+	}
+
+	/**
+	 * @return the citys
+	 */
+	public List<City> getCitys() {
+		return citys;
+	}
+
+	/**
+	 * @param citys
+	 *            the citys to set
+	 */
+	public void setCitys(List<City> citys) {
+		this.citys = citys;
 	}
 }
