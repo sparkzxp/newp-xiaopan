@@ -47,7 +47,7 @@
         				<td style="width:80%;">
         					<div style="margin-bottom: 10px;">
         						<%-- <a href="<%=basePath%>mobile/mobile_toShop?shop.id=<s:property value="#parent.id"/>" data-transition="slide"><s:property value="#parent.title"/></a> --%>
-        						<s:property value="#parent.title"/>
+        						<s:property value="#parent.title"/><s:if test="#parent.isClosed.equals(\"1\")"><span style="color: red;">（已打烊）</span></s:if>
         					</div>
         					<div>
         						<a href="tel:<s:property value="#parent.tel"/>" style="text-decoration:none;">

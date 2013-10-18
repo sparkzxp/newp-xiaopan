@@ -10,6 +10,7 @@
 			<result name="toSearch">/jsp/mobile/search.jsp</result>
 			<result name="toShop">/jsp/mobile/shop.jsp</result>
 			<result name="toPhone">/jsp/mobile/phone.jsp</result>
+			<result name="toCityList">/jsp/mobile/city_list.jsp</result>
 		</action>
 	</package>
 

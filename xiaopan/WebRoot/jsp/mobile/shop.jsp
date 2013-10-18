@@ -34,7 +34,7 @@
     <div data-role="content">
         <ul data-divider-theme="e" data-inset="true">
         	<li data-theme="c">
-       			店铺：<s:property value="shop.title"/>
+       			店铺：<s:property value="shop.title"/><s:if test="shop.isClosed.equals(\"1\")"><span style="color: red;">（本店已打烊）</span></s:if>
         	</li>
         	<li data-theme="c">
        			地址：<s:property value="shop.address"/>
