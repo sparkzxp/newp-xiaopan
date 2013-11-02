@@ -227,22 +227,6 @@
     		
     		setTimeout(doSilder, 2000);
     	});
-    	
-    	function showLeafType(o){
-    		$('#leafType_title').html($(o).text());
-    		var _as = $(o).parent().find('span').find('a');
-    		$('#leafType').find('li').remove();
-    		for(var i=0; i<_as.length; i++){
-    			$('#leafType').find('ul').append('<li>'+_as[i].outerHTML+'</li>');
-    		}
-    		$('#topType').hide();
-    		$('#leafType').show();
-    	}
-    	
-    	function showTopType(){
-    		$('#leafType').hide();
-    		$('#topType').show();
-    	}
     </script>
     <style type="text/css">
     #showbox{
@@ -281,24 +265,8 @@
     <%@ include file="header.jsp"%>
     <!--end search-->
     <div class="main">
-        <div class="left" style="width:170px;">
-        <div id="picplayer" style="position:relative;overflow:hidden;width:170px;height:485px;clear:none;border:solid 1px #ccc;"> 
-		</div>
-           	<s:set name="count" value="1"></s:set>
-           	<s:iterator value="adss" var="parent">
-           		<s:if test="#parent.place == '头部广告'">
-            	<script type="text/javascript">
-            		var p<s:property value="#count"/> = {
-            			url : '<%=basePath%><s:property value="#parent.imageurl"/>',
-            			link : '<s:property value="%{(#parent.weburl==null || #parent.weburl==\"\")?\"javascript:void(0);\":#parent.weburl}"/>',
-            			time : 6000
-            		};
-            		pics.push(p<s:property value="#count"/>);
-            	</script>
-                <s:set name="count" value="#count + 1"></s:set>
-                </s:if>
-            </s:iterator>
-            <%-- <ul>
+        <div class="left">
+            <ul>
             <s:set name="count" value="1"></s:set>
             <s:iterator value="adss" var="parent">
             	<s:if test="#parent.place == '网页左面' and #count <= 5">
@@ -327,47 +295,57 @@
                 <s:set name="count" value="#count + 1"></s:set>
                 </s:if>
             </s:iterator>
-            </ul> --%>
+            </ul>
         </div>
         <!--end left-->
         <div class="middle">
-        	<div class="middleType" id="topType">
         	<s:iterator value="types" var="parent">
         		<s:if test="#parent.topid == 0">
-        		<div class="item_new">
-        			<div style="font-weight:bolder;"><s:property value="#parent.name"/></div>
-        			<div>
-						<s:set name="count" value="1"></s:set>
-						<ul id="ul_<s:property value="#parent.id"/>">
-						<s:iterator value="types" var="child">
-                       	<s:if test="#child.topid == #parent.id">
-                       		<li>
-                       			<a href="javascript:void(0);" onclick="showLeafType(this)"><s:property value="#child.name"/></a>
-                       			<span style="display: none;">
-                       			<s:iterator value="types" var="leaf">
-                       			<s:if test="#leaf.topid == #child.id">
-                       				<a href="<%=basePath%>web/main_toSearch?key.name=<s:property value="#leaf.name"/>"><s:property value="#leaf.name"/></a>
-                       			</s:if>
-                       			</s:iterator>
-                       			</span>
-                       		</li>
-						</s:if>
-						</s:iterator>
-                    	</ul>
-                    </div>
+        		<div class="item">
+                    <ul id="ul_<s:property value="#parent.id"/>">
+                        <li><strong><s:property value="#parent.name"/></strong></li>
+                        <s:set name="count" value="1"></s:set>
+                        <s:iterator value="types" var="child">
+                        	<s:if test="#child.topid == #parent.id">
+                        		<s:if test="#count == 11">
+                        		<li>
+                        		<%-- <a href="javascript:void(0);" style="color:#777777;" onclick="toggleList('<s:property value="#parent.id"/>_<s:property value="#parent.name"/>');"> --%>
+                        		<a href="javascript:void(0);" style="color:#777777;" onclick="popup('<s:property value="#parent.id"/>_<s:property value="#parent.name"/>');">
+                        		<img id="img_<s:property value="#parent.id"/>_<s:property value="#parent.name"/>" alt="" src="<%=basePath%>images/ico1.gif"/>&nbsp;其他</a></li>
+                        		<ul id="ul_<s:property value="#parent.id"/>_<s:property value="#parent.name"/>" style="display:none;">
+                        		</s:if>
+	                        	<s:if test="#count < 11">
+	                            <li><a href="javascript:void(0);"<%-- "<%=basePath%>web/main_toSearch?key.name=<s:property value="#child.name"/>" --%> 
+	                            		onclick="popup('<s:property value="#child.id"/>_<s:property value="#child.name"/>', '<s:property value="#child.name"/>');"><s:property value="#child.name"/></a></li>
+	                            	<ul id="ul_<s:property value="#child.id"/>_<s:property value="#child.name"/>" style="display:none;">
+	                            	<s:iterator value="types" var="leaf">
+                        			<s:if test="#leaf.topid == #child.id">
+                        			<li><a href="<%=basePath%>web/main_toSearch?key.name=<s:property value="#leaf.name"/>"><s:property value="#leaf.name"/></a></li>
+                        			</s:if>
+                        			</s:iterator>
+	                            	</ul>
+	                            <s:set name="count" value="#count + 1"></s:set>
+	                            </s:if>
+	                            <s:else>
+	                            <%-- <li><a href="<%=basePath%>web/main_toSearch?key.name=<s:property value="#child.name"/>"><s:property value="#child.name"/></a></ --%>li>
+	                            <li><a href="javascript:void(0);"<%-- "<%=basePath%>web/main_toSearch?key.name=<s:property value="#child.name"/>" --%> 
+	                            		onclick="popup('<s:property value="#child.id"/>_<s:property value="#child.name"/>', '<s:property value="#child.name"/>');"><s:property value="#child.name"/></a></li>
+	                            	<ul id="ul_<s:property value="#child.id"/>_<s:property value="#child.name"/>" style="display:none;">
+	                            	<s:iterator value="types" var="leaf">
+                        			<s:if test="#leaf.topid == #child.id">
+                        			<li><a href="<%=basePath%>web/main_toSearch?key.name=<s:property value="#leaf.name"/>"><s:property value="#leaf.name"/></a></li>
+                        			</s:if>
+                        			</s:iterator>
+	                            	</ul></li>
+	                            <s:set name="count" value="#count + 1"></s:set>
+	                            </s:else>
+                            </s:if>
+                        </s:iterator>
+                        <s:if test="#count > 10"></ul></s:if>
+                    </ul>
                 </div>
         		</s:if>
         	</s:iterator>
-        	</div>
-        	<div class="middleType" id="leafType" style="display: none;">
-        		<div class="item_new" style="width:100%;">
-        			<span style="float: right;"><a href="javascript:void(0);" onclick="showTopType()">[返回]</a>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-        			<div style="font-weight:bolder;" id="leafType_title"></div>
-	        		<div>
-	        			<ul></ul>
-	        		</div>
-	        	</div>
-        	</div>
             <div class="clear"></div>
             <div class="m_ads">
                 <ul>
@@ -464,84 +442,5 @@
     <!--end main-->
     <%@ include file="footer.jsp"%>
     </form>
-<script>
-	var p = $('#picplayer');
-	if(pics.length > 0){
-	initPicPlayer(pics, p.css('width').split('px')[0], p.css('height').split(
-			'px')[0]);
-	}
-	function initPicPlayer(pics, w, h) {
-		//选中的图片 
-		var selectedItem;
-		//选中的按钮 
-		var selectedBtn;
-		//自动播放的id 
-		var playID;
-		//选中图片的索引 
-		var selectedIndex;
-		//容器 
-		var p = $('#picplayer');
-		p.text('');
-		p.append('<div id="piccontent"></div>');
-		var c = $('#piccontent');
-		for ( var i = 0; i < pics.length; i++) {
-			//添加图片到容器中 
-			c.append('<a href="'+pics[i].link+'" ><img id="picitem'+i+'" style="display: none;z-index:'+i+'" src="'+pics[i].url+'" /></a>');
-		}
-		//按钮容器，绝对定位在右下角 
-		p.append('<div id="picbtnHolder" style="position:absolute;top:'
-				+ (h - 25) + 'px;width:' + w
-				+ 'px;height:20px;z-index:10000;"></div>');
-		// 
-		var btnHolder = $('#picbtnHolder');
-		btnHolder.append('<div id="picbtns" style="float:right; padding-right:1px;"></div>');
-		var btns = $('#picbtns');
-		// 
-		for ( var i = 0; i < pics.length; i++) {
-			//增加图片对应的按钮 
-			btns.append('<span id="picbtn'+i+'" style="cursor:pointer; border:solid 1px #ccc;background-color:#eee;color:#000; display:inline-block;width:15px;line-height: 15px;text-align: center;margin-right: 1px;">'
-							+ (i + 1) + ' </span> ');
-			$('#picbtn' + i).data('index', i);
-			$('#picbtn' + i)
-					.click(
-							function(event) {
-								if (selectedItem.attr('src') == $(
-										'#picitem' + $(this).data('index'))
-										.attr('src')) {
-									return;
-								}
-								setSelectedItem($(this).data('index'));
-							});
-		}
-		btns.append(' ');
-		/// 
-		setSelectedItem(0);
-		//显示指定的图片index 
-		function setSelectedItem(index) {
-			selectedIndex = index;
-			clearInterval(playID);
-			//alert(index); 
-			if (selectedItem)
-				selectedItem.fadeOut('fast');
-			selectedItem = $('#picitem' + index);
-			selectedItem.fadeIn('slow');
-			// 
-			if (selectedBtn) {
-				selectedBtn.css('backgroundColor', '#eee');
-				//selectedBtn.css('color', '#000');
-			}
-			selectedBtn = $('#picbtn' + index);
-			selectedBtn.css('backgroundColor', '#aaa');
-			//selectedBtn.css('color', '#000');
-			//自动播放 
-			playID = setInterval(function() {
-				var index = selectedIndex + 1;
-				if (index > pics.length - 1)
-					index = 0;
-				setSelectedItem(index);
-			}, pics[index].time);
-		}
-	}
-</script>
 </body>
 </html>

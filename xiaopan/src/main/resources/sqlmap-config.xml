@@ -28,6 +28,7 @@
 		<typeAlias alias="feedback" type="com.newp.xiaopan.bean.system.Feedback" />
 		<typeAlias alias="comment" type="com.newp.xiaopan.bean.system.Comment" />
 		<typeAlias alias="setting" type="com.newp.xiaopan.bean.system.Setting" />
+		<typeAlias alias="vote" type="com.newp.xiaopan.bean.system.Vote" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="sqlmaps/mysql/system/user.xml" />
@@ -44,5 +45,6 @@
 		<mapper resource="sqlmaps/mysql/system/feedback.xml" />
 		<mapper resource="sqlmaps/mysql/system/comment.xml" />
 		<mapper resource="sqlmaps/mysql/system/setting.xml" />
+		<mapper resource="sqlmaps/mysql/system/vote.xml" />
 	</mappers>
 </configuration>  

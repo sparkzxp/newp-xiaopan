@@ -54,7 +54,7 @@
         	<li data-theme="c">
         		菜谱：
         		<s:iterator value="shop.types" var="child">
-        		<div><s:property value="#child.name"/>(<s:property value="#child.price"/>元)</div>
+        		<div><s:property value="#child.name"/>(<s:property value="#child.price"/>)</div>
         		</s:iterator>
         	</li>
         </ul>

@@ -1,7 +1,7 @@
 body
 {
     font-size: 12px;
-    color:#454545;
+    /* color:#454545; */
     line-height: 23px;
     text-align: center;
     padding: 0;
@@ -21,7 +21,7 @@ div
 }
 a
 {
-    color: #4f4f4f;
+    color: #2f2f2f;
     text-decoration: none;
     cursor: pointer;
 }
@@ -45,7 +45,7 @@ img
 	height:30px;
 	line-height:30px;
 	width:880px;
-	color:#999999;
+	color:#777777;
 }
 .t_left
 {
@@ -131,7 +131,7 @@ img
 	background:url(../images/search1.jpg) left top no-repeat;
 	border:0;
 	margin-left:15px;
-	color:#999999;
+	color:#777777;
 }
 .nav ul li a
 {
@@ -148,7 +148,7 @@ img
 	line-height:27px;
 	border:none;
 	width:305px;
-	color:#999999;
+	color:#777777;
 	font-size:14px;
 	margin-left:33px;
 }
@@ -189,7 +189,7 @@ img
 	width:800px;
 	line-height:25px;
 	text-align:center;
-	color:#999999;
+	color:#777777;
 	border-top:solid 2px #dfdfdf;
 	margin-top:25px;
 	padding-top:10px;
