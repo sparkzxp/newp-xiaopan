@@ -1,9 +1,12 @@
 package com.newp.xiaopan.action.web;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -22,6 +25,7 @@ import com.newp.xiaopan.bean.system.Key;
 import com.newp.xiaopan.bean.system.Shop;
 import com.newp.xiaopan.bean.system.Site;
 import com.newp.xiaopan.bean.system.Type;
+import com.newp.xiaopan.bean.system.Vote;
 import com.newp.xiaopan.common.Constants;
 import com.newp.xiaopan.common.IPUtil;
 import com.newp.xiaopan.service.system.IAdsService;
@@ -33,6 +37,7 @@ import com.newp.xiaopan.service.system.IFeedbackService;
 import com.newp.xiaopan.service.system.IShopService;
 import com.newp.xiaopan.service.system.ISiteService;
 import com.newp.xiaopan.service.system.ITypeService;
+import com.newp.xiaopan.service.system.IVoteService;
 
 /**
  * @author 张霄鹏
@@ -60,6 +65,8 @@ public class MainAction extends BaseAction {
 	private IFeedbackService feedbackService;
 	@Autowired
 	private ICommentService commentService;
+	@Autowired
+	private IVoteService voteService;
 
 	private String siteJson;
 	private Site site;
@@ -85,6 +92,8 @@ public class MainAction extends BaseAction {
 
 	private List<Comment> comments;
 	private Comment comment;
+
+	private Vote vote;
 
 	public String toMap() {
 		return "toMap";
@@ -153,6 +162,7 @@ public class MainAction extends BaseAction {
 		}
 		initHeader();
 		shop = this.shopService.query(shop);
+		Collections.sort(shop.getTypes(), new SortByTopid());
 		Shop s = new Shop();
 		s.setId(shop.getId());
 		s.setClick(shop.getClick() + 1);
@@ -280,6 +290,72 @@ public class MainAction extends BaseAction {
 		this.feedbackService.add(feedback);
 
 		this.ajax(true);
+	}
+
+	public void addVote() {
+		vote.setIpAddress(IPUtil.getIpAddr(this.getCurrentRequest()));
+		this.ajax(this.voteService.add(vote));
+	}
+
+	@SuppressWarnings("unchecked")
+	public void queryVoteByShop() {
+		JSONObject result = new JSONObject();
+		List<Map<String, Object>> list = this.voteService.queryStat(vote);
+		JSONArray jsonArray = new JSONArray();
+		JSONObject speed0 = new JSONObject();
+		speed0.put("id", "speed0");
+		speed0.put("name", "蜗牛店");
+		speed0.put("value", "0");
+		if (CollectionUtils.isNotEmpty(list)) {
+			for (Map<String, Object> map : list) {
+				if ("speed0".equals(map.get("type").toString())) {
+					speed0.put("value", map.get("count").toString());
+				}
+			}
+		}
+		jsonArray.add(speed0);
+
+		JSONObject speed1 = new JSONObject();
+		speed1.put("id", "speed1");
+		speed1.put("name", "乌龟店");
+		speed1.put("value", "0");
+		if (CollectionUtils.isNotEmpty(list)) {
+			for (Map<String, Object> map : list) {
+				if ("speed1".equals(map.get("type").toString())) {
+					speed1.put("value", map.get("count").toString());
+				}
+			}
+		}
+		jsonArray.add(speed1);
+
+		JSONObject speed2 = new JSONObject();
+		speed2.put("id", "speed2");
+		speed2.put("name", "兔子店");
+		speed2.put("value", "0");
+		if (CollectionUtils.isNotEmpty(list)) {
+			for (Map<String, Object> map : list) {
+				if ("speed2".equals(map.get("type").toString())) {
+					speed2.put("value", map.get("count").toString());
+				}
+			}
+		}
+		jsonArray.add(speed2);
+
+		JSONObject speed3 = new JSONObject();
+		speed3.put("id", "speed3");
+		speed3.put("name", "曹操店");
+		speed3.put("value", "0");
+		if (CollectionUtils.isNotEmpty(list)) {
+			for (Map<String, Object> map : list) {
+				if ("speed3".equals(map.get("type").toString())) {
+					speed3.put("value", map.get("count").toString());
+				}
+			}
+		}
+		jsonArray.add(speed3);
+
+		result.put("root", jsonArray);
+		this.ajax(result.toJSONString());
 	}
 
 	public String getSiteJson() {
@@ -487,4 +563,31 @@ public class MainAction extends BaseAction {
 	public void setComment(Comment comment) {
 		this.comment = comment;
 	}
+
+	/**
+	 * @return the vote
+	 */
+	public Vote getVote() {
+		return vote;
+	}
+
+	/**
+	 * @param vote
+	 *            the vote to set
+	 */
+	public void setVote(Vote vote) {
+		this.vote = vote;
+	}
+}
+
+class SortByTopid implements Comparator<Type> {
+
+	public int compare(Type o1, Type o2) {
+		if (o1.getTopid() > o2.getTopid()) {
+			return 1;
+		} else {
+			return 0;
+		}
+	}
+
 }

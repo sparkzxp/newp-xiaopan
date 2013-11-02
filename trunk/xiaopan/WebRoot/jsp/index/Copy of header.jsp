@@ -94,24 +94,7 @@
             <img src="<%=basePath%>images/logo.jpg" style="height:85px;" /></a><br />
 			【<a id="siteSel" href="javascript:void(0)" onclick="showMenu();"><s:property value="site.name" /></a>】
         </div>
-        <div class="h_right" style="height: 120px;">
-        <div class="search1">
-	        <input type="text" id="txtkeyword" class="keyword" value="请输入菜名或店铺名查询...." onfocus='if($(this).val()=="请输入菜名或店铺名查询...."){$(this).val("");}' onblur='if($.trim($(this).val())==""||$.trim($(this).val())==null){$(this).val("请输入菜名或店铺名查询....");}' />
-	        <input type="button" id="btnsearch" class="search" />
-	        <%-- <div class="hot">
-	            <ul>
-	                <li><strong>热门：</strong></li>
-	                <s:iterator value="keys" var="parent">
-		                <li>
-		                    <a href="<%=basePath%>web/main_toSearch?key.name=<s:property value="#parent.name"/>"><s:property value="#parent.name"/></a>
-		                </li>
-		            </s:iterator>
-	            </ul>
-	        </div> --%>
-	        <div class="clear"></div>
-	    </div>
-	    </div>
-        <%-- <div class="h_right">
+        <div class="h_right">
         <div id="picplayer" style="position:relative;overflow:hidden;width:695px;height:195px;clear:none;border:solid 1px #ccc;"> 
 		</div>
            	<s:set name="count" value="1"></s:set>
@@ -128,13 +111,28 @@
                 <s:set name="count" value="#count + 1"></s:set>
                 </s:if>
             </s:iterator>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="search1">
+        <input type="text" id="txtkeyword" class="keyword" value="请输入菜名或店铺名查询...." onfocus='if($(this).val()=="请输入菜名或店铺名查询...."){$(this).val("");}' onblur='if($.trim($(this).val())==""||$.trim($(this).val())==null){$(this).val("请输入菜名或店铺名查询....");}' />
+        <input type="button" id="btnsearch" class="search" />
+        <%-- <div class="hot">
+            <ul>
+                <li><strong>热门：</strong></li>
+                <s:iterator value="keys" var="parent">
+	                <li>
+	                    <a href="<%=basePath%>web/main_toSearch?key.name=<s:property value="#parent.name"/>"><s:property value="#parent.name"/></a>
+	                </li>
+	            </s:iterator>
+            </ul>
         </div> --%>
         <div class="clear"></div>
     </div>
     <div id="menuContent" class="menuContent" style="display:none; position: absolute;">
 		<ul id="siteTree" class="ztree" style="clear:both;margin-top:0; width:130px; height: 80px;"></ul>
 	</div>
-<!-- <script>
+<script>
 	var p = $('#picplayer');
 	if(pics.length > 0){
 	initPicPlayer(pics, p.css('width').split('px')[0], p.css('height').split(
@@ -212,4 +210,4 @@
 			}, pics[index].time);
 		}
 	}
-</script> -->
+</script>

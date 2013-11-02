@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="voteNpc">
+	<resultMap id="voteRstMap" type="vote">
+		<id property="id" column="id" />
+		<result property="type" column="type" />
+		<result property="ipAddress" column="ipAddress" />
+		<result property="voteDt" column="voteDt" />
+		<result property="shopId" column="shopId" />
+	</resultMap>
+
+	<select id="count" resultType="int" parameterType="map">
+		select count(T.ID) FROM vote T
+		<where>
+			<if test="vote != null">
+				<if test="vote.ipAddress != null and vote.ipAddress != ''">
+					and T.ipAddress = #{vote.ipAddress}
+				</if>
+				<if test="vote.shopId != null and vote.shopId != ''">
+					and T.shopId = #{vote.shopId}
+				</if>
+			</if>
+			<if test="voteDt != null and voteDt != ''">
+				and DATE_FORMAT(T.voteDt,'%Y-%m-%d') = #{voteDt}
+			</if>
+		</where>
+	</select>
+
+	<select id="queryStat" resultType="java.util.HashMap" parameterType="vote">
+		select count(T.id) count, T.type from vote T
+		<where>
+			<if test="shopId != null and shopId != ''">
+				and T.shopId = #{shopId}
+			</if>
+		</where>
+		group by T.type
+	</select>
+	
+	<insert id="add" parameterType="vote">
+		<selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		INSERT INTO `vote`(
+			type, ipAddress, voteDt, shopId
+		) VALUES (
+			#{type}, #{ipAddress}, NOW(), #{shopId}
+		)
+	</insert>
+</mapper>

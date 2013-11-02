@@ -8,7 +8,7 @@ import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.stereotype.Controller;
 
-import com.newp.xiaopan.common.Constants;
+import com.newp.xiaopan.common.MobileUtil;
 
 /**
  * @author 张霄鹏
@@ -31,11 +31,12 @@ public class ErrorAction extends BaseAction {
 				break;
 			}
 		}
-		String browser = Constants.ANDROID_IPHONE_BAIDUTC_FILTER;
+//		String browser = Constants.ANDROID_IPHONE_BAIDUTC_FILTER;
 		System.out.println(userAgent.toUpperCase());
 		log.info(userAgent.toUpperCase());
 
-		if (userAgent.toUpperCase().matches(browser)) {
+//		if (userAgent.toUpperCase().matches(browser)) {
+		if(MobileUtil.CheckAgent(userAgent)) {
 			return "mobile";
 		} else {
 			return "toExceptionError";

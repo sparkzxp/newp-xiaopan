@@ -13,14 +13,57 @@
     <script language="javascript" src="<%=basePath%>/js/GetUrlData.js"></script>
     <script language="javascript" src="<%=basePath%>/js/global.js"></script>
     <script type="text/javascript" src="<%=basePath%>plugin/ztree/jquery.ztree.core-3.2.min.js"></script>
+    <script type="text/javascript" src="<%=basePath%>plugin/jquery-spider-poll/jQuery.spider.poll.js"></script>
 	
     <link rel="stylesheet" href="<%=basePath%>plugin/ztree/css/select.css" type="text/css">
 	<link rel="stylesheet" href="<%=basePath%>plugin/ztree/css/zTreeStyle.css" type="text/css">
     <link type="text/css" href="<%=basePath%>/css/public.css" rel="Stylesheet" />
     <link type="text/css" href="<%=basePath%>/css/common.css" rel="Stylesheet" />
-    
+    <link href="<%=basePath%>plugin/jquery-spider-poll/jQuery.spider.poll.css" rel="stylesheet" type="text/css">
     <script language="javascript">
+	    //var data="{root:[{id:'speed0',name:'蜗牛店',value:'50'},{id:'speed1',name:'乌龟店',value:'20'},{id:'speed2',name:'兔子店',value:'10'},{id:'speed3',name:'曹操店',value:'10'}]}"; 
+
         $(function() {
+        	$.post("<%=basePath%>web/main_queryVoteByShop", {
+        		"vote.shopId":$('#queryForm_shop_id').val()
+			},function(data){
+				$("#poll_speed").poll("poll1",{
+	        		title:'送餐速度',
+	        		titleColor:'#ff6600',
+	        		width:'600px',
+	        		data:data,
+	        		showPoll:true,
+	        		multiple:false
+	        	});
+			});
+        	
+        	/* $("#poll_speed").poll("poll1",{
+        		title:'送餐速度',
+        		titleColor:'#ff6600',
+        		width:'600px',
+        		data:data,
+        		showPoll:true,
+        		multiple:false
+        	}); */
+        	
+        	$('#vote').click(function(){
+        		if($("#poll_speed").getChecked().length == 0){
+        			alert('亲，投票前请先选择一项哦');
+        		}else{
+        			$.post("<%=basePath%>web/main_addVote", {
+        				"vote.type":$($("#poll_speed").getChecked()[0]).val(),
+        				"vote.shopId":$('#queryForm_shop_id').val()
+        			},function(data){
+        				if(data == 'success'){
+        					location.reload();
+        					//alert('感谢您的投票');
+        				}else{
+        					alert(data);
+        				}
+        			});
+        		}
+        	});
+        	
         	$('#queryForm_comment_comment').val('');
         	$("#btn_submit").click(function(){
    				if($('#queryForm').valid()){
@@ -38,12 +81,27 @@
    	   		});
         });
     </script>
+    
+    <style type="text/css">
+    .poll_div {
+    	margin: 0;
+    	background-color: #fff;
+    }
+    .poll_div div {
+    	margin: 0;
+    	background-color: #fff;
+    }
+    input[type=button]{
+    	cursor: pointer;
+    }
+    </style>
 </head>
 <body>
     <s:form id="queryForm">
     <%@ include file="header.jsp"%>
     <div class="position"></div>
     <div class="main">
+    	<s:hidden name="shop.id"/>
         <%@ include file="left.jsp"%>
         <div class="right">
             <div class="r_d">
@@ -64,9 +122,15 @@
             </div>
             <!--end r_d-->
             <div class="list">
+            	<div id="poll_speed" class="poll_div"></div>
+            	<div style="width:100%; text-align:center; padding-top:5px;"><input type="button" value="我要投票" id="vote"/></div>
                 <div class="l_title"><h3>菜单</h3></div>
                 <div class="l_c">
-                	<table style="width: 99%;border: 1px solid #3F3F3F;">
+                	<s:iterator value="shop.types" var="parent">
+                		<div style="width: 50%; float: left;"><s:property value="#parent.name"/>
+                		<s:property value="#parent.price"/></div>
+                	</s:iterator>
+                	<%-- <table style="width: 99%;border: 1px solid #3F3F3F;">
                 		<tr>
                 			<th style="width:15%;">名称</th><th style="width:10%;">价格</th>
                 			<th style="width:15%;">名称</th><th style="width:10%;">价格</th>
@@ -92,8 +156,7 @@
                 	<s:if test="#count != 1 and #count % 4 != 0">
                 		</tr>
                 	</s:if>
-                	</table>
-                	<s:property value="shop.contents" escape="false"/>
+                	</table> --%>
                     <div class="clear"></div>
                 </div>
             </div>
