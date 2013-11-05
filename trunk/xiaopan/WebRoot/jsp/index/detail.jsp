@@ -21,8 +21,6 @@
     <link type="text/css" href="<%=basePath%>/css/common.css" rel="Stylesheet" />
     <link href="<%=basePath%>plugin/jquery-spider-poll/jQuery.spider.poll.css" rel="stylesheet" type="text/css">
     <script language="javascript">
-	    //var data="{root:[{id:'speed0',name:'蜗牛店',value:'50'},{id:'speed1',name:'乌龟店',value:'20'},{id:'speed2',name:'兔子店',value:'10'},{id:'speed3',name:'曹操店',value:'10'}]}"; 
-
         $(function() {
         	$.post("<%=basePath%>web/main_queryVoteByShop", {
         		"vote.shopId":$('#queryForm_shop_id').val()
@@ -36,15 +34,6 @@
 	        		multiple:false
 	        	});
 			});
-        	
-        	/* $("#poll_speed").poll("poll1",{
-        		title:'送餐速度',
-        		titleColor:'#ff6600',
-        		width:'600px',
-        		data:data,
-        		showPoll:true,
-        		multiple:false
-        	}); */
         	
         	$('#vote').click(function(){
         		if($("#poll_speed").getChecked().length == 0){
@@ -79,6 +68,9 @@
 		 			});
 	   			}
    	   		});
+        	$("#comment").click(function(){
+        		$('html, body').animate({scrollTop: $(document).height()}, 'slow'); 
+   	   		});
         });
     </script>
     
@@ -108,7 +100,7 @@
                 <div class="r_d_l">
                     <p><h3><s:property value="shop.title" /><s:if test="shop.isClosed.equals(\"1\")"><span style="color: red;">（本店已打烊）</span></s:if></h3></p>
                     <p>地址：<s:property value="shop.address" /></p>
-                    <p>电话：<s:property value="shop.tel" /></p>
+                    <p>电话：<span style="font-weight: bold;color: red;"><s:property value="shop.tel" /></span></p>
                     <p>联系人：<s:property value="shop.contacter" /></p>
                     <p>
                         <strong>介绍：</strong><s:property value="shop.description" />
@@ -123,7 +115,10 @@
             <!--end r_d-->
             <div class="list">
             	<div id="poll_speed" class="poll_div"></div>
-            	<div style="width:100%; text-align:center; padding-top:5px;"><input type="button" value="我要投票" id="vote"/></div>
+            	<div style="width:100%; text-align:center; padding-top:5px;">
+            		<input type="button" value="我要投票" id="vote"/>
+            		<input type="button" value="有话要说" id="comment"/>
+            	</div>
                 <div class="l_title"><h3>菜单</h3></div>
                 <div class="l_c">
                 	<s:iterator value="shop.types" var="parent">

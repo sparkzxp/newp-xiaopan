@@ -410,7 +410,7 @@
         <!--end middle-->
         <div class="right">
             <div class="r_item">
-                <div class="r_t"><strong>网站公告</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="<%=basePath%>web/main_toNoticeList">更多&gt;&gt;</a></div>
+                <div class="r_t"><strong>网站公告</strong>&nbsp;&nbsp;&nbsp;&nbsp;<a href="<%=basePath%>web/main_toNoticeList">更多&gt;&gt;</a></div>
                 <div class="r_c">
                     <ul>
                     <s:iterator value="archives" var="parent">

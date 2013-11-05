@@ -20,10 +20,15 @@
 	</properties>
 
 	<repositories>
-		<repository>
+		<!-- <repository>
 			<id>nexus</id>
 			<name>Team Nexus Repository</name>
 			<url>http://192.168.1.100:7777/nexus/content/groups/public</url>
+		</repository> -->
+		<repository>
+			<id>nexus</id>
+			<name>Team Nexus Repository</name>
+			<url>http://192.168.1.100:7777/nexus/content/repositories/releases</url>
 		</repository>
 	</repositories>
 

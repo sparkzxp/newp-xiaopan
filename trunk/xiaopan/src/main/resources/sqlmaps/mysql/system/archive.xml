@@ -27,19 +27,19 @@
 	</sql>
 	
 	<select id="count" resultType="int" parameterType="map">
-		select count(*) from ARCHIVES A
+		select count(*) from archives A
 		<include refid="query_where" />
 	</select>
 	
 	<select id="queryByPager" resultMap="archiveRstMap" parameterType="map">
-		select * from ARCHIVES A
+		select * from archives A
 		<include refid="query_where" />
 		ORDER BY senddate desc, title asc
 		limit ${pager.startIndex}, ${pager.pageSize}
 	</select>
 
 	<select id="query" resultMap="archiveRstMap" parameterType="map">
-		SELECT A.* FROM ARCHIVES A
+		SELECT A.* FROM archives A
 		<include refid="query_where" />
 		order by A.senddate desc, A.title asc
 		<if test="top != null">
@@ -51,7 +51,7 @@
 		<selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
 			SELECT LAST_INSERT_ID()
 		</selectKey>
-		INSERT INTO ARCHIVES(
+		INSERT INTO archives(
 			title, source, keyword,
 			description, contents, senddate
 		) VALUES (
@@ -61,7 +61,7 @@
 	</insert>
 	
 	<update id="update" parameterType="archive">
-		update ARCHIVES set
+		update archives set
 			title = #{title},
 			source = #{source},
 			keyword = #{keyword},
@@ -73,6 +73,6 @@
 	</update>
 	
 	<delete id="delete" parameterType="archive">
-		delete from ARCHIVES where id = #{id}
+		delete from archives where id = #{id}
 	</delete>
 </mapper>

@@ -30,7 +30,7 @@
 	</sql>
 
 	<select id="query" resultMap="arctypeRstMap" parameterType="map">
-		SELECT A.* FROM ARCTYPE A
+		SELECT A.* FROM arctype A
 		<include refid="query_where" />
 		order by A.sort asc, A.typename asc
 	</select>
@@ -39,7 +39,7 @@
 		<selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
 			SELECT LAST_INSERT_ID()
 		</selectKey>
-		INSERT INTO ARCTYPE(
+		INSERT INTO arctype(
 			typename, seotitle, keyword,
 			description, contents, topid,
 			sort
@@ -51,7 +51,7 @@
 	</insert>
 	
 	<update id="update" parameterType="arctype">
-		update ARCTYPE set
+		update arctype set
 			typename = #{typename},
 			seotitle = #{seotitle},
 			keyword = #{keyword},
@@ -64,6 +64,6 @@
 	</update>
 	
 	<delete id="delete" parameterType="arctype">
-		delete from ARCTYPE where id = #{id}
+		delete from arctype where id = #{id}
 	</delete>
 </mapper>

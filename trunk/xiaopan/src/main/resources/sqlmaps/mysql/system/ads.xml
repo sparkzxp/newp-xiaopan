@@ -37,7 +37,7 @@
 	</sql>
 
 	<select id="query" resultMap="adsRstMap" parameterType="map">
-		SELECT T.* FROM ADS T
+		SELECT T.* FROM ads T
 		<include refid="query_where" />
 		order by T.place asc, T.title asc
 	</select>
@@ -46,7 +46,7 @@
 		<selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
 			SELECT LAST_INSERT_ID()
 		</selectKey>
-		INSERT INTO ADS(
+		INSERT INTO ads(
 			title, imageurl, weburl,
 			startdate, enddate, indexShow,
 			place, address, tel,
@@ -62,7 +62,7 @@
 	</insert>
 	
 	<update id="update" parameterType="ads">
-		update ADS set
+		update ads set
 			title = #{title},
 			imageurl = #{imageurl},
 			imageurl2 = #{imageurl2},
@@ -81,6 +81,6 @@
 	</update>
 	
 	<delete id="delete" parameterType="ads">
-		delete from ADS where id = #{id}
+		delete from ads where id = #{id}
 	</delete>
 </mapper>

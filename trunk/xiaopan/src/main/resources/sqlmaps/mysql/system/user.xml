@@ -15,10 +15,10 @@
 		<where>
 			<if test="user != null">
 				<if test="user.id !=null and user.id != ''">
-					and U.ID = #{user.id}
+					and U.id = #{user.id}
 				</if>
 				<if test="user.username !=null and user.username != ''">
-					and U.USERNAME = #{user.username}
+					and U.username = #{user.username}
 				</if>
 			</if>
 		</where>
@@ -26,26 +26,26 @@
 
 	<!-- 条件查询 -->
 	<select id="query" resultMap="userRstMap" parameterType="map">
-		SELECT U.* FROM ADMIN U
+		SELECT U.* FROM admin U
 		<include refid="queryUser_where" />
 		order by U.username asc
 	</select>
 
 	<!-- 条件查询(分页) -->
 	<select id="queryByPager" resultMap="userRstMap" parameterType="map">
-		SELECT U.* FROM ADMIN U
+		SELECT U.* FROM admin U
 		<include refid="queryUser_where" />
-		ORDER BY U.USERNAME asc
+		ORDER BY U.username asc
 		limit ${pager.startIndex}, ${pager.pageSize}
 	</select>
 	<!-- 数据条数(分页) -->
 	<select id="queryCount" resultType="int" parameterType="map">
-		SELECT COUNT(*) FROM ADMIN U
+		SELECT COUNT(*) FROM admin U
 		<include refid="queryUser_where" />
 	</select>
 	
 	<update id="updatePart" parameterType="user">
-		update ADMIN
+		update admin
 		<set>
 		<if test="username != null and username != ''">
 			username = #{username},
@@ -61,15 +61,15 @@
 		<selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
 			SELECT LAST_INSERT_ID()
 		</selectKey>
-		INSERT INTO ADMIN(
+		INSERT INTO admin(
 			username, password, roleId, registerDate
 		) VALUES (
-			#{username}, #{password}, #{role.id}, CURRENT_TIMESTAMP
+			#{username}, #{password}, #{role.id}, NOW()
 		)
 	</insert>
 	
 	<update id="update" parameterType="user">
-		update ADMIN set
+		update admin set
 			username = #{username},
 			roleId = #{role.id}
 			
@@ -77,6 +77,6 @@
 	</update>
 	
 	<delete id="delete" parameterType="user">
-		delete from ADMIN where id = #{id}
+		delete from admin where id = #{id}
 	</delete>
 </mapper>

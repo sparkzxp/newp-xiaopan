@@ -43,7 +43,7 @@
 	</insert>
 	
 	<insert id="addResources" parameterType="role">
-		INSERT INTO ROLERESOURCE (
+		INSERT INTO roleresource (
 			roleId, resourceId
 		) VALUES 
 		<foreach collection="resources" item="resource" index="index" separator=",">
@@ -67,6 +67,6 @@
 	</delete>
 	
 	<delete id="deleteResources" parameterType="role">
-		delete from ROLERESOURCE where roleId = #{id}
+		delete from roleresource where roleId = #{id}
 	</delete>
 </mapper>

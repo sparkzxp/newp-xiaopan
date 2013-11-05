@@ -67,20 +67,20 @@
 	</select>
 
 	<select id="query" resultMap="shopRstMap" parameterType="map">
-		SELECT s.*, si.name siteName FROM SHOP s
+		SELECT s.*, si.name siteName FROM shop s
 		join site si on si.id = s.siteId
 		<include refid="query_where" />
 		<include refid="order"/>
 	</select>
 
 	<select id="queryByShopId" resultMap="shopRstMap" parameterType="map">
-		SELECT s.*, si.name siteName FROM SHOP s
+		SELECT s.*, si.name siteName FROM shop s
 		join site si on si.id = s.siteId
 		where s.id = #{id}
 	</select>
 	
 	<select id="querySuport" resultMap="shopRstMap" parameterType="map">
-		SELECT s.*, si.name siteName FROM SHOP s
+		SELECT s.*, si.name siteName FROM shop s
 		join site si on si.id = s.siteId
 		order by s.click desc
 		<if test="top != null">limit ${top}</if>
@@ -90,7 +90,7 @@
 		<selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
 			SELECT LAST_INSERT_ID()
 		</selectKey>
-		INSERT INTO SHOP(
+		INSERT INTO shop(
 			title, keyword, description,
 			contents, address, tel,
 			contacter, imagePath, siteId,
@@ -104,7 +104,7 @@
 	</insert>
 	
 	<insert id="addTypes" parameterType="shop">
-		INSERT INTO SHOPTYPE (
+		INSERT INTO shoptype (
 			shopId, typeId
 		) VALUES 
 		<foreach collection="types" item="type" index="index" separator=",">
@@ -115,7 +115,7 @@
 	</insert>
 	
 	<update id="update" parameterType="shop">
-		update SHOP set
+		update shop set
 			title = #{title},
 			keyword = #{keyword},
 			description = #{description},
@@ -131,7 +131,7 @@
 	</update>
 	
 	<update id="updatePart" parameterType="shop">
-		update SHOP
+		update shop
 			<set>
 				<if test="click != null">
 					click = #{click},
@@ -142,10 +142,10 @@
 	</update>
 	
 	<delete id="delete" parameterType="shop">
-		delete from SHOP where id = #{id}
+		delete from shop where id = #{id}
 	</delete>
 	
 	<delete id="deleteTypes" parameterType="shop">
-		delete from SHOPTYPE where shopId = #{id}
+	delete from shoptype where shopId = #{id}
 	</delete>
 </mapper>
