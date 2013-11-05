@@ -38,8 +38,8 @@
 	</sql>
 
 	<select id="queryByShopId" resultMap="typeRstMap" parameterType="string">
-		SELECT T.* FROM TYPE T
-		join SHOPTYPE ST on ST.typeId = T.id
+		SELECT T.* FROM type T
+		join shoptype ST on ST.typeId = T.id
 		where ST.shopId = #{id}
 		order by T.sort asc, T.name asc
 	</select>
@@ -49,16 +49,16 @@
 		name, topid, min(id) id,
 		'' color,'' seotitle, '' keyword, 
 		'' description, '' sort, '' price
-		FROM TYPE T
-		left join TYPESITE TS on TS.typeId = T.id
+		FROM type T
+		left join typesite TS on TS.typeId = T.id
 		<include refid="query_where" />
 		group by name
 		order by T.sort asc, T.name asc
 	</select>
 	
 	<select id="query" resultMap="typeRstMap" parameterType="map">
-		SELECT distinct T.* FROM TYPE T
-		left join TYPESITE TS on TS.typeId = T.id
+		SELECT distinct T.* FROM type T
+		left join typesite TS on TS.typeId = T.id
 		<include refid="query_where" />
 		order by T.sort asc, T.name asc
 	</select>
@@ -73,7 +73,7 @@
 		<selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
 			SELECT LAST_INSERT_ID()
 		</selectKey>
-		INSERT INTO TYPE(
+		INSERT INTO type(
 			name, seotitle, keyword,
 			description, color, topid,
 			sort, price
@@ -85,7 +85,7 @@
 	</insert>
 	
 	<insert id="addSites" parameterType="type">
-		INSERT INTO TYPESITE (
+		INSERT INTO typesite (
 			typeId, siteId
 		) VALUES 
 		<foreach collection="sites" item="site" index="index" separator=",">
@@ -96,7 +96,7 @@
 	</insert>
 	
 	<update id="update" parameterType="type">
-		update TYPE set
+		update type set
 			name = #{name},
 			seotitle = #{seotitle},
 			keyword = #{keyword},
@@ -110,11 +110,11 @@
 	</update>
 	
 	<delete id="delete" parameterType="type">
-		delete from TYPE where id = #{id}
+		delete from type where id = #{id}
 	</delete>
 	
 	<delete id="deleteSites" parameterType="map">
-		delete from TYPESITE where typeId = #{type.id}
+		delete from typesite where typeId = #{type.id}
 		<if test="siteIds != null and siteIds != ''">
 			and siteId in (${siteIds})
 		</if>

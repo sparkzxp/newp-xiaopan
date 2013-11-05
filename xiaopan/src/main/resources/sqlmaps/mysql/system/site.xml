@@ -26,19 +26,19 @@
 	</sql>
 
 	<select id="query" resultMap="siteRstMap" parameterType="map">
-		SELECT T.* FROM SITE T
+		SELECT T.* FROM site T
 		<include refid="query_where" />
 		order by T.sort asc, T.name asc
 	</select>
 	
 	<select id="queryByTypeId" resultMap="siteRstMap" parameterType="map">
-		SELECT T.* FROM SITE T
-		join TYPESITE TS on TS.siteId = T.id
+		SELECT T.* FROM site T
+		join typesite TS on TS.siteId = T.id
 		where TS.typeId = #{id}
 	</select>
 	
 	<select id="queryBySiteId" resultMap="siteRstMap" parameterType="map">
-		SELECT T.* FROM SITE T
+		SELECT T.* FROM site T
 		where T.id = #{id}
 	</select>
 	
@@ -46,7 +46,7 @@
 		<selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
 			SELECT LAST_INSERT_ID()
 		</selectKey>
-		INSERT INTO SITE(
+		INSERT INTO site(
 			name, description, sort, cityId
 		) VALUES (
 			#{name}, #{description}, #{sort}, #{city.id}
@@ -54,7 +54,7 @@
 	</insert>
 	
 	<update id="update" parameterType="site">
-		update SITE set
+		update site set
 			name = #{name},
 			description = #{description},
 			sort = #{sort},
@@ -64,6 +64,6 @@
 	</update>
 	
 	<delete id="delete" parameterType="site">
-		delete from SITE where id = #{id}
+		delete from site where id = #{id}
 	</delete>
 </mapper>

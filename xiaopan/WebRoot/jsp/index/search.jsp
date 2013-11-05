@@ -56,7 +56,7 @@
                     <tr>
                         <td><a href="<%=basePath%>web/main_toDetail?shop.id=<s:property value="#parent.id"/>"><s:property value="#parent.title"/></a><s:if test="#parent.isClosed.equals(\"1\")"><span style="color: red;">（已打烊）</span></s:if>
                         </td>
-                        <td><s:property value="#parent.tel"/></td>
+                        <td><span style="font-weight: bold; color: red;"><s:property value="#parent.tel"/></span></td>
                         <td style="text-align: left;">
                         	<s:iterator value="#parent.types" var="child">
                         		<s:if test="#child.name.indexOf(key.name) > -1">

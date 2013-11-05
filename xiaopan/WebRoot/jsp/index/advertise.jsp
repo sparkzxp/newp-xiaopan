@@ -36,6 +36,7 @@
 	}
 	
 	function showCityMenu(){
+		$('#menu').css('left', $('#menubar').position().left);
 		if($('#menu').css('visibility') == 'hidden'){
 			menu.style.visibility='visible';
 		}else{
@@ -129,8 +130,8 @@
     <div class="t_left">
     	欢迎来到校畔网，感谢您对校畔网的支持！
     	<span id="nowCity" style="cursor: pointer;">无锡</span>&nbsp;
-       	<span style="position:absolute;width:160;height:40;z-index:1;visibility:visible;">
-       		<span id="menubar" style="color: blue;cursor: pointer;" onclick="showCityMenu();">[切换]</span>
+       	<span>
+       		<span id="menubar" style="color: blue;cursor: pointer;" onclick="showCityMenu();">[切换城市]</span>
 			<div border=1  id="menu" style="position:absolute;top:15;left:0; width:200px;height:10;z-index:2;visibility:hidden;background-color: #DFDFDF;">
 			<s:set name="count" value="1"></s:set>
 			<s:iterator value="citys" var="parent">
@@ -142,9 +143,9 @@
 		</span>
     </div>
     <div class="t_right">
-    	<a href="<%=basePath%>web/main_toFeedback" target="_blank" title="校畔网 联系我们">联系我们</a>|
-        <a href="javascript:void(0);" onClick="window.external.addFavorite(document.location.href,document.title)" title="校畔网 加入收藏">加入收藏</a>|
-        <a href="javascript:void(0);" onClick="var strHref=window.location.href;this.style.behavior='url(#default#homepage)';this.setHomePage('http://www.xiaopanwang.com/');" title="校畔网 设为首页">设为首页</a>
+    	<a href="<%=basePath%>web/main_toFeedback" target="_blank" title="校畔网 联系我们">联系我们</a>
+        <!-- |<a href="javascript:void(0);" onClick="window.external.addFavorite(document.location.href,document.title)" title="校畔网 加入收藏">加入收藏</a>|
+        <a href="javascript:void(0);" onClick="var strHref=window.location.href;this.style.behavior='url(#default#homepage)';this.setHomePage('http://www.xiaopanwang.com/');" title="校畔网 设为首页">设为首页</a> -->
     </div>
 </div>
 <div class="main">
