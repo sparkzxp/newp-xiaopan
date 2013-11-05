@@ -123,6 +123,9 @@
 		height:100%;
 		z-index:990;
 	}
+	.top{
+		margin:auto;
+	}
 	</style>
 </head>
 <body>

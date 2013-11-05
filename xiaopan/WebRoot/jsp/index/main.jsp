@@ -277,8 +277,7 @@
     </style>
 </head>
 <body>
-    <form id="form1">
-    <%@ include file="header.jsp"%>
+    <form id="form1"><%@ include file="header.jsp"%>
     <!--end search-->
     <div class="main">
         <div class="left" style="width:170px;">
