@@ -15,6 +15,7 @@ public class Type extends BaseBean {
 	private String keyword;
 	private String description;
 	private Integer topid;
+	private String topname;// 取数据用，不入库
 	private Integer sort;
 	private String price;
 	private List<Site> sites;
@@ -105,5 +106,19 @@ public class Type extends BaseBean {
 	 */
 	public void setSites(List<Site> sites) {
 		this.sites = sites;
+	}
+
+	/**
+	 * @return the topname
+	 */
+	public String getTopname() {
+		return topname;
+	}
+
+	/**
+	 * @param topname the topname to set
+	 */
+	public void setTopname(String topname) {
+		this.topname = topname;
 	}
 }

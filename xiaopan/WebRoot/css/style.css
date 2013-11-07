@@ -43,8 +43,8 @@
 {
 	left:185px;
 	width:550px;
-	height: 390px;
-	overflow: scroll;
+	min-height: 390px;
+	/* overflow: scroll; */
 }
 .item
 {

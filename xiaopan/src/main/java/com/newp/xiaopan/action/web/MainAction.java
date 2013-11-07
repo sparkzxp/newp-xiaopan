@@ -162,7 +162,7 @@ public class MainAction extends BaseAction {
 		}
 		initHeader();
 		shop = this.shopService.query(shop);
-		Collections.sort(shop.getTypes(), new SortByTopid());
+		//Collections.sort(shop.getTypes(), new SortByTopid());
 		Shop s = new Shop();
 		s.setId(shop.getId());
 		s.setClick(shop.getClick() + 1);

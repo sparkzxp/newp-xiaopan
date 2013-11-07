@@ -35,7 +35,7 @@
 		toUrl(str);
 	}
 	
-	function showCityMenu(){
+	function toggleCityMenu(){
 		$('#menu').css('left', $('#menubar').position().left);
 		if($('#menu').css('visibility') == 'hidden'){
 			menu.style.visibility='visible';
@@ -51,6 +51,10 @@
 		$("#title").click(function(){
 			$(this).parent().animate({top:-300,opacity: 'hide'},500);
 			$(".mask").fadeOut("fast").remove();
+		});
+		
+		$('#menu').mouseleave(function(e, a, b){
+			menu.style.visibility="hidden";
 		});
 
 		var total = $('p').length;
@@ -132,14 +136,14 @@
 <div class="top">
     <div class="t_left">
     	欢迎来到校畔网，感谢您对校畔网的支持！
-    	<span id="nowCity" style="cursor: pointer;">无锡</span>&nbsp;
-       	<span>
-       		<span id="menubar" style="color: blue;cursor: pointer;" onclick="showCityMenu();">[切换城市]</span>
-			<div border=1  id="menu" style="position:absolute;top:15;left:0; width:200px;height:10;z-index:2;visibility:hidden;background-color: #DFDFDF;">
+    	<span id="nowCity">无锡</span>&nbsp;
+       	<span id="citySpan">
+       		<span id="menubar" onclick="toggleCityMenu();">[切换城市]</span>
+			<div border=1  id="menu">
 			<s:set name="count" value="1"></s:set>
 			<s:iterator value="citys" var="parent">
 			<s:if test="#count != 1 and #count % 5 == 1"><br></s:if>
-			<a id="link" style="color:blue;margin-left: 10px;" href="<%=basePath%>web/main_toAdvertise?city.id=<s:property value="#parent.id"/>"><s:property value="#parent.name"/></a>
+			<a id="link" href="<%=basePath%>web/main_toAdvertise?city.id=<s:property value="#parent.id"/>"><s:property value="#parent.name"/></a>
 			<s:set name="count" value="#count + 1"></s:set>
 			</s:iterator>
 			</div>

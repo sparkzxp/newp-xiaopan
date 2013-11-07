@@ -10,6 +10,7 @@
 		<result property="keyword" column="keyword" />
 		<result property="description" column="description" />
 		<result property="topid" column="topid" />
+		<result property="topname" column="topname" />
 		<result property="sort" column="sort" />
 		<result property="price" column="price" />
 		<collection property="sites" javaType="java.util.ArrayList" ofType="site" select="siteNpc.queryByTypeId" column="id" />
@@ -38,10 +39,12 @@
 	</sql>
 
 	<select id="queryByShopId" resultMap="typeRstMap" parameterType="string">
-		SELECT T.* FROM type T
+		SELECT T.*, P.name topname FROM type T
 		join shoptype ST on ST.typeId = T.id
+		join type P on P.id = T.topid
 		where ST.shopId = #{id}
-		order by T.sort asc, T.name asc
+		order by topname asc
+		<!-- order by T.sort asc, T.name asc -->
 	</select>
 
 	<select id="queryDistinct" resultMap="typeRstMap" parameterType="map">

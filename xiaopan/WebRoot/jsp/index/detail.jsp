@@ -121,9 +121,14 @@
             	</div>
                 <div class="l_title"><h3>菜单</h3></div>
                 <div class="l_c">
+                	<s:set name="topid" value="-1"></s:set>
                 	<s:iterator value="shop.types" var="parent">
+                		<s:if test="#parent.topid != #topid">
+                		<div style="width: 100%; float: left;font-weight:bold;margin-top:5px;"><s:property value="#parent.topname"/></div>
+                		</s:if>
                 		<div style="width: 50%; float: left;"><s:property value="#parent.name"/>
                 		<s:property value="#parent.price"/></div>
+                		<s:set name="topid" value="#parent.topid"></s:set>
                 	</s:iterator>
                 	<%-- <table style="width: 99%;border: 1px solid #3F3F3F;">
                 		<tr>
