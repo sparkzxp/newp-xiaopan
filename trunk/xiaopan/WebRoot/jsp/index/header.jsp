@@ -46,6 +46,19 @@
 		}
 
 		$(function() {
+			var _h = 470;
+			if($($('.middleType')[0]).children().length > 0){
+				_h -= 390;
+				for(var i=0; i<$($('.middleType')[0]).children().length; i++){
+					_h += $($('.middleType')[0]).children()[i].clientHeight;
+				}
+				$('.main').height(_h);
+			}
+			
+			$('#menu').mouseleave(function(e, a, b){
+				menu.style.visibility="hidden";
+			});
+			
 			$('#nowCity').html('<s:property value="city.name"/>');
 			
 	    	var zNodes = JSON.parse('<s:property value="siteJson" escape="false"/>');
@@ -64,14 +77,14 @@
 	</style>
     <div class="top">
         <div class="t_left">
-        	欢迎来到校畔网，感谢您对校畔网的支持！<span id="nowCity" style="cursor: pointer;">无锡</span>&nbsp;
+        	欢迎来到校畔网，感谢您对校畔网的支持！<span id="nowCity">无锡</span>&nbsp;
         	<span>
-        		<span id="menubar" style="color: blue;cursor: pointer;" onclick="showCityMenu();">[切换城市]</span>
-				<div border=1  id="menu" style="position:absolute;top:15;left:0; width:200px;height:10;z-index:2;visibility:hidden;background-color: #DFDFDF;">
+        		<span id="menubar" onclick="showCityMenu();">[切换城市]</span>
+				<div border=1  id="menu" >
 				<s:set name="count" value="1"></s:set>
 				<s:iterator value="citys" var="parent">
 				<s:if test="#count != 1 and #count % 5 == 1"><br></s:if>
-				<a id="link" style="color:blue;margin-left: 10px;" href="<%=basePath%>web/main_toAdvertise?city.id=<s:property value="#parent.id"/>"><s:property value="#parent.name"/></a>
+				<a id="link" href="<%=basePath%>web/main_toAdvertise?city.id=<s:property value="#parent.id"/>"><s:property value="#parent.name"/></a>
 				<s:set name="count" value="#count + 1"></s:set>
 				</s:iterator>
 				</div>
@@ -131,7 +144,7 @@
         </div> --%>
         <div class="clear"></div>
     </div>
-    <div id="menuContent" class="menuContent" style="display:none; position: absolute;">
+    <div id="menuContent" class="menuContent" style="display:none; position: absolute;z-index: 10;">
 		<ul id="siteTree" class="ztree" style="clear:both;margin-top:0; width:130px; height: 80px;"></ul>
 	</div>
 <!-- <script>
