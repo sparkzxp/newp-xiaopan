@@ -31,6 +31,13 @@ public class AdsService extends BaseService implements IAdsService {
 		return this.adsDao.query(params);
 	}
 
+	public List<Ads> queryList(Ads ads, String cityId) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("ads", ads);
+		params.put("cityId", cityId);
+		return this.adsDao.query(params);
+	}
+
 	public Ads query(Ads ads) {
 		List<Ads> list = this.queryList(ads);
 		if (CollectionUtils.isNotEmpty(list)) {
@@ -40,15 +47,26 @@ public class AdsService extends BaseService implements IAdsService {
 	}
 
 	public String add(Ads ads) {
-		return this.adsDao.add(ads);
+		String id = this.adsDao.add(ads);
+		if (CollectionUtils.isNotEmpty(ads.getCitys())) {
+			this.adsDao.addCitys(ads);
+		}
+		return id;
 	}
 
 	public Integer update(Ads ads) {
-		return this.adsDao.update(ads);
+		Integer result = this.adsDao.update(ads);
+		this.adsDao.deleteCitys(ads);
+		if (CollectionUtils.isNotEmpty(ads.getCitys())) {
+			this.adsDao.addCitys(ads);
+		}
+		return result;
 	}
 
 	public Integer delete(Ads ads) {
-		return this.adsDao.delete(ads);
+		Integer result = this.adsDao.delete(ads);
+		this.adsDao.deleteCitys(ads);
+		return result;
 	}
 
 }

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.newp.xiaopan.dao.system;
 
 import java.util.List;
@@ -21,4 +18,8 @@ public interface IAdsDao {
 	Integer update(Ads ads);
 
 	Integer delete(Ads ads);
+
+	String addCitys(Ads ads);
+
+	Integer deleteCitys(Ads ads);
 }

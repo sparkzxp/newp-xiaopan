@@ -1,6 +1,7 @@
 package com.newp.xiaopan.bean.system;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 /**
  * @author 张霄鹏
@@ -23,7 +24,7 @@ public class Ads extends BaseBean {
 	private String longitude;
 	private String indexShow;
 	private String siteId;
-	private City city;
+	private List<City> citys;
 	private Integer sort;
 
 	public Ads() {
@@ -148,21 +149,6 @@ public class Ads extends BaseBean {
 	}
 
 	/**
-	 * @return the city
-	 */
-	public City getCity() {
-		return city;
-	}
-
-	/**
-	 * @param city
-	 *            the city to set
-	 */
-	public void setCity(City city) {
-		this.city = city;
-	}
-
-	/**
 	 * @return the sort
 	 */
 	public Integer getSort() {
@@ -170,9 +156,25 @@ public class Ads extends BaseBean {
 	}
 
 	/**
-	 * @param sort the sort to set
+	 * @param sort
+	 *            the sort to set
 	 */
 	public void setSort(Integer sort) {
 		this.sort = sort;
+	}
+
+	/**
+	 * @return the citys
+	 */
+	public List<City> getCitys() {
+		return citys;
+	}
+
+	/**
+	 * @param citys
+	 *            the citys to set
+	 */
+	public void setCitys(List<City> citys) {
+		this.citys = citys;
 	}
 }
