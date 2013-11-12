@@ -111,8 +111,7 @@ public class MainAction extends BaseAction {
 
 		Ads t = new Ads();
 		t.setIndexShow("0");
-		t.setCity(getCity());
-		adss = this.adsService.queryList(t);
+		adss = this.adsService.queryList(t, getCity().getId());
 
 		Site _site = new Site();
 		_site.setCity(getCity());

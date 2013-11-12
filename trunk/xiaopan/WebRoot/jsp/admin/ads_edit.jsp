@@ -10,12 +10,67 @@
     <link rel="stylesheet" type="text/css" href="<%=basePath%>plugin/jquery-impromptu/jquery-impromptu.css">
     <link type="text/css" href="<%=basePath%>css/admin/common.css" rel="Stylesheet" />
     <link type="text/css" href="<%=basePath%>css/admin/tab.css" rel="Stylesheet" />
+	<link rel="stylesheet" href="<%=basePath%>plugin/ztree/css/select.css" type="text/css">
+	<link rel="stylesheet" href="<%=basePath%>plugin/ztree/css/zTreeStyle.css" type="text/css">
+
     <script language="javascript" src="<%=basePath%>js/jquery/jquery-1.7.2.min.js"></script>
     <script language="javascript" src="<%=basePath%>js/admin/global.js"></script>
     <script language="javascript" src="<%=basePath%>js/common/validation.js"></script>
+    <script language="javascript" src="<%=basePath%>js/common/json2.js"></script>
     <script type="text/javascript" src="<%=basePath%>js/common/fileEveryWhere.js"></script>
     <script type="text/javascript" src="<%=basePath%>plugin/jquery-impromptu/jquery-impromptu.js"></script>
+	<script type="text/javascript" src="<%=basePath%>plugin/ztree/jquery.ztree.core-3.2.min.js"></script>
+	<script type="text/javascript" src="<%=basePath%>plugin/ztree/jquery.ztree.excheck-3.2.min.js"></script>
     <script type="text/javascript">
+    var setting = {
+		check: {
+			enable: true,
+			chkboxType: {"Y":"", "N":""}
+		},
+		view: {
+			dblClickExpand: false
+		},
+		data: {
+			simpleData: {
+				enable: true
+			}
+		},
+		callback: {
+			onCheck: onCheck
+		}
+	};
+	
+	function onCheck(e, treeId, treeNode) {
+		var zTree = $.fn.zTree.getZTreeObj("cityTree"),
+		nodes = zTree.getCheckedNodes(true);
+		var v = "";
+		var k = "";
+		for (var i=0, l=nodes.length; i<l; i++) {
+			v += nodes[i].name + ",";
+			k += nodes[i].id + ",";
+		}
+		if (v.length > 0 ) v = v.substring(0, v.length-1);
+		if (k.length > 0 ) k = k.substring(0, k.length-1);
+		$("#citySel").attr("value", v);
+		$("#editForm_cityIds").attr("value", k);
+	}
+
+	function showMenu() {
+		var cityObj = $("#citySel");
+		var cityOffset = $("#citySel").offset();
+		$("#menuContent").css({left:cityOffset.left + "px", top:cityOffset.top + cityObj.outerHeight() + "px"}).slideDown("fast");
+
+		$("body").bind("mousedown", onBodyDown);
+	}
+	function hideMenu() {
+		$("#menuContent").fadeOut("fast");
+		$("body").unbind("mousedown", onBodyDown);
+	}
+	function onBodyDown(event) {
+		if (!(event.target.id == "menuBtn" || event.target.id == "citySel" || event.target.id == "menuContent" || $(event.target).parents("#menuContent").length>0)) {
+			hideMenu();
+		}
+	}
 	
 	function selOneShop(obj){
 		$('.selShop').removeClass('selOneShop');
@@ -26,6 +81,18 @@
     	$("input:file").fileEveryWhere({
 			ButtonText : "浏览"
 		});
+    	
+    	var zNodes = JSON.parse('<s:property value="cityJson" escape="false"/>');
+    	$.fn.zTree.init($("#cityTree"), setting, zNodes);
+    	
+    	var zTree = $.fn.zTree.getZTreeObj("cityTree"),
+		nodes = zTree.getCheckedNodes(true);
+		var v = "";
+		for (var i=0, l=nodes.length; i<l; i++) {
+			v += nodes[i].name + ",";
+		}
+		if (v.length > 0 ) v = v.substring(0, v.length-1);
+		$("#citySel").attr("value", v);
 		
 		$("input[name=imgFile]").next("input[type=text]").val($('#editForm_ads_imageurl').val());
 		$("input[name=imgFile2]").next("input[type=text]").val($('#editForm_ads_imageurl2').val());
@@ -146,7 +213,9 @@
                 <tr>
                     <td align="right" height="25">所属城市：</td>
                     <td>
-                        <s:select name="ads.city.id" list="citys" listKey="id" listValue="name" headerKey="" headerValue="--请选择--"></s:select>
+                        <textarea id="citySel" readonly="readonly" style="width:400px; height:60px;" onclick="showMenu();"></textarea>
+                    	&nbsp;<a id="menuBtn" href="javascript:void(0)" onclick="showMenu();" style="font-size:12px;">选择</a>
+                    	<s:hidden name="cityIds" cssClass="{maxlengthCN:500}"/>
                         此属性仅用于辨识引导页广告来源
                     </td>
                 </tr>
@@ -201,5 +270,8 @@
         <div class="clear"></div>
     </div>
     </s:form>
+    <div id="menuContent" class="menuContent" style="display:none; position: absolute;">
+		<ul id="cityTree" class="ztree" style="clear:both;margin-top:0; width:250px; height: 300px;"></ul>
+	</div>
 </body>
 </html>

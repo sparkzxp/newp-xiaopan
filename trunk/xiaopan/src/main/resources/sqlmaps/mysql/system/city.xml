@@ -28,6 +28,12 @@
 		where T.id = #{id}
 	</select>
 	
+	<select id="queryByAdsId" resultMap="cityRstMap" parameterType="map">
+		SELECT T.* FROM `city` T
+		join adscity AC on AC.cityId = T.id
+		where AC.adsId = #{adsId}
+	</select>
+	
 	<insert id="add" parameterType="city">
 		<selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
 			SELECT LAST_INSERT_ID()

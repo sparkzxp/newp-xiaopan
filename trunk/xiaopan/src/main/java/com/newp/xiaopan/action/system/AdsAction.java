@@ -4,16 +4,22 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.newp.xiaopan.bean.system.Ads;
+import com.newp.xiaopan.bean.system.City;
+import com.newp.xiaopan.bean.system.City;
 import com.newp.xiaopan.bean.system.City;
 import com.newp.xiaopan.bean.system.Site;
 import com.newp.xiaopan.common.Constants;
@@ -44,6 +50,8 @@ public class AdsAction extends BaseAction {
 	private List<Ads> adss;
 	private List<Site> sites;
 	private List<City> citys;
+	private String cityIds;
+	private String cityJson;
 
 	private File imgFile;
 	private String imgFileFileName;
@@ -60,11 +68,56 @@ public class AdsAction extends BaseAction {
 		return Constants.ACTION_TO_LIST;
 	}
 
+	@SuppressWarnings("unchecked")
+	private void initTree(boolean isUpdate) {
+		String[] cityIdArr = null;
+		StringBuffer sb = new StringBuffer();
+		if (isUpdate && CollectionUtils.isNotEmpty(ads.getCitys())) {
+			cityIdArr = new String[ads.getCitys().size()];
+			for (int i = 0; i < ads.getCitys().size(); i++) {
+				cityIdArr[i] = ads.getCitys().get(i).getId();
+				if (i == 0) {
+					sb.append(cityIdArr[i]);
+				} else {
+					sb.append(",").append(cityIdArr[i]);
+				}
+			}
+			cityIds = sb.toString();
+		}
+
+		List<City> allCity = this.cityService.queryList(null);
+		JSONArray jsonArray = new JSONArray();
+		JSONObject jsonObject;
+		boolean firstOpen = true;
+		for (City t : allCity) {
+			jsonObject = new JSONObject();
+			jsonObject.put("id", t.getId());
+			if (isUpdate && null != cityIdArr) {
+				for (String s : cityIdArr) {
+					if (t.getId().equals(s)) {
+						jsonObject.put("checked", true);
+						break;
+					}
+				}
+			}
+			jsonObject.put("pId", 0);
+			jsonObject.put("name", t.getName());
+			if (firstOpen) {
+				jsonObject.put("open", true);
+				firstOpen = false;
+			}
+			jsonArray.add(jsonObject);
+		}
+		this.cityJson = jsonArray.toJSONString();
+	}
+
 	public String toEdit() {
-		if (null != ads && StringUtils.isNotEmpty(ads.getId())) {
+		boolean isUpdate = (null != ads && StringUtils.isNotEmpty(ads.getId()));
+		if (isUpdate) {
 			ads = this.adsService.query(ads);
 		}
-//		sites = (List<Site>) MySessionListener.getConfigMap_s().get(Constants.CONFIG_SITE_LIST);
+		initTree(isUpdate);
+		// sites = (List<Site>) MySessionListener.getConfigMap_s().get(Constants.CONFIG_SITE_LIST);
 		sites = this.siteService.queryList(null);
 		citys = this.cityService.queryList(null);
 		return Constants.ACTION_TO_EDIT;
@@ -72,6 +125,19 @@ public class AdsAction extends BaseAction {
 
 	@SuppressWarnings({ "deprecation" })
 	public String doEdit() {
+		boolean isUpdate = (null != ads && StringUtils.isNotEmpty(ads.getId()));
+		if (StringUtils.isNotEmpty(cityIds)) {
+			List<City> tmpCitys = new ArrayList<City>();
+			String[] arr = cityIds.split(",");
+			City t;
+			for (String s : arr) {
+				t = new City();
+				t.setId(s);
+				tmpCitys.add(t);
+			}
+			ads.setCitys(tmpCitys);
+		}
+
 		String oldPath = ads.getImageurl();
 		if (StringUtils.isNotBlank(oldPath) && oldPath.indexOf("xiaopan") > -1) {
 			oldPath = oldPath.substring(oldPath.indexOf("xiaopan") + 7, oldPath.length());
@@ -139,7 +205,9 @@ public class AdsAction extends BaseAction {
 
 			pathStatus = false;
 			uploadStatus = "success";
-//			sites = (List<Site>) MySessionListener.getConfigMap_s().get(Constants.CONFIG_SITE_LIST);
+
+			initTree(isUpdate);
+			// sites = (List<Site>) MySessionListener.getConfigMap_s().get(Constants.CONFIG_SITE_LIST);
 			sites = this.siteService.queryList(null);
 			citys = this.cityService.queryList(null);
 			return Constants.ACTION_TO_EDIT;
@@ -147,7 +215,9 @@ public class AdsAction extends BaseAction {
 			log.error(e);
 			pathStatus = false;
 			uploadStatus = "error";
-//			sites = (List<Site>) MySessionListener.getConfigMap_s().get(Constants.CONFIG_SITE_LIST);
+
+			initTree(isUpdate);
+			// sites = (List<Site>) MySessionListener.getConfigMap_s().get(Constants.CONFIG_SITE_LIST);
 			sites = this.siteService.queryList(null);
 			citys = this.cityService.queryList(null);
 			return Constants.ACTION_TO_EDIT;
@@ -303,9 +373,40 @@ public class AdsAction extends BaseAction {
 	}
 
 	/**
-	 * @param citys the citys to set
+	 * @param citys
+	 *            the citys to set
 	 */
 	public void setCitys(List<City> citys) {
 		this.citys = citys;
+	}
+
+	/**
+	 * @return the cityIds
+	 */
+	public String getCityIds() {
+		return cityIds;
+	}
+
+	/**
+	 * @param cityIds
+	 *            the cityIds to set
+	 */
+	public void setCityIds(String cityIds) {
+		this.cityIds = cityIds;
+	}
+
+	/**
+	 * @return the cityJson
+	 */
+	public String getCityJson() {
+		return cityJson;
+	}
+
+	/**
+	 * @param cityJson
+	 *            the cityJson to set
+	 */
+	public void setCityJson(String cityJson) {
+		this.cityJson = cityJson;
 	}
 }

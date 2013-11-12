@@ -21,6 +21,8 @@ public interface IAdsService {
 
 	List<Ads> queryList(Ads ads);
 
+	List<Ads> queryList(Ads ads, String cityId);
+
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	String add(Ads ads);
 

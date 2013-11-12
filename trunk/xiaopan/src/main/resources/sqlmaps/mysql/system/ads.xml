@@ -18,7 +18,7 @@
 		<result property="indexShow" column="indexShow" />
 		<result property="siteId" column="siteId" />
 		<result property="sort" column="sort" />
-		<association property="city" column="cityId" select="cityNpc.queryByCityId"/>
+		<collection property="citys" javaType="java.util.ArrayList" ofType="city" select="cityNpc.queryByAdsId" column="id" />
 	</resultMap>
 
 	<sql id="query_where">
@@ -34,17 +34,16 @@
 					<!-- and T.indexShow = #{ads.indexShow} -->
 					and T.indexShow != #{ads.indexShow}
 				</if>
-				<if test="ads.city != null">
-					<if test="ads.city.id != null and ads.city.id != ''">
-						and T.cityId = #{ads.city.id}
-					</if>
-				</if>
+			</if>
+			<if test="cityId != null and cityId != ''">
+				and AC.cityId = #{cityId}
 			</if>
 		</where>
 	</sql>
 
 	<select id="query" resultMap="adsRstMap" parameterType="map">
-		SELECT T.* FROM ads T
+		SELECT distinct T.* FROM ads T
+		left join adscity AC on AC.adsId = T.id
 		<include refid="query_where" />
 		order by T.place asc, T.sort asc, T.title asc
 	</select>
@@ -58,16 +57,25 @@
 			startdate, enddate, indexShow,
 			place, address, tel,
 			latitude, longitude, siteId,
-			<if test="city != null and city.id != null and city.id != ''">cityId,</if>
 			imageurl2, sort
 		) VALUES (
 			#{title}, #{imageurl}, #{weburl},
 			now(), now(), #{indexShow},
 			#{place}, #{address}, #{tel},
 			#{latitude}, #{longitude}, #{siteId},
-			<if test="city != null and city.id != null and city.id != ''">#{city.id},</if>
 			#{imageurl2}, #{sort}
 		)
+	</insert>
+	
+	<insert id="addCitys" parameterType="ads">
+		INSERT INTO adscity (
+			adsId, cityId
+		) VALUES 
+		<foreach collection="citys" item="city" index="index" separator=",">
+		(
+			#{id}, #{city.id}
+		)
+		</foreach>
 	</insert>
 	
 	<update id="update" parameterType="ads">
@@ -85,7 +93,6 @@
 			latitude = #{latitude},
 			longitude = #{longitude},
 			siteId = #{siteId},
-			<if test="city != null and city.id != null and city.id != ''">cityId = #{city.id},</if>
 			sort = #{sort}
 			
 			WHERE id = #{id}
@@ -93,5 +100,9 @@
 	
 	<delete id="delete" parameterType="ads">
 		delete from ads where id = #{id}
+	</delete>
+	
+	<delete id="deleteCitys" parameterType="ads">
+		delete from adscity where adsId = #{id}
 	</delete>
 </mapper>

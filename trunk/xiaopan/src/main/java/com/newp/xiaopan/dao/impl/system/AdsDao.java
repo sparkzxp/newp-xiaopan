@@ -39,4 +39,13 @@ public class AdsDao implements IAdsDao {
 	public Integer delete(Ads ads) {
 		return this.sqlSession.delete("adsNpc.delete", ads);
 	}
+
+	public String addCitys(Ads ads) {
+		this.sqlSession.insert("adsNpc.addCitys", ads);
+		return String.valueOf(ads.getId());
+	}
+
+	public Integer deleteCitys(Ads ads) {
+		return this.sqlSession.delete("adsNpc.deleteCitys", ads);
+	}
 }
