@@ -14,10 +14,12 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.newp.xiaopan.bean.system.Ads;
+import com.newp.xiaopan.bean.system.City;
 import com.newp.xiaopan.bean.system.Site;
 import com.newp.xiaopan.common.Constants;
 import com.newp.xiaopan.common.FileUtil;
 import com.newp.xiaopan.service.system.IAdsService;
+import com.newp.xiaopan.service.system.ICityService;
 import com.newp.xiaopan.service.system.ISiteService;
 
 /**
@@ -35,10 +37,13 @@ public class AdsAction extends BaseAction {
 	private IAdsService adsService;
 	@Autowired
 	private ISiteService siteService;
+	@Autowired
+	private ICityService cityService;
 
 	private Ads ads;
 	private List<Ads> adss;
 	private List<Site> sites;
+	private List<City> citys;
 
 	private File imgFile;
 	private String imgFileFileName;
@@ -61,6 +66,7 @@ public class AdsAction extends BaseAction {
 		}
 //		sites = (List<Site>) MySessionListener.getConfigMap_s().get(Constants.CONFIG_SITE_LIST);
 		sites = this.siteService.queryList(null);
+		citys = this.cityService.queryList(null);
 		return Constants.ACTION_TO_EDIT;
 	}
 
@@ -135,6 +141,7 @@ public class AdsAction extends BaseAction {
 			uploadStatus = "success";
 //			sites = (List<Site>) MySessionListener.getConfigMap_s().get(Constants.CONFIG_SITE_LIST);
 			sites = this.siteService.queryList(null);
+			citys = this.cityService.queryList(null);
 			return Constants.ACTION_TO_EDIT;
 		} catch (Exception e) {
 			log.error(e);
@@ -142,6 +149,7 @@ public class AdsAction extends BaseAction {
 			uploadStatus = "error";
 //			sites = (List<Site>) MySessionListener.getConfigMap_s().get(Constants.CONFIG_SITE_LIST);
 			sites = this.siteService.queryList(null);
+			citys = this.cityService.queryList(null);
 			return Constants.ACTION_TO_EDIT;
 		} finally {
 			try {
@@ -285,5 +293,19 @@ public class AdsAction extends BaseAction {
 
 	public void setSites(List<Site> sites) {
 		this.sites = sites;
+	}
+
+	/**
+	 * @return the citys
+	 */
+	public List<City> getCitys() {
+		return citys;
+	}
+
+	/**
+	 * @param citys the citys to set
+	 */
+	public void setCitys(List<City> citys) {
+		this.citys = citys;
 	}
 }

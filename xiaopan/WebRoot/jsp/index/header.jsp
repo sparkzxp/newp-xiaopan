@@ -46,9 +46,9 @@
 		}
 
 		$(function() {
-			var _h = 470;
+			var _h = 640;
 			if($($('.middleType')[0]).children().length > 0){
-				_h -= 390;
+				_h -= 530;
 				for(var i=0; i<$($('.middleType')[0]).children().length; i++){
 					_h += $($('.middleType')[0]).children()[i].clientHeight;
 				}

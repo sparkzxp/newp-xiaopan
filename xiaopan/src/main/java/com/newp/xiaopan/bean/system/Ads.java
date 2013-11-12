@@ -23,6 +23,8 @@ public class Ads extends BaseBean {
 	private String longitude;
 	private String indexShow;
 	private String siteId;
+	private City city;
+	private Integer sort;
 
 	public Ads() {
 		super();
@@ -143,5 +145,34 @@ public class Ads extends BaseBean {
 
 	public void setSiteId(String siteId) {
 		this.siteId = siteId;
+	}
+
+	/**
+	 * @return the city
+	 */
+	public City getCity() {
+		return city;
+	}
+
+	/**
+	 * @param city
+	 *            the city to set
+	 */
+	public void setCity(City city) {
+		this.city = city;
+	}
+
+	/**
+	 * @return the sort
+	 */
+	public Integer getSort() {
+		return sort;
+	}
+
+	/**
+	 * @param sort the sort to set
+	 */
+	public void setSort(Integer sort) {
+		this.sort = sort;
 	}
 }

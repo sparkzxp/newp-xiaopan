@@ -17,6 +17,8 @@
 		<result property="longitude" column="longitude" />
 		<result property="indexShow" column="indexShow" />
 		<result property="siteId" column="siteId" />
+		<result property="sort" column="sort" />
+		<association property="city" column="cityId" select="cityNpc.queryByCityId"/>
 	</resultMap>
 
 	<sql id="query_where">
@@ -32,6 +34,11 @@
 					<!-- and T.indexShow = #{ads.indexShow} -->
 					and T.indexShow != #{ads.indexShow}
 				</if>
+				<if test="ads.city != null">
+					<if test="ads.city.id != null and ads.city.id != ''">
+						and T.cityId = #{ads.city.id}
+					</if>
+				</if>
 			</if>
 		</where>
 	</sql>
@@ -39,7 +46,7 @@
 	<select id="query" resultMap="adsRstMap" parameterType="map">
 		SELECT T.* FROM ads T
 		<include refid="query_where" />
-		order by T.place asc, T.title asc
+		order by T.place asc, T.sort asc, T.title asc
 	</select>
 	
 	<insert id="add" parameterType="ads">
@@ -51,13 +58,15 @@
 			startdate, enddate, indexShow,
 			place, address, tel,
 			latitude, longitude, siteId,
-			imageurl2
+			<if test="city != null and city.id != null and city.id != ''">cityId,</if>
+			imageurl2, sort
 		) VALUES (
 			#{title}, #{imageurl}, #{weburl},
 			now(), now(), #{indexShow},
 			#{place}, #{address}, #{tel},
 			#{latitude}, #{longitude}, #{siteId},
-			#{imageurl2}
+			<if test="city != null and city.id != null and city.id != ''">#{city.id},</if>
+			#{imageurl2}, #{sort}
 		)
 	</insert>
 	
@@ -75,7 +84,9 @@
 			tel = #{tel},
 			latitude = #{latitude},
 			longitude = #{longitude},
-			siteId = #{siteId}
+			siteId = #{siteId},
+			<if test="city != null and city.id != null and city.id != ''">cityId = #{city.id},</if>
+			sort = #{sort}
 			
 			WHERE id = #{id}
 	</update>
