@@ -281,6 +281,17 @@
     <!--end search-->
     <div class="main">
         <div class="left" style="width:170px;">
+	        <div style="height: 140px;">
+				<s:set name="count" value="1"></s:set>
+				推荐店铺：
+	            <s:iterator value="adss" var="parent">
+	            <s:if test="#parent.place == '网页左面' and #count <= 5">
+				<a href="<s:property value="%{(#parent.weburl==null || #parent.weburl==\"\")?\"javascript:void(0);\":#parent.weburl}"/>" style="color: blue;">
+				<s:property value="#parent.title"/></a>
+	            <s:set name="count" value="#count + 1"></s:set>
+	            </s:if>
+	            </s:iterator>
+            </div>
         <div id="picplayer" style="position:relative;overflow:hidden;width:170px;height:485px;clear:none;border:solid 1px #ccc;"> 
 		</div>
            	<s:set name="count" value="1"></s:set>
@@ -425,7 +436,7 @@
             </div>
             <s:set name="count" value="1"></s:set>
             <s:iterator value="adss" var="parent">
-            	<s:if test="#parent.place == '网页右面' and #count < 5">
+            	<s:if test="#parent.place == '网页右面' and #count < 7">
         		<div class="rightAds" style="position: relative;height:82px;overflow: hidden;margin-top: 4px;">
            			<ul style="margin-top: 0px">
            				<li style="overflow: hidden;margin:0;padding:0;height: 82px;">

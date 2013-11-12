@@ -140,6 +140,17 @@
                     </td>
                 </tr>
                 <tr>
+                    <td width="120px" align="right" height="25px">排序号：</td>
+                    <td><s:textfield name="ads.sort" cssStyle="width:200px;" cssClass="{required:true,digits:true,min:0,max:100}"/></td>
+                </tr>
+                <tr>
+                    <td align="right" height="25">所属城市：</td>
+                    <td>
+                        <s:select name="ads.city.id" list="citys" listKey="id" listValue="name" headerKey="" headerValue="--请选择--"></s:select>
+                        此属性仅用于辨识引导页广告来源
+                    </td>
+                </tr>
+                <tr>
                     <td align="right" height="25">所属站点：</td>
                     <td>
                         <s:select name="ads.siteId" list="sites" listKey="id" listValue="name" cssClass="{required:true}"></s:select>

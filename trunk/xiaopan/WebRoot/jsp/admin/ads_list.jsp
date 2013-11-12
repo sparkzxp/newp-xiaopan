@@ -46,8 +46,9 @@
                 <tr>
                     <th style="width:45px;">编号</th>
                     <th style="width:110px;">图片</th>
-                    <th style="min-width:300px;">标题说明</th>
+                    <th style="min-width:200px;">标题说明</th>
                     <th style="width:80px;">位置</th>
+                    <th style="width:80px;">引导页显示</th>
                     <th style="width:80px;">操作</th>
                 </tr>
                 <s:iterator value="adss" var="parent">
@@ -56,6 +57,11 @@
                         <td><img alt="图片" src="<%=basePath%><s:property value="#parent.imageurl" />" style="width:100px;margin:5px;" /></td>
                         <td><s:property value="#parent.title" /></td>
                         <td><s:property value="#parent.place" /></td>
+                        <td>
+                        	<s:if test="#parent.indexShow.equals(\"0\")">不显示</s:if>
+                        	<s:if test="#parent.indexShow.equals(\"1\")">大图显示</s:if>
+                        	<s:if test="#parent.indexShow.equals(\"2\")">底部显示</s:if>
+                        </td>
                         <td>
                             <a href="<%=basePath%>sys/ads_toEdit?ads.id=<s:property value="#parent.id" />">修改</a>
                             <a href="javascript:void(0);" aid="<s:property value="#parent.id" />" aimageurl="<s:property value="#parent.imageurl" />" class="delete">删除</a>

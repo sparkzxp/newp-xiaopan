@@ -100,10 +100,6 @@ public class MainAction extends BaseAction {
 	}
 
 	public String toAdvertise() {
-		Ads t = new Ads();
-		t.setIndexShow("0");
-		adss = this.adsService.queryList(t);
-
 		if (city == null) {
 			if (this.getCurrentSession().getAttribute(Constants.SESSION_CITY) != null) {
 				city = (City) this.getCurrentSession().getAttribute(Constants.SESSION_CITY);
@@ -112,6 +108,12 @@ public class MainAction extends BaseAction {
 			}
 		}
 		this.setCity(this.cityService.query(getCity()));
+
+		Ads t = new Ads();
+		t.setIndexShow("0");
+		t.setCity(getCity());
+		adss = this.adsService.queryList(t);
+
 		Site _site = new Site();
 		_site.setCity(getCity());
 		this.getCurrentSession().setAttribute(Constants.SESSION_CITY, this.getCity());
@@ -162,7 +164,7 @@ public class MainAction extends BaseAction {
 		}
 		initHeader();
 		shop = this.shopService.query(shop);
-		//Collections.sort(shop.getTypes(), new SortByTopid());
+		// Collections.sort(shop.getTypes(), new SortByTopid());
 		Shop s = new Shop();
 		s.setId(shop.getId());
 		s.setClick(shop.getClick() + 1);
