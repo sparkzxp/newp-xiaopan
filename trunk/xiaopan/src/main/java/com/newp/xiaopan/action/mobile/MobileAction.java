@@ -77,7 +77,6 @@ public class MobileAction extends BaseAction {
 		params.put("type", null);
 		params.put("siteId", site.getId());
 		types = typeService.queryDistinctList(params);
-//		types = typeService.queryDistinctList(new Type());
 		initSite();
 		return "toTypeList";
 	}
