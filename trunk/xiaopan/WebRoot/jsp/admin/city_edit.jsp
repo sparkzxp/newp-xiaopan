@@ -20,12 +20,12 @@
 	 	   			$.post("<%=basePath%>sys/city_doEdit",$("#editForm").serialize(),function(data){
 	 	   				data = JSON.parse(data);
 		  	   			if(data.result=="success"){
-		  	   					alert("编辑成功!");
-		 						$('#editForm_city_id').val(data.id);
-		 					}else if(data.result=="error"){
-		 						alert("编辑失败!");
-		 					}else{
-		 						alert(data.result);
+	  	   					alert("编辑成功!");
+	 						$('#editForm_city_id').val(data.id);
+	 					}else if(data.result=="error"){
+	 						alert("编辑失败!");
+	 					}else{
+	 						alert(data.result);
 		  				}
 		  	   			$("#btn_submit").removeAttr("disabled");
 		 			});

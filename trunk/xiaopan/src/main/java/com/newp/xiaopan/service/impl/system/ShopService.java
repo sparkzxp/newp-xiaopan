@@ -80,9 +80,10 @@ public class ShopService extends BaseService implements IShopService {
 		return this.shopDao.queryByPager(params);
 	}
 
-	public List<Shop> querySuportList(Integer top) {
+	public List<Shop> querySuportList(Shop shop, Integer top) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("top", top);
+		params.put("shop", shop);
 		return this.shopDao.querySuport(params);
 	}
 

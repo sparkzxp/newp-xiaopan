@@ -82,6 +82,7 @@
 	<select id="querySuport" resultMap="shopRstMap" parameterType="map">
 		SELECT s.*, si.name siteName FROM shop s
 		join site si on si.id = s.siteId
+		<include refid="query_where" />
 		order by s.click desc
 		<if test="top != null">limit ${top}</if>
 	</select>

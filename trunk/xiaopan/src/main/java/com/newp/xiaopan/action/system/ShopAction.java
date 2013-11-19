@@ -88,6 +88,15 @@ public class ShopAction extends BaseAction {
 	}
 
 	@SuppressWarnings("unchecked")
+	public void changeTypeTree() {
+		JSONObject jsonObject = new JSONObject();
+		boolean isUpdate = (null != shop && StringUtils.isNotEmpty(shop.getId()));
+		initTypeTree(isUpdate);
+		jsonObject.put("result", "success");
+		jsonObject.put("typeJson", typeJson);
+		this.ajax(jsonObject.toJSONString());
+	}
+
 	private void initEdit(boolean isUpdate) {
 		// 1
 		String[] typeIdArr = null;
@@ -109,14 +118,48 @@ public class ShopAction extends BaseAction {
 		isAdmin = this.getLoginUser().getRole().getId().equals(Constants.SYS_ADMIN_ID);
 
 		// 3
-		setSites(this.siteService.queryList(null));
+		if (!isAdmin && this.getLoginUserSite() != null) {
+			Site _site = new Site();
+			_site.setCity(this.getLoginUserSite().getCity());
+			setSites(this.siteService.queryList(_site));
+		} else {
+			setSites(this.siteService.queryList(null));
+		}
 
 		// 4
+		initTypeTree(isUpdate);
+	}
+
+	@SuppressWarnings("unchecked")
+	private void initTypeTree(boolean isUpdate) {
+		String[] typeIdArr = null;
+		if (StringUtils.isNotEmpty(typeIds)) {
+			typeIdArr = typeIds.split(",");
+		}
+
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("type", new Type());
-		if (!this.getLoginUser().getRole().getId().equals(Constants.SYS_ADMIN_ID) && this.getLoginUserSite() != null) {
-			params.put("siteId", this.getLoginUserSite().getId());
+
+		if (this.getLoginUser().getRole().getId().equals(Constants.SYS_ADMIN_ID)) {
+			// 系统管理员
+			if (null != shop && StringUtils.isNotEmpty(this.shop.getSiteId())) {
+				// 修改
+				params.put("siteId", this.shop.getSiteId());
+			} else {
+				params.put("siteId", "-1");
+			}
+		} else {
+			// 站点管理员
+			if (isUpdate) {
+				params.put("siteId", shop.getSiteId());
+			} else {
+				params.put("siteId", this.getLoginUserSite().getId());
+			}
 		}
+
+		// if (!this.getLoginUser().getRole().getId().equals(Constants.SYS_ADMIN_ID) && this.getLoginUserSite() != null) {
+		// params.put("siteId", this.getLoginUserSite().getId());
+		// }
 		List<Type> allTypes = this.typeService.queryList(params);
 		JSONArray jsonArray = new JSONArray();
 		JSONObject jsonObject;

@@ -46,13 +46,13 @@
 		}
 
 		$(function() {
-			var _h = 640;
+			var _h = 640;//530+80
 			if($($('.middleType')[0]).children().length > 0){
 				_h -= 530;
 				for(var i=0; i<$($('.middleType')[0]).children().length; i++){
 					_h += $($('.middleType')[0]).children()[i].clientHeight;
 				}
-				$('.main').height(_h);
+				$('.main').height((_h>640?_h:640));
 			}
 			
 			$('#menu').mouseleave(function(e, a, b){
