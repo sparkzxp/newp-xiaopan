@@ -237,10 +237,9 @@ public class MainAction extends BaseAction {
 			getCurrentSession().setAttribute(Constants.SESSION_USER_SITE, site);
 		}
 
-		if (null == getCurrentSession().getAttribute(Constants.SESSION_SUPORT_SHOP)) {
-			getCurrentSession().setAttribute(Constants.SESSION_SUPORT_SHOP, shopService.querySuportList(8));
-		}
-		suportShops = (List<Shop>) getCurrentSession().getAttribute(Constants.SESSION_SUPORT_SHOP);
+		Shop _shop = new Shop();
+		_shop.setSiteId(site.getId());
+		suportShops = this.shopService.querySuportList(_shop, 8);
 
 		adss = adsService.queryList(new Ads(site.getId()));
 	}

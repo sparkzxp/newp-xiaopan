@@ -51,7 +51,7 @@
     	var setting = {
 			check: {
 				enable: true,
-				chkboxType: {"Y":"", "N":""}
+				chkboxType: {"Y":"ps", "N":"ps"}
 			},
 			view: {
 				dblClickExpand: false
@@ -126,6 +126,33 @@
 			}else if($('#editForm_uploadStatus').val()!=""){
 				alert($('#editForm_uploadStatus').val());	
 			}
+			
+			$('#editForm_shop_siteId').change(function(){
+				if($("#editForm_shop_id").val() == '' || $("#editForm_shop_siteId").val() != ''){
+					$.post("<%=basePath%>sys/shop_changeTypeTree",{
+						'typeIds' : $("#editForm_typeIds").val(),
+						'shop.id' : $("#editForm_shop_id").val(),
+						'shop.siteId' : $("#editForm_shop_siteId").val()
+					},function(data){
+						data = JSON.parse(data);
+						if(data.result=="success"){
+							var zNodes = JSON.parse(data.typeJson);
+				        	$.fn.zTree.init($("#typeTree"), setting, zNodes);
+				        	
+				        	var zTree = $.fn.zTree.getZTreeObj("typeTree"),
+							nodes = zTree.getCheckedNodes(true);
+							var v = "";
+							for (var i=0, l=nodes.length; i<l; i++) {
+								v += nodes[i].name + ",";
+							}
+							if (v.length > 0 ) v = v.substring(0, v.length-1);
+							$("#typeSel").attr("value", v);
+						}else{
+							alert(data.result);
+						}
+					});
+				}
+			});
 
         	$("#btn_submit").click(function(){
         		if($("input[type=file]").next("input[type=text]").val()==''){
@@ -198,7 +225,7 @@
                 <tr id="siteIdTR" style="display: none;">
                     <td width="120px" height="25px" align="right">所属站点：</td>
                     <td>
-                    	<s:select name="shop.siteId" list="sites" listKey="id" listValue="name" cssClass="{required:true}"></s:select>
+                    	<s:select name="shop.siteId" list="sites" headerKey="" headerValue="--请选择--" listKey="id" listValue="name" cssClass="{required:true}"></s:select>
                     </td>
                 </tr>
                 <tr>

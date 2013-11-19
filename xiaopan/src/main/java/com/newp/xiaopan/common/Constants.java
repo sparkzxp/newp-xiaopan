@@ -10,7 +10,6 @@ public interface Constants {
 	String SESSION_USER_KEY = "userInfo";
 	String SESSION_USER_SITE = "userSite";
 	String SESSION_HOT_KEY = "hotKey";
-	String SESSION_SUPORT_SHOP = "suportShop";
 	String SESSION_CITY = "nowCity";
 
 	String CONFIG_SITE_LIST = "siteList";

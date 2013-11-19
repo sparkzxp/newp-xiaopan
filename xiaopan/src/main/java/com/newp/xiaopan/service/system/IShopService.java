@@ -23,7 +23,7 @@ public interface IShopService {
 
 	List<Shop> queryList(Map<String, Object> params);
 
-	List<Shop> querySuportList(Integer top);
+	List<Shop> querySuportList(Shop shop, Integer top);
 
 	List<Shop> queryListByPager(Shop shop, Type type, Pager pager);
 

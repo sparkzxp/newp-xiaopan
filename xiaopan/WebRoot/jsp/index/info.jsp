@@ -30,7 +30,7 @@
             <div class="n_c">
                 <div class="n_title"><h2><s:property value="arctype.typename" /></h2></div>
                 <div class="content">
-                    <s:property value="arctype.typename" escape="false" />
+                    <s:property value="arctype.contents" escape="false" />
                 </div>
                 <div class="clear"></div>
             </div>
